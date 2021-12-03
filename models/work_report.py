@@ -11,13 +11,13 @@ class WorkReport:
 
         def __str__(self):
                 return f"""Workreport_ID: {self.workreport_id} 
-SSN: {self.ssn}
-Contractor: {self.contractor}
-Contractor_review: {self.contractor_review}
-Contractor_remuneration: {self.contractor_remuneration}
-Total_cost: {self.total_cost}
-Desctiption: {self.description}
-Approved: {self.approved}"""
+                SSN: {self.ssn}
+                Contractor: {self.contractor}
+                Contractor_review: {self.contractor_review}
+                Contractor_remuneration: {self.contractor_remuneration}
+                Total_cost: {self.total_cost}
+                Desctiption: {self.description}
+                Approved: {self.approved}"""
 
 
             
