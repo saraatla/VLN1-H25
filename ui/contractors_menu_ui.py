@@ -4,8 +4,8 @@ from ui.contractor_ui import ContractorUI
 
 class ContractorMenu:
     def __init__(self, location, user_type):
-        self.llapi = LLAPI()
         self.location = location
+        self.llapi = LLAPI(self.location)
         self.user_type = user_type
 
     def start(self):

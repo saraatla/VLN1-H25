@@ -4,8 +4,8 @@ from ui.employee_ui import EmployeeUI
 
 class WorkRequestMenu:
     def __init__(self, location, user_type):
-        self.llapi = LLAPI()
         self.location = location
+        self.llapi = LLAPI(self.location)
         self.user_type = user_type
 
     def start(self):
