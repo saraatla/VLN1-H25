@@ -1,5 +1,5 @@
 from logic.LLAPI import LLAPI
-LINE = '--------'
+LINE = '------------------------------------------'
 
 class EmployeeUI:
     def __init__(self, employee, location):
