@@ -12,7 +12,7 @@ class Menu:
         print("B: Back")
         print(LINE)
         while True:
-            command = input("Select option: ")
+            command = input("Select option: ").upper()
             print(LINE)
             if command == 'B':
                 return -1

@@ -18,6 +18,7 @@ class EmployeeMenu:
             if operation  == 'Search by SSN':
                 search = input('Enter SSN:')
                 found_employee = llapi.search_employee(search)
+                print(f'This is {found_employee}')
                 if found_employee is not None:
                     employee_ui = EmployeeUI(found_employee)
                     employee_ui.start()
