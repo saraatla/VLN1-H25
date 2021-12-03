@@ -1,9 +1,10 @@
 from ui.menu import Menu
-from logic.LLAPI import llapi
+from logic.LLAPI import LLAPI
 from ui.property_ui import PropertyUI
 
 class PropertyMenu:
     def __init__(self, location, user_type):
+        self.llapi = LLAPI()
         self.location = location
         self.user_type = user_type
 
@@ -17,15 +18,15 @@ class PropertyMenu:
             operation = operations[selected_operation]
             if operation  == 'Search by ID':
                 search = input('Enter property ID:')
-                found_property = llapi.search_property(search)
+                found_property = self.llapi.search_property(search)
                 if found_property is not None:
                     property_ui = PropertyUI(found_property)
                     property_ui.start()
             elif operation == 'See list':
-                property_list = llapi.list_properties(self.location)
+                property_list = self.llapi.list_properties(self.location)
                 for property in property_list: #eh svona veit ekki
                     print(property)
             elif operation == 'Add new':
-                new_property = llapi.create_property()
+                new_property = self.llapi.create_property()
                 property_ui = PropertyUI(new_property)
                 property_ui.start()
