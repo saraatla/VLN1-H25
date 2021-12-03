@@ -13,8 +13,20 @@ class EmployeeLL:
     def create_employee(self,emp):
         return self.dlapi.create_employee(emp)
 
-    def edit_employee(self, empno, col, newvalue):
-        return self.dlapi.edit_employee(empno, col, newvalue)
+    #def edit_employee(self, empno, col, newvalue):
+        #return self.dlapi.edit_employee(empno, col, newvalue)
+
+    def edit_employee(self):
+        emp = input('Which employee would you like to change?: ')
+        col = input('What wolud you want to change? ')
+        try:
+            emp = int(emp)
+            col = int(col)
+        except:
+            print('TYPE FUCKING NUMBERS!!')
+        newval = input(f'What is the new {col}? ')
+        return self.dlapi.edit_employee(emp, col, newval)
+    
 
     def search_employee(self, search):
         reader = self.dlapi.list_employees()

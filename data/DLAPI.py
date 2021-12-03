@@ -27,8 +27,8 @@ class DLAPI:
     def list_employees(self):
         return self.employeeDL.list_employees()
 
-    def edit_employee(self,emp):
-        return self.employeeDL.edit_employee(emp)
+    def edit_employee(self,emp,col,newval):
+        return self.employeeDL.edit_employee(emp,col,newval)
 
     # Property DL
     def create_property(self, prop):

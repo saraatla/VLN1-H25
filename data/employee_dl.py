@@ -28,12 +28,12 @@ class EmployeeDL:
             writer.writerow({'Name': emp.name, 'SSN': emp.ssn, 'Email': emp.email, 'Address': emp.address, 
             'Phone':emp.phone, 'GSM':emp.gsm, 'Location':emp.location, 'Airport':emp.airport, 'Title':emp.title})
     
-    def edit_employee(self, empno, col, newvalue): 
+    def edit_employee(self, emp, col, newvalue): 
         """This function edits a certain value for a certain employee (input by supervisor)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            data_list[empno-1][col] = newvalue
+            data_list[emp][col] = newvalue
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile
             writer.writerows(data_list)
