@@ -2,19 +2,24 @@ import csv
 from models.property_model import Property
 
 class PropertyDL:
+    """Property data layer class; Contains 3 functions: lists, 
+    makes new and changes information about a property"""
     def __init__(self):
         self.filepath = "csv/Properties.csv"
     
     def list_properties(self):
-        ret_list = []
+        """This function reads the csv file and makes a list with 
+        all the properties along with their information"""
+        return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 prop = Property([row["Destination_ID"], row["Address"], row["Squarefoot"], row["Rooms"], row["Type"], row["Property_ID"], row["Facilities"]])
-                ret_list.append(prop)
-        return ret_list
+                return_list.append(prop)
+        return return_list
 
     def create_property(self, prop):
+        "This function appends a new property to the csv file"
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["Destination_ID", "Address", "Squarefoot", "Rooms", "Type", "Property_ID", "Facilities"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -22,6 +27,7 @@ class PropertyDL:
             pass
 
     def search_property(self, search):
+        
         with open(self.filepath, "r", newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:

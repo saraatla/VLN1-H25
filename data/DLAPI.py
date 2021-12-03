@@ -5,7 +5,7 @@ from data.contractor_dl import ContractorDL
 from data.work_request_dl import WorkRequestDL
 
 class DLAPI:
-    """Data Layer API, þar sækjum við öll föllin í data layerum"""
+    """Data Layer API, Fetching all the functions"""
     def __init__(self):
         self.locations = LocationDL()
         self.employeeDL  = EmployeeDL()
@@ -14,12 +14,10 @@ class DLAPI:
         self.work_requestDL = WorkRequestDL()
 
     def list_locations(self):
-        """Fallið skilar lista af locations"""
         return self.locations.list_locations()
     
     # employee
     def create_employee(self, emp):
-        """Fallið býr til  """
         return self.employeeDL.create_employee(emp)
 
     def list_employees(self):

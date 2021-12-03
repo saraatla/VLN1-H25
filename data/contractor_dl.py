@@ -12,13 +12,12 @@ class ContractorDL:
         all the contractors along with their information"""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile) # reader operates like a regular 
-            # reader but maps the information in each row to a dict whose keys 
-            # are given by the optional fieldnames parameter.
+            reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
+                                             # are given by the optional fieldnames parameter.
             for row in reader:                
                 cont = Contractor([row["Name"], row["Type"], row["Contact"], row["Contacts_phone"], # Make an instance of Contractor
                 row["Address"], row["Open_hours"], row["Review"]])
-                return_list.append(cont) # We append every contractor to the list
+                return_list.append(cont)
         return return_list
 
     def create_contractor(self, cont):
@@ -36,7 +35,7 @@ class ContractorDL:
             data_list = list(reader) 
             data_list[contno][col] = newval
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
-            writer = csv.writer(csvfile) # writer is responsible for converting the value into delimited strings on the given file-like object
+            writer = csv.writer(csvfile) # converts the value into delimited string on the given csvfile
             writer.writerows(data_list)
     
 
