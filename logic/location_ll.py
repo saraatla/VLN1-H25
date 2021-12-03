@@ -26,9 +26,8 @@ class LocationLL:
         for key, valu in self.location_dict.items():
             self.string += f"{key}. {valu}\n"
         return self.string
-        
-    # Hvað gerir þetta?
-    def list(self):
+
+    def list_of_locations(self):
         location_dict = self.location_dict()
         loc_list = []
         for value in location_dict.values():

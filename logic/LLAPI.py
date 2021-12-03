@@ -18,6 +18,15 @@ class LLAPI:
     # Location LL
     def list_locations(self):
         return self.locations.list()
+    
+    def location_dict(self):
+        return self.locations.location_dict()
+    
+    def print_location(self):
+        return self.locations.print_location()
+    
+    def list_of_locations(self):
+        return self.locations.list_of_locations()
 
     # Employee LL
     def create_employee(self, emp):
