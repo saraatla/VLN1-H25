@@ -2,7 +2,7 @@ import csv
 from models.employee_model import Employee
 
 class EmployeeDL:
-    """Employee data layer klasi; """
+    """Employee data layer class; Contains 3 functions: lists, makes new and changes information about an employee"""
     def __init__(self):
         self.filepath = "csv/Employees.csv"
     
