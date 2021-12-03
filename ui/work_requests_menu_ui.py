@@ -1,5 +1,6 @@
 from ui.menu import Menu
 from logic.LLAPI import llapi
+from employee_ui import EmployeeUI
 
 class WorkRequestMenu:
     def __init__(self, location, user_type):
