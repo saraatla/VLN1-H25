@@ -15,7 +15,7 @@ class WorkRequestLL:
         return self.dlapi.edit_work_request(work_reqno,col,value)
 
     def search_work_request(self, search):
-        reader = self.dlapi.get_all_work_requests()
+        reader = self.dlapi.list_work_requests()
         for row in reader:
             if search == row.workrequest_id:
                 return row
@@ -23,7 +23,7 @@ class WorkRequestLL:
 
     def get_all_work_requests_by_status(self, status):
         the_list = []
-        reader = self.dlapi.get_all_work_requests()
+        reader = self.dlapi.list_work_requests()
         for row in reader:
             if status == row.status:
                 the_list.append(row)
