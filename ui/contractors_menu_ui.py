@@ -22,10 +22,10 @@ class ContractorMenu:
                     contractor_ui = ContractorUI(found_contractor)
                     contractor_ui.start()
             elif operation == 'See list':
-                contractor_list = llapi.list_contractors(self.location)
+                contractor_list = self.llapi.list_contractors(self.location)
                 for contractor in contractor_list: #eh svona veit ekki
                     print(contractor)
             elif operation == 'Add new':
-                new_contractor = llapi.create_contractor()
+                new_contractor = self.llapi.create_contractor()
                 contractor_ui = ContractorUI(new_contractor)
                 contractor_ui.start()
