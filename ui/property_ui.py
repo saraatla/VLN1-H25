@@ -1,8 +1,9 @@
-from logic.LLAPI import llapi
+from logic.LLAPI import LLAPI
 LINE = '--------'
 
 class PropertyUI:
     def __init__(self, property):
+        self.llapi = LLAPI()
         self.property = property
         self.options = """[1].Edit
 [B].Back"""
@@ -16,9 +17,9 @@ class PropertyUI:
             print(LINE)
             commands2 = input("Choose Options edit or back: ").upper()
             if commands2 == "1":
-                llapi.edit_property(self, self.property)
+                self.llapi.edit_property(self, self.property)
                 print(LINE)
-                edited_property = llapi.search_property(self.property)
+                edited_property = self.llapi.search_property(self.property)
                 print(edited_property)
                 print(LINE)
             elif commands2 == "B":

@@ -7,7 +7,8 @@ from data.work_report_dl import WorkReportDL
 
 class DLAPI:
     """Data Layer API, fetches all the functions in the data layer"""
-    def __init__(self):
+    def __init__(self, location):
+        self.location = location
         self.locationDL = LocationDL()
         self.employeeDL  = EmployeeDL()
         self.propertyDL = PropertyDL()
@@ -68,5 +69,3 @@ class DLAPI:
 
     def edit_work_report(self,work_rep):
         return self.work_reportDL.edit_work_report(work_rep)
-
-dlapi = DLAPI()

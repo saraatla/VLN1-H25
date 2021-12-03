@@ -1,10 +1,11 @@
 from ui.menu import Menu
-from logic.LLAPI import llapi
+from logic.LLAPI import LLAPI
 from ui.employee_ui import EmployeeUI
 
 class EmployeeMenu:
     def __init__(self, location, user_type):
         self.location = location
+        self.llapi = LLAPI(self.location)
         self.user_type = user_type
 
     def start(self):
@@ -17,16 +18,16 @@ class EmployeeMenu:
             operation = operations[selected_operation]
             if operation  == 'Search by SSN':
                 search = input('Enter SSN:')
-                found_employee = llapi.search_employee(search)
+                found_employee = self.llapi.search_employee(search)
                 print(f'This is {found_employee}')
                 if found_employee is not None:
                     employee_ui = EmployeeUI(found_employee)
                     employee_ui.start()
             elif operation == 'See list':
-                employee_list = llapi.list_employees(self.location)
+                employee_list = self.llapi.list_employees(self.location)
                 for employee in employee_list: #eh svona veit ekki
                     print(employee)
             elif operation == 'Add new':
-                new_employee = llapi.create_employee()
+                new_employee = self.llapi.create_employee()
                 employee_ui = EmployeeUI(new_employee)
                 employee_ui.start()

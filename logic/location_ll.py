@@ -2,8 +2,9 @@ from data.DLAPI import DLAPI
 
 class LocationLL:
     """Location logic layer class; Contains X functions: fetches the functions in the data layer API,"""
-    def __init__(self):
-        self.dlapi = DLAPI()
+    def __init__(self,location):
+        self.location = location
+        self.dlapi = DLAPI(self.location)
 
     def list_locations(self):
         return self.dlapi.list_locations()
@@ -20,13 +21,6 @@ class LocationLL:
         location_dict = { str(i+1) : temp[i] for i in range(0, len(temp))}
         return location_dict
     
-    def print_location(self):
-        self.location_dict = self.location_dict()
-        self.string = ""
-        for key, valu in self.location_dict.items():
-            self.string += f"{key}. {valu}\n"
-        return self.string
-
     def list_of_locations(self):
         location_dict = self.location_dict()
         loc_list = []
