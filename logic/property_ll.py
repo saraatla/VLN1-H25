@@ -4,7 +4,7 @@ class PropertyLL:
     def __init__(self):
         self.dlapi = DLAPI()
     
-    def get_all_properties(self):
+    def list_properties(self):
         return self.dlapi.list_properties()
 
     def create_property(self, prop):
