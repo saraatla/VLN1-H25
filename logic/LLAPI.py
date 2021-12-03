@@ -8,8 +8,8 @@ from logic.work_report_ll import WorkReportLL
 class LLAPI:
     """Logic Layer API fetches all the functions in the logic layer"""
     def __init__(self):
-        self.locations = LocationLL()
-        self.employeeLL  = EmployeeLL(self.locations)
+        self.listlocations = LocationLL()
+        self.employeeLL  = EmployeeLL(self.location)
         self.propertyLL = PropertyLL()
         self.contractorLL  = ContractorLL()
         self.work_requestLL = WorkRequestLL()
@@ -17,7 +17,7 @@ class LLAPI:
 
     # Location LL
     def list_locations(self):
-        return self.locations.list()
+        return self.listlocations.list()
 
     # Employee LL
     def create_employee(self, emp):
