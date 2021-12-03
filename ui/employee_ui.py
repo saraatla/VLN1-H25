@@ -18,7 +18,7 @@ class EmployeeUI:
             print(LINE)
             commands2 = input("Choose Options edit or back: ").upper()
             if commands2 == "1":
-                self.llapi.edit_employee(self, self.employee)
+                self.llapi.edit_employee(self.employee)
                 print(LINE)
                 edited_employee = self.llapi.search_employee(self.employee)
                 print(edited_employee)
