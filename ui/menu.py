@@ -1,3 +1,4 @@
+from Extra.acci import acci
 LINE = '------------------------------------------'
 class Menu:
     def __init__(self, intro, options):
@@ -5,14 +6,16 @@ class Menu:
         self.options = options
 
     def draw_options(self):
+        acci()
         print(self.intro)
+        print(LINE)
         for i, option in enumerate(self.options):
             print(f"{i+1}: {option}")
         print("B: Back")
         print(LINE)
         while True:
             command = input("Select option: ")
-            #self.location,self.user_type
+            print(LINE)
             if command == 'B':
                 return -1
             try:
