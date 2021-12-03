@@ -5,8 +5,8 @@ class EmployeeLL:
         self.dlapi = DLAPI()
         self.location = location
 
-    def get_all_employees(self):
-        return self.dlapi.get_all_employees()
+    def list_employees(self):
+        return self.dlapi.list_employees()
         
     def create_employee(self,emp):
         return self.dlapi.create_employee(emp)
@@ -15,7 +15,7 @@ class EmployeeLL:
         return self.dlapi.edit_employee(empno, col, newvalue)
 
     def search_employee(self, search):
-        reader = self.dlapi.get_all_employees()
+        reader = self.dlapi.list_employees()
         for row in reader:
             if self.location == "All Locations":
                 if search == row.ssn:

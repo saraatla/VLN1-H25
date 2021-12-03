@@ -5,7 +5,7 @@ class PropertyLL:
         self.dlapi = DLAPI()
     
     def get_all_properties(self):
-        return self.dlapi.get_all_properties()
+        return self.dlapi.list_properties()
 
     def create_property(self, prop):
         return self.dlapi.create_property(prop)
@@ -14,7 +14,7 @@ class PropertyLL:
         return self.dlapi.edit_property(propno, col, newvalue)
 
     def search_property(self, search):
-        reader = self.dlapi.get_all_properties()
+        reader = self.dlapi.list_properties()
         for row in reader:
             if search == row.property_id:
                 return row

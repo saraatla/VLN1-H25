@@ -5,18 +5,18 @@ class WorkReportLL:
         self.dlapi = DLAPI()
         self.approved_index = 7
 
-    def get_all_work_reports(self):
-        return self.dlapi.get_all_reports()
+    def list_work_reports(self):
+        return self.dlapi.list_work_reports()
 
     def search_report(self, search):
-        reader = self.dlapi.get_all_reports()
+        reader = self.dlapi.list_work_reports()
         for row in reader:
             if search == row.workreport_id:
                 return row
         return False
 
     def approve_report(self, wrep_id):
-        reader = self.dlapi.get_all_reports()
+        reader = self.dlapi.list_work_reports()
         i = 0
         for row in reader:
             if wrep_id == row.workreport_id:
@@ -26,7 +26,7 @@ class WorkReportLL:
         return 'No report found'
 
     def create_report(self, wrep):
-        request = self.dlapi.get_all_work_requests()
+        request = self.dlapi.list_work_reports()
         for row in request:
             if row.workreport_id == wrep:
                 if row.status == 'Open':

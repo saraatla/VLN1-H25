@@ -3,6 +3,7 @@ from data.employee_dl import EmployeeDL
 from data.property_dl import PropertyDL
 from data.contractor_dl import ContractorDL
 from data.work_request_dl import WorkRequestDL
+from data.work_report_dl import WorkReportDL
 
 class DLAPI:
     """Data Layer API, Fetching all the functions"""
@@ -12,6 +13,7 @@ class DLAPI:
         self.propertyDL = PropertyDL()
         self.contractorDL  = ContractorDL()
         self.work_requestDL = WorkRequestDL()
+        self.work_reportDL = WorkReportDL()
 
     def list_locations(self):
         return self.locations.list_locations()
@@ -56,5 +58,14 @@ class DLAPI:
     def edit_contractor(self,cont):
         return self.contractorDL.edit_contractor(cont)
 
+    # work reports
+    def create_work_report(self, work_req):
+        return self.work_reportDL.create_work_report(work_req)
+
+    def list_work_reports(self):
+        return self.work_reportDL.list_work_reports()
+
+    def edit_work_report(self,work_req):
+        return self.work_reportDL.edit_work_report(work_req)
 
 dlapi = DLAPI()

@@ -4,8 +4,8 @@ class WorkRequestLL:
     def __init__(self):
         self.dlapi = DLAPI()
 
-    def get_all_work_requests(self):
-        return self.dlapi.get_all_work_requests()
+    def list_work_requests(self):
+        return self.dlapi.list_work_requests()
         
     def create_work_request(self,work_req):
         return self.dlapi.create_work_request(work_req)

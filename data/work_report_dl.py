@@ -5,16 +5,16 @@ class WorkReportDL:
     def __init__(self):
         self.filepath = 'The_Code/csv_files/Workreport.csv'
 
-    def get_all_reports(self):
-        ret_list = []
+    def list_work_reports(self):
+        return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 work_rep = WorkReport(row['Workreport_ID'], row['SSN'], row['Contractor'], row['Contractor_review'],
                 row['Contractor_remuneration'], row['Total_cost'], row['Description'], row['Approved'])
-                ret_list.append(work_rep)
-            return ret_list
+                return_list.append(work_rep)
+            return return_list
 
     def create_work_report(self, work_rep):
         "This function appends a new work report to the csv file"
@@ -24,7 +24,6 @@ class WorkReportDL:
             writer.writerow({'Workreport_ID': work_rep.workreport_id, 'SSN': work_rep.ssn, 'Contractor': work_rep.contractor, 
             'Contractor_review': work_rep.contractor_review, 'Contractor_remuneration':work_rep.contractor_remuneration,
             'Total_cost':work_rep.total_cost, 'Description':work_rep.description, 'Approved':work_rep.approved})
-
 
     def edit_work_report(self, rep_no, col, newval):
         """This function edits a certain value for a certain work report (input by employee)"""
