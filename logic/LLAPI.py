@@ -47,6 +47,9 @@ class LLAPI:
 
     def list_work_requests(self):
         return self.work_requestLL.list_work_requests()
+    
+    def get_all_work_requests_by_status(self, status):
+        return self.work_requestLL.get_all_work_requests_by_status(status)
 
     def search_work_requests(self,work_req):
         return self.work_requestLL.search_work_requests(work_req)
