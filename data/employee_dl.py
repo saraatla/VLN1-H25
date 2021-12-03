@@ -29,7 +29,7 @@ class EmployeeDL:
             'Phone':emp.phone, 'GSM':emp.gsm, 'Location':emp.location, 'Airport':emp.airport, 'Title':emp.title})
     
     def edit_employee(self, empno, col, newvalue): 
-        """This function edits a certain value for a certain employee"""
+        """This function edits a certain value for a certain employee (input by supervisor)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the given csvfile.
             data_list = list(reader)

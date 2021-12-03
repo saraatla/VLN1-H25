@@ -29,7 +29,7 @@ class ContractorDL:
             'Address':cont.address, 'Open_hours':cont.open_hours, 'Review':cont.review}) 
 
     def edit_contractor(self, contno, col, newval):
-        """This function edits a certain value for a certain contractor"""
+        """This function edits a certain value for a certain contractor (input by supervisor)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # will iterate over lines in the given csvfile.
             data_list = list(reader) 
