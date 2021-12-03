@@ -1,3 +1,4 @@
+from Extra.acci import acci
 from ui.location_ui import LocationUI
 from ui.menu import Menu
 
@@ -7,6 +8,7 @@ class StartUI:
 
     def start(self):
         while True:
+            acci()
             intro = 'Welcome to NaN Air \nPlease Enter your status in the company'
             options = ['Supervisor', 'Employee']
             menu = Menu(intro, options)

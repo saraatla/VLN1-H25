@@ -1,4 +1,3 @@
-from Extra.acci import acci
 LINE = '------------------------------------------'
 class Menu:
     def __init__(self, intro, options):
@@ -6,7 +5,6 @@ class Menu:
         self.options = options
 
     def draw_options(self):
-        acci()
         print(self.intro)
         print(LINE)
         for i, option in enumerate(self.options):

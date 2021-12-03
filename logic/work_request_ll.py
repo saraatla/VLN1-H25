@@ -1,5 +1,4 @@
 from data.DLAPI import DLAPI
-from models.work_request import WorkRequest
 
 class WorkRequestLL:
     def __init__(self):

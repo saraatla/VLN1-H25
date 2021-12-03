@@ -7,7 +7,7 @@ from logic.work_request_ll import WorkRequestLL
 class LLAPI:
     def __init__(self):
         self.locations = LocationLL()
-        self.employeeLL  = EmployeeLL()
+        self.employeeLL  = EmployeeLL(self.locations)
         self.propertyLL = PropertyLL()
         self.contractorLL  = ContractorLL()
         self.work_requestLL = WorkRequestLL()

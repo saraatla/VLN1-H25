@@ -1,6 +1,4 @@
-from data_layer.DLAPI import DLAPI
-from models.ContractorModel import Contractor
-
+from data.DLAPI import DLAPI
 
 class ContractorLL:
     def __init__(self):

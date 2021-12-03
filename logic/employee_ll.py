@@ -1,5 +1,4 @@
-from data_layer.DLAPI import DLAPI
-from models.EmployeeModel import Employee
+from data.DLAPI import DLAPI
 
 class EmployeeLL:
     def __init__(self, location):

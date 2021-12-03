@@ -1,6 +1,4 @@
 from data.DLAPI import DLAPI
-from models.property_model import Property
-
 
 class PropertyLL:
     def __init__(self):
