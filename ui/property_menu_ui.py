@@ -17,7 +17,7 @@ class PropertyMenu:
             operation = operations[selected_operation]
             if operation  == 'Search by ID':
                 search = input('Enter property ID:')
-                found_property = llapi.search_properties(self.location)
+                found_property = llapi.search_properties(search)
                 if found_property is not None:
                     property_ui = PropertyUI(found_property)
                     property_ui.start()
