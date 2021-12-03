@@ -6,7 +6,7 @@ from data.work_request_dl import WorkRequestDL
 from data.work_report_dl import WorkReportDL
 
 class DLAPI:
-    """Data Layer API, Fetching all the functions"""
+    """Data Layer API, fetches all the functions in the data layer"""
     def __init__(self):
         self.locationDL = LocationDL()
         self.employeeDL  = EmployeeDL()

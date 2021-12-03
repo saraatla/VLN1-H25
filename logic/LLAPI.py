@@ -6,6 +6,7 @@ from logic.work_request_ll import WorkRequestLL
 from logic.work_report_ll import WorkReportLL
 
 class LLAPI:
+    """Logic Layer API fetches all the functions in the logic layer"""
     def __init__(self):
         self.locations = LocationLL()
         self.employeeLL  = EmployeeLL(self.locations)
@@ -88,8 +89,6 @@ class LLAPI:
 
     def edit_work_request(self,work_rep):
         return self.work_requestLL.edit_work_request(work_rep)
-
-
 
 
 llapi = LLAPI()
