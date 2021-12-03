@@ -1,9 +1,10 @@
 from ui.menu import Menu
-from logic.LLAPI import llapi
+from logic.LLAPI import LLAPI
 from ui.contractor_ui import ContractorUI
 
 class ContractorMenu:
     def __init__(self, location, user_type):
+        self.llapi = LLAPI()
         self.location = location
         self.user_type = user_type
 
@@ -16,7 +17,7 @@ class ContractorMenu:
                 return
             operation = operations[selected_operation]
             if operation  == 'Search by name':
-                found_contractor = llapi.search_contractors(self.location)
+                found_contractor = self.llapi.search_contractor(self.location)
                 if found_contractor is not None:
                     contractor_ui = ContractorUI(found_contractor)
                     contractor_ui.start()

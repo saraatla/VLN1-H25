@@ -68,5 +68,3 @@ class DLAPI:
 
     def edit_work_report(self,work_rep):
         return self.work_reportDL.edit_work_report(work_rep)
-
-dlapi = DLAPI()
