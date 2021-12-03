@@ -2,10 +2,12 @@ import csv
 from models.contractor_model import Contractor
 
 class ContractorDL:
+    """Contractor data layer class; Contains 3 functions: lists, makes new and changes information about contractors"""
     def __init__(self):
         self.filepath = "csv/Contractors.csv"
 
     def list_contractors(self):
+        """This function reads the csv file and makes a list with all the contractors along with their information"""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # Náum í csv skránna
@@ -16,6 +18,7 @@ class ContractorDL:
         return return_list
 
     def create_contractor(self, cont):
+        "This function appends "
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["Name", "Type", "Contact", "Contacts_phone", "Address", "Open_hours", "Review"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # Náum í csv skránna

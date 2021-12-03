@@ -1,8 +1,8 @@
 import csv
 from models.employee_model import Employee
 
-
 class EmployeeDL:
+    """Employee data layer klasi; """
     def __init__(self):
         self.filepath = "csv/Employees.csv"
     
