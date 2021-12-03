@@ -20,7 +20,7 @@ class EmployeeUI:
             if commands2 == "1":
                 self.llapi.edit_employee(self.employee)
                 print(LINE)
-                edited_employee = self.llapi.search_employee(self.employee.ssn)
+                edited_employee = self.llapi.search_employee() # BREYTA ÞESSU
                 print(edited_employee)
                 print(LINE)
             elif commands2 == "B":
