@@ -21,13 +21,6 @@ class LocationLL:
         location_dict = { str(i+1) : temp[i] for i in range(0, len(temp))}
         return location_dict
     
-    def print_location(self):
-        self.location_dict = self.location_dict()
-        self.string = ""
-        for key, valu in self.location_dict.items():
-            self.string += f"{key}. {valu}\n"
-        return self.string
-
     def list_of_locations(self):
         location_dict = self.location_dict()
         loc_list = []

@@ -10,7 +10,7 @@ class LocationUI:
 
     def start(self):
         while True:
-            options = self.llapi.list_locations()
+            options = self.llapi.list_of_locations()
             options.append('All locations')
             location_menu = Menu(f'Welcome you are signed in as {self.user_type}\nPlease choose location', options)
             selection  = location_menu.draw_options()
