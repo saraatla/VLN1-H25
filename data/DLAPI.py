@@ -4,6 +4,7 @@ from data.property_dl import PropertyDL
 from data.contractor_dl import ContractorDL
 from data.work_request_dl import WorkRequestDL
 
+# flott þetta æði
 
 class DLAPI:
     def __init__(self):
