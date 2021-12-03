@@ -4,10 +4,14 @@ import csv
 from models.work_request import WorkRequest
 
 class WorkRequestDL:
+    """WorkReuest data layer class; Contains 3 functions: lists, 
+    makes new and changes information about a work request"""
     def __init__(self):
         self.filepath = "csv_files/Workrequest.csv"
     
     def list_work_requests(self):
+        """This function reads the csv file and makes a list with 
+        all the work requests along with their information"""
         ret_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -18,6 +22,7 @@ class WorkRequestDL:
         return ret_list
 
     def create_work_request(self,work_req):
+        "This function appends a new work request to the csv file"
         with open(self.filepath, 'a', newline='') as csvfile:
             fieldnames = ['Workrequest_ID', 'Title', 'Property_ID', 'Destination_ID', 'Contractor', 'Repeat', 'When', 'Status','Priority','Description']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -26,6 +31,7 @@ class WorkRequestDL:
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description})
 
     def search_work_request(self, search):
+
         with open(self.filepath, "r", newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
@@ -34,6 +40,7 @@ class WorkRequestDL:
             return False
     
     def edit_work_request(self, work_reqno, col,newvalue ):  
+        """This function edits a certain value for a certain work request"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile)
             data_list = list(reader)
