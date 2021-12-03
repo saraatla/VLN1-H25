@@ -37,8 +37,8 @@ class DLAPI:
     def list_properties(self):
         return self.propertyDL.list_properties()
 
-    def edit_property(self,prop):
-        return self.propertyDL.edit_property(prop)
+    def edit_property(self,prop,col,newval):
+        return self.propertyDL.edit_property(prop,col,newval)
 
     # Contractor DL
     def create_contractor(self, cont):

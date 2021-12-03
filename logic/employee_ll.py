@@ -23,7 +23,7 @@ class EmployeeLL:
             try:
                 emp = int(emp)
                 col = int(col)
-                newval = input(f'What is the new {col}? ')
+                newval = input(f'What is the new {fieldnames[col-1]}? ')
                 return self.dlapi.edit_employee(emp, col, newval)
             except:
                 print('Invalid input, try again!')

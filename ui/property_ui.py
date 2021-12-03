@@ -17,12 +17,13 @@ class PropertyUI:
             print(LINE)
             commands2 = input("Choose Options edit or back: ").upper()
             if commands2 == "1":
-                self.llapi.edit_property(self, self.property)
+                self.llapi.edit_property(self.property)
+                edited_property = self.llapi.search_property(self.property.property_id)
                 print(LINE)
-                edited_property = self.llapi.search_property(self.property)
                 print(edited_property)
                 print(LINE)
             elif commands2 == "B":
                 return
             else:
                 print("Invalid option, try again ")
+                print(LINE)
