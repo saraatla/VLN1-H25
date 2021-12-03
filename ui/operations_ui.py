@@ -1,5 +1,9 @@
 from ui.menu import Menu
 from ui.employee_menu_ui import EmployeeMenu
+from ui.property_menu_ui import PropertyMenu
+from ui.contractors_menu_ui import ContractorMenu
+from ui.work_requests_menu_ui import WorkRequestMenu
+
 
 class OperationsUI:
     def __init__(self, location, user_type):
@@ -18,8 +22,11 @@ class OperationsUI:
                 employee_menu  = EmployeeMenu(self.location,self.user_type)
                 employee_menu.start()
             elif operation == 'Properties':
-                print('property ui')
+                property_menu  = PropertyMenu(self.location,self.user_type)
+                property_menu.start()
             elif operation == 'Work requests':
-                print('Work request ui')
+                work_request_menu  = WorkRequestMenu(self.location,self.user_type)
+                work_request_menu.start()
             elif operation == 'Contractor':
-                print('contractor ui')
+                contractor_menu  = ContractorMenu(self.location,self.user_type)
+                contractor_menu.start()
