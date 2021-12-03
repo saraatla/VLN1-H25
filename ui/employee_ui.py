@@ -1,6 +1,28 @@
+from logic.LLAPI import llapi
+LINE = '--------'
+
 class EmployeeUI:
-    def __init__(self):
-        pass
+    def __init__(self, employee):
+        self.employee = employee
+        self.options = """[1].Edit
+[B].Back"""
 
     def start(self):
-        pass
+        print(LINE)
+        print(self.employee)
+        print(LINE)
+        while True:
+            print(self.options)
+            print(LINE)
+            commands2 = input("Choose Options edit or back: ")
+            if commands2 == "1":
+                llapi.edit_employee(self, self.employee)
+                print(LINE)
+                edited_employee = llapi.search_employee(self.employee)
+                print(edited_employee)
+                print(LINE)
+            elif commands2 == "b":
+                return
+            else:
+                print("Invalid option, try again ")
+
