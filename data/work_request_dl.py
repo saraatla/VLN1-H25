@@ -14,7 +14,8 @@ class WorkRequestDL:
         all the work requests along with their information"""
         ret_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
-            reader = csv.DictReader(csvfile)
+            reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
+                                             # are given by the optional fieldnames parameter.
             for row in reader:
                 work_req = WorkRequest(row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
                 row["Contractor"], row["Repeat"], row["When"], row["Status"], row["Priority"], row["Description"])
@@ -40,7 +41,7 @@ class WorkRequestDL:
             return False
     
     def edit_work_request(self, work_reqno, col,newvalue ):  
-        """This function edits a certain value for a certain work request"""
+        """This function edits a certain value for a certain work request (input by supervisor)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile)
             data_list = list(reader)
