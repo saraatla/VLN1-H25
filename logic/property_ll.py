@@ -1,6 +1,7 @@
 from data.DLAPI import DLAPI
 
 class PropertyLL:
+    """Property logic layer class; Contains X functions: fetches the functions in the data layer API,"""
     def __init__(self):
         self.dlapi = DLAPI()
     

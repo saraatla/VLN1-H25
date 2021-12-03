@@ -75,21 +75,20 @@ class LLAPI:
         return self.work_requestLL.edit_work_request(work_req)
 
     # Work Report LL
-    def create_work_report(self, work_rep):
-        return self.work_requestLL.create_work_request(work_rep)
+    def create_report(self, work_rep):
+        return self.work_reportLL.create_report(work_rep)
 
-    def list_work_requests(self):
-        return self.work_requestLL.list_work_requests()
-    
-    def get_all_work_requests_by_status(self, status):
-        return self.work_requestLL.get_all_work_requests_by_status(status)
+    def list_work_reports(self):
+        return self.work_reportLL.list_work_reports()
 
     def search_work_report(self,work_rep):
-        return self.work_requestLL.search_work_report(work_rep)
+        return self.work_reportLL.search_work_report(work_rep)
 
-    def edit_work_request(self,work_rep):
-        return self.work_requestLL.edit_work_request(work_rep)
+    def edit_work_report(self,work_rep):
+        return self.work_reportLL.edit_work_report(work_rep)
 
+    def approve_report(self, workreport_id):
+        return self.work_reportLL.approve_report(workreport_id)
 
 llapi = LLAPI()
 
