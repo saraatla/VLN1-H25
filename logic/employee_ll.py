@@ -6,7 +6,6 @@ class EmployeeLL:
     def __init__(self, location):
         self.location = location
         self.dlapi = DLAPI(self.location)
-        
 
     def list_employees(self):
         return self.dlapi.list_employees()
@@ -14,24 +13,25 @@ class EmployeeLL:
     def create_employee(self,emp):
         return self.dlapi.create_employee(emp)
 
-    #def edit_employee(self, empno, col, newvalue):
-        #return self.dlapi.edit_employee(empno, col, newvalue)
-
     def edit_employee(self, emp):
-        emp = input('Which employee would you like to change?: ')
-        col = input('What wolud you want to change? ')
-        try:
-            emp = int(emp)
-            col = int(col)
-        except:
-            print('TYPE FUCKING NUMBERS!!')
-        newval = input(f'What is the new {col}? ')
-        return self.dlapi.edit_employee(emp, col, newval)
-    
-
-    def search_employee(self):
         while True:
-            search = input('Enter SSN: ')
+            emp = input('Which employee would you like to change?: ')
+            fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Location', 'Airport', 'Title']
+            for index, field in enumerate(fieldnames):
+                print(f"{index+1}: {field}")
+            col = input('What would you want to change? ')
+            try:
+                emp = int(emp)
+                col = int(col)
+                newval = input(f'What is the new {col}? ')
+                return self.dlapi.edit_employee(emp, col, newval)
+            except:
+                print('Invalid input, try again!')
+
+    def search_employee(self, search):
+        while True:
+            if search == '':
+                search = input('Enter SSN: ')
             reader = self.dlapi.list_employees()
             for row in reader:
                 if self.location == "All Locations":
@@ -41,15 +41,7 @@ class EmployeeLL:
                     if search == row.ssn:
                         return row
                 else:
+                    print(LINE)
                     print('Employee not found')
                     print(LINE)
-                    break
-
-"""if found_employee is not None: 
-    return found_employee
-    employee_ui = EmployeeUI(found_employee, self.location)
-    employee_ui.start()
-    hold_on = False
-else:
-    print('Invalid option, choose try again or go back')
-return None"""
+                    return

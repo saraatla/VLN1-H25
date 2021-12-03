@@ -17,14 +17,16 @@ class EmployeeUI:
             print(self.options)
             print(LINE)
             commands2 = input("Choose Options edit or back: ").upper()
+            print(LINE)
             if commands2 == "1":
                 self.llapi.edit_employee(self.employee)
+                edited_employee = self.llapi.search_employee(self.employee.ssn)
                 print(LINE)
-                edited_employee = self.llapi.search_employee() # BREYTA ÞESSU
                 print(edited_employee)
                 print(LINE)
             elif commands2 == "B":
                 return
             else:
                 print("Invalid option, try again ")
+                print(LINE)
 

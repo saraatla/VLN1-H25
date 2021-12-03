@@ -1,5 +1,5 @@
 Name,SSN,Email,Address,Phone,GSM,Destination_ID,Location,Airport,Title
-sara,123456-0001,jan.jacobsen@nanair.is,Vei 230 12. Longyearbyen,+47 92 09 77 00,+354 777 1337,L1,Svalbard,Lonyearbyen,Manager
+Jan Jacobsen,123456-0001,jan.jacobsen@nanair.is,Vei 230 12. Longyearbyen,+47 92 09 77 00,+354 777 1337,L1,Svalbard,Lonyearbyen,Manager
 Jacob Yxa,123456-0002,jacob.yxa@nanair.is,Vei 224 3B. Longyearbyen,+47 92 09 77 01,+354 777 1338,L1,Svalbard,Longyearbyen,Employee
 Nanna Daema,123456-0003,nanna.daema@nanair.is,Ivan Starostin st. 109. Barantsburg,+47 92 09 77 02,+354 777 1339,L1,Svalbard,Longyearbyen,Employee
 Minik Wallace,123456-0004,minik.wallace@nanair.is,Isaajap Aqqutaa 1. 3900 Nuuk,+299 34 24 67,+354 777 1361,L2,Greenland,Nuuk,Manager

@@ -36,8 +36,8 @@ class LLAPI:
     def list_employees(self):
         return self.employeeLL.list_employees()
 
-    def search_employee(self):
-        return self.employeeLL.search_employee()
+    def search_employee(self, search=''):
+        return self.employeeLL.search_employee(search)
 
     def edit_employee(self,emp):
         return self.employeeLL.edit_employee(emp)
