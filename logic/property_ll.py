@@ -2,8 +2,9 @@ from data.DLAPI import DLAPI
 
 class PropertyLL:
     """Property logic layer class; Contains X functions: fetches the functions in the data layer API,"""
-    def __init__(self):
-        self.dlapi = DLAPI()
+    def __init__(self,location):
+        self.location = location
+        self.dlapi = DLAPI(location)
     
     def list_properties(self):
         return self.dlapi.list_properties()

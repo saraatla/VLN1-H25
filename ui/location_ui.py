@@ -3,8 +3,9 @@ from logic.LLAPI import LLAPI
 from ui.operations_ui import OperationsUI
 
 class LocationUI:
-    def __init__(self, user_type):
-        self.llapi = LLAPI()
+    def __init__(self,user_type,location=""):
+        self.location = location
+        self.llapi = LLAPI(self.location)
         self.user_type = user_type
 
     def start(self):
