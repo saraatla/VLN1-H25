@@ -1,5 +1,5 @@
-from data_layer.DLAPI import DLAPI
-from models.PropertyModel import Property
+from data.DLAPI import DLAPI
+from models.property_model import Property
 
 
 class PropertyLL:

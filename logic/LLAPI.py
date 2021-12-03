@@ -2,7 +2,7 @@ from logic.location_ll import LocationLL
 from logic.employee_ll import EmployeeLL
 from logic.property_ll import PropertyLL
 from logic.contractor_ll import ContractorLL
-from logic.work_request_ll import Work_requestLL
+from logic.work_request_ll import WorkRequestLL
 
 class LLAPI:
     def __init__(self):
@@ -10,7 +10,7 @@ class LLAPI:
         self.employeeLL  = EmployeeLL()
         self.propertyLL = PropertyLL()
         self.contractorLL  = ContractorLL()
-        self.work_requestLL = Work_requestLL()
+        self.work_requestLL = WorkRequestLL()
 
     def list_locations(self):
         return self.locations.list()
