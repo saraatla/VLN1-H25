@@ -65,7 +65,7 @@ class LLAPI:
         return self.contractorLL.list_contractors()
 
     def search_contractors(self,cont):
-        return self.contractorLL.search_contractors(cont)
+        return self.contractorLL.search_contractor(cont)
 
     def edit_contractor(self,cont):
         return self.contractorLL.edit_contractor(cont)
