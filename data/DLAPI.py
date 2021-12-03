@@ -8,17 +8,18 @@ from data.work_report_dl import WorkReportDL
 class DLAPI:
     """Data Layer API, Fetching all the functions"""
     def __init__(self):
-        self.locations = LocationDL()
+        self.locationDL = LocationDL()
         self.employeeDL  = EmployeeDL()
         self.propertyDL = PropertyDL()
         self.contractorDL  = ContractorDL()
         self.work_requestDL = WorkRequestDL()
         self.work_reportDL = WorkReportDL()
 
+    # Location DL
     def list_locations(self):
-        return self.locations.list_locations()
+        return self.locationDL.list_locations()
     
-    # employee
+    # Employee DL
     def create_employee(self, emp):
         return self.employeeDL.create_employee(emp)
 
@@ -28,7 +29,7 @@ class DLAPI:
     def edit_employee(self,emp):
         return self.employeeDL.edit_employee(emp)
 
-    # property
+    # Property DL
     def create_property(self, prop):
         return self.propertyDL.create_property(prop)
 
@@ -38,17 +39,7 @@ class DLAPI:
     def edit_property(self,prop):
         return self.propertyDL.edit_property(prop)
 
-    # work request
-    def create_work_request(self, work_req):
-        return self.work_requestDL.create_work_request(work_req)
-
-    def list_work_requests(self):
-        return self.work_requestDL.list_work_requests()
-
-    def edit_work_request(self,work_req):
-        return self.work_requestDL.edit_work_request(work_req)
-
-    # contractor
+    # Contractor DL
     def create_contractor(self, cont):
         return self.contractorDL.create_contractor(cont)
 
@@ -58,7 +49,17 @@ class DLAPI:
     def edit_contractor(self,cont):
         return self.contractorDL.edit_contractor(cont)
 
-    # work reports
+    # Work Request DL
+    def create_work_request(self, work_req):
+        return self.work_requestDL.create_work_request(work_req)
+
+    def list_work_requests(self):
+        return self.work_requestDL.list_work_requests()
+
+    def edit_work_request(self,work_req):
+        return self.work_requestDL.edit_work_request(work_req)
+
+    # Work Report DL
     def create_work_report(self, work_req):
         return self.work_reportDL.create_work_report(work_req)
 
