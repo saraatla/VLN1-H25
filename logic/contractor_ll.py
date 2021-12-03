@@ -1,6 +1,7 @@
 from data.DLAPI import DLAPI
 
 class ContractorLL:
+    """Contractor logic layer class; Contains X functions: fetches the functions in the data layer API,"""
     def __init__(self):
         self.dlapi = DLAPI()
 
@@ -14,6 +15,7 @@ class ContractorLL:
         return self.dlapi.edit_contractor(contno, col, newvalue)
 
     def search_contractor(self, search):
+
         reader = self.dlapi.list_contractors()
         for row in reader:
             if search == row.name:
