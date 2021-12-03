@@ -8,7 +8,7 @@ class WorkReportLL:
     def list_work_reports(self):
         return self.dlapi.list_work_reports()
 
-    def search_report(self, search):
+    def search_work_report(self, search):
         reader = self.dlapi.list_work_reports()
         for row in reader:
             if search == row.workreport_id:

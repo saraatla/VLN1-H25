@@ -3,6 +3,7 @@ from logic.employee_ll import EmployeeLL
 from logic.property_ll import PropertyLL
 from logic.contractor_ll import ContractorLL
 from logic.work_request_ll import WorkRequestLL
+from logic.work_report_ll import WorkReportLL
 
 class LLAPI:
     def __init__(self):
@@ -11,11 +12,13 @@ class LLAPI:
         self.propertyLL = PropertyLL()
         self.contractorLL  = ContractorLL()
         self.work_requestLL = WorkRequestLL()
+        self.work_reportLL = WorkReportLL()
 
+    # Location LL
     def list_locations(self):
         return self.locations.list()
 
-    # employee
+    # Employee LL
     def create_employee(self, emp):
         return self.employeeLL.create_employee(emp)
 
@@ -28,7 +31,7 @@ class LLAPI:
     def edit_employee(self,emp):
         return self.employeeLL.edit_employee(emp)
 
-    # property
+    # Property LL
     def create_property(self, prop):
         return self.propertyLL.create_property(prop)
 
@@ -36,12 +39,25 @@ class LLAPI:
         return self.propertyLL.list_properties()
 
     def search_properties(self,prop):
-        return self.propertyLL.search_properties(prop)
+        return self.propertyLL.search_property(prop)
 
     def edit_property(self,prop):
         return self.propertyLL.edit_property(prop)
 
-    # work request
+    # Contractor LL
+    def create_contractor(self, cont):
+        return self.contractorLL.create_contractor(cont)
+
+    def list_contractors(self):
+        return self.contractorLL.list_contractors()
+
+    def search_contractors(self,cont):
+        return self.contractorLL.search_contractor(cont)
+
+    def edit_contractor(self,cont):
+        return self.contractorLL.edit_contractor(cont)
+
+    # Work Request LL
     def create_work_request(self, work_req):
         return self.work_requestLL.create_work_request(work_req)
 
@@ -52,25 +68,28 @@ class LLAPI:
         return self.work_requestLL.get_all_work_requests_by_status(status)
 
     def search_work_requests(self,work_req):
-        return self.work_requestLL.search_work_requests(work_req)
+        return self.work_requestLL.search_work_request(work_req)
 
     def edit_work_request(self,work_req):
         return self.work_requestLL.edit_work_request(work_req)
 
-    # contractor
-    def create_contractor(self, cont):
-        return self.contractorLL.create_contractor(cont)
+    # Work Report LL
+    def create_work_report(self, work_rep):
+        return self.work_requestLL.create_work_request(work_rep)
 
-    def list_contractors(self):
-        return self.contractorLL.list_contractors()
-
-    def search_contractors(self,cont):
-        return self.contractorLL.search_contractors(cont)
-
-    def edit_contractor(self,cont):
-        return self.contractorLL.edit_contractor(cont)
-
+    def list_work_requests(self):
+        return self.work_requestLL.list_work_requests()
     
+    def get_all_work_requests_by_status(self, status):
+        return self.work_requestLL.get_all_work_requests_by_status(status)
+
+    def search_work_report(self,work_rep):
+        return self.work_requestLL.search_work_report(work_rep)
+
+    def edit_work_request(self,work_rep):
+        return self.work_requestLL.edit_work_request(work_rep)
+
+
 
 
 llapi = LLAPI()
