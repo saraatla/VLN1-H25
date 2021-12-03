@@ -21,7 +21,7 @@ class EmployeeMenu:
                 found_employee = self.llapi.search_employee(search)
                 print(f'This is {found_employee}')
                 if found_employee is not None:
-                    employee_ui = EmployeeUI(found_employee)
+                    employee_ui = EmployeeUI(found_employee, self.location)
                     employee_ui.start()
             elif operation == 'See list':
                 employee_list = self.llapi.list_employees(self.location)
@@ -29,5 +29,5 @@ class EmployeeMenu:
                     print(employee)
             elif operation == 'Add new':
                 new_employee = self.llapi.create_employee()
-                employee_ui = EmployeeUI(new_employee)
+                employee_ui = EmployeeUI(new_employee, self.location)
                 employee_ui.start()

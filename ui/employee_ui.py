@@ -2,8 +2,9 @@ from logic.LLAPI import LLAPI
 LINE = '--------'
 
 class EmployeeUI:
-    def __init__(self, employee):
-        self.llapi= LLAPI()
+    def __init__(self, employee, location):
+        self.location = location
+        self.llapi= LLAPI(self.location)
         self.employee = employee
         self.options = """[1].Edit
 [B].Back"""
