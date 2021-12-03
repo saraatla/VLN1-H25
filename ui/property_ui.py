@@ -15,14 +15,14 @@ class PropertyUI:
         while True:
             print(self.options)
             print(LINE)
-            commands2 = input("Choose Options edit or back: ")
+            commands2 = input("Choose Options edit or back: ").upper()
             if commands2 == "1":
                 self.llapi.edit_property(self, self.property)
                 print(LINE)
                 edited_property = self.llapi.search_property(self.property)
                 print(edited_property)
                 print(LINE)
-            elif commands2.lower() == "b":
+            elif commands2 == "B":
                 return
             else:
                 print("Invalid option, try again ")
