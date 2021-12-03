@@ -21,7 +21,7 @@ class PropertyUI:
                 edited_property = llapi.search_property(self.property)
                 print(edited_property)
                 print(LINE)
-            elif commands2 == "b":
+            elif commands2.lower() == "b":
                 return
             else:
                 print("Invalid option, try again ")
