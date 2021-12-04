@@ -1,7 +1,7 @@
 import time
 from Extra.TermcolorFile.termcolor import colored
 def acci():
-        print(colored("\x1bc███╗   ██╗ █████╗ ███╗   ██╗     █████╗ ██╗██████╗ ","red"))
+        print(f'\x1bc{colored("███╗   ██╗ █████╗ ███╗   ██╗     █████╗ ██╗██████╗ ","red")}')
         time.sleep(0.1)
         print(colored("████╗  ██║██╔══██╗████╗  ██║    ██╔══██╗██║██╔══██╗","green"))
         time.sleep(0.1)
