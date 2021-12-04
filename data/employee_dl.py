@@ -4,10 +4,11 @@ from models.employee_model import Employee
 class EmployeeDL:
     """Employee data layer class; Contains 4 functions: lists, 
     makes new and changes information about an employee"""
-    def __init__(self):
+    def __init__(self,location):
         self.filepath = "csv/Employees.csv"
+        self.location = location
     
-    def list_employees(self):
+    def list_employees(self,location):
         """This function reads the csv file and makes a list with 
         all the employees along with their information"""
         return_list = []
@@ -16,7 +17,7 @@ class EmployeeDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 emp = Employee(row["Name"], row["SSN"], row["Email"], row["Address"], row["Phone"], 
-                row["GSM"], row["Location"], row["Airport"], row["Title"]) # Make an instance of Employee
+                row["GSM"], location, row["Airport"], row["Title"]) # Make an instance of Employee
                 return_list.append(emp)
         return return_list
 

@@ -7,8 +7,8 @@ class EmployeeLL:
         self.location = location
         self.dlapi = DLAPI(self.location)
 
-    def list_employees(self):
-        return self.dlapi.list_employees()
+    def list_employees(self,location):
+        return self.dlapi.list_employees(location)
         
     def create_employee(self,emp):
         return self.dlapi.create_employee(emp)
