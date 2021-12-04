@@ -1,5 +1,6 @@
 from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
+from models.employee_model import Employee
 LINE = '------------------------------------------'
 
 class EmployeeLL:
@@ -19,13 +20,22 @@ class EmployeeLL:
                 self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Location","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
         print(self.table.draw())
         while True:
+            print(LINE)
             command = input("Enter B to go back:").upper()
             if command == "B":
                 return
             else:
                 print("Invalid input, try again!")
         
-    def create_employee(self,emp):
+    def create_employee(self):
+        print('Enter the following information: ')
+        print(LINE)
+        emp = []
+        fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Destination_ID', 'Location', 'Airport', 'Title']
+        for field in fieldnames:
+            val = input(f'{field}: ')
+            emp.append(val)
+        print('Contractor successfully created!')
         return self.dlapi.create_employee(emp)
 
     def edit_employee(self, emp):

@@ -30,8 +30,8 @@ class LLAPI:
         return self.locations.list_of_locations()
 
     # Employee LL
-    def create_employee(self, emp):
-        return self.employeeLL.create_employee(emp)
+    def create_employee(self):
+        return self.employeeLL.create_employee()
 
     def list_employees(self):
         return self.employeeLL.list_employees()

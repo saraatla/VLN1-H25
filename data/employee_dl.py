@@ -1,6 +1,5 @@
 import csv
 from models.employee_model import Employee
-from models.destination_model import Destination
 
 class EmployeeDL:
     """Employee data layer class; Contains 4 functions: lists, 
