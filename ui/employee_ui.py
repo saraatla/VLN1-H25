@@ -20,7 +20,7 @@ class EmployeeUI:
             print(LINE)
             if commands2 == "1":
                 self.llapi.edit_employee(self.employee)
-                edited_employee = self.llapi.search_employee(self.employee.ssn)
+                edited_employee = self.llapi.search_employee(self.employee.ssn, self.location)
                 print(LINE)
                 print(edited_employee)
                 print(LINE)

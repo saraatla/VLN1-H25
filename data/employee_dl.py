@@ -1,5 +1,6 @@
 import csv
 from models.employee_model import Employee
+from models.destination_model import Destination
 
 class EmployeeDL:
     """Employee data layer class; Contains 4 functions: lists, 
@@ -8,7 +9,7 @@ class EmployeeDL:
         self.filepath = "csv/Employees.csv"
         self.location = location
     
-    def list_employees(self,location):
+    def list_employees(self):
         """This function reads the csv file and makes a list with 
         all the employees along with their information"""
         return_list = []
@@ -17,7 +18,7 @@ class EmployeeDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 emp = Employee(row["Name"], row["SSN"], row["Email"], row["Address"], row["Phone"], 
-                row["GSM"], location, row["Airport"], row["Title"]) # Make an instance of Employee
+                row["GSM"], row["Location"], row["Airport"], row["Title"]) # Make an instance of Employee# Make an instance of Employee
                 return_list.append(emp)
         return return_list
 

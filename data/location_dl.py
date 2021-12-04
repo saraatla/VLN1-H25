@@ -7,6 +7,7 @@ class LocationDL:
     def __init__(self):
         self.filepath = "csv/Destinations.csv"
 
+
     def list_locations(self):
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:

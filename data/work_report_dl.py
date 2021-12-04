@@ -4,8 +4,9 @@ from models.work_report import WorkReport
 class WorkReportDL:
     """Work report data layer class; Contains 4 functions: lists, 
     makes new and changes information about a work report"""
-    def __init__(self):
+    def __init__(self, location):
         self.filepath = 'The_Code/csv_files/Workreport.csv'
+        self.location = location
 
     def list_work_reports(self):
         return_list = []

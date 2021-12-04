@@ -1,3 +1,4 @@
+from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 LINE = '------------------------------------------'
 
@@ -6,9 +7,23 @@ class EmployeeLL:
     def __init__(self, location):
         self.location = location
         self.dlapi = DLAPI(self.location)
+        self.table = Texttable()
 
-    def list_employees(self,location):
-        return self.dlapi.list_employees(location)
+    def list_employees(self):
+        self.table.set_deco(Texttable.HEADER)
+        self.table.set_max_width(118)
+        emp_list = self.dlapi.list_employees()
+        for item in range(len(emp_list)):
+            emp = emp_list[item]
+            if emp.location == self.location:
+                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Location","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
+        print(self.table.draw())
+        while True:
+            command = input("Enter B to go back:").upper()
+            if command == "B":
+                return
+            else:
+                print("Invalid input, try again!")
         
     def create_employee(self,emp):
         return self.dlapi.create_employee(emp)

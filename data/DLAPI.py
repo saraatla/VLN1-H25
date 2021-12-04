@@ -10,11 +10,11 @@ class DLAPI:
     def __init__(self, location):
         self.location = location
         self.locationDL = LocationDL()
-        self.employeeDL  = EmployeeDL(location)
-        self.propertyDL = PropertyDL()
-        self.contractorDL  = ContractorDL()
-        self.work_requestDL = WorkRequestDL()
-        self.work_reportDL = WorkReportDL()
+        self.employeeDL  = EmployeeDL(self.location)
+        self.propertyDL = PropertyDL(self.location)
+        self.contractorDL  = ContractorDL(self.location)
+        self.work_requestDL = WorkRequestDL(self.location)
+        self.work_reportDL = WorkReportDL(self.location)
 
     # Location DL
     def list_locations(self):
@@ -24,8 +24,8 @@ class DLAPI:
     def create_employee(self, emp):
         return self.employeeDL.create_employee(emp)
 
-    def list_employees(self,location):
-        return self.employeeDL.list_employees(location)
+    def list_employees(self):
+        return self.employeeDL.list_employees()
 
     def edit_employee(self,emp,col,newval):
         return self.employeeDL.edit_employee(emp,col,newval)

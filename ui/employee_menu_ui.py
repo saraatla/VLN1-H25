@@ -2,6 +2,8 @@ from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.employee_ui import EmployeeUI
 
+LINE = '------------------------------------------'
+
 class EmployeeMenu:
     def __init__(self, location, user_type):
         self.location = location
@@ -22,9 +24,8 @@ class EmployeeMenu:
                     employee_ui = EmployeeUI(found_employee, self.location)
                     employee_ui.start()
             elif operation == 'See list':
-                employee_list = self.llapi.list_employees(self.location)
-                for employee in employee_list: #eh svona veit ekki
-                    print(employee)
+                self.llapi.list_employees()
+                print(LINE)
             elif operation == 'Add new':
                 new_employee = self.llapi.create_employee()
                 employee_ui = EmployeeUI(new_employee, self.location)

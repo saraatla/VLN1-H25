@@ -9,12 +9,12 @@ class LLAPI:
     """Logic Layer API fetches all the functions in the logic layer"""
     def __init__(self,location):
         self.location = location
-        self.locations = LocationLL(location)
-        self.employeeLL  = EmployeeLL(location)
-        self.propertyLL = PropertyLL(location)
-        self.contractorLL  = ContractorLL(location)
-        self.work_requestLL = WorkRequestLL(location)
-        self.work_reportLL = WorkReportLL(location)
+        self.locations = LocationLL(self.location)
+        self.employeeLL  = EmployeeLL(self.location)
+        self.propertyLL = PropertyLL(self.location)
+        self.contractorLL  = ContractorLL(self.location)
+        self.work_requestLL = WorkRequestLL(self.location)
+        self.work_reportLL = WorkReportLL(self.location)
 
     # Location LL
     def list_locations(self):
@@ -33,8 +33,8 @@ class LLAPI:
     def create_employee(self, emp):
         return self.employeeLL.create_employee(emp)
 
-    def list_employees(self,location):
-        return self.employeeLL.list_employees(location)
+    def list_employees(self):
+        return self.employeeLL.list_employees()
 
     def search_employee(self, emp=''):
         return self.employeeLL.search_employee(emp)
