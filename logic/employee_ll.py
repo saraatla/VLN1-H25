@@ -31,12 +31,14 @@ class EmployeeLL:
         print('Enter the following information: ')
         print(LINE)
         emp = []
-        fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Destination_ID', 'Location', 'Airport', 'Title']
+        fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Location', 'Airport', 'Title']
         for field in fieldnames:
             val = input(f'{field}: ')
             emp.append(val)
-        print('Contractor successfully created!')
-        return self.dlapi.create_employee(emp)
+        self.dlapi.create_employee(Employee(emp))
+        print(f'{LINE}\nEmployee successfully created!\n{LINE}')
+
+        
 
     def edit_employee(self, emp):
         while True:

@@ -16,8 +16,8 @@ class EmployeeDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                emp = Employee(row["Name"], row["SSN"], row["Email"], row["Address"], row["Phone"], 
-                row["GSM"], row["Location"], row["Airport"], row["Title"]) # Make an instance of Employee# Make an instance of Employee
+                emp = Employee([row["Name"], row["SSN"], row["Email"], row["Address"], row["Phone"], 
+                row["GSM"], row["Location"], row["Airport"], row["Title"]]) # Make an instance of Employee# Make an instance of Employee
                 return_list.append(emp)
         return return_list
 

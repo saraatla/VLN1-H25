@@ -27,6 +27,6 @@ class EmployeeMenu:
                 self.llapi.list_employees()
                 print(LINE)
             elif operation == 'Add new':
-                new_employee = self.llapi.create_employee()
-                employee_ui = EmployeeUI(new_employee, self.location)
-                employee_ui.start()
+                self.llapi.create_employee()
+                #employee_ui = EmployeeUI(new_employee, self.location)
+                #employee_ui.start()

@@ -1,14 +1,14 @@
 class Employee:
-    def __init__(self,name,ssn,email,address,phone,gsm,location,airport,title):
-        self.name = name
-        self.ssn = ssn
-        self.email = email
-        self.address = address
-        self.phone = phone
-        self.gsm = gsm
-        self.location = location
-        self.airport = airport
-        self.title = title
+    def __init__(self,parameters):
+        self.name = parameters[0]
+        self.ssn = parameters[1]
+        self.email = parameters[2]
+        self.address = parameters[3]
+        self.phone = parameters[4]
+        self.gsm = parameters[5]
+        self.location = parameters[6]
+        self.airport = parameters[7]
+        self.title = parameters[8]
         
         
     def __str__(self):
