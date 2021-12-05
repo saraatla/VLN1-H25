@@ -63,5 +63,5 @@ class ContractorLL:
                 if search == row.name:
                     return row
                 else:
-                    print(f'{LINE}\nEmployee not found\n{LINE}')
+                    print(f'{LINE}\nContractor not found\n{LINE}')
                     return
