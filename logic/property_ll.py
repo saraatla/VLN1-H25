@@ -65,11 +65,6 @@ class PropertyLL:
                 search = input('Enter Property ID: ')        
             reader = self.dlapi.list_properties()
             for row in reader:
-                #print(row.property_id)
-                #if search == row.property_id:
-                    #print('nice')
-                    #print(row.property_id)
-                    #return row
                 if self.destination == "All destinations":
                     if search == row.property_id:
                         return row
