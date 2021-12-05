@@ -16,8 +16,10 @@ class PropertyLL:
         prop_list = self.dlapi.list_properties()
         for item in range(len(prop_list)):
             prop = prop_list[item]
-            #if prop.destination == self.destination:
-            self.table.add_rows([["Nr","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], [item+1,prop.destination, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
+            if prop.destination == self.destination:
+                self.table.add_rows([["Nr","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], [item+1,prop.destination, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
+            elif self.destination == "All destinations":
+                self.table.add_rows([["Nr","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], [item+1,prop.destination, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
         print(self.table.draw())
         while True:
             print(LINE)
@@ -64,16 +66,16 @@ class PropertyLL:
             reader = self.dlapi.list_properties()
             for row in reader:
                 #print(row.property_id)
-                if search == row.property_id:
+                #if search == row.property_id:
                     #print('nice')
                     #print(row.property_id)
-                    return row
-                # if self.destination == "All destinations":
-                #     if search == row.property_id:
-                #         return row
-                # elif row.destination == self.destination:
-                #     if search == row.property_id:
-                #         return row
+                    #return row
+                if self.destination == "All destinations":
+                    if search == row.property_id:
+                        return row
+                elif row.destination == self.destination:
+                    if search == row.property_id:
+                        return row
                 else:
                     print(f'{LINE}\nProperty not found\n{LINE}')
                     return
