@@ -1,12 +1,12 @@
 class Property:
-    def __init__(self,destination_id,address,squarefoot,rooms,type,property_id,facilites): #self, parameters og parameter[0] og upp í self hér fyrir neðan
-        self.destination_id = destination_id
-        self.address = address
-        self.squarefoot = squarefoot
-        self.rooms = rooms
-        self.type = type
-        self.property_id = property_id
-        self.facilities = facilites
+    def __init__(self,parameters): 
+        self.destination_id = parameters[0]
+        self.address = parameters[1]
+        self.squarefoot = parameters[2]
+        self.rooms = parameters[3]
+        self.type = parameters[4]
+        self.property_id = parameters[5]
+        self.facilities = parameters[6]
 
     def __str__(self):
         return f"""Destination_ID: {self.destination_id} 

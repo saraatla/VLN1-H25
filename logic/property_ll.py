@@ -1,4 +1,6 @@
+from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
+from models.property_model import Property
 LINE = '------------------------------------------'
 
 class PropertyLL:
@@ -6,20 +8,46 @@ class PropertyLL:
     def __init__(self,location):
         self.location = location
         self.dlapi = DLAPI(self.location)
+        self.table = Texttable()
     
     def list_properties(self):
-        return self.dlapi.list_properties()
+        self.table.set_deco(Texttable.HEADER)
+        self.table.set_max_width(130)
+        prop_list = self.dlapi.list_properties()
+        for item in range(len(prop_list)):
+            prop = prop_list[item]
+            #if prop.location == self.location:
+            self.table.add_rows([["Nr","Destination_ID", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], [item+1,prop.destination_id, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
+        print(self.table.draw())
+        while True:
+            print(LINE)
+            command = input("Enter B to go back:").upper()
+            if command == "B":
+                return
+            else:
+                print("Invalid input, try again!")
 
-    def create_property(self, prop):
-        return self.dlapi.create_property(prop)
+    def create_property(self):
+        print('Enter the following information: ')
+        print(LINE)
+        prop = []
+        fieldnames = ['Destination_ID', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
+        for field in fieldnames:
+            val = input(f'{field}: ')
+            prop.append(val)
+        self.dlapi.create_property(Property(prop))
+        print(f'{LINE}\nProperty successfully created!\n{LINE}')
+ 
     
-    def edit_property(self, prop, col, newval):
+
+
+    def edit_property(self, prop):
         while True:
             prop = input('Which property would you like to change?: ')
             fieldnames = ['Destination_ID', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What would you want to change? ')
+            col = input('What do you want to change? ')
             try:
                 prop = int(prop)
                 col = int(col)
@@ -35,10 +63,10 @@ class PropertyLL:
                 search = input('Enter Property ID: ')        
             reader = self.dlapi.list_properties()
             for row in reader:
-                print(row.property_id)
+                #print(row.property_id)
                 if search == row.property_id:
-                    print('nice')
-                    print(row.property_id)
+                    #print('nice')
+                    #print(row.property_id)
                     return row
                 # if self.location == "All Locations":
                 #     if search == row.property_id:
@@ -47,9 +75,7 @@ class PropertyLL:
                 #     if search == row.property_id:
                 #         return row
                 else:
-                    print(LINE)
-                    print('Property not found')
-                    print(LINE)
+                    print(f'{LINE}\nProperty not found\n{LINE}')
                     return
  
 

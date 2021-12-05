@@ -2,6 +2,8 @@ from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.property_ui import PropertyUI
 
+LINE = '------------------------------------------'
+
 class PropertyMenu:
     def __init__(self, location, user_type):
         self.location = location
@@ -22,10 +24,7 @@ class PropertyMenu:
                     property_ui = PropertyUI(found_property, self.location)
                     property_ui.start()
             elif operation == 'See list':
-                property_list = self.llapi.list_properties(self.location)
-                for property in property_list: #eh svona veit ekki
-                    print(property)
+                self.llapi.list_properties()
+                print(LINE)
             elif operation == 'Add new':
-                new_property = self.llapi.create_property()
-                property_ui = PropertyUI(new_property)
-                property_ui.start()
+                self.llapi.create_property()

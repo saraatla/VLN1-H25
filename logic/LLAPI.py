@@ -43,8 +43,8 @@ class LLAPI:
         return self.employeeLL.edit_employee(emp)
 
     # Property LL
-    def create_property(self, prop):
-        return self.propertyLL.create_property(prop)
+    def create_property(self):
+        return self.propertyLL.create_property()
 
     def list_properties(self):
         return self.propertyLL.list_properties()

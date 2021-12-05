@@ -34,8 +34,8 @@ class DLAPI:
     def create_property(self, prop):
         return self.propertyDL.create_property(prop)
 
-    def list_properties(self,location):
-        return self.propertyDL.list_properties(location)
+    def list_properties(self):
+        return self.propertyDL.list_properties()
 
     def edit_property(self,prop,col,newval):
         return self.propertyDL.edit_property(prop,col,newval)

@@ -18,6 +18,8 @@ class EmployeeLL:
             emp = emp_list[item]
             if emp.location == self.location:
                 self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Location","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
+            elif self.location == "All locations":
+                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Location","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
         print(self.table.draw())
         while True:
             print(LINE)
@@ -46,7 +48,7 @@ class EmployeeLL:
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Location', 'Airport', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What would you want to change? ')
+            col = input('What do you want to change? ')
             try:
                 emp = int(emp)
                 col = int(col)
@@ -61,14 +63,14 @@ class EmployeeLL:
                 search = input('Enter SSN: ')
             reader = self.dlapi.list_employees()
             for row in reader:
-                if self.location == "All Locations":
+                #if self.location == "All Locations":
+                    #if search == row.ssn:
+                        #return row
+                if row.location == self.location:
                     if search == row.ssn:
                         return row
-                elif row.location == self.location:
-                    if search == row.ssn:
+                elif search == row.ssn:
                         return row
                 else:
-                    print(LINE)
-                    print('Employee not found')
-                    print(LINE)
+                    print(f'{LINE}\nEmployee not found\n{LINE}')
                     return
