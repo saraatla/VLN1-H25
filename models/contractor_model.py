@@ -9,4 +9,10 @@ class Contractor:
         self.review = parameters[6]
         
     def __str__(self):
-        return f"Name: {self.name}, Type: {self.type}, Contact: {self.contact}, Contacts_phone: {self.contacts_phone}, Address: {self.address}, Open_hours: {self.open_hours}, Review: {self.review}"
+        return f"""Name: {self.name}
+Type: {self.type} 
+Contact: {self.contact} 
+Contacts_phone: {self.contacts_phone} 
+Address: {self.address} 
+Open_hours: {self.open_hours} 
+Review: {self.review}"""

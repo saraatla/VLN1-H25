@@ -2,6 +2,8 @@ from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.contractor_ui import ContractorUI
 
+LINE = '------------------------------------------'
+
 class ContractorMenu:
     def __init__(self, location, user_type):
         self.location = location
@@ -17,15 +19,12 @@ class ContractorMenu:
                 return
             operation = operations[selected_operation]
             if operation  == 'Search by name':
-                found_contractor = self.llapi.search_contractor(self.location)
+                found_contractor = self.llapi.search_contractor()
                 if found_contractor is not None:
-                    contractor_ui = ContractorUI(found_contractor)
+                    contractor_ui = ContractorUI(found_contractor, self.location)
                     contractor_ui.start()
             elif operation == 'See list':
-                contractor_list = self.llapi.list_contractors(self.location)
-                for contractor in contractor_list: #eh svona veit ekki
-                    print(contractor)
+                self.llapi.list_contractors()
+                print(LINE)
             elif operation == 'Add new':
-                new_contractor = self.llapi.create_contractor()
-                contractor_ui = ContractorUI(new_contractor)
-                contractor_ui.start()
+                self.llapi.create_contractor()

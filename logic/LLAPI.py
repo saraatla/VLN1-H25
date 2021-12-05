@@ -56,13 +56,13 @@ class LLAPI:
         return self.propertyLL.edit_property(prop)
 
     # Contractor LL
-    def create_contractor(self, cont):
-        return self.contractorLL.create_contractor(cont)
+    def create_contractor(self):
+        return self.contractorLL.create_contractor()
 
     def list_contractors(self):
         return self.contractorLL.list_contractors()
 
-    def search_contractor(self,cont):
+    def search_contractor(self,cont=''):
         return self.contractorLL.search_contractor(cont)
 
     def edit_contractor(self,cont):
