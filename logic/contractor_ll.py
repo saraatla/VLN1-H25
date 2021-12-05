@@ -1,6 +1,6 @@
 from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
-from models.employee_model import Employee
+from models.contractor_model import Contractor
 LINE = '------------------------------------------'
 
 class ContractorLL:
@@ -16,10 +16,7 @@ class ContractorLL:
         cont_list = self.dlapi.list_contractors()
         for item in range(len(cont_list)):
             cont = cont_list[item]
-            if cont.destination == self.destination:
-                self.table.add_rows([["Nr","Name", "Type","Contact","Contact's phone","Address","Open_hours","Review"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.destination, emp.airport, emp.title]])
-            elif self.destination == "All destinations":
-                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","destination","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.destination, emp.airport, emp.title]])
+            self.table.add_rows([["Nr","Name","Type","Contact","Contact's phone","Address","Open_hours","Review"], [item+1,cont.name, cont.type, cont.contact, cont.contacts_phone, cont.address, cont.open_hours, cont.review]])
         print(self.table.draw())
         while True:
             print(LINE)
@@ -29,16 +26,42 @@ class ContractorLL:
             else:
                 print("Invalid input, try again!")
 
-    def create_contractor(self, cont):
-        return self.dlapi.create_contractor(cont)
+    def create_contractor(self):
+        print('Enter the following information: ')
+        print(LINE)
+        cont = []
+        fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
+        for field in fieldnames:
+            val = input(f'{field}: ')
+            cont.append(val)
+        self.dlapi.create_contractor(Contractor(cont))
+        print(f'{LINE}\nContractor successfully created!\n{LINE}')
 
-    def edit_contractor(self, contno, col, newvalue):
-        return self.dlapi.edit_contractor(contno, col, newvalue)
+
+    def edit_contractor(self, cont):
+        while True:
+            cont = input('Which contractor would you like to change?: ')
+            fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
+            for index, field in enumerate(fieldnames):
+                print(f"{index+1}: {field}")
+            col = input('What do you want to change? ')
+            try:
+                cont = int(cont)
+                col = int(col)
+                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                col = col-1
+                return self.dlapi.edit_contractor(cont, col, newval)
+            except:
+                print('Invalid input, try again!')
 
     def search_contractor(self, search):
-
-        reader = self.dlapi.list_contractors()
-        for row in reader:
-            if search == row.name:
-                return row
-        return False
+        while True:
+            if search == '':
+                search = input('Enter name: ')
+            reader = self.dlapi.list_contractors()
+            for row in reader:
+                if search == row.name:
+                    return row
+                else:
+                    print(f'{LINE}\nEmployee not found\n{LINE}')
+                    return

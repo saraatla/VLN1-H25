@@ -1,6 +1,6 @@
 from data.DLAPI import DLAPI
 
-class destinationLL:
+class DestinationLL:
     """destination logic layer class; Contains X functions: fetches the functions in the data layer API,"""
     def __init__(self,destination):
         self.destination = destination

@@ -27,6 +27,6 @@ class OperationsUI:
             elif operation == 'Work requests':
                 work_request_menu  = WorkRequestMenu(self.destination,self.user_type)
                 work_request_menu.start()
-            elif operation == 'Contractor':
+            elif operation == 'Contractors':
                 contractor_menu  = ContractorMenu(self.destination,self.user_type)
                 contractor_menu.start()

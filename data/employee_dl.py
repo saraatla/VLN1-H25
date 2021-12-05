@@ -34,8 +34,6 @@ class EmployeeDL:
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            if col == 1:
-                col = 0
             data_list[emp][col] = newvalue
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile

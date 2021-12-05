@@ -2,7 +2,7 @@ from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.operations_ui import OperationsUI
 
-class destinationUI:
+class DestinationUI:
     def __init__(self,user_type,destination=""):
         self.destination = destination
         self.llapi = LLAPI(self.destination)

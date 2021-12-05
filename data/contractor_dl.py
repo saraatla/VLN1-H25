@@ -29,12 +29,12 @@ class ContractorDL:
             writer.writerow({'Name': cont.name, 'Type': cont.type, 'Contact': cont.contact, 'Contacts_phone': cont.contacts_phone, 
             'Address':cont.address, 'Open_hours':cont.open_hours, 'Review':cont.review}) 
 
-    def edit_contractor(self, contno, col, newval):
+    def edit_contractor(self, cont, col, newval):
         """This function edits a certain value for a certain contractor (input by supervisor)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader) 
-            data_list[contno][col] = newval
+            data_list[cont][col] = newval
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile
             writer.writerows(data_list)

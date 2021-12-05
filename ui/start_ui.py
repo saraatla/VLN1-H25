@@ -1,5 +1,5 @@
 from Extra.acci import acci
-from ui.destination_ui import destinationUI
+from ui.destination_ui import DestinationUI
 from ui.menu import Menu
 
 class StartUI:
@@ -16,7 +16,7 @@ class StartUI:
             if selection < 0:
                 return
             selection_str = options[selection]
-            destination_menu  = destinationUI(selection_str)
+            destination_menu  = DestinationUI(selection_str)
             destination_menu.start()
 
         

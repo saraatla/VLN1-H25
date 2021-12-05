@@ -1,4 +1,4 @@
-from logic.destination_ll import destinationLL
+from logic.destination_ll import DestinationLL
 from logic.employee_ll import EmployeeLL
 from logic.property_ll import PropertyLL
 from logic.contractor_ll import ContractorLL
@@ -9,7 +9,7 @@ class LLAPI:
     """Logic Layer API fetches all the functions in the logic layer"""
     def __init__(self,destination):
         self.destination = destination
-        self.destinations = destinationLL(self.destination)
+        self.destinations = DestinationLL(self.destination)
         self.employeeLL  = EmployeeLL(self.destination)
         self.propertyLL = PropertyLL(self.destination)
         self.contractorLL  = ContractorLL(self.destination)
