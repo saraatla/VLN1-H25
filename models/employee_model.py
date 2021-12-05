@@ -6,7 +6,7 @@ class Employee:
         self.address = parameters[3]
         self.phone = parameters[4]
         self.gsm = parameters[5]
-        self.location = parameters[6]
+        self.destination = parameters[6]
         self.airport = parameters[7]
         self.title = parameters[8]
         
@@ -18,6 +18,6 @@ Email: {self.email}
 Address: {self.address} 
 Phone: {self.phone}
 GSM: {self.gsm}
-Location: {self.location} 
+destination: {self.destination} 
 Airport: {self.airport} 
 Title: {self.title}"""

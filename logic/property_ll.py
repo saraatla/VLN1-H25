@@ -5,9 +5,9 @@ LINE = '------------------------------------------'
 
 class PropertyLL:
     """Property logic layer class; Contains X functions: fetches the functions in the data layer API,"""
-    def __init__(self,location):
-        self.location = location
-        self.dlapi = DLAPI(self.location)
+    def __init__(self,destination):
+        self.destination = destination
+        self.dlapi = DLAPI(self.destination)
         self.table = Texttable()
     
     def list_properties(self):
@@ -16,8 +16,8 @@ class PropertyLL:
         prop_list = self.dlapi.list_properties()
         for item in range(len(prop_list)):
             prop = prop_list[item]
-            #if prop.location == self.location:
-            self.table.add_rows([["Nr","Destination_ID", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], [item+1,prop.destination_id, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
+            #if prop.destination == self.destination:
+            self.table.add_rows([["Nr","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], [item+1,prop.destination, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
         print(self.table.draw())
         while True:
             print(LINE)
@@ -31,7 +31,7 @@ class PropertyLL:
         print('Enter the following information: ')
         print(LINE)
         prop = []
-        fieldnames = ['Destination_ID', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
+        fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
         for field in fieldnames:
             val = input(f'{field}: ')
             prop.append(val)
@@ -44,7 +44,7 @@ class PropertyLL:
     def edit_property(self, prop):
         while True:
             prop = input('Which property would you like to change?: ')
-            fieldnames = ['Destination_ID', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
+            fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
@@ -68,10 +68,10 @@ class PropertyLL:
                     #print('nice')
                     #print(row.property_id)
                     return row
-                # if self.location == "All Locations":
+                # if self.destination == "All destinations":
                 #     if search == row.property_id:
                 #         return row
-                # elif row.location == self.location:
+                # elif row.destination == self.destination:
                 #     if search == row.property_id:
                 #         return row
                 else:

@@ -4,9 +4,9 @@ from models.property_model import Property
 class PropertyDL:
     """Property data layer class; Contains 4 functions: lists, 
     makes new and changes information about a property"""
-    def __init__(self, location):
+    def __init__(self, destination):
         self.filepath = "csv/Properties.csv"
-        self.location = location
+        self.destination = destination
     
     def list_properties(self):
         """This function reads the csv file and makes a list with 
@@ -16,7 +16,7 @@ class PropertyDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                prop = Property([row["Destination_ID"], row["Address"], row["Squarefoot"], 
+                prop = Property([row["Destination"], row["Address"], row["Squarefoot"], 
                 row["Rooms"], row["Type"], row["Property_ID"], row["Facilities"]]) # Make an instance of Property
                 return_list.append(prop)
         return return_list
@@ -24,9 +24,9 @@ class PropertyDL:
     def create_property(self, prop):
         "This function appends a new property to the csv file"
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["Destination_ID", "Address", "Squarefoot", "Rooms", "Type", "Property_ID", "Facilities"]
+            fieldnames = ["Destination", "Address", "Squarefoot", "Rooms", "Type", "Property_ID", "Facilities"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
-            writer.writerow({'Destination_ID': prop.destination_id, "Address": prop.address, "Squarefoot": prop.squarefoot, 
+            writer.writerow({'Destination': prop.destination, "Address": prop.address, "Squarefoot": prop.squarefoot, 
             "Rooms": prop.rooms, "Type": prop.type, "Property_ID": prop.property_id, "Facilities": prop.facilities})
 
     def edit_property(self, prop, col, newvalue):  

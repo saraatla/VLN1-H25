@@ -1,4 +1,4 @@
-from logic.location_ll import LocationLL
+from logic.destination_ll import destinationLL
 from logic.employee_ll import EmployeeLL
 from logic.property_ll import PropertyLL
 from logic.contractor_ll import ContractorLL
@@ -7,27 +7,25 @@ from logic.work_report_ll import WorkReportLL
 
 class LLAPI:
     """Logic Layer API fetches all the functions in the logic layer"""
-    def __init__(self,location):
-        self.location = location
-        self.locations = LocationLL(self.location)
-        self.employeeLL  = EmployeeLL(self.location)
-        self.propertyLL = PropertyLL(self.location)
-        self.contractorLL  = ContractorLL(self.location)
-        self.work_requestLL = WorkRequestLL(self.location)
-        self.work_reportLL = WorkReportLL(self.location)
+    def __init__(self,destination):
+        self.destination = destination
+        self.destinations = destinationLL(self.destination)
+        self.employeeLL  = EmployeeLL(self.destination)
+        self.propertyLL = PropertyLL(self.destination)
+        self.contractorLL  = ContractorLL(self.destination)
+        self.work_requestLL = WorkRequestLL(self.destination)
+        self.work_reportLL = WorkReportLL(self.destination)
 
-    # Location LL
-    def list_locations(self):
-        return self.locations.list_locations()
+    # destination LL
     
-    def location_dict(self):
-        return self.locations.location_dict()
+    def destination_dict(self):
+        return self.destinations.destination_dict()
     
-    def print_location(self):
-        return self.locations.print_location()
+    def print_destination(self):
+        return self.destinations.print_destination()
     
-    def list_of_locations(self):
-        return self.locations.list_of_locations()
+    def list_of_destinations(self):
+        return self.destinations.list_of_destinations()
 
     # Employee LL
     def create_employee(self):

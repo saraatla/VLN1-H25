@@ -2,9 +2,9 @@ from logic.LLAPI import LLAPI
 LINE = '------------------------------------------'
 
 class PropertyUI:
-    def __init__(self, property, location):
-        self.location = location
-        self.llapi = LLAPI(self.location)
+    def __init__(self, property, destination):
+        self.destination = destination
+        self.llapi = LLAPI(self.destination)
         self.property = property
         self.options = """[1].Edit
 [B].Back"""

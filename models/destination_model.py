@@ -1,6 +1,5 @@
 class Destination:
-    def __init__(self,id,destination,airport,phone,open_hours,manager):
-        self.id = id
+    def __init__(self,destination,airport,phone,open_hours,manager):
         self.destination = destination
         self.airport = airport
         self.phone = phone

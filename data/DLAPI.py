@@ -1,4 +1,4 @@
-from data.location_dl import LocationDL
+from data.destination_dl import DestinationDL
 from data.employee_dl import EmployeeDL
 from data.property_dl import PropertyDL
 from data.contractor_dl import ContractorDL
@@ -7,18 +7,22 @@ from data.work_report_dl import WorkReportDL
 
 class DLAPI:
     """Data Layer API, fetches all the functions in the data layer"""
-    def __init__(self, location):
-        self.location = location
-        self.locationDL = LocationDL()
-        self.employeeDL  = EmployeeDL(self.location)
-        self.propertyDL = PropertyDL(self.location)
-        self.contractorDL  = ContractorDL(self.location)
-        self.work_requestDL = WorkRequestDL(self.location)
-        self.work_reportDL = WorkReportDL(self.location)
+    def __init__(self, destination):
+        self.destination = destination
+        self.destinationDL = DestinationDL()
+        self.employeeDL  = EmployeeDL(self.destination)
+        self.propertyDL = PropertyDL(self.destination)
+        self.contractorDL  = ContractorDL(self.destination)
+        self.work_requestDL = WorkRequestDL(self.destination)
+        self.work_reportDL = WorkReportDL(self.destination)
 
-    # Location DL
-    def list_locations(self):
-        return self.locationDL.list_locations()
+    # destination DL
+    def list_destinations(self):
+        return self.destinationDL.list_destinations()
+
+    def get_destination(self, id):
+        return self.destinationDL.get_destination(id)
+
     
     # Employee DL
     def create_employee(self, emp):

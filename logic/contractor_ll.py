@@ -5,9 +5,9 @@ LINE = '------------------------------------------'
 
 class ContractorLL:
     """Contractor logic layer class; Contains X functions: fetches the functions in the data layer API,"""
-    def __init__(self,location):
-        self.location = location
-        self.dlapi = DLAPI(self.location)
+    def __init__(self,destination):
+        self.destination = destination
+        self.dlapi = DLAPI(self.destination)
         self.table = Texttable()
 
     def list_contractors(self):
@@ -16,10 +16,10 @@ class ContractorLL:
         cont_list = self.dlapi.list_contractors()
         for item in range(len(cont_list)):
             cont = cont_list[item]
-            if cont.location == self.location:
-                self.table.add_rows([["Nr","Name", "Type","Contact","Contact's phone","Address","Open_hours","Review"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
-            elif self.location == "All locations":
-                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Location","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
+            if cont.destination == self.destination:
+                self.table.add_rows([["Nr","Name", "Type","Contact","Contact's phone","Address","Open_hours","Review"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.destination, emp.airport, emp.title]])
+            elif self.destination == "All destinations":
+                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","destination","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.destination, emp.airport, emp.title]])
         print(self.table.draw())
         while True:
             print(LINE)

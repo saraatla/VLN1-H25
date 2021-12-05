@@ -5,9 +5,9 @@ LINE = '------------------------------------------'
 
 class EmployeeLL:
     """Employee logic layer class; Contains X functions: fetches the functions in the data layer API,"""
-    def __init__(self, location):
-        self.location = location
-        self.dlapi = DLAPI(self.location)
+    def __init__(self, destination):
+        self.destination = destination
+        self.dlapi = DLAPI(self.destination)
         self.table = Texttable()
 
     def list_employees(self):
@@ -16,10 +16,10 @@ class EmployeeLL:
         emp_list = self.dlapi.list_employees()
         for item in range(len(emp_list)):
             emp = emp_list[item]
-            if emp.location == self.location:
-                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Location","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
-            elif self.location == "All locations":
-                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Location","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.location, emp.airport, emp.title]])
+            if emp.destination == self.destination:
+                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Destination","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.destination, emp.airport, emp.title]])
+            elif self.destination == "All destinations":
+                self.table.add_rows([["Nr","Name", "SSN","Email","Gsm","Destination","Airport","Title"], [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.destination, emp.airport, emp.title]])
         print(self.table.draw())
         while True:
             print(LINE)
@@ -33,19 +33,19 @@ class EmployeeLL:
         print('Enter the following information: ')
         print(LINE)
         emp = []
-        fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Location', 'Airport', 'Title']
+        fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Destination', 'Airport', 'Title']
         for field in fieldnames:
             val = input(f'{field}: ')
             emp.append(val)
         self.dlapi.create_employee(Employee(emp))
         print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
-        
+
 
     def edit_employee(self, emp):
         while True:
             emp = input('Which employee would you like to change?: ')
-            fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Location', 'Airport', 'Title']
+            fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Airport', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
@@ -63,10 +63,10 @@ class EmployeeLL:
                 search = input('Enter SSN: ')
             reader = self.dlapi.list_employees()
             for row in reader:
-                #if self.location == "All Locations":
+                #if self.destination == "All destinations":
                     #if search == row.ssn:
                         #return row
-                if row.location == self.location:
+                if row.destination == self.destination:
                     if search == row.ssn:
                         return row
                 elif search == row.ssn:

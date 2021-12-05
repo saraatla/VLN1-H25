@@ -4,9 +4,9 @@ from models.contractor_model import Contractor
 class ContractorDL:
     """Contractor data layer class; Contains 4 functions: lists, 
     makes new and changes information about a contractor"""
-    def __init__(self, location):
+    def __init__(self, destination):
         self.filepath = "csv/Contractors.csv"
-        self.location = location
+        self.destination = destination
 
     def list_contractors(self):
         """This function reads the csv file and makes a list with 

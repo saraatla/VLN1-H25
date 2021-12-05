@@ -4,9 +4,9 @@ class WorkReportLL:
     """Work Report logic layer class; Contains X functions: fetches the functions in the data layer API,"""
     APPROVED_INDEX = 7
 
-    def __init__(self,location):
-        self.location = location
-        self.dlapi = DLAPI(self.location)
+    def __init__(self,destination):
+        self.destination = destination
+        self.dlapi = DLAPI(self.destination)
 
     def list_work_reports(self):
         return self.dlapi.list_work_reports()
