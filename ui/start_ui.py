@@ -11,7 +11,7 @@ class StartUI:
         while True:
             acci()
             print("%s" % time.ctime())
-            intro = 'Welcome to NaN Air \nPlease Enter your status in the company'
+            intro = 'Welcome to NaN Air \nPlease Enter your status in the company.'
             options = ['Supervisor', 'Employee']
             menu = Menu(intro, options)
             selection = menu.draw_options()
