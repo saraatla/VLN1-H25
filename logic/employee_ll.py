@@ -32,30 +32,30 @@ class EmployeeLL:
     def create_employee(self):
         print('Enter the following information: ')
         print(LINE)
+        ID = len(self.dlapi.list_employees())
         emp = []
         fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Destination', 'Airport', 'Title']
         for field in fieldnames:
             val = input(f'{field}: ')
             emp.append(val)
-        self.dlapi.create_employee(Employee(emp))
+        self.dlapi.create_employee(Employee(emp),ID)
         print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
 
 
     def edit_employee(self, emp):
         while True:
-            emp = input('Which employee would you like to change?: ')
+            ssn = emp.ssn
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Airport', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
             try:
-                emp = int(emp)
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 if col == 1:
                     col = 0
-                return self.dlapi.edit_employee(emp, col, newval)
+                return self.dlapi.edit_employee(ssn, col, newval)
             except:
                 print('Invalid input, try again!')
 
