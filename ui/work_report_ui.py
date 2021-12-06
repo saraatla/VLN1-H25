@@ -20,7 +20,7 @@ B: Back"""
             print(LINE)
             if commands2 == "1":
                 self.llapi.edit_employee(self.work_report)
-                edited_request = self.llapi.search_work_requests(self.work_request.workreprot_id)
+                edited_request = self.llapi.search_work_requests(self.work_request.workreport_id)
                 print(LINE)
                 print(edited_request)
                 print(LINE)
