@@ -1,13 +1,13 @@
 class WorkReport:
-        def __init__(self,workreport_id,ssn,contractor,contractor_review,contractor_remuneration,total_cost,description,approved = False):
-                self.workreport_id = workreport_id
-                self.ssn = ssn
-                self.contractor = contractor 
-                self.contractor_review = contractor_review
-                self.contractor_remuneration = contractor_remuneration
-                self.total_cost = total_cost
-                self.description = description
-                self.approved = approved
+        def __init__(self,parameters):
+                self.workreport_id = parameters[0]
+                self.ssn = parameters[1]
+                self.contractor = parameters[2] 
+                self.contractor_review = parameters[3]
+                self.contractor_remuneration = parameters[4]
+                self.total_cost = parameters[5]
+                self.description = parameters[6]
+                self.approved = parameters[7]
 
         def __str__(self):
                 return f"""Workreport_ID: {self.workreport_id} 
