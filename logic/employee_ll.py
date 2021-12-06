@@ -45,18 +45,17 @@ class EmployeeLL:
 
     def edit_employee(self, emp):
         while True:
-            emp = input('Which employee would you like to change?: ')
+            ssn = emp.ssn
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Airport', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
             try:
-                emp = int(emp)
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 if col == 1:
                     col = 0
-                return self.dlapi.edit_employee(emp, col, newval)
+                return self.dlapi.edit_employee(ssn, col, newval)
             except:
                 print('Invalid input, try again!')
 
