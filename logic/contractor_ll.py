@@ -5,8 +5,7 @@ LINE = '------------------------------------------'
 
 class ContractorLL:
     """Contractor logic layer class; Contains X functions: fetches the functions in the data layer API,"""
-    def __init__(self,destination):
-        self.destination = destination
+    def __init__(self):
         self.dlapi = DLAPI(self.destination)
         self.table = Texttable()
 

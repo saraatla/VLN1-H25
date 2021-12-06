@@ -12,7 +12,7 @@ class DLAPI:
         self.destinationDL = DestinationDL()
         self.employeeDL  = EmployeeDL(self.destination)
         self.propertyDL = PropertyDL(self.destination)
-        self.contractorDL  = ContractorDL(self.destination)
+        self.contractorDL  = ContractorDL()
         self.work_requestDL = WorkRequestDL(self.destination)
         self.work_reportDL = WorkReportDL(self.destination)
 
