@@ -85,6 +85,9 @@ class LLAPI:
     def edit_work_request(self,work_req):
         return self.work_requestLL.edit_work_request(work_req)
 
+    def search_work_request_ssn(self):
+        return self.work_requestLL.search_work_request_SSN()
+
     # Work Report LL
     def create_report(self, work_rep):
         return self.work_reportLL.create_report(work_rep)
