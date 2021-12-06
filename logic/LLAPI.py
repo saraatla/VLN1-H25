@@ -60,8 +60,8 @@ class LLAPI:
     def search_contractor(self,cont=''):
         return self.contractorLL.search_contractor(cont)
 
-    def edit_contractor(self,cont):
-        return self.contractorLL.edit_contractor(cont)
+    def edit_contractor(self,id):
+        return self.contractorLL.edit_contractor(id)
 
     # Work Request LL
     def create_work_request(self, work_req):

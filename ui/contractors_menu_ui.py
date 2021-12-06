@@ -12,13 +12,13 @@ class ContractorMenu:
 
     def start(self):
         while True:
-            operations =  ['Search by name', 'See list', 'Add new']
+            operations =  ['Search by ID', 'See list', 'Add new']
             operations_menu = Menu(f'Contractors in {self.destination}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
             operation = operations[selected_operation]
-            if operation  == 'Search by name':
+            if operation  == 'Search by ID':
                 found_contractor = self.llapi.search_contractor()
                 if found_contractor is not None:
                     contractor_ui = ContractorUI(found_contractor, self.destination)
