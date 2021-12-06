@@ -87,7 +87,7 @@ class WorkRequestLL:
             retlist = []
             for row in ssn_list:
                 for line in reader_request:
-                    if row[0] == line.workreport_id:
+                    if row.workreport_id == line.workreport_id:
                         retlist.append(line)
             return retlist
         return False
