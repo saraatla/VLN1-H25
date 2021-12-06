@@ -12,7 +12,7 @@ class LLAPI:
         self.destinations = DestinationLL(self.destination)
         self.employeeLL  = EmployeeLL(self.destination)
         self.propertyLL = PropertyLL(self.destination)
-        self.contractorLL  = ContractorLL()
+        self.contractorLL  = ContractorLL(destination)
         self.work_requestLL = WorkRequestLL(self.destination)
         self.work_reportLL = WorkReportLL(self.destination)
 
