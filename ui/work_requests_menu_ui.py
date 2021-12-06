@@ -24,7 +24,7 @@ class WorkRequestMenu:
                     work_request_ui.start()
 
             elif operation == 'Search by Property ID':
-                found_request = self.llapi.search_work_requests()
+                found_request = self.llapi.search_work_requests_prop()
                 if found_request is not None:
                     work_request_ui = WorkRequestUI(found_request, self.destination)
                     work_request_ui.start()
