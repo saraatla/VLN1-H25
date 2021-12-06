@@ -72,8 +72,9 @@ class WorkRequestLL:
             if search == row.property_id:
                 retlist.append(row)
         if retlist:
-            return retlist
-        return False
+            self.print_resaults(retlist)
+        else:
+            return False
 
     def search_work_request_SSN(self):
         reader_report = self.dlapi.list_work_reports()
@@ -89,24 +90,40 @@ class WorkRequestLL:
                 for line in reader_request:
                     if row.workreport_id == line.workreport_id:
                         retlist.append(line)
-            return retlist
-        return False
+            self.print_resaults(retlist)
+        else:
+            return False
 
     def search_work_request_cont(self):
-        reader = self.dlapi.list_work_requests()
+        reader_report = self.dlapi.list_work_reports()
+        reader_request = self.dlapi.list_work_reports()
         search = input('Enter contractor ID: ')
-        retlist = []
-        for row in reader:
-            if search == row[4]:
-                retlist.append(row)
-        if retlist:
-            return retlist
-        return False
+        contr_list = []
+        for row in reader_report:
+            if search == row.contractor:
+                contr_list.append(row)
+        if contr_list:
+            retlist = []
+            for row in contr_list:
+                for line in reader_request:
+                    if row.workreport_id == line.workreport_id:
+                        retlist.append(line)
+            self.print_resaults(retlist)
+        else:
+            return False
 
     def get_all_work_requests_by_status(self, status):
         the_list = []
         reader = self.dlapi.list_work_requests()
         for row in reader:
-            if status == row[7]:
+            if status == row.status:
                 the_list.append(row)
         return the_list
+
+    def print_resaults(self, retlist):
+        self.table.set_deco(Texttable.HEADER)
+        self.table.set_max_width(118)
+        for item in range(len(retlist)):
+            req = retlist[item]
+            self.table.add_rows([["no.", "Workrequest ID", "Title", "Date", "Status", "Priority"], [item+1,req.workrequest_id, req.title, req.date, req.status, req.priority]])
+        print(self.table.draw())
