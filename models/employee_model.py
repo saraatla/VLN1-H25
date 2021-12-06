@@ -1,5 +1,5 @@
 class Employee:
-    def __init__(self,parameters, ID):
+    def __init__(self,parameters):
         self.name = parameters[0]
         self.ssn = parameters[1]
         self.email = parameters[2]

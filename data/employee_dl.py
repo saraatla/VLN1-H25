@@ -21,7 +21,7 @@ class EmployeeDL:
                 return_list.append(emp)
         return return_list
 
-    def create_employee(self,emp, ID):
+    def create_employee(self,emp):
         "This function appends a new employee to the csv file"
         with open(self.filepath,'a', newline='') as csvfile:
             fieldnames = ['Name', 'SSN', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Airport', 'Title']
