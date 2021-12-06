@@ -15,7 +15,7 @@ class ContractorDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:                
-                cont = Contractor([row["Name"], row["Type"], row["Contact"], row["Contacts_phone"], # Make an instance of Contractor
+                cont = Contractor([row["Contractor_ID"], row["Name"], row["Type"], row["Contact"], row["Contacts_phone"], # Make an instance of Contractor
                 row["Address"], row["Open_hours"], row["Review"]])
                 return_list.append(cont)
         return return_list
@@ -23,9 +23,9 @@ class ContractorDL:
     def create_contractor(self, cont):
         "This function appends a new contractor to the csv file"
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["Name", "Type", "Contact", "Contacts_phone", "Address", "Open_hours", "Review"]
+            fieldnames = ["Contractor_ID","Name", "Type", "Contact", "Contacts_phone", "Address", "Open_hours", "Review"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
-            writer.writerow({'Name': cont.name, 'Type': cont.type, 'Contact': cont.contact, 'Contacts_phone': cont.contacts_phone, 
+            writer.writerow({'Contractor_ID': cont.id,'Name': cont.name, 'Type': cont.type, 'Contact': cont.contact, 'Contacts_phone': cont.contacts_phone, 
             'Address':cont.address, 'Open_hours':cont.open_hours, 'Review':cont.review}) 
 
     def edit_contractor(self, cont, col, newvalue):

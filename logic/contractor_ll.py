@@ -29,7 +29,7 @@ class ContractorLL:
         print('Enter the following information: ')
         print(LINE)
         cont = []
-        fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
+        fieldnames = ["Contractor_ID","Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
         for field in fieldnames:
             val = input(f'{field}: ')
             cont.append(val)
@@ -40,7 +40,7 @@ class ContractorLL:
     def edit_contractor(self, cont):
         while True:
             cont_name = cont.name
-            fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
+            fieldnames = ["Contractor_ID","Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
