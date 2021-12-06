@@ -94,7 +94,7 @@ class WorkRequestLL:
 
     def search_work_request_cont(self):
         reader = self.dlapi.list_work_requests()
-        search = input('Enter contractor name: ')
+        search = input('Enter contractor ID: ')
         retlist = []
         for row in reader:
             if search == row[4]:
