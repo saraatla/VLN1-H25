@@ -1,4 +1,4 @@
-"""Workrequest_ID,Title,Property_ID,Destination_ID,Contractor,Repeat,When,Status,Priority,Description"""
+"""Workrequest_ID,Title,Property_ID,Destination_ID,Contractor,Date,Status,Priority,Description"""
 
 import csv
 from models.work_request import WorkRequest
@@ -19,17 +19,17 @@ class WorkRequestDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
-                row["Contractor"], row["Repeat"], row["When"], row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
+                row["Contractor"], row["Date"], row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
                 ret_list.append(work_req)
         return ret_list
 
     def create_work_request(self,work_req):
         "This function appends a new work request to the csv file"
         with open(self.filepath, 'a', newline='') as csvfile:
-            fieldnames = ['Workrequest_ID', 'Title', 'Property_ID', 'Destination_ID', 'Contractor', 'Repeat', 'When', 'Status','Priority','Description']
+            fieldnames = ['Workrequest_ID', 'Title', 'Property_ID', 'Destination_ID', 'Contractor', 'Date', 'Status','Priority','Description']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
             writer.writerow({'Workrequest_ID': work_req.workrequest_id, 'Title': work_req.title, 'Property_ID': work_req.property_id, 
-            'Destination_ID': work_req.destination_id, 'Contractor':work_req.contractor, 'Repeat':work_req.repeat, 'When':work_req.when, 
+            'Destination_ID': work_req.destination_id, 'Contractor':work_req.contractor, 'Date':work_req.date, 
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description})
 
     # def search_work_request(self, search):
