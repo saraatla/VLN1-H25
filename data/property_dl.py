@@ -29,17 +29,15 @@ class PropertyDL:
             writer.writerow({'Destination': prop.destination, "Address": prop.address, "Squarefoot": prop.squarefoot, 
             "Rooms": prop.rooms, "Type": prop.type, "Property_ID": prop.property_id, "Facilities": prop.facilities})
 
-    def edit_property(self, prop, col, newvalue):  
+    def edit_property(self, id, col, newvalue):  
         """This function edits a certain value for a certain property (input by supervisor)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            for prop_value in data_list:
-                for index, value in enumerate(prop_value): 
-                    if value == prop: 
-                        print(prop)
-                        print(index)
-                        data_list[index][col-1] = newvalue 
+            for i, prop_value in enumerate(data_list):
+                for value in prop_value: 
+                    if value == id: 
+                        data_list[i][col-1] = newvalue 
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
             writer.writerows(data_list)
