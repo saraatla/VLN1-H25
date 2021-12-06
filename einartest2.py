@@ -16,13 +16,14 @@ class test:
         self.table.add_row(["Property_ID",workreq.property_id])
         self.table.add_row(["Destination_ID",workreq.destination_id])
         self.table.add_row(["Contractor",workreq.contractor])
-        self.table.add_row(["Date",workreq.date])
+        self.table.add_row(["Repeat",workreq.repeat])
+        self.table.add_row(["When",workreq.when])
         self.table.add_row(["Status",workreq.status])
         self.table.add_row(["Priority",workreq.priority])
         self.table.add_row(["Description",workreq.description])
         self.table.add_row(["Workreport ID",workreq.workreport_id])
         print(self.table.draw())
-         
+            
         
     
  
