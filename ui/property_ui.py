@@ -6,8 +6,8 @@ class PropertyUI:
         self.destination = destination
         self.llapi = LLAPI(self.destination)
         self.property = property
-        self.options = """[1].Edit
-[B].Back"""
+        self.options = """1: Edit
+B: Back"""
 
     def start(self):
         print(LINE)
