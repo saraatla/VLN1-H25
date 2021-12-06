@@ -101,7 +101,7 @@ class WorkRequestLL:
             retlist = []
             for row in ssn_list:
                 for line in reader_request:
-                    if row.workreport_id == line.workrequest_id:
+                    if row.workreport_id == line.workreport_id:
                         retlist.append(line)
             self.list_works(retlist)
         else:
@@ -152,27 +152,27 @@ class WorkRequestLL:
     
 
 
-    def print_resaults(self, retlist):
-        self.table.set_deco(Texttable.HEADER)
-        self.table.set_max_width(118)
-        for item in range(len(retlist)):
-            req = retlist[item]
-            self.table2.add_row(["Workrequest_ID",req.workrequest_id])
-            self.table2.add_row(["Title",req.title])
-            self.table2.add_row(["Property_ID",req.property_id])
-            self.table2.add_row(["Destination_ID",req.destination_id])
-            self.table2.add_row(["Contractor",req.contractor])
-            self.table2.add_row(["Date",req.date])
-            self.table2.add_row(["Status",req.status])
-            self.table2.add_row(["Priority",req.priority])
-            self.table2.add_row(["Description",req.description])
-            self.table2.add_row(["Workreport ID",req.workreport_id])
-        print(self.table2.draw())
+    # def print_resaults(self, retlist):
+    #     self.table.set_deco(Texttable.HEADER)
+    #     self.table.set_max_width(118)
+    #     for item in range(len(retlist)):
+    #         req = retlist[item]
+    #         self.table2.add_row(["Workrequest_ID",req.workrequest_id])
+    #         self.table2.add_row(["Title",req.title])
+    #         self.table2.add_row(["Property_ID",req.property_id])
+    #         self.table2.add_row(["Destination_ID",req.destination_id])
+    #         self.table2.add_row(["Contractor",req.contractor])
+    #         self.table2.add_row(["Date",req.date])
+    #         self.table2.add_row(["Status",req.status])
+    #         self.table2.add_row(["Priority",req.priority])
+    #         self.table2.add_row(["Description",req.description])
+    #         self.table2.add_row(["Workreport ID",req.workreport_id])
+    #     print(self.table2.draw())
         
     def list_works(self,retlist):
         # return self.dlapi.list_work_requests()
         self.table.set_deco(Texttable.HEADER)
-        self.table.set_max_width(180)
+        self.table.set_max_width(200)
         workreq_list = self.dlapi.list_work_requests()
         for item in range(len(retlist)):
             workreq = retlist[item]
