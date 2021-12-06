@@ -15,13 +15,14 @@ class WorkRequestLL:
     def list_work_requests(self):
         # return self.dlapi.list_work_requests()
         self.table.set_deco(Texttable.HEADER)
-        self.table.set_max_width(180)
+        self.table.set_max_width(300)
         workreq_list = self.dlapi.list_work_requests()
         for item in range(len(workreq_list)):
             workreq = workreq_list[item]
             # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
-            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Date", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
+            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.status, workreq.priority]])
         print(self.table.draw())
+        self.table.reset()
         while True:
             command = input("Enter Nr of report to open or B to Back:").upper()
             if command == "B":
@@ -29,7 +30,7 @@ class WorkRequestLL:
             elif command.isdigit():
                 nr = int(command)  
                 try:
-                    print(self.format_for_single_workrequest(nr))
+                    self.format_for_single_workrequest(nr)
                 except:
                     print("Nr out of range try again")
 
@@ -148,37 +149,20 @@ class WorkRequestLL:
         self.table2.add_row(["Priority",workreq.priority])
         self.table2.add_row(["Description",workreq.description])
         self.table2.add_row(["Workreport ID",workreq.workreport_id])
-        return self.table2.draw()
-    
-
-
-    # def print_resaults(self, retlist):
-    #     self.table.set_deco(Texttable.HEADER)
-    #     self.table.set_max_width(118)
-    #     for item in range(len(retlist)):
-    #         req = retlist[item]
-    #         self.table2.add_row(["Workrequest_ID",req.workrequest_id])
-    #         self.table2.add_row(["Title",req.title])
-    #         self.table2.add_row(["Property_ID",req.property_id])
-    #         self.table2.add_row(["Destination_ID",req.destination_id])
-    #         self.table2.add_row(["Contractor",req.contractor])
-    #         self.table2.add_row(["Date",req.date])
-    #         self.table2.add_row(["Status",req.status])
-    #         self.table2.add_row(["Priority",req.priority])
-    #         self.table2.add_row(["Description",req.description])
-    #         self.table2.add_row(["Workreport ID",req.workreport_id])
-    #     print(self.table2.draw())
+        print(self.table2.draw())
+        self.table2.reset()
         
     def list_works(self,retlist):
         # return self.dlapi.list_work_requests()
         self.table.set_deco(Texttable.HEADER)
-        self.table.set_max_width(200)
+        self.table.set_max_width(300)
         workreq_list = self.dlapi.list_work_requests()
         for item in range(len(retlist)):
             workreq = retlist[item]
             # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
             self.table.add_rows([["Nr","Workrequest_ID", "Title", "Date", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
         print(self.table.draw())
+        self.table.reset()
         while True:
             command = input("Enter Nr of report to open or B to Back:").upper()
             if command == "B":
@@ -186,7 +170,7 @@ class WorkRequestLL:
             elif command.isdigit():
                 nr = int(command)  
                 try:
-                    print(self.format_for_single_workrequest(nr))
+                    self.format_for_single_workrequest(nr)
                 except:
                     print("Nr out of range try again")
 
