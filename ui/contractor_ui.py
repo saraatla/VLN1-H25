@@ -20,7 +20,7 @@ B: Back"""
             print(LINE)
             if commands2 == "1":
                 self.llapi.edit_contractor(self.contractor)
-                edited_contractor = self.llapi.search_contractor(self.contractor.name)
+                edited_contractor = self.llapi.search_contractor(self.contractor.id)
                 print(LINE)
                 print(edited_contractor)
                 print(LINE)
