@@ -12,7 +12,7 @@ class LLAPI:
         self.destinations = DestinationLL(self.destination)
         self.employeeLL  = EmployeeLL(self.destination)
         self.propertyLL = PropertyLL(self.destination)
-        self.contractorLL  = ContractorLL(self.destination)
+        self.contractorLL  = ContractorLL(destination)
         self.work_requestLL = WorkRequestLL(self.destination)
         self.work_reportLL = WorkReportLL(self.destination)
 
@@ -20,9 +20,6 @@ class LLAPI:
     
     def destination_dict(self):
         return self.destinations.destination_dict()
-    
-    def print_destination(self):
-        return self.destinations.print_destination()
     
     def list_of_destinations(self):
         return self.destinations.list_of_destinations()

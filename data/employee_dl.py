@@ -35,6 +35,7 @@ class EmployeeDL:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
             for employee_value in data_list:
+                print(employee_value)
                 for i,value in enumerate(employee_value):
                     if value == ssn:
                         data_list[i][col] = newvalue

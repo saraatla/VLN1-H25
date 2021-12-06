@@ -12,7 +12,7 @@ class DLAPI:
         self.destinationDL = DestinationDL()
         self.employeeDL  = EmployeeDL(self.destination)
         self.propertyDL = PropertyDL(self.destination)
-        self.contractorDL  = ContractorDL(self.destination)
+        self.contractorDL  = ContractorDL()
         self.work_requestDL = WorkRequestDL(self.destination)
         self.work_reportDL = WorkReportDL(self.destination)
 
@@ -41,8 +41,8 @@ class DLAPI:
     def list_properties(self):
         return self.propertyDL.list_properties()
 
-    def edit_property(self,prop,col,newval):
-        return self.propertyDL.edit_property(prop,col,newval)
+    def edit_property(self,id,col,newval):
+        return self.propertyDL.edit_property(id,col,newval)
 
     # Contractor DL
     def create_contractor(self, cont):
