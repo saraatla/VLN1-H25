@@ -27,10 +27,33 @@ class WorkRequestLL:
             else:
                 print("Invalid input, try again!")
     def create_work_request(self,work_req):
-        return self.dlapi.create_work_request(work_req)
+        # return self.dlapi.create_work_request(work_req)
+        print('Enter the following information: ')
+        print(LINE)
+        workreq = []
+        fieldnames = ["Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"]
+        for field in fieldnames:
+            val = input(f'{field}: ')
+            workreq.append(val)
+        self.dlapi.create_contractor(WorkRequest(workreq))
+        print(f'{LINE}\nWork request successfully created!\n{LINE}')
 
-    def edit_work_request(self,work_reqno,col,value):
-        return self.dlapi.edit_work_request(work_reqno,col,value)
+    def edit_work_request(self, workreq):
+        # return self.dlapi.edit_work_request(work_reqno,col,value)
+        while True:
+            workreq = input('Which contractor would you like to change?: ')
+            fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
+            for index, field in enumerate(fieldnames):
+                print(f"{index+1}: {field}")
+            col = input('What do you want to change? ')
+            try:
+                workreq = int(workreq)
+                col = int(col)
+                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                col = col-1
+                return self.dlapi.edit_work_request(workreq,col,newval)
+            except:
+                print('Invalid input, try again!')
 
     def search_work_request(self, search):
         reader = self.dlapi.list_work_requests()
