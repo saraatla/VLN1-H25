@@ -1,7 +1,7 @@
 from logic.LLAPI import LLAPI
 LINE = '------------------------------------------'
 
-class WorkReportUI:
+class WorkRequestUI:
     def __init__(self, work_request, destination):
         self.destination = destination
         self.llapi= LLAPI(self.destination)

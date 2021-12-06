@@ -45,13 +45,12 @@ class PropertyLL:
 
     def edit_property(self, prop):
         while True:
-            prop = input('Which property would you like to change?: ')
+            prop = prop.ssn
             fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
             try:
-                prop = int(prop)
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 return self.dlapi.edit_property(prop, col, newval)
