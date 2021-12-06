@@ -13,7 +13,7 @@ class WorkRequestLL:
     def list_work_requests(self):
         # return self.dlapi.list_work_requests()
         self.table.set_deco(Texttable.HEADER)
-        self.table.set_max_width(118)
+        self.table.set_max_width(200)
         workreq_list = self.dlapi.list_work_requests()
         for item in range(len(workreq_list)):
             workreq = workreq_list[item]

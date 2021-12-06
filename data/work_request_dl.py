@@ -18,8 +18,8 @@ class WorkRequestDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                work_req = WorkRequest(row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
-                row["Contractor"], row["Repeat"], row["When"], row["Status"], row["Priority"], row["Description"], row["Workreport_ID"])
+                work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
+                row["Contractor"], row["Repeat"], row["When"], row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
                 ret_list.append(work_req)
         return ret_list
 
