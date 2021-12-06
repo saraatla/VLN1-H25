@@ -18,7 +18,7 @@ class WorkRequestLL:
         workreq_list = self.dlapi.list_work_requests()
         for item in range(len(workreq_list)):
             workreq = workreq_list[item]
-            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.workreport_id]])
+            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor_ID", "Repeat", "When", "Status", "Priority", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.workreport_id]])
         print(self.table.draw())
         while True:
             print(LINE)
@@ -32,7 +32,7 @@ class WorkRequestLL:
         print('Enter the following information: ')
         print(LINE)
         workreq = []
-        fieldnames = ["Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"]
+        fieldnames = ["Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor_ID", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"]
         for field in fieldnames:
             val = input(f'{field}: ')
             workreq.append(val)
@@ -94,7 +94,7 @@ class WorkRequestLL:
 
     def search_work_request_cont(self):
         reader = self.dlapi.list_work_requests()
-        search = input('Enter contractor name: ')
+        search = input('Enter contractor ID: ')
         retlist = []
         for row in reader:
             if search == row[4]:
