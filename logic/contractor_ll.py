@@ -54,7 +54,7 @@ class ContractorLL:
     def search_contractor(self, search):
         while True:
             if search == '':
-                search = input('Enter name: ')
+                search = input('Enter Contractor ID: ')
             reader = self.dlapi.list_contractors()
             for row in reader:
                 if search == row.id:
