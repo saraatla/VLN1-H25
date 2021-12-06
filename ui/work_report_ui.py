@@ -1,5 +1,4 @@
 from logic.LLAPI import LLAPI
-
 LINE = '------------------------------------------'
 
 class WorkReportUI:

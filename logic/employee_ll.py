@@ -32,12 +32,13 @@ class EmployeeLL:
     def create_employee(self):
         print('Enter the following information: ')
         print(LINE)
+        ID = len(self.dlapi.list_employees())
         emp = []
         fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Destination', 'Airport', 'Title']
         for field in fieldnames:
             val = input(f'{field}: ')
             emp.append(val)
-        self.dlapi.create_employee(Employee(emp))
+        self.dlapi.create_employee(Employee(emp),ID)
         print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
 
