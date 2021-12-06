@@ -73,11 +73,20 @@ class LLAPI:
     def get_all_work_requests_by_status(self, status):
         return self.work_requestLL.get_all_work_requests_by_status(status)
 
-    def search_work_requests(self,work_req):
-        return self.work_requestLL.search_work_request(work_req)
+    def search_work_requests_id(self):
+        return self.work_requestLL.search_work_request_id()
+
+    def search_work_requests_prop(self):
+        return self.work_requestLL.search_work_request_prop()
+
+    def search_work_requests_cont(self):
+        return self.work_requestLL.search_work_request_cont()
 
     def edit_work_request(self,work_req):
         return self.work_requestLL.edit_work_request(work_req)
+
+    def search_work_request_ssn(self):
+        return self.work_requestLL.search_work_request_SSN()
 
     # Work Report LL
     def create_report(self, work_rep):
