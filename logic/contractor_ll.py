@@ -40,17 +40,16 @@ class ContractorLL:
 
     def edit_contractor(self, cont):
         while True:
-            cont = input('Which contractor would you like to change?: ')
+            cont_name = cont.name
             fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
             try:
-                cont = int(cont)
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 col = col-1
-                return self.dlapi.edit_contractor(cont, col, newval)
+                return self.dlapi.edit_contractor(cont_name, col, newval)
             except:
                 print('Invalid input, try again!')
 
