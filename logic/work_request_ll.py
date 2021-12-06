@@ -72,8 +72,14 @@ class WorkRequestLL:
             if search == row.property_id:
                 retlist.append(row)
         if retlist:
-            return retlist
-        return False
+            self.table.set_deco(Texttable.HEADER)
+            self.table.set_max_width(118)
+            for item in range(len(retlist)):
+                req = retlist[item]
+                self.table.add_rows([["no.", "Workrequest ID", "Title", "Date", "Status", "Priority"], [item+1,req.workrequest_id, req.title, req.date, req.status, req.priority]])
+            print(self.table.draw())
+        else:
+            return False
 
     def search_work_request_SSN(self):
         reader_report = self.dlapi.list_work_reports()
