@@ -60,7 +60,7 @@ class WorkRequestLL:
         reader = self.dlapi.list_work_requests()
         search = input('Enter request ID: ')
         for row in reader:
-            if search == row[0]:
+            if search == row.workrequest_id:
                 return row
         return False
 
