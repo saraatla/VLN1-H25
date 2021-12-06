@@ -1,3 +1,4 @@
+from os import read
 from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 from models.work_request import WorkRequest
@@ -58,12 +59,9 @@ class WorkRequestLL:
     def search_work_request_id(self):
         reader = self.dlapi.list_work_requests()
         search = input('Enter request ID: ')
-        retlist = []
         for row in reader:
-            if search == row.workrequest_id:
-                retlist.append(row)
-        if retlist:
-            return retlist
+            if search == row[0]:
+                return row
         return False
 
     def search_work_request_prop(self):
@@ -71,30 +69,35 @@ class WorkRequestLL:
         search = input('Enter property ID: ')
         retlist = []
         for row in reader:
-            if search == row.property_id:
+            if search == row[2]:
                 retlist.append(row)
         if retlist:
             return retlist
         return False
 
     def search_work_request_SSN(self):
-        pass
-        # reader = self.dlapi.list_work_requests()
-        # search = input('Enter SSN: ')
-        # retlist = []
-        # for row in reader:
-        #     if search == row.:
-        #         retlist.append(row)
-        # if retlist:
-        #     return retlist
-        # return False
+        reader_report = self.dlapi.list_work_reports()
+        reader_request = self.dlapi.list_work_reports()
+        search = input('Enter SSN: ')
+        ssn_list = []
+        for row in reader_report:
+            if search == row[1]:
+                ssn_list.append(row)
+        if ssn_list:
+            retlist = []
+            for row in ssn_list:
+                for line in reader_request:
+                    if row[0] == line[10]:
+                        retlist.append(line)
+            return retlist
+        return False
 
     def search_work_request_cont(self):
         reader = self.dlapi.list_work_requests()
         search = input('Enter contractor name: ')
         retlist = []
         for row in reader:
-            if search == row.contractor:
+            if search == row[4]:
                 retlist.append(row)
         if retlist:
             return retlist
@@ -104,6 +107,6 @@ class WorkRequestLL:
         the_list = []
         reader = self.dlapi.list_work_requests()
         for row in reader:
-            if status == row.status:
+            if status == row[7]:
                 the_list.append(row)
         return the_list
