@@ -30,8 +30,8 @@ class WorkRequestMenu:
                     work_request_ui.start()
 
             elif operation == 'Search by SSN':
-                found_report = self.llapi.search_work_request_ssn()
-                if found_report is not None:
+                found_request = self.llapi.search_work_request_ssn()
+                if found_request is not None:
                     # pass
                     work_request_ui = WorkRequestUI(found_request, self.destination)
                     work_request_ui.start()
