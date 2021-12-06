@@ -5,7 +5,7 @@ class WorkReportDL:
     """Work report data layer class; Contains 4 functions: lists, 
     makes new and changes information about a work report"""
     def __init__(self, destination):
-        self.filepath = 'The_Code/csv_files/Workreport.csv'
+        self.filepath = 'csv/Workreport.csv'
         self.destination = destination
 
     def list_work_reports(self):
