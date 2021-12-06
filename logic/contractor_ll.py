@@ -56,7 +56,9 @@ class ContractorLL:
             if search == '':
                 search = input('Enter name: ')
             reader = self.dlapi.list_contractors()
+            print(search)
             for row in reader:
+                print(row.name)
                 if search == row.name:
                     return row
                 else:
