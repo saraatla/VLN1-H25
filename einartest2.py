@@ -10,9 +10,20 @@ class test:
     def print_function(self,row):
         self.item = row-1
         workreq = self.workreq_list[self.item]
-        #self.table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"],[self.item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
-        #self.table.add_rows([["Nr"],[self.item+1],["Workrequest_ID"],[workreq.workreport_id],["Title"],[workreq.title],["Property_ID"],[workreq.property_id]])
-        self.table.add_row([["Nr"],[self.item+1]])
-        self.table.add_row([["Workrequest_ID"],[workreq.workreport_id]])#,["Title"],[workreq.title],["Property_ID"],[workreq.property_id]])
+        self.table.add_row(["Nr",self.item+1])
+        self.table.add_row(["Workrequest_ID",workreq.workrequest_id])
+        self.table.add_row(["Title",workreq.title])
+        self.table.add_row(["Property_ID",workreq.property_id])
+        self.table.add_row(["Destination_ID",workreq.destination_id])
+        self.table.add_row(["Contractor",workreq.contractor])
+        self.table.add_row(["Repeat",workreq.repeat])
+        self.table.add_row(["When",workreq.when])
+        self.table.add_row(["Status",workreq.status])
+        self.table.add_row(["Priority",workreq.priority])
+        self.table.add_row(["Description",workreq.description])
+        self.table.add_row(["Workreport ID",workreq.workreport_id])
         print(self.table.draw())
+         
+        
+    
  
