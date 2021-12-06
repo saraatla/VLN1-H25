@@ -22,7 +22,7 @@ class WorkReportDL:
     def create_work_report(self, work_rep):
         "This function appends a new work report to the csv file"
         with open(self.filepath, 'a', newline='') as csvfile:
-            fieldnames = ['Workreport_ID', 'SSN', 'Contractor', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description', 'Open']
+            fieldnames = ['Workreport_ID', 'SSN', 'Contractor', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description', 'Approved']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({'Workreport_ID': work_rep.workreport_id, 'SSN': work_rep.ssn, 'Contractor': work_rep.contractor, 
             'Contractor_review': work_rep.contractor_review, 'Contractor_remuneration':work_rep.contractor_remuneration,
