@@ -6,8 +6,8 @@ class WorkRequestUI:
         self.destination = destination
         self.llapi= LLAPI(self.destination)
         self.work_request = work_request
-        self.options = """[1].Edit
-[B].Back"""
+        self.options = """1: Edit
+B: Back"""
 
     def start(self):
         print(LINE)
