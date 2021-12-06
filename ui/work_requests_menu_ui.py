@@ -1,6 +1,7 @@
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-from ui.employee_ui import EmployeeUI
+from ui.work_request_ui import WorkRequestUI
+from ui.work_report_ui import WorkReportUI
 
 class WorkRequestMenu:
     def __init__(self, destination, user_type):
@@ -16,16 +17,29 @@ class WorkRequestMenu:
             if selected_operation < 0:
                 return
             operation = operations[selected_operation]
-            if operation  == 'Search by SSN': # HALDA ÁFRAM HÉR SARA
-                found_employee = self.llapi.search_employees(self.destination)
-                if found_employee is not None:
-                    employee_ui = EmployeeUI(found_employee)
-                    employee_ui.start()
-            elif operation == 'See list':
+            if operation  == 'Search by Work Request ID': 
+                found_request = self.llapi.search_work_requests()
+                if found_request is not None:
+                    work_request_ui = WorkRequestUI(found_request, self.destination)
+                    work_request_ui.start()
+            elif operation == 'Search by Property ID':
+                found_request = self.llapi.search_work_requests()
+                if found_request is not None:
+                    work_request_ui = WorkRequestUI(found_request, self.destination)
+                    work_request_ui.start()
+            elif operation == 'Search by SSN':
+                found_report = self.llapi.search_work_reports()
+                if found_report is not None:
+                    work_report_ui = WorkReportUI(found_report, self.destination)
+                    work_report_ui.start()
+            elif operation == 'Search by Contractor Name':
+                found_report = self.llapi.search_work_reports()
+                if found_report is not None:
+                    work_report_ui = WorkReportUI(found_report, self.destination)
+                    work_report_ui.start()
+            elif operation == 'See list of all requests':
                 employee_list = self.llapi.list_employees(self.destination)
                 for employee in employee_list: #eh svona veit ekki
                     print(employee)
             elif operation == 'Add new':
-                new_employee = self.llapi.create_employee()
-                employee_ui = EmployeeUI(new_employee)
-                employee_ui.start()
+                self.llapi.create_work_request()

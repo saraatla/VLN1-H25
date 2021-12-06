@@ -2,13 +2,15 @@ import csv
 from models.destination_model import Destination
 
 class DestinationDL:
-    """destination data layer class; Contains 2 functions: lists, 
+    """Destination data layer class; Contains 2 functions: lists, 
     makes new and changes information about a property"""
     def __init__(self):
         self.filepath = "csv/Destinations.csv"
 
 
     def list_destinations(self):
+        """This function reads the csv file and makes a list with 
+        all the destinations along with their information"""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 

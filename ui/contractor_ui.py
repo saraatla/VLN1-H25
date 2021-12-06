@@ -6,8 +6,8 @@ class ContractorUI:
         self.destination = destination
         self.llapi= LLAPI(self.destination)
         self.contractor = contractor
-        self.options = """[1].Edit
-[B].Back"""
+        self.options = """1: Edit
+B: Back"""
 
     def start(self):
         print(LINE)
