@@ -6,8 +6,8 @@ class WorkReportUI:
         self.destination = destination
         self.llapi= LLAPI(self.destination)
         self.work_report = work_report
-        self.options = """[1].Edit
-[B].Back"""
+        self.options = """1: Edit
+B: Back"""
 
     def start(self):
         print(LINE)

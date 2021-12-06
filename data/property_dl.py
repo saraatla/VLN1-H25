@@ -36,7 +36,9 @@ class PropertyDL:
             data_list = list(reader)
             for prop_value in data_list:
                 for index, value in enumerate(prop_value): 
-                    if value == prop.property_id: 
+                    if value == prop: 
+                        print(prop)
+                        print(index)
                         data_list[index][col-1] = newvalue 
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
