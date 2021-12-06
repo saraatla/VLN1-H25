@@ -18,7 +18,7 @@ class WorkRequestMenu:
                 return
             operation = operations[selected_operation]
             if operation == 'Search by Work Request ID':
-                found_request = self.llapi.search_work_requests()
+                found_request = self.llapi.search_work_requests_id()
                 if found_request is not None:
                     work_request_ui = WorkRequestUI(found_request, self.destination)
                     work_request_ui.start()
@@ -30,23 +30,26 @@ class WorkRequestMenu:
                     work_request_ui.start()
 
             elif operation == 'Search by SSN':
-                found_report = self.llapi.search_work_report()
+                found_report = self.llapi.s
                 if found_report is not None:
                     # pass
-                    work_report_ui = WorkReportUI(found_report, self.destination)
-                    work_report_ui.start()
+                    work_request_ui = WorkRequestUI(found_request, self.destination)
+                    work_request_ui.start()
+
 
             elif operation == 'Search by Contractor Name':
-                found_report = self.llapi.search_work_report()
+                found_report = self.llapi.search_work_requests_cont()
                 if found_report is not None:
                     # pass
-                    work_report_ui = WorkReportUI(found_report, self.destination)
-                    work_report_ui.start()
+                    work_request_ui = WorkRequestUI(found_request, self.destination)
+                    work_request_ui.start()
+
 
             elif operation == 'See list of all requests':
                 workreq_list = self.llapi.list_work_requests()
                 for request in workreq_list:
                     print(request)
+
 
             elif operation == "See list of requests ready to close":
                 workreq_list = self.llapi.get_all_work_requests_by_status()
