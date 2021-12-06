@@ -15,7 +15,7 @@ def list_work_requests():
         for item in range(len(workreq_list)):
             workreq = workreq_list[item]
             # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
-            table.add_rows([["Nr","Workrequest_ID", "Title", "When", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.when, workreq.status, workreq.priority]])
+            table.add_rows([["Nr","Workrequest_ID", "Title", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.status, workreq.priority]])
         print(table.draw())
         while True:
             command = input("Enter Nr of report to open or B to Back:").upper()

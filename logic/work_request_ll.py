@@ -10,23 +10,32 @@ class WorkRequestLL:
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
         self.table = Texttable()
-
+        self.table2 = Texttable()
+   
     def list_work_requests(self):
         # return self.dlapi.list_work_requests()
         self.table.set_deco(Texttable.HEADER)
-        self.table.set_max_width(118)
+        self.table.set_max_width(180)
         workreq_list = self.dlapi.list_work_requests()
         for item in range(len(workreq_list)):
             workreq = workreq_list[item]
-            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor_ID", "Repeat", "When", "Status", "Priority", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.workreport_id]])
+            # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
+            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Date", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
         print(self.table.draw())
         while True:
-            print(LINE)
-            command = input("Enter B to go back:").upper()
+            command = input("Enter Nr of report to open or B to Back:").upper()
             if command == "B":
                 return
+            elif command.isdigit():
+                nr = int(command)  
+                try:
+                    print(self.format_for_single_workrequest(nr))
+                except:
+                    print("Nr out of range try again")
+
             else:
                 print("Invalid input, try again!")
+   
     def create_work_request(self,work_req):
         # return self.dlapi.create_work_request(work_req)
         print('Enter the following information: ')
@@ -110,3 +119,20 @@ class WorkRequestLL:
             if status == row[7]:
                 the_list.append(row)
         return the_list
+
+    def format_for_single_workrequest(self,row):
+        self.workreq_list = self.dlapi.list_work_requests()
+        self.item = row-1
+        workreq = self.workreq_list[self.item]
+        self.table2.add_row(["Nr",self.item+1])
+        self.table2.add_row(["Workrequest_ID",workreq.workrequest_id])
+        self.table2.add_row(["Title",workreq.title])
+        self.table2.add_row(["Property_ID",workreq.property_id])
+        self.table2.add_row(["Destination_ID",workreq.destination_id])
+        self.table2.add_row(["Contractor",workreq.contractor])
+        self.table2.add_row(["Date",workreq.date])
+        self.table2.add_row(["Status",workreq.status])
+        self.table2.add_row(["Priority",workreq.priority])
+        self.table2.add_row(["Description",workreq.description])
+        self.table2.add_row(["Workreport ID",workreq.workreport_id])
+        return self.table2.draw()

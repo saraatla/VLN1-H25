@@ -46,10 +46,8 @@ class WorkRequestMenu:
 
 
             elif operation == 'See list of all requests':
-                workreq_list = self.llapi.list_work_requests()
-                for request in workreq_list:
-                    print(request)
-
+                self.llapi.list_work_requests()
+                
 
             elif operation == "See list of requests ready to close":
                 workreq_list = self.llapi.get_all_work_requests_by_status()
