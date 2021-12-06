@@ -69,7 +69,7 @@ class WorkRequestLL:
         search = input('Enter property ID: ')
         retlist = []
         for row in reader:
-            if search == row[2]:
+            if search == row.property_id:
                 retlist.append(row)
         if retlist:
             return retlist
@@ -81,13 +81,13 @@ class WorkRequestLL:
         search = input('Enter SSN: ')
         ssn_list = []
         for row in reader_report:
-            if search == row[1]:
+            if search == row.ssn:
                 ssn_list.append(row)
         if ssn_list:
             retlist = []
             for row in ssn_list:
                 for line in reader_request:
-                    if row[0] == line[10]:
+                    if row.workreport_id == line.workreport_id:
                         retlist.append(line)
             return retlist
         return False
