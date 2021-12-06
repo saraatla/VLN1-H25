@@ -55,11 +55,49 @@ class WorkRequestLL:
             except:
                 print('Invalid input, try again!')
 
-    def search_work_request(self, search):
+    def search_work_request_id(self):
         reader = self.dlapi.list_work_requests()
+        search = input('Enter request ID: ')
+        retlist = []
         for row in reader:
             if search == row.workrequest_id:
-                return row
+                retlist.append(row)
+        if retlist:
+            return retlist
+        return False
+
+    def search_work_request_prop(self):
+        reader = self.dlapi.list_work_requests()
+        search = input('Enter property ID: ')
+        retlist = []
+        for row in reader:
+            if search == row.property_id:
+                retlist.append(row)
+        if retlist:
+            return retlist
+        return False
+
+    def search_work_request_SSN(self):
+        pass
+        # reader = self.dlapi.list_work_requests()
+        # search = input('Enter SSN: ')
+        # retlist = []
+        # for row in reader:
+        #     if search == row.:
+        #         retlist.append(row)
+        # if retlist:
+        #     return retlist
+        # return False
+
+    def search_work_request_cont(self):
+        reader = self.dlapi.list_work_requests()
+        search = input('Enter contractor name: ')
+        retlist = []
+        for row in reader:
+            if search == row.contractor:
+                retlist.append(row)
+        if retlist:
+            return retlist
         return False
 
     def get_all_work_requests_by_status(self, status):

@@ -18,12 +18,12 @@ class WorkRequestMenu:
                 return
             operation = operations[selected_operation]
             if operation  == 'Search by Work Request ID': 
-                found_request = self.llapi.search_work_requests()
-                if found_request is not None:
+                found_request = self.llapi.search_work_requests_id()
+                if found_request:
                     work_request_ui = WorkRequestUI(found_request, self.destination)
                     work_request_ui.start()
             elif operation == 'Search by Property ID':
-                found_request = self.llapi.search_work_requests()
+                found_request = self.llapi.search_work_requests_prop()
                 if found_request is not None:
                     work_request_ui = WorkRequestUI(found_request, self.destination)
                     work_request_ui.start()
@@ -34,11 +34,10 @@ class WorkRequestMenu:
                     #work_report_ui = WorkReportUI(found_report, self.destination)
                     #work_report_ui.start()
             elif operation == 'Search by Contractor Name':
-                found_report = self.llapi.search_work_reports()
-                if found_report is not None:
-                    pass
-                    #work_report_ui = WorkReportUI(found_report, self.destination)
-                    #work_report_ui.start()
+                found_report = self.llapi.search_work_requests_cont()
+                if found_report:
+                    work_request_ui = WorkRequestUI(found_report, self.destination)
+                    work_request_ui.start()
             elif operation == 'See list of all requests':
                 employee_list = self.llapi.list_employees(self.destination)
                 for employee in employee_list: #eh svona veit ekki

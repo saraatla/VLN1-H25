@@ -7,7 +7,7 @@ class WorkRequestDL:
     """WorkRequest data layer class; Contains 4 functions: lists, 
     makes new and changes information about a work request"""
     def __init__(self, destination):
-        self.filepath = "csv_files/Workrequest.csv"
+        self.filepath = "csv/Workrequest.csv"
         self.destination = destination
     
     def list_work_requests(self):
@@ -18,7 +18,7 @@ class WorkRequestDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                work_req = WorkRequest(row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
+                work_req = WorkRequest(row["Workreport_ID"],row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
                 row["Contractor"], row["Repeat"], row["When"], row["Status"], row["Priority"], row["Description"])
                 ret_list.append(work_req)
         return ret_list
