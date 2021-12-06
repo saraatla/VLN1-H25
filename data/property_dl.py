@@ -34,11 +34,10 @@ class PropertyDL:
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            # for index, row in enumerate(data_list): #
-                #if row[col] == propno: #
-                    #print(index)
-                    #return index #
-            data_list[prop][col-1] = newvalue 
+            for prop_value in data_list:
+                for index, value in enumerate(prop_value): 
+                    if value == prop.property_id: 
+                        data_list[index][col-1] = newvalue 
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
             writer.writerows(data_list)
