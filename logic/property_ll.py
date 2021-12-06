@@ -45,7 +45,6 @@ class PropertyLL:
 
     def edit_property(self, prop):
         while True:
-            prop = prop.ssn
             fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")

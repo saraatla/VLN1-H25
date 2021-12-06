@@ -19,7 +19,7 @@ B: Back"""
             commands2 = input("Choose Options edit or back: ").upper()
             print(LINE)
             if commands2 == "1":
-                self.llapi.edit_property(self.property)
+                self.llapi.edit_property(self.property.property_id)
                 edited_property = self.llapi.search_property(self.property.property_id)
                 print(LINE)
                 print(edited_property)
