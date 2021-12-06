@@ -46,16 +46,18 @@ class PropertyLL:
     def edit_property(self, prop):
         while True:
             id = prop.property_id
-            fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
+            fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Facilities']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
-            try:
-                col = int(col)
-                newval = input(f'What is the new {fieldnames[col-1]}? ')
-                return self.dlapi.edit_property(id, col, newval)
-            except:
-                print('Invalid input, try again!')
+            #try:
+            col = int(col)
+            newval = input(f'What is the new {fieldnames[col-1]}? ')
+            if col < 6:
+                col = col - 1
+            return self.dlapi.edit_property(id, col, newval)
+            #except:
+                #print('Invalid input, try again!')
         
 
     def search_property(self, search):

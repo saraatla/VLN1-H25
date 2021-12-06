@@ -15,7 +15,7 @@ class ContractorLL:
         cont_list = self.dlapi.list_contractors()
         for item in range(len(cont_list)):
             cont = cont_list[item]
-            self.table.add_rows([["Nr","Name","Type","Contact","Contact's phone","Address","Open_hours","Review"], [item+1,cont.name, cont.type, cont.contact, cont.contacts_phone, cont.address, cont.open_hours, cont.review]])
+            self.table.add_rows([["Nr","Contractor_ID","Name","Type","Contact","Contact's phone","Address","Open_hours","Review"], [item+1,cont.id,cont.name, cont.type, cont.contact, cont.contacts_phone, cont.address, cont.open_hours, cont.review]])
         print(self.table.draw())
         while True:
             print(LINE)
@@ -29,7 +29,7 @@ class ContractorLL:
         print('Enter the following information: ')
         print(LINE)
         cont = []
-        fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
+        fieldnames = ["Contractor_ID","Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
         for field in fieldnames:
             val = input(f'{field}: ')
             cont.append(val)
@@ -39,7 +39,7 @@ class ContractorLL:
 
     def edit_contractor(self, cont):
         while True:
-            cont_name = cont.name
+            cont_name = cont.id
             fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
@@ -55,10 +55,10 @@ class ContractorLL:
     def search_contractor(self, search):
         while True:
             if search == '':
-                search = input('Enter name: ')
+                search = input('Enter Contractor ID: ')
             reader = self.dlapi.list_contractors()
             for row in reader:
-                if search == row.name:
+                if search == row.id:
                     return row
                 else:
                     print(f'{LINE}\nContractor not found\n{LINE}')

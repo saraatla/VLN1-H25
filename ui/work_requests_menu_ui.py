@@ -28,13 +28,13 @@ class WorkRequestMenu:
                     work_request_ui = WorkRequestUI(found_request, self.destination)
                     work_request_ui.start()
             elif operation == 'Search by SSN':
-                found_report = self.llapi.search_work_reports()
+                found_report = self.llapi.search_work_report()
                 if found_report is not None:
                     # pass
                     work_report_ui = WorkReportUI(found_report, self.destination)
                     work_report_ui.start()
             elif operation == 'Search by Contractor Name':
-                found_report = self.llapi.search_work_reports()
+                found_report = self.llapi.search_work_report()
                 if found_report is not None:
                     # pass
                     work_report_ui = WorkReportUI(found_report, self.destination)

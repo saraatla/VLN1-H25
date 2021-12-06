@@ -37,7 +37,7 @@ class PropertyDL:
             for i, prop_value in enumerate(data_list):
                 for value in prop_value: 
                     if value == id: 
-                        data_list[i][col-1] = newvalue 
+                        data_list[i][col] = newvalue 
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
             writer.writerows(data_list)
