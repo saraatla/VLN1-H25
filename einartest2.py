@@ -23,7 +23,7 @@ class test:
         self.table.add_row(["Description",workreq.description])
         self.table.add_row(["Workreport ID",workreq.workreport_id])
         print(self.table.draw())
-         
+            
         
     
  
