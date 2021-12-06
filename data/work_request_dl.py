@@ -7,7 +7,7 @@ class WorkRequestDL:
     """WorkRequest data layer class; Contains 4 functions: lists, 
     makes new and changes information about a work request"""
     def __init__(self, destination):
-        self.filepath = "csv_files/Workrequest.csv"
+        self.filepath = "csv/Workrequest.csv"
         self.destination = destination
     
     def list_work_requests(self):
@@ -19,7 +19,7 @@ class WorkRequestDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 work_req = WorkRequest(row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
-                row["Contractor"], row["Repeat"], row["When"], row["Status"], row["Priority"], row["Description"])
+                row["Contractor"], row["Repeat"], row["When"], row["Status"], row["Priority"], row["Description"], row["Workreport_ID"])
                 ret_list.append(work_req)
         return ret_list
 
