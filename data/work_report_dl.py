@@ -14,8 +14,8 @@ class WorkReportDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                work_rep = WorkReport(row['Workreport_ID'], row['SSN'], row['Contractor'], row['Contractor_review'],
-                row['Contractor_remuneration'], row['Total_cost'], row['Description'], row['Approved'])
+                work_rep = WorkReport([row['Workreport_ID'], row['SSN'], row['Contractor'], row['Contractor_review'],
+                row['Contractor_remuneration'], row['Total_cost'], row['Description'], row['Approved']])
                 return_list.append(work_rep)
             return return_list
 
