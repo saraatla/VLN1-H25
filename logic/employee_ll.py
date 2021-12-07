@@ -47,10 +47,50 @@ class EmployeeLL:
 
 
 
+    # def edit_employee(self, emp):
+    #     edit_or_not = input("Do you want to (E)dit this employee? or go (B)ack?").upper()
+    #     if edit_or_not == "B":
+    #         return
+    #     elif edit_or_not == "E":
+    #         while True:
+    #             ssn = emp.ssn
+    #             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Title']
+    #             for index, field in enumerate(fieldnames):
+    #                 print(f"{index+1}: {field}")
+    #             col = input('What do you want to change? ')
+    #             try:
+    #                 col = int(col)
+    #                 newval = input(f'What is the new {fieldnames[col-1]}? ')
+    #                 if col == 1:
+    #                     col = 0
+    #                 return self.dlapi.edit_employee(ssn, col, newval)
+    #             except:
+    #                 print('Invalid input, try again!')
+    #     else:
+    #         print('Invalid input, try again!')
+
+    def search_employee(self, search):
+        while True:
+            nr= 1
+            reader = self.dlapi.list_employees()
+            if search:
+                for row in reader:
+                    if search == row.ssn:
+                        # self.get_table(row,nr)
+                        return self.get_table(row,nr)
+            elif search == '':
+                search = input('Enter SSN: ')
+                for row in reader:
+                    if row.destination == self.destination:
+                        if search == row.ssn:
+                            return self.get_table(row,nr), row
+            else:
+                print(f'{LINE}\nEmployee not found\n{LINE}')
+                return
     def edit_employee(self, emp):
         while True:
             ssn = emp.ssn
-            fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Airport', 'Title']
+            fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
@@ -63,25 +103,6 @@ class EmployeeLL:
             except:
                 print('Invalid input, try again!')
 
-    def search_employee(self, search):
-        while True:
-            if search == '':
-                search = input('Enter SSN: ')
-            reader = self.dlapi.list_employees()
-            nr= 1
-            for row in reader:
-                if row.destination == self.destination:
-                    if search == row.ssn:
-                        self.get_table(row,nr)
-                        return
-                elif search == row.ssn:
-                        self.get_table(row,nr)
-                        print(f"This Employee is in {row.destination}")
-                        return
-                else:
-                    print(f'{LINE}\nEmployee not found\n{LINE}')
-                    return
-        
     def format_for_single_workrequest(self,retlist,nr):
         if retlist:
             for item in range(len(retlist)):
@@ -92,6 +113,7 @@ class EmployeeLL:
 
 
     def get_table(self,workreq, nr):
+        self.table2.reset()
         self.table2.add_row(["Nr",nr])
         self.table2.add_row(["Name",workreq.name])
         self.table2.add_row(["Ssn",workreq.ssn])
@@ -101,4 +123,4 @@ class EmployeeLL:
         self.table2.add_row(["Gsm",workreq.gsm])
         self.table2.add_row(["Destination",workreq.destination])
         self.table2.add_row(["Title",workreq.title])
-        print(self.table2.draw())
+        return self.table2.draw()
