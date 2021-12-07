@@ -1,6 +1,7 @@
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.operations_ui import OperationsUI
+from Extra.acci import locAscii
 
 class DestinationMenu:
     def __init__(self,user_type,destination=""):
@@ -10,6 +11,7 @@ class DestinationMenu:
 
     def start(self):
         while True:
+            locAscii()
             options = self.llapi.list_of_destinations()
             options.append('All destinations')
             destination_menu = Menu(f'Welcome you are signed in as {self.user_type}\nPlease choose destination', options)

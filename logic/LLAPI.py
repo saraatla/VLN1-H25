@@ -90,6 +90,9 @@ class LLAPI:
 
     def search_work_request_ssn(self):
         return self.work_requestLL.search_work_request_SSN()
+    
+    def get_new_id(self):
+        return self.work_requestLL.get_new_id()
 
     # Work Report LL
     def create_report(self, work_rep):

@@ -36,7 +36,7 @@ class ContractorDL:
             for contractor_value in data_list:
                 for index,value in enumerate(contractor_value):
                     if value == cont:
-                        data_list[index][col] = newvalue
+                        data_list[index+1][col] = newvalue
 
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile

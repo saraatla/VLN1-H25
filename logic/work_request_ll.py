@@ -72,17 +72,11 @@ class WorkRequestLL:
         else:
             print('No request registered in the system')
 
-    def create_work_request(self,work_req):
+
+    def create_work_request(self,workreq):
         """Creates new work requests"""
-        print('Enter the following information: ')
-        print(LINE)
-        workreq = []
-        fieldnames = ["Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor_ID", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"]
-        for field in fieldnames:
-            val = input(f'{field}: ')
-            workreq.append(val)
-        self.dlapi.create_contractor(WorkRequest(workreq))
-        print(f'{LINE}\nWork request successfully created!\n{LINE}')
+        self.dlapi.create_work_request(WorkRequest(workreq))
+
 
     def edit_work_request(self, workreq):
         """Edits workrequest"""
@@ -212,3 +206,8 @@ class WorkRequestLL:
             else:
                 print("Invalid input, try again!")
             self.table.reset()
+    
+    def get_new_id(self):
+        last_id = self.dlapi.find_last_id()
+        new_id = int(last_id[1:])+1
+        return f'w{new_id}'
