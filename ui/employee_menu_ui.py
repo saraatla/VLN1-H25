@@ -12,7 +12,9 @@ class EmployeeMenu:
 
     def start(self):
         while True:
-            operations =  ['Search by SSN', 'See list', 'Add new']
+            operations =  ['Search by SSN', 'See list']
+            if self.user_type == 'Manager':
+                operations.append('Add new')
             operations_menu = Menu(f'Employees in {self.destination}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
