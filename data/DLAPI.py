@@ -16,7 +16,7 @@ class DLAPI:
         self.work_requestDL = WorkRequestDL(self.destination)
         self.work_reportDL = WorkReportDL(self.destination)
 
-    # destination DL
+    # Destination DL
     def list_destinations(self):
         return self.destinationDL.list_destinations()
     
