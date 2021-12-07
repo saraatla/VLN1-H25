@@ -45,7 +45,7 @@ class WorkRequestMenu:
 
             elif operation == 'See list of all requests':
                 self.llapi.list_work_requests()
-                
+
             elif operation == "See list of requests by status":
                 self.llapi.workrequests_by_status()
 
