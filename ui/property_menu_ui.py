@@ -1,6 +1,7 @@
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.property_ui import PropertyUI
+from Extra.acci import propAscii
 
 LINE = '------------------------------------------'
 
@@ -12,6 +13,7 @@ class PropertyMenu:
 
     def start(self):
         while True:
+            propAscii()
             operations =  ['Search by ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
