@@ -5,6 +5,7 @@ from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.work_request_ui import WorkRequestUI
 from ui.work_report_ui import WorkReportUI
+from Extra.acci import workAscii
 
 LINE = '------------------------------------------'
 
@@ -16,6 +17,7 @@ class WorkRequestMenu:
 
     def start(self):
          while True:
+            workAscii()
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor Name', 'See list of all requests', 'See list of requests ready to close']
             if self.user_type == 'Manager':
                 operations.append('Add new')
