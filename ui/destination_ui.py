@@ -6,11 +6,11 @@ class DestinationUI:
         self.options = """B: Back"""
 
     def start(self):
-        print(LINE)
         print(self.destination)
         print(LINE)
         while True:
             command = input("Enter B to go back:").upper()
+            print(LINE)
             if command == "B":
                 return
             else:

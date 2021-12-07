@@ -48,11 +48,12 @@ def create_work_request(self):
         # return self.dlapi.create_work_request(work_req)
         print('Enter the following information: ')
         print(LINE)
-
-        workreq = []
-        fieldnames = ["Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor_ID", "Date", "Status", "Priority", "Description", "Workreport_ID"]
+        last_id = find_last_id()
+        new_id = last_id + 1
+        workreq = [new_id]
+        fieldnames = ["Title", "Property_ID", "Destination", "Contractor", "Date", "Status", "Priority", "Description", "Workreport_ID"]
         for field in fieldnames:
             val = input(f'{field}: ')
             workreq.append(val)
-        self.dlapi.create_contractor(WorkRequest(workreq))
+        self.dlapi.create_work_request(WorkRequest(workreq))
         print(f'{LINE}\nWork request successfully created!\n{LINE}')
