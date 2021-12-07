@@ -28,12 +28,15 @@ class WorkReportDL:
             'Contractor_review': work_rep.contractor_review, 'Contractor_remuneration':work_rep.contractor_remuneration,
             'Total_cost':work_rep.total_cost, 'Description':work_rep.description, 'Approved':work_rep.approved, 'Manager_comment':work_rep.manager_cmt})
 
-    def edit_work_report(self, rep_no, col, newval):
+    def edit_work_report(self, workrep_no, col, new_value):
         """This function edits a certain value for a certain work report (input by employee)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            data_list[rep_no][col] = newval
+            for index, work_report_value in enumerate(data_list):
+                for value in work_report_value: 
+                    if value == workrep_no: 
+                        data_list[index][col] = new_value
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
             writer.writerows(data_list)

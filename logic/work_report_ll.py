@@ -1,4 +1,5 @@
 from data.DLAPI import DLAPI
+from models.work_request import WorkRequest
 
 class WorkReportLL:
     """Work Report logic layer class; Contains X functions: fetches the functions in the data layer API,"""
@@ -11,8 +12,19 @@ class WorkReportLL:
     def list_work_reports(self):
         return self.dlapi.list_work_reports()
 
-    def edit_work_report(self,):
-        return self.dlapi.edit_work_report()
+    def edit_work_report(self, rep):
+        while True:
+            id = rep.workrequest_id
+            fieldnames = ['Title', 'Property_ID', 'Destination', 'Contractor', 'Date', 'Status', 'Priority', 'Description']
+            for index, field in enumerate(fieldnames):
+                print(f"{index+1}: {field}")
+            col = input('What do you want to change? ')
+            try:
+                col = int(col)
+                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                return self.dlapi.edit_work_report(id, col, newval)
+            except:
+                print('Invalid input, try again!')
 
     def search_work_report(self, search):
         reader = self.list_work_reports()

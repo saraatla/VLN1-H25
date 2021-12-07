@@ -42,7 +42,7 @@ class EmployeeLL:
         for field in fieldnames:
             val = input(f'{field}: ')
             emp.append(val)
-        self.dlapi.create_employee(Employee(emp),ID)
+        self.dlapi.create_employee(Employee(emp))
         print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
 
@@ -61,16 +61,19 @@ class EmployeeLL:
                     for row in reader:
                         if search == row.ssn:
                             # self.get_table(row,nr)
-                            return self.get_table(row,)
+                            return self.get_table(row)
                 elif search == '':
                     search = input('Enter SSN: ')
                     for row in reader:
                         if row.destination == self.destination:
                             if search == row.ssn:
-                                return self.get_table(row,), row
+                                return self.get_table(row), row
                 else:
                     print(f'{LINE}\nEmployee not found\n{LINE}')
                     return
+
+
+
     def edit_employee(self, emp):
         while True:
             ssn = emp.ssn
