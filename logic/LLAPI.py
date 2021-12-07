@@ -23,6 +23,9 @@ class LLAPI:
     
     def list_of_destinations(self):
         return self.destinations.list_of_destinations()
+    
+    def search_destination(self, dest):
+        return self.destinations.search_destination(dest)
 
     # Employee LL
     def create_employee(self):
@@ -70,8 +73,8 @@ class LLAPI:
     def list_work_requests(self):
         return self.work_requestLL.list_work_requests()
     
-    def get_all_work_requests_by_status(self, status):
-        return self.work_requestLL.get_all_work_requests_by_status(status)
+    def workrequests_by_status(self):
+        return self.work_requestLL.workrequests_by_status()
 
     def search_work_requests_id(self):
         return self.work_requestLL.search_work_request_id()

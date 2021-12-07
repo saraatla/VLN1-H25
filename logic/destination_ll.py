@@ -25,3 +25,11 @@ class DestinationLL:
         for value in destination_dict.values():
             loc_list.append(value)
         return loc_list
+    
+    def search_destination(self, dest):
+        while True:
+            reader = self.dlapi.list_destinations()
+            for row in reader:
+                if dest == row.destination:
+                    return row
+

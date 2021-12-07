@@ -29,3 +29,35 @@ for i in x:
     repDL.create_work_report(work_rep)
     work_rep = WorkReport([f'wrep{i+2}','123456-0007','N/A','N/A','N/A','15.000.-','Allt gekk eins og í sögu','False'])
     repDL.create_work_report(work_rep)"""
+
+from os import read
+from Extra.texttableFile.texttable import Texttable
+from data.DLAPI import DLAPI
+from models.work_request import WorkRequest
+LINE = '------------------------------------------'
+
+class WorkRequestLL:
+    """Work Request logic layer class; Contains X functions: fetches the functions in the data layer API,"""
+    def __init__(self, destination):
+        self.destination = destination
+        self.dlapi = DLAPI(self.destination)
+        self.table = Texttable()
+        self.table2 = Texttable()
+
+    def create_work_request(self):
+            # return self.dlapi.create_work_request(work_req)
+            print('Enter the following information: ')
+            print(LINE)
+            last_id = self.dlapi.find_last_id()
+            new_id = int(last_id[1:])+1
+            workreq = [f'w{new_id}']
+            fieldnames = ["Title", "Property_ID", "Destination", "Contractor", "Date", "Status", "Priority", "Description", "Workreport_ID"]
+            for field in fieldnames:
+                val = input(f'{field}: ')
+                workreq.append(val)
+            self.dlapi.create_work_request(WorkRequest(workreq))
+            print(f'{LINE}\nWork request successfully created!\n{LINE}')
+
+wLL  = WorkRequestLL('Svalbard')
+
+wLL.create_work_request()

@@ -1,5 +1,5 @@
 """Workrequest_ID,Title,Property_ID,Destination_ID,Contractor,Date,Status,Priority,Description"""
-
+import datetime
 import csv
 from models.work_request import WorkRequest
 
@@ -19,7 +19,7 @@ class WorkRequestDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
-                row["Contractor"], row["Date"], row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
+                row["Contractor"], datetime.datetime(row["Date"].split('/')[2],row["Date"].split('/')[1],row["Date"].split('/')[0]), row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
                 ret_list.append(work_req)
         return ret_list
 
@@ -31,15 +31,6 @@ class WorkRequestDL:
             writer.writerow({'Workrequest_ID': work_req.workrequest_id, 'Title': work_req.title, 'Property_ID': work_req.property_id, 
             'Destination_ID': work_req.destination_id, 'Contractor':work_req.contractor, 'Date':work_req.date, 
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description})
-
-    # def search_work_request(self, search):
-
-    #     with open(self.filepath, "r", newline="", encoding='utf-8') as csvfile:
-    #         reader = csv.DictReader(csvfile)
-    #         for row in reader:
-    #             if search == row[0]:
-    #                 return row
-    #         return False
     
     def edit_work_request(self, work_reqno, col,newvalue ):  
         """This function edits a certain value for a certain work request (input by supervisor)"""

@@ -16,7 +16,7 @@ class DestinationDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                dest = Destination(row["Destination"], row["Airport"], row["Phone_number"], 
+                dest = Destination(row["Destination"], row["Phone_number"], 
                 row["Opening_hours"],row["Manager_ssn"]) # Make an instance of Destination
                 return_list.append(dest)
         return return_list
