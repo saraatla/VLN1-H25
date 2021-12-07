@@ -19,7 +19,7 @@ class WorkRequestDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination"],
-                row["Contractor"], (date(row["Date"].split('/')[2],row["Date"].split('/')[1],row["Date"].split('/')[0])), row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
+                row["Contractor"], (date(int(row["Date"].split('/')[2]),int(row["Date"].split('/')[1]),int(row["Date"].split('/')[0]))), row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
                 ret_list.append(work_req)
         return ret_list
 
