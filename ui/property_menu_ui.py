@@ -12,7 +12,9 @@ class PropertyMenu:
 
     def start(self):
         while True:
-            operations =  ['Search by ID', 'See list', 'Add new']
+            operations =  ['Search by ID', 'See list']
+            if self.user_type == 'Manager':
+                operations.append('Add new')
             operations_menu = Menu(f'Properties in {self.destination}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
