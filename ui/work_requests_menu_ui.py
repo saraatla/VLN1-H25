@@ -28,8 +28,10 @@ class WorkRequestMenu:
             operation = operations[selected_operation]
             if operation == 'Search by work request ID':
                 found_request = self.llapi.search_work_requests_id()
+                print('HEEEELLLOOOOOO')
                 if found_request is not None:
-                    work_request_ui = WorkRequestUI(found_request, self.destination)
+                    print('HÆÆÆÆÆÆÆÆÆÆÆÆ')
+                    work_request_ui = WorkRequestUI(found_request, self.destination, self.user_type)
                     work_request_ui.start()
 
             elif operation == 'Search by property ID':

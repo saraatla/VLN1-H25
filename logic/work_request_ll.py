@@ -78,20 +78,18 @@ class WorkRequestLL:
         self.dlapi.create_work_request(WorkRequest(workreq))
 
 
-    def edit_work_request(self, workreq):
+    def edit_work_request(self, req):
         """Edits workrequest"""
         while True:
-            workreq = input('Which contractor would you like to change?: ')
-            fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
+            id = req.workrequest_id
+            fieldnames = ['Title', 'Property_ID', 'Destination', 'Contractor', 'Date', 'Status', 'Priority', 'Description']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
             try:
-                workreq = int(workreq)
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
-                col = col-1
-                return self.dlapi.edit_work_request(workreq,col,newval)
+                return self.dlapi.edit_work_request(id,col,newval)
             except:
                 print('Invalid input, try again!')
 
@@ -175,7 +173,7 @@ class WorkRequestLL:
                 self.table2.add_row(["Workrequest_ID",workreq.workrequest_id])
                 self.table2.add_row(["Title",workreq.title])
                 self.table2.add_row(["Property_ID",workreq.property_id])
-                self.table2.add_row(["Destination_ID",workreq.destination_id])
+                self.table2.add_row(["Destination",workreq.destination])
                 self.table2.add_row(["Contractor",workreq.contractor])
                 self.table2.add_row(["Date",workreq.date])
                 self.table2.add_row(["Status",workreq.status])

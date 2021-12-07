@@ -2,10 +2,11 @@ from logic.LLAPI import LLAPI
 LINE = '------------------------------------------'
 
 class WorkRequestUI:
-    def __init__(self, work_request, destination):
+    def __init__(self, work_request, destination, user_type):
         self.destination = destination
         self.llapi= LLAPI(self.destination)
         self.work_request = work_request
+        self.user_type = user_type
         self.options = """1: Edit
 B: Back"""
 
@@ -13,20 +14,41 @@ B: Back"""
         print(LINE)
         print(self.work_request)
         print(LINE)
+        if self.user_type == 'Manager':
+            self.manager_start()
+        elif self.user_type == 'Employee':
+            self.employee_start()
+        print(LINE)
+
+    def manager_start(self):
+        options = """1: Edit \nB: Back"""
+        input_str = "Choose Options edit or back: "
         while True:
-            print(self.options)
+            print(options)
             print(LINE)
-            commands2 = input("Choose Options edit or back: ").upper()
+            command = input(input_str).upper()
             print(LINE)
-            if commands2 == "1":
-                self.llapi.edit_employee(self.work_request)
-                edited_request = self.llapi.search_work_requests(self.work_request.workrequest_id)
+            if command == "1":
+                self.llapi.edit_work_request(self.work_request)
+                edited_request = self.llapi.search_work_requests_id(self.work_request.workrequest_id)
                 print(LINE)
                 print(edited_request)
                 print(LINE)
-            elif commands2 == "B":
+            elif command == "B":
                 return
             else:
                 print("Invalid option, try again ")
-                print(LINE)
+        
+    def employee_start(self):
+        options = """B: Back"""
+        input_str = "Press B for back: "
+        while True:
+            print(options)
+            print(LINE)
+            command = input(input_str).upper()
+            print(LINE)
+            if command == "B":
+                return
+            else:
+                print("Invalid option, try again ")
 
