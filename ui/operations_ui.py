@@ -3,6 +3,7 @@ from ui.employee_menu_ui import EmployeeMenu
 from ui.property_menu_ui import PropertyMenu
 from ui.contractors_menu_ui import ContractorMenu
 from ui.work_requests_menu_ui import WorkRequestMenu
+from ui.destination_ui import DestinationUI
 
 
 class OperationsUI:
@@ -12,7 +13,7 @@ class OperationsUI:
 
     def start(self):
         while True:
-            operations =  ['Employees', 'Properties', 'Work requests', 'Contractors']
+            operations =  ['Employees', 'Properties', 'Work requests', 'Contractors','Destination info']
             operations_menu = Menu(f'Welcome to {self.destination}\nMain menu for {self.user_type}',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
@@ -30,3 +31,7 @@ class OperationsUI:
             elif operation == 'Contractors':
                 contractor_menu  = ContractorMenu(self.destination,self.user_type)
                 contractor_menu.start()
+            elif operation == 'Destination info':
+                destination_ui = DestinationUI(self.destination)
+                destination_ui.start()
+
