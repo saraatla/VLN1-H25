@@ -2,11 +2,12 @@ from logic.LLAPI import LLAPI
 LINE = '------------------------------------------'
 
 class EmployeeUI:
-    def __init__(self, employee, destination, data):
+    def __init__(self, employee, destination, data, nr=""):
         self.destination = destination
         self.llapi= LLAPI(self.destination)
         self.employee = employee
         self.data = data
+        self.nr = nr
         self.options = """1: Edit
 B: Back"""
 
@@ -21,7 +22,7 @@ B: Back"""
             print(LINE)
             if commands2 == "1":
                 self.llapi.edit_employee(self.data)
-                edited_employee = self.llapi.search_employee(self.data.ssn)
+                edited_employee = self.llapi.search_employee(self.data.ssn,self.nr)
                 print(LINE)
                 print(edited_employee)
                 print(LINE)
