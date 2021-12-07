@@ -12,7 +12,9 @@ class PropertyMenu:
 
     def start(self):
         while True:
-            operations =  ['Search by ID', 'See list', 'Add new']
+            operations =  ['Search by ID', 'See list']
+            if self.user_type == 'Manager':
+                operations.append('Add new')
             operations_menu = Menu(f'Properties in {self.destination}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
@@ -21,7 +23,7 @@ class PropertyMenu:
             if operation  == 'Search by ID':
                 found_property = self.llapi.search_property()
                 if found_property is not None:
-                    property_ui = PropertyUI(found_property, self.destination)
+                    property_ui = PropertyUI(found_property, self.destination,self.user_type)
                     property_ui.start()
             elif operation == 'See list':
                 self.llapi.list_properties()

@@ -1,5 +1,5 @@
 """Workrequest_ID,Title,Property_ID,Destination_ID,Contractor,Date,Status,Priority,Description"""
-from datetime import time
+from datetime import date
 import csv
 from models.work_request import WorkRequest
 
@@ -18,8 +18,8 @@ class WorkRequestDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination_ID"],
-                row["Contractor"], (time(row["Date"].split('/')[2],row["Date"].split('/')[1],row["Date"].split('/')[0])), row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
+                work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination"],
+                row["Contractor"], (date(int(row["Date"].split('/')[2]),int(row["Date"].split('/')[1]),int(row["Date"].split('/')[0]))), row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
                 ret_list.append(work_req)
         return ret_list
 
@@ -43,8 +43,10 @@ class WorkRequestDL:
             writer.writerows(data_list)
 
     def find_last_id(self):
-        
-        return 'w644' #self.work_requestDL.find_last_id()
+        req_list = self.list_work_requests()
+        print(req_list.workrequest_id())
+        return 'w644'
+
 
 
     
