@@ -93,10 +93,10 @@ class WorkRequestMenu:
         priority_options  = ['Emergengy', 'Now', 'ASAP']
         for i, option in enumerate(priority_options):
             print(f"{i+1}: {option}")
-        index = int(input('Choose priority:'))
+        index = int(input('Choose priority: '))
         priority = priority_options[index-1]
         workreq.append(priority)
-        description = input('Description:  ')
+        description = input('Description: ')
         workreq.append(description)
         report_id = 'None'
         workreq.append(report_id)
@@ -109,22 +109,22 @@ class WorkRequestMenu:
         if date.today() <= x:
             i = 0
             if repeat == 2:
-                how_many = int(input('for how many days?:'))
+                how_many = int(input('for how many days: '))
                 for i in range(how_many):
                     new_date = timedelta(days = 1*i)
                     self.create_repeated(workreq, x, new_date)
             elif repeat == 3:
-                how_many = int(input('for how many weeks?:'))
+                how_many = int(input('for how many weeks: '))
                 for i in range(how_many):
                     new_date = timedelta(weeks = 1*i)
                     self.create_repeated(workreq, x, new_date)
             elif repeat == 4:
-                how_many = int(input('for how many months?:'))
+                how_many = int(input('for how many months: '))
                 for i in range(how_many):
                     new_date = relativedelta(months =+1*i)
                     self.create_repeated(workreq, x, new_date)
             elif repeat == 5:
-                how_many = int(input('for how many years?:'))
+                how_many = int(input('for how many years: '))
                 for i in range(how_many):
                     new_date = relativedelta(years =+1*i)
                     self.create_repeated(workreq, x, new_date)
