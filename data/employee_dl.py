@@ -17,7 +17,7 @@ class EmployeeDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 emp = Employee([row["Name"], row["SSN"], row["Email"], row["Address"], row["Phone"], 
-                row["GSM"], row["Destination"], row["Airport"], row["Title"]]) # Make an instance of Employee# Make an instance of Employee
+                row["GSM"], row["Destination"], row["Title"]]) # Make an instance of Employee# Make an instance of Employee
                 return_list.append(emp)
         return return_list
 
