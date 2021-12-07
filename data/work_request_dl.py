@@ -44,8 +44,7 @@ class WorkRequestDL:
 
     def find_last_id(self):
         req_list = self.list_work_requests()
-        print(req_list.workrequest_id())
-        return 'w644'
+        return req_list[-1].workrequest_id
 
 
 
