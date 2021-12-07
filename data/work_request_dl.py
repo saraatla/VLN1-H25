@@ -31,15 +31,6 @@ class WorkRequestDL:
             writer.writerow({'Workrequest_ID': work_req.workrequest_id, 'Title': work_req.title, 'Property_ID': work_req.property_id, 
             'Destination_ID': work_req.destination_id, 'Contractor':work_req.contractor, 'Date':work_req.date, 
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description})
-
-    # def search_work_request(self, search):
-
-    #     with open(self.filepath, "r", newline="", encoding='utf-8') as csvfile:
-    #         reader = csv.DictReader(csvfile)
-    #         for row in reader:
-    #             if search == row[0]:
-    #                 return row
-    #         return False
     
     def edit_work_request(self, work_reqno, col,newvalue ):  
         """This function edits a certain value for a certain work request (input by supervisor)"""
