@@ -36,6 +36,43 @@ class WorkRequestLL:
             else:
                 print("Invalid input, try again!")
             self.table.reset()
+
+    def workrequests_by_status(self):
+        """Prints a table of all request that have report 
+        and are still open, that are, ready to close."""
+        reader_report = self.dlapi.list_work_reports()
+        reader_request = self.dlapi.list_work_requests()
+        status = input('Enter status: ')
+        retlist = []
+        if status != 'closed':
+            for row in reader_report:
+                for line in reader_request:
+                    if row.workreport_id == line.workreport_id and line.status == status:
+                        retlist.append(line)
+        else:
+            for line in reader_request:
+                if line.status == status:
+                    retlist.append(line)
+        if retlist:
+            self.list_works(retlist)
+            return True
+        else:
+            print('No {} work request found.\nPlease enter "open", "closed" or "completed".'.format(status))
+
+
+
+    # def list_work_requests(self):
+    #     """Prints all work request in the system"""
+    #     workreq_list = self.dlapi.list_work_requests()
+    #     retlist = []
+    #     for item in workreq_list:
+    #         retlist.append(item)
+    #     if retlist:
+    #         self.list_works(retlist)
+    #         return True
+    #     else:
+    #         print('No request registered in the system')
+
     def create_work_request(self,work_req):
         # return self.dlapi.create_work_request(work_req)
         print('Enter the following information: ')
