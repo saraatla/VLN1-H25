@@ -7,8 +7,7 @@ class Employee:
         self.phone = parameters[4]
         self.gsm = parameters[5]
         self.destination = parameters[6]
-        self.airport = parameters[7]
-        self.title = parameters[8]
+        self.title = parameters[7]
         
         
     def __str__(self):
@@ -18,6 +17,5 @@ Email: {self.email}
 Address: {self.address} 
 Phone: {self.phone}
 GSM: {self.gsm}
-destination: {self.destination} 
-Airport: {self.airport} 
+Destination: {self.destination} 
 Title: {self.title}"""
