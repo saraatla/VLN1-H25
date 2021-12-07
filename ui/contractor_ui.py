@@ -12,12 +12,12 @@ class ContractorUI:
         print(LINE)
         print(self.contractor)
         print(LINE)
-        while True:
-            if self.user_type == 'Manager':
-                self.manager_start()
-            elif self.user_type == 'Employee':
-                self.employee_start()
-                print(LINE)
+        
+        if self.user_type == 'Manager':
+            self.manager_start()
+        elif self.user_type == 'Employee':
+            self.employee_start()
+        
 
     def manager_start(self):
         options = """1: Edit \nB: Back"""
