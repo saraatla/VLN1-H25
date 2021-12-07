@@ -12,7 +12,7 @@ class StartUI:
             acci()
             print("%s" % time.ctime())
             intro = 'Welcome to NaN Air \nPlease Enter your status in the company.'
-            options = ['Supervisor', 'Employee']
+            options = ['Manager', 'Employee']
             menu = Menu(intro, options)
             selection = menu.draw_options()
             if selection < 0:
