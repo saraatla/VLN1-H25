@@ -7,7 +7,7 @@ def acci():
         time.sleep(0.12)
         print(colored("██╔██╗ ██║███████║██╔██╗ ██║    ███████║██║██████╔╝", "blue"))
         time.sleep(0.13)
-        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", "yellow"))
+        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", "white"))
         time.sleep(0.14)
         print(colored("██║ ╚████║██║  ██║██║ ╚████║    ██║  ██║██║██║  ██║", "magenta"))
         time.sleep(0.15)
