@@ -1,6 +1,7 @@
 import datetime
 
 
+
 from data.work_report_dl import WorkReportDL
 from models.work_report import WorkReport
 
@@ -35,6 +36,7 @@ for i in x:
 
 
 from datetime import date, timedelta
+from dateutil.relativedelta import relativedelta
 
 from os import read
 from Extra.texttableFile.texttable import Texttable
@@ -102,9 +104,11 @@ class WorkRequestLL:
         dates = start_date.split('/')
         x = date(int(dates[2]),int(dates[1]),int(dates[0]))
         if date.today() <= x:
+            i = 0
             if repeat == 2:
                 how_many = int(input('for how many days?:'))
-                self.daily_repeat(how_many, workreq, x)
+                i = self.calculateI(how_many)
+                self.daily_repeat(how_many, workreq, x, timedelta(days = 1*i))
             elif repeat == 3:
                 how_many = int(input('for how many weeks?:'))
                 self.weekly_repeat(how_many, workreq, x)
@@ -117,10 +121,13 @@ class WorkRequestLL:
         else:
             print("Can not create work request in the past")
 
-
-    def daily_repeat(self, how_many, workreq, x):
+    def calculateI(self, how_many):
         for i in range(how_many):
-            new_date = timedelta(days = 1*i)
+            return i
+
+    def daily_repeat(self, how_many, workreq, x, delta):
+        for i in range(how_many):
+            new_date = delta
             date_work_req = x + new_date
             date_work_req = date_work_req.strftime('%d/%m/%Y')
             workreq[5] = date_work_req
@@ -144,7 +151,7 @@ class WorkRequestLL:
 
     def monthly_repeat(self, how_many, workreq, x):
         for i in range(how_many):
-            new_date = timedelta(months = 1*i)
+            new_date = relativedelta(months =+1*i)
             date_work_req = x + new_date
             date_work_req = date_work_req.strftime('%d/%m/%Y')
             workreq[5] = date_work_req
@@ -156,7 +163,7 @@ class WorkRequestLL:
 
     def yearly_repeat(self, how_many, workreq, x):
         for i in range(how_many):
-            new_date = timedelta(years = 1*i)
+            new_date = relativedelta(years =+1*i)
             date_work_req = x + new_date   
             date_work_req = date_work_req.strftime('%d/%m/%Y')
             workreq[5] = date_work_req
