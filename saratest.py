@@ -44,16 +44,20 @@ class WorkRequestLL:
         self.table = Texttable()
         self.table2 = Texttable()
 
-def create_work_request(self):
-        # return self.dlapi.create_work_request(work_req)
-        print('Enter the following information: ')
-        print(LINE)
-        last_id = find_last_id()
-        new_id = last_id + 1
-        workreq = [new_id]
-        fieldnames = ["Title", "Property_ID", "Destination", "Contractor", "Date", "Status", "Priority", "Description", "Workreport_ID"]
-        for field in fieldnames:
-            val = input(f'{field}: ')
-            workreq.append(val)
-        self.dlapi.create_work_request(WorkRequest(workreq))
-        print(f'{LINE}\nWork request successfully created!\n{LINE}')
+    def create_work_request(self):
+            # return self.dlapi.create_work_request(work_req)
+            print('Enter the following information: ')
+            print(LINE)
+            last_id = self.dlapi.find_last_id()
+            new_id = int(last_id[1:])+1
+            workreq = [f'w{new_id}']
+            fieldnames = ["Title", "Property_ID", "Destination", "Contractor", "Date", "Status", "Priority", "Description", "Workreport_ID"]
+            for field in fieldnames:
+                val = input(f'{field}: ')
+                workreq.append(val)
+            self.dlapi.create_work_request(WorkRequest(workreq))
+            print(f'{LINE}\nWork request successfully created!\n{LINE}')
+
+wLL  = WorkRequestLL('Svalbard')
+
+wLL.create_work_request()

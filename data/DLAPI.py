@@ -64,6 +64,9 @@ class DLAPI:
     def edit_work_request(self,work_req):
         return self.work_requestDL.edit_work_request(work_req)
 
+    def find_last_id(self):
+        return 'w644' #self.work_requestDL.find_last_id()
+
     # Work Report DL
     def create_work_report(self, work_rep):
         return self.work_reportDL.create_work_report(work_rep)
