@@ -23,6 +23,9 @@ class LLAPI:
     
     def list_of_destinations(self):
         return self.destinations.list_of_destinations()
+    
+    def search_destination(self, dest):
+        return self.destinations.search_destination(dest)
 
     # Employee LL
     def create_employee(self):
