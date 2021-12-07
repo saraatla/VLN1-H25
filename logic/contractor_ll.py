@@ -60,6 +60,6 @@ class ContractorLL:
             for row in reader:
                 if search == row.id:
                     return row
-                else:
-                    print(f'{LINE}\nContractor not found\n{LINE}')
-                    return
+            
+            print(f'{LINE}\nContractor not found\n{LINE}')
+            return
