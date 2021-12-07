@@ -12,7 +12,6 @@ class PropertyUI:
         print(LINE)
         print(self.property)
         print(LINE)
-        
         if self.user_type == 'Manager':
             self.manager_start()
         elif self.user_type == 'Employee':
