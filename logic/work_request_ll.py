@@ -37,13 +37,13 @@ class WorkRequestLL:
     #         self.table.reset()
 
     def workrequests_by_status(self):
-        """Prints a table of all request that have report 
-        and are still open, that are, ready to close."""
+        """Prints a table of all request baised on their status. Requests that are ready to be closed
+        are open and have a report signed to them."""
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
-        status = input('Enter status: ')
+        status = input('Enter status: ').lower()
         retlist = []
-        if status != 'closed':
+        if status == 'ready for closing':
             for row in reader_report:
                 for line in reader_request:
                     if row.workreport_id == line.workreport_id and line.status == status:
@@ -56,7 +56,7 @@ class WorkRequestLL:
             self.list_works(retlist)
             return True
         else:
-            print('No {} work request found.\nPlease enter "open", "closed" or "completed".'.format(status))
+            print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
 
 
 
@@ -73,7 +73,7 @@ class WorkRequestLL:
             print('No request registered in the system')
 
     def create_work_request(self,work_req):
-        # return self.dlapi.create_work_request(work_req)
+        """Creates new work requests"""
         print('Enter the following information: ')
         print(LINE)
         workreq = []
@@ -85,7 +85,7 @@ class WorkRequestLL:
         print(f'{LINE}\nWork request successfully created!\n{LINE}')
 
     def edit_work_request(self, workreq):
-        # return self.dlapi.edit_work_request(work_reqno,col,value)
+        """Edits workrequest"""
         while True:
             workreq = input('Which contractor would you like to change?: ')
             fieldnames = ["Name","Type","Contact","Contact's phone","Address","Open_hours","Review"]
@@ -102,6 +102,7 @@ class WorkRequestLL:
                 print('Invalid input, try again!')
 
     def search_work_request_id(self):
+        """Returns workrequests baised on their id"""
         reader = self.dlapi.list_work_requests()
         search = input('Enter request ID: ')
         retlist = []
@@ -114,6 +115,7 @@ class WorkRequestLL:
             return False
 
     def search_work_request_prop(self):
+        """Returns workrequests baised on the property they are assigned to"""
         reader = self.dlapi.list_work_requests()
         search = input('Enter property ID: ')
         retlist = []
@@ -126,6 +128,7 @@ class WorkRequestLL:
             return False
 
     def search_work_request_SSN(self):
+        """Returns workrequests baised on the ssn of the employee that worked on the associated report"""
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
         search = input('Enter SSN: ')
