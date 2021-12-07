@@ -43,8 +43,7 @@ class WorkRequestDL:
             writer.writerows(data_list)
 
     def find_last_id(self):
-        
-        return 'w644' #self.work_requestDL.find_last_id()
+        return 'w644'
 
 
     
