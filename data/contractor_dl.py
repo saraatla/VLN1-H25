@@ -28,7 +28,7 @@ class ContractorDL:
             writer.writerow({'Contractor_ID': cont.id,'Name': cont.name, 'Type': cont.type, 'Contact': cont.contact, 'Contacts_phone': cont.contacts_phone, 
             'Address':cont.address, 'Open_hours':cont.open_hours, 'Review':cont.review}) 
 
-    def edit_contractor(self, cont, col, newvalue):
+    def edit_contractor(self, cont, col, new_value):
         """This function edits a certain value for a certain contractor (input by Managers)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
@@ -36,7 +36,7 @@ class ContractorDL:
             for index, contractor_value in enumerate(data_list):
                 for value in contractor_value:
                     if value == cont:
-                        data_list[index][col] = newvalue
+                        data_list[index][col] = new_value
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile
             writer.writerows(data_list)

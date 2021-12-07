@@ -32,14 +32,14 @@ class WorkRequestDL:
             'Destination': work_req.destination, 'Contractor':work_req.contractor, 'Date':work_req.date, 
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description, 'Workreport_ID':work_req.workreport_id})
     
-    def edit_work_request(self, work_reqno, col,new_value ):  
+    def edit_work_request(self, workreq_no, col,new_value ):  
         """This function edits a certain value for a certain work request (input by Manager)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            for index, property_value in enumerate(data_list):
-                for value in property_value: 
-                    if value == work_reqno: 
+            for index, work_request_value in enumerate(data_list):
+                for value in work_request_value: 
+                    if value == workreq_no: 
                         data_list[index][col] = new_value 
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
