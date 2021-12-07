@@ -47,7 +47,7 @@ class ContractorLL:
             try:
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
-                col = col-1
+                col = col
                 return self.dlapi.edit_contractor(cont_name, col, newval)
             except:
                 print('Invalid input, try again!')

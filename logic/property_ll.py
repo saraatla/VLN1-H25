@@ -41,8 +41,6 @@ class PropertyLL:
         print(f'{LINE}\nProperty successfully created!\n{LINE}')
  
     
-
-
     def edit_property(self, prop):
         while True:
             id = prop.property_id
