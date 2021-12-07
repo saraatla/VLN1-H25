@@ -107,70 +107,36 @@ class WorkRequestLL:
             i = 0
             if repeat == 2:
                 how_many = int(input('for how many days?:'))
-                i = self.calculateI(how_many)
-                self.daily_repeat(how_many, workreq, x, timedelta(days = 1*i))
+                for i in range(how_many):
+                    new_date = timedelta(days = 1*i)
+                    self.create_repeated(workreq, x, new_date)
             elif repeat == 3:
                 how_many = int(input('for how many weeks?:'))
-                self.weekly_repeat(how_many, workreq, x)
+                for i in range(how_many):
+                    new_date = timedelta(weeks = 1*i)
+                    self.create_repeated(workreq, x, new_date)
             elif repeat == 4:
                 how_many = int(input('for how many months?:'))
-                self.monthly_repeat(how_many, workreq, x)
+                for i in range(how_many):
+                    new_date = relativedelta(months =+1*i)
+                    self.create_repeated(workreq, x, new_date)
             elif repeat == 5:
                 how_many = int(input('for how many years?:'))
-                self.yearly_repeat(how_many, workreq, x)
+                for i in range(how_many):
+                    new_date = relativedelta(years =+1*i)
+                    self.create_repeated(workreq, x, new_date)
         else:
             print("Can not create work request in the past")
 
-    def calculateI(self, how_many):
-        for i in range(how_many):
-            return i
 
-    def daily_repeat(self, how_many, workreq, x, delta):
-        for i in range(how_many):
-            new_date = delta
-            date_work_req = x + new_date
-            date_work_req = date_work_req.strftime('%d/%m/%Y')
-            workreq[5] = date_work_req
-            self.dlapi.create_work_request(WorkRequest(workreq))
-            old_id = workreq[0]
-            new_id = int(old_id[1:])+1
-            workreq[0] = f'w{new_id}'
-
-
-    def weekly_repeat(self, how_many, workreq, x):
-        for i in range(how_many):
-            new_date = timedelta(weeks = 1*i)
-            date_work_req = x + new_date
-            date_work_req = date_work_req.strftime('%d/%m/%Y')
-            workreq[5] = date_work_req
-            self.dlapi.create_work_request(WorkRequest(workreq))
-            old_id = workreq[0]
-            new_id = int(old_id[1:])+1
-            workreq[0] = f'w{new_id}'
-    
-
-    def monthly_repeat(self, how_many, workreq, x):
-        for i in range(how_many):
-            new_date = relativedelta(months =+1*i)
-            date_work_req = x + new_date
-            date_work_req = date_work_req.strftime('%d/%m/%Y')
-            workreq[5] = date_work_req
-            self.dlapi.create_work_request(WorkRequest(workreq))
-            old_id = workreq[0]
-            new_id = int(old_id[1:])+1
-            workreq[0] = f'w{new_id}'
-
-
-    def yearly_repeat(self, how_many, workreq, x):
-        for i in range(how_many):
-            new_date = relativedelta(years =+1*i)
-            date_work_req = x + new_date   
-            date_work_req = date_work_req.strftime('%d/%m/%Y')
-            workreq[5] = date_work_req
-            self.dlapi.create_work_request(WorkRequest(workreq)) 
-            old_id = workreq[0]
-            new_id = int(old_id[1:])+1
-            workreq[0] = f'w{new_id}' 
+    def create_repeated(self, workreq, x, new_date):
+        date_work_req = x + new_date
+        date_work_req = date_work_req.strftime('%d/%m/%Y')
+        workreq[5] = date_work_req
+        self.dlapi.create_work_request(WorkRequest(workreq))
+        old_id = workreq[0]
+        new_id = int(old_id[1:])+1
+        workreq[0] = f'w{new_id}'
 
         
 

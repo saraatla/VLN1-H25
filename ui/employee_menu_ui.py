@@ -21,9 +21,9 @@ class EmployeeMenu:
                 return
             operation = operations[selected_operation]
             if operation  == 'Search by SSN':
-                found_employee = self.llapi.search_employee()
+                found_employee, data = self.llapi.search_employee()
                 if found_employee is not None: 
-                    employee_ui = EmployeeUI(found_employee, self.destination)
+                    employee_ui = EmployeeUI(found_employee, self.destination, data)
                     employee_ui.start()
             elif operation == 'See list':
                 self.llapi.list_employees()
