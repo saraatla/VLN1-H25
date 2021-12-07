@@ -42,6 +42,10 @@ class WorkRequestDL:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
             writer.writerows(data_list)
 
+    def find_last_id(self):
+        
+        return 'w644' #self.work_requestDL.find_last_id()
+
 
     
 

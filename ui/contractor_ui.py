@@ -2,12 +2,18 @@ from logic.LLAPI import LLAPI
 LINE = '------------------------------------------'
 
 class ContractorUI:
-    def __init__(self, contractor, destination):
+    def __init__(self, contractor, destination, user_type):
         self.destination = destination
         self.llapi= LLAPI(self.destination)
         self.contractor = contractor
-        self.options = """1: Edit
+        self.user_type = user_type
+        if self.user_type == 'Manager':
+            self.options = """1: Edit
 B: Back"""
+            self.input_str = "Choose Options edit or back: "
+        else:
+            self.options = """B: Back"""
+            self.input_str = "Press B for back: "
 
     def start(self):
         print(LINE)
@@ -16,7 +22,8 @@ B: Back"""
         while True:
             print(self.options)
             print(LINE)
-            commands2 = input("Choose Options edit or back: ").upper()
+
+            commands2 = input(self.input_str).upper()
             print(LINE)
             if commands2 == "1":
                 self.llapi.edit_contractor(self.contractor)
