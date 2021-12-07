@@ -8,6 +8,7 @@ class WorkReport:
                 self.total_cost = parameters[5]
                 self.description = parameters[6]
                 self.approved = parameters[7]
+                self.manager_cmt = parameters[8]
 
         def __str__(self):
                 return f"""Workreport_ID: {self.workreport_id} 
@@ -17,7 +18,8 @@ class WorkReport:
                 Contractor_remuneration: {self.contractor_remuneration}
                 Total_cost: {self.total_cost}
                 Desctiption: {self.description}
-                Approved: {self.approved}"""
+                Approved: {self.approved}
+                Manager_comment: {self.manager_cmt}"""
 
 
             

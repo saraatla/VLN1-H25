@@ -20,8 +20,4 @@ class DestinationDL:
                 row["Opening_hours"],row["Manager_ssn"]) # Make an instance of Destination
                 return_list.append(dest)
         return return_list
-    
-    def get_destination(self, id):
-        dest_list = self.list_destinations()
-        return dest_list[id]
         

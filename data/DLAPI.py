@@ -19,10 +19,6 @@ class DLAPI:
     # destination DL
     def list_destinations(self):
         return self.destinationDL.list_destinations()
-
-    def get_destination(self, id):
-        return self.destinationDL.get_destination(id)
-
     
     # Employee DL
     def create_employee(self, emp):

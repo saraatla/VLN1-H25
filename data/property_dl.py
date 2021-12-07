@@ -30,7 +30,7 @@ class PropertyDL:
             "Rooms": prop.rooms, "Type": prop.type, "Property_ID": prop.property_id, "Facilities": prop.facilities})
 
     def edit_property(self, id, col, newvalue):  
-        """This function edits a certain value for a certain property (input by supervisor)"""
+        """This function edits a certain value for a certain property (input by Manager)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)

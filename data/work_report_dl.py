@@ -15,7 +15,7 @@ class WorkReportDL:
                                              # are given by the optional fieldnames parameter.
             for row in reader:
                 work_rep = WorkReport([row['Workreport_ID'], row['SSN'], row['Contractor'], row['Contractor_review'],
-                row['Contractor_remuneration'], row['Total_cost'], row['Description'], row['Approved']])
+                row['Contractor_remuneration'], row['Total_cost'], row['Description'], row['Approved'],row['Manager_comment']])
                 return_list.append(work_rep)
             return return_list
 
@@ -26,7 +26,7 @@ class WorkReportDL:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writerow({'Workreport_ID': work_rep.workreport_id, 'SSN': work_rep.ssn, 'Contractor': work_rep.contractor, 
             'Contractor_review': work_rep.contractor_review, 'Contractor_remuneration':work_rep.contractor_remuneration,
-            'Total_cost':work_rep.total_cost, 'Description':work_rep.description, 'Approved':work_rep.approved})
+            'Total_cost':work_rep.total_cost, 'Description':work_rep.description, 'Approved':work_rep.approved, 'Manager_comment':work_rep.manager_cmt})
 
     def edit_work_report(self, rep_no, col, newval):
         """This function edits a certain value for a certain work report (input by employee)"""
