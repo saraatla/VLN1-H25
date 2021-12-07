@@ -2,10 +2,11 @@ from logic.LLAPI import LLAPI
 LINE = '------------------------------------------'
 
 class PropertyUI:
-    def __init__(self, property, destination):
+    def __init__(self, property, destination,user_type):
         self.destination = destination
         self.llapi = LLAPI(self.destination)
         self.property = property
+        self.user_type = user_type
     
     def start(self):
         print(LINE)
