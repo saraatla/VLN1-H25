@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from dateutil.relativedelta import relativedelta
 
 from ui.menu import Menu
@@ -72,6 +72,7 @@ class WorkRequestMenu:
             self.llapi.create_work_request(workreq)
             print(f'{LINE}\nWork request successfully created!\n{LINE}')
     
+
     def create_work_req_list(self):
         new_id = self.llapi.get_new_id()
         workreq = [new_id]
@@ -82,7 +83,7 @@ class WorkRequestMenu:
         workreq.append(self.destination)
         contractor = input('Is a contractor needed for this work request: ')
         workreq.append(contractor)
-        start_date = input('Start date, dd/mm/yyyy: ')
+        start_date = self.check_date()
         workreq.append(start_date)
         if start_date == date.today():
             status = 'open'
@@ -140,3 +141,16 @@ class WorkRequestMenu:
         old_id = workreq[0]
         new_id = int(old_id[1:])+1
         workreq[0] = f'w{new_id}'
+
+
+    def check_date(self):
+        while True:
+            date_string = input('Start date, dd/mm/yyyy: ')
+            format = "%d/%m/%Y"
+            try:
+                datetime.strptime(date_string, format)
+                return date_string
+            except ValueError:
+                print("This is the incorrect date format. It should be dd/mm/yyyy")
+
+
