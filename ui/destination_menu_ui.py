@@ -2,6 +2,7 @@ from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.operations_ui import OperationsUI
 from Extra.acci import locAscii
+
 class DestinationMenu:
     def __init__(self,user_type,destination=""):
         self.destination = destination
