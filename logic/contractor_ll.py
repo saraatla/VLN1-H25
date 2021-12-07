@@ -46,7 +46,7 @@ class ContractorLL:
             col = input('What do you want to change? ')
             try:
                 col = int(col)
-                newval = input(f'What is the new {fieldnames[col]}? ')
+                newval = input(f'What is the new {fieldnames[col-1]}? ')
                 col = col
                 return self.dlapi.edit_contractor(cont_name, col, newval)
             except:
