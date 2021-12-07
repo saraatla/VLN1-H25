@@ -42,7 +42,7 @@ class EmployeeLL:
         for field in fieldnames:
             val = input(f'{field}: ')
             emp.append(val)
-        self.dlapi.create_employee(Employee(emp),ID)
+        self.dlapi.create_employee(Employee(emp))
         print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
 
