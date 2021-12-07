@@ -12,32 +12,29 @@ class WorkRequestLL:
         self.table = Texttable()
         self.table2 = Texttable()
    
-    def list_work_requests(self):
-        # return self.dlapi.list_work_requests()
-        
-        self.table.set_deco(Texttable.HEADER)
-        self.table.set_max_width(300)
-        workreq_list = self.dlapi.list_work_requests()
-        for item in range(len(workreq_list)):
-            workreq = workreq_list[item]
-            # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
-            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.status, workreq.priority]])
-        print(self.table.draw())
-        while True:
-            command = input("Enter Nr of report to open or B to Back:").upper()
-            if command == "B":
-                return
-            elif command.isdigit():
-                nr = int(command)  
-                try:
-                    self.format_for_single_workrequest(workreq_list,nr)
-                    
-                except:
-                    print("Nr out of range try again")
-
-            else:
-                print("Invalid input, try again!")
-            self.table.reset()
+    # def list_work_requests(self):
+    #     # return self.dlapi.list_work_requests()
+    #     self.table.set_deco(Texttable.HEADER)
+    #     self.table.set_max_width(300)
+    #     workreq_list = self.dlapi.list_work_requests()
+    #     for item in range(len(workreq_list)):
+    #         workreq = workreq_list[item]
+    #         # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
+    #         self.table.add_rows([["Nr","Workrequest_ID", "Title", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.status, workreq.priority]])
+    #     print(self.table.draw())
+    #     while True:
+    #         command = input("Enter Nr of report to open or B to Back:").upper()
+    #         if command == "B":
+    #             return
+    #         elif command.isdigit():
+    #             nr = int(command)  
+    #             try:
+    #                 self.format_for_single_workrequest(workreq_list,nr)   
+    #             except:
+    #                 print("Nr out of range try again")
+    #         else:
+    #             print("Invalid input, try again!")
+    #         self.table.reset()
 
     def workrequests_by_status(self):
         """Prints a table of all request that have report 
@@ -63,17 +60,17 @@ class WorkRequestLL:
 
 
 
-    # def list_work_requests(self):
-    #     """Prints all work request in the system"""
-    #     workreq_list = self.dlapi.list_work_requests()
-    #     retlist = []
-    #     for item in workreq_list:
-    #         retlist.append(item)
-    #     if retlist:
-    #         self.list_works(retlist)
-    #         return True
-    #     else:
-    #         print('No request registered in the system')
+    def list_work_requests(self):
+        """Prints all work request in the system"""
+        workreq_list = self.dlapi.list_work_requests()
+        retlist = []
+        for item in workreq_list:
+            retlist.append(item)
+        if retlist:
+            self.list_works(retlist)
+            return True
+        else:
+            print('No request registered in the system')
 
     def create_work_request(self,work_req):
         # return self.dlapi.create_work_request(work_req)
@@ -172,57 +169,12 @@ class WorkRequestLL:
                 the_list.append(row)
         return the_list
 
-    # def format_for_single_workrequest(self,data):
-    #     self.workreq_list = self.dlapi.list_work_requests()
-    #     self.item = data-1
-    #     workreq = self.workreq_list[self.item]
-    #     self.table2.add_row(["Nr",self.item+1])
-    #     self.table2.add_row(["Workrequest_ID",workreq.workrequest_id])
-    #     self.table2.add_row(["Title",workreq.title])
-    #     self.table2.add_row(["Property_ID",workreq.property_id])
-    #     self.table2.add_row(["Destination_ID",workreq.destination_id])
-    #     self.table2.add_row(["Contractor",workreq.contractor])
-    #     self.table2.add_row(["Date",workreq.date])
-    #     self.table2.add_row(["Status",workreq.status])
-    #     self.table2.add_row(["Priority",workreq.priority])
-    #     self.table2.add_row(["Description",workreq.description])
-    #     self.table2.add_row(["Workreport ID",workreq.workreport_id])
-    #     print(self.table2.draw())
-    #     self.table2.reset()
-        
-    # def list_works(self,retlist):
-    #     # return self.dlapi.list_work_requests()
-    #     self.table.set_deco(Texttable.HEADER)
-    #     self.table.set_max_width(200)
-    #     workreq_list = self.dlapi.list_work_requests()
-    #     for item in range(len(retlist)):
-    #         workreq = retlist[item]
-    #         # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
-    #         self.table.add_rows([["Nr","Workrequest_ID", "Title", "Date", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
-    #     print(self.table.draw())
-    #     self.table.reset()
-    #     while True:
-    #         command = input("Enter Nr of report to open or B to Back:").upper()
-    #         if command == "B":
-    #             return
-    #         elif command.isdigit():
-    #             nr = int(command)  
-    #             try:
-    #                 print(self.format_for_single_workrequest(nr))
-    #             except:
-    #                 print("Nr out of range try again")
-
-    #         else:
-    #             print("Invalid input, try again!")
-
-    
-    
     def format_for_single_workrequest(self,retlist,nr):
         for item in range(len(retlist)):
             workreq = retlist[item]
             if item+1 == nr:
                 # self.item = nr
-                self.table2.add_row(["Nr",nr])
+                self.table2.add_row(["No.",nr])
                 self.table2.add_row(["Workrequest_ID",workreq.workrequest_id])
                 self.table2.add_row(["Title",workreq.title])
                 self.table2.add_row(["Property_ID",workreq.property_id])
@@ -245,18 +197,15 @@ class WorkRequestLL:
             workreq = retlist[item]
             # list_from_table.append(workreq)
             # table.add_rows([["Nr","Workrequest_ID", "Title", "Property_ID", "Destination_ID", "Contractor", "Repeat", "When", "Status", "Priority", "Description", "Workreport_ID"], [item+1, workreq.workreport_id, workreq.title, workreq.property_id, workreq.destination_id, workreq.contractor, workreq.repeat, workreq.when, workreq.status, workreq.priority, workreq.description, workreq.workreport_id]])
-            self.table.add_rows([["Nr","Workrequest_ID", "Title", "Date", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
+            self.table.add_rows([["No.","Workrequest_ID", "Title", "Date", "Status", "Priority"], [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
         print(self.table.draw())
         while True:
-            command = input("Enter Nr of report to open or B to Back:").upper()
+            command = input("Enter No. of report to open or B to Back:").upper()
             if command == "B":
                 return
             elif command.isdigit():
                 nr = int(command)
                 self.format_for_single_workrequest(retlist,nr)
-                # except:
-                #     print("Nr out of range try again")
-
             else:
                 print("Invalid input, try again!")
             self.table.reset()
