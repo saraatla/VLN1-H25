@@ -33,11 +33,10 @@ class ContractorDL:
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader) 
-            for contractor_value in data_list:
-                for index,value in enumerate(contractor_value):
+            for index, contractor_value in enumerate(data_list):
+                for value in contractor_value:
                     if value == cont:
                         data_list[index+1][col] = newvalue
-
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile
             writer.writerows(data_list)
