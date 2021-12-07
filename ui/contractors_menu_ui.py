@@ -1,6 +1,7 @@
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.contractor_ui import ContractorUI
+from Extra.acci import contAscii
 
 LINE = '------------------------------------------'
 
@@ -12,6 +13,7 @@ class ContractorMenu:
 
     def start(self):
         while True:
+            contAscii()
             operations =  ['Search by ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
