@@ -33,7 +33,7 @@ class WorkRequestDL:
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description, 'Workreport_ID':work_req.workreport_id})
     
     def edit_work_request(self, work_reqno, col,newvalue ):  
-        """This function edits a certain value for a certain work request (input by supervisor)"""
+        """This function edits a certain value for a certain work request (input by Manager)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
