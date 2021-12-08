@@ -54,11 +54,15 @@ class EmployeeMenu:
     def create_employee(self):
         print('Enter the following information: ')
         print(LINE)
+        fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Title']
         emp = []
-        fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Destination', 'Title']
+        if self.destination == 'All destinations':
+            fieldnames.insert(6, 'Destination')
         for field in fieldnames:
             val = input(f'{field}: ')
             emp.append(val)
+        if self.destination != 'All destinations':
+            emp.insert(6, self.destination)
         return self.llapi.create_employee(emp) 
 
 
