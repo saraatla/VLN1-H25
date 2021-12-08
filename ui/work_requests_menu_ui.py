@@ -1,5 +1,5 @@
+import datetime
 from datetime import date, timedelta, datetime
-from Extra.pythondateutil.dateutil.relativedelta import relativedelta
 from Extra.texttableFile.texttable import Texttable
 from Extra.acci import workAscii
 from ui.menu import Menu
