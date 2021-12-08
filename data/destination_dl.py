@@ -10,7 +10,9 @@ class DestinationDL:
 
     def list_destinations(self):
         """This function reads the csv file and makes a list with 
-        all the destinations along with their information"""
+        all the destinations along with their information
+        Returns:
+            list: list of destination info."""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
