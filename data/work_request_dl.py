@@ -1,5 +1,5 @@
 """Workrequest_ID,Title,Property_ID,Destination_ID,Contractor,Date,Status,Priority,Description"""
-from datetime import date
+from datetime import datetime
 import csv
 from models.work_request import WorkRequest
 
@@ -18,8 +18,9 @@ class WorkRequestDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
+                work_reqdate = datetime.strptime(row["Date"],'%d/%m/%Y')
                 work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination"],
-                row["Contractor"], (date(int(row["Date"].split('/')[2]),int(row["Date"].split('/')[1]),int(row["Date"].split('/')[0]))), row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
+                row["Contractor"], work_reqdate,row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
                 ret_list.append(work_req)
         return ret_list
 
