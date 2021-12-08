@@ -3,7 +3,6 @@ from Extra.acci import propAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 
-
 LINE = '------------------------------------------'
 
 class PropertyMenu:
