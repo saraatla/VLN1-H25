@@ -64,9 +64,13 @@ class WorkRequestMenu:
                     self.open_request_from_list(found_requests)
 
             elif operation == 'See list of all requests':
+                start_date = input('Enter date to search from:')
+                end_date = input('Enter date to end:')
                 request_list = self.llapi.list_all_work_requests(self.destination)
-                self.list_work_requests_ui(request_list)
-                self.open_request_from_list(request_list)
+                request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
+                # request_list = self.llapi.list_all_work_requests(self.destination)
+                self.list_work_requests_ui(request_list_by_date)
+                self.open_request_from_list(request_list_by_date)
                 
 
             elif operation == "See list of requests by status":

@@ -2,7 +2,7 @@ from os import read
 from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 from models.work_request import WorkRequest
-from datetime import date
+from datetime import datetime
 LINE = '------------------------------------------'
 
 class WorkRequestLL:
@@ -111,14 +111,17 @@ class WorkRequestLL:
         new_id = int(last_id[1:])+1
         return f'w{new_id}'
 
-    def check_if_date_is_between(self,request_list,start_date,end_date):
+    def get_list_of_workreq_on_period(self,request_list,start_date,end_date):
         """This function fetches a list og requests on a period input by user"""
-        date_search_from = date.strptime(start_date,'%d/%m/%Y')
-        date_search_to = date.strptime(end_date,'%d/%m/%Y')
+        if start_date == '' and end_date == '':
+            request_list_by_date = self.list_all_work_requests(self.destination)
+        date_search_from = datetime.strptime(start_date,'%d/%m/%Y')
+        date_search_to = datetime.strptime(end_date,'%d/%m/%Y')
         request_list_by_date = []
         for request in request_list:
             if request.status == 'completed':
                 if date_search_from <= request.date <= date_search_to:
+                    print('hALO')
                     request_list_by_date.append(request)
         return request_list_by_date
 
