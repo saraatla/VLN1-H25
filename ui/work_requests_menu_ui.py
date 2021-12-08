@@ -105,6 +105,8 @@ class WorkRequestMenu:
             command = input("Enter Number of request to open or B to Back:").upper()
             if command == "B":
                 break
+            if command == "P":
+                self.print_with_date_range(request_list)
             if not command.isdigit():
                 print("Invalid input, try again!")
             else:
@@ -114,6 +116,9 @@ class WorkRequestMenu:
                         self.individual_work_request_ui(request,nr)
                 break
 
+
+    def print_with_date_range(self, request_list):
+        pass
 
 
     def list_work_requests_ui(self, request_list):
