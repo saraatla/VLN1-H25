@@ -2,12 +2,13 @@ from Extra.texttableFile.texttable import Texttable
 from Extra.acci import contAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-
+from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
 
 class ContractorMenu:
     def __init__(self, destination, user_type):
         self.destination = destination
+        self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
         self.table = Texttable
@@ -18,7 +19,7 @@ class ContractorMenu:
             operations =  ['Search by ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Contractors in {self.destination}\nChoose options',operations)
+            operations_menu = Menu(f'Contractors in {self.destination_collor}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return

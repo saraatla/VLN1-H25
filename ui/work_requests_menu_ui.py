@@ -1,10 +1,10 @@
 from datetime import date, timedelta, datetime
-from dateutil.relativedelta import relativedelta
+from Extra.pythondateutil.dateutil.relativedelta import relativedelta
 from Extra.texttableFile.texttable import Texttable
 from Extra.acci import workAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-
+from Extra.TermcolorFile.termcolor import colored, cprint
 from ui.work_report_ui import WorkReportUI
 
 
@@ -13,6 +13,7 @@ LINE = '------------------------------------------'
 class WorkRequestMenu:
     def __init__(self, destination, user_type):
         self.destination = destination
+        self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
 
@@ -22,7 +23,7 @@ class WorkRequestMenu:
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Work Requests in {self.destination}\nChoose options', operations)
+            operations_menu = Menu(f'Work Requests in {self.destination_collor}\nChoose options', operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
@@ -38,6 +39,7 @@ class WorkRequestMenu:
 
             elif operation == 'Search by property ID':
                 search = input('Enter property ID: ')
+                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_requests_prop(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -45,8 +47,9 @@ class WorkRequestMenu:
                     self.list_work_requests_ui(found_requests)
                     self.open_request_from_list(found_requests)
 
-            elif operation == 'Search by SSN': # EKKI RETT ÞETTA SKILAR LISTA
+            elif operation == 'Search by SSN':
                 search = input('Enter SSN: ')
+                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -56,6 +59,7 @@ class WorkRequestMenu:
 
             elif operation == 'Search by contractor ID':
                 search = input('Enter contractor ID: ')
+                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_requests_cont(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -64,13 +68,21 @@ class WorkRequestMenu:
                     self.open_request_from_list(found_requests)
 
             elif operation == 'See list of all requests':
-                start_date = input('Enter date to search from:')
-                end_date = input('Enter date to end:')
-                request_list = self.llapi.list_all_work_requests(self.destination)
-                request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
-                # request_list = self.llapi.list_all_work_requests(self.destination)
-                self.list_work_requests_ui(request_list_by_date)
-                self.open_request_from_list(request_list_by_date)
+                while True:
+                    print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
+                    #start_date = input('Enter date to search from (dd/mm/yyyy):')
+                    #end_date = input('Enter date to end (dd/mm/yyyy):')
+                    start_date = self.check_date('date to search from')
+                    end_date = self.check_date('date to end')
+                    request_list = self.llapi.list_all_work_requests(self.destination)
+                    request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
+                    if request_list_by_date is None:
+                        print('The inputs are not valid, try again')
+                        break
+                    else:
+                        self.list_work_requests_ui(request_list_by_date)
+                        self.open_request_from_list(request_list_by_date)
+                    break
                 
 
             elif operation == "See list of requests by status":
@@ -92,7 +104,7 @@ class WorkRequestMenu:
         while True:
             command = input("Enter Number of request to open or B to Back:").upper()
             if command == "B":
-                return
+                break
             if not command.isdigit():
                 print("Invalid input, try again!")
             else:
@@ -232,7 +244,7 @@ class WorkRequestMenu:
         workreq.append(self.destination)
         contractor = input('Is a contractor needed for this work request: ')
         workreq.append(contractor)
-        start_date = self.check_date()
+        start_date = self.check_date('start date')
         workreq.append(start_date)
         if start_date == date.today():
             status = 'open'
@@ -292,9 +304,11 @@ class WorkRequestMenu:
         workreq[0] = f'w{new_id}'
 
 
-    def check_date(self):
+    def check_date(self, date_str):
         while True:
-            date_string = input('Start date, dd/mm/yyyy: ')
+            date_string = input(f'Enter {date_str}, dd/mm/yyyy: ')
+            if date_string == '' and date_str is not 'start date':
+                return date_string
             format = "%d/%m/%Y"
             try:
                 datetime.strptime(date_string, format)

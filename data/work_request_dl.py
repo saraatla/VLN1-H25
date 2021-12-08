@@ -20,7 +20,7 @@ class WorkRequestDL:
             for row in reader:
                 work_reqdate = datetime.strptime(row["Date"],'%d/%m/%Y')
                 work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination"],
-                row["Contractor"], work_reqdate,row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
+                row["Contractor"], work_reqdate.date(),row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
                 ret_list.append(work_req)
         return ret_list
 

@@ -2,12 +2,13 @@ from Extra.texttableFile.texttable import Texttable
 from Extra.acci import propAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-
+from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
 
 class PropertyMenu:
     def __init__(self, destination, user_type):
         self.destination = destination
+        self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
 
@@ -17,7 +18,7 @@ class PropertyMenu:
             operations =  ['Search by ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Properties in {self.destination}\nChoose options',operations)
+            operations_menu = Menu(f'Properties in {self.destination_collor}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
@@ -34,7 +35,7 @@ class PropertyMenu:
             elif operation == 'See list':
                 prop_list = self.list_properties()
                 while True:
-                    command = input("Enter number of property to open or B to Back:").upper()
+                    command = input("Enter number of property to open or B to Back: ").upper()
                     if command == "B":
                         return
                     if not command.isdigit():
