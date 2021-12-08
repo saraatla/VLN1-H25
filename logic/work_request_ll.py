@@ -41,23 +41,23 @@ class WorkRequestLL:
         are open and have a report signed to them."""
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
-        status = input('Enter status: ').lower()
-        retlist = []
-        if status == 'ready for closing':
-            for row in reader_report:
+        while True:
+            status = input('Enter status: ').lower()
+            retlist = []
+            if status == 'ready for closing':
+                for row in reader_report:
+                    for line in reader_request:
+                        if row.workreport_id == line.workreport_id and line.status == status:
+                            retlist.append(line)
+            else:
                 for line in reader_request:
-                    if row.workreport_id == line.workreport_id and line.status == status:
+                    if line.status == status:
                         retlist.append(line)
-        else:
-            for line in reader_request:
-                if line.status == status:
-                    retlist.append(line)
-        if retlist:
-            self.list_works(retlist)
-            return True
-        else:
-            print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
-
+            if retlist:
+                self.list_works(retlist)
+                return True
+            else:
+                print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
 
 
     def list_work_requests(self):
@@ -156,13 +156,13 @@ class WorkRequestLL:
         else:
             return False
 
-    def get_all_work_requests_by_status(self, status):
-        the_list = []
-        reader = self.dlapi.list_work_requests()
-        for row in reader:
-            if status == row.status:
-                the_list.append(row)
-        return the_list
+    # def get_all_work_requests_by_status(self, status):
+    #     the_list = []
+    #     reader = self.dlapi.list_work_requests()
+    #     for row in reader:
+    #         if status == row.status:
+    #             the_list.append(row)
+    #     return the_list
 
     def format_for_single_workrequest(self,retlist,nr):
         for item in range(len(retlist)):
@@ -187,6 +187,7 @@ class WorkRequestLL:
         # return self.dlapi.list_work_requests()
         self.table.set_deco(Texttable.HEADER)
         self.table.set_max_width(300)
+        self.table.reset()
         workreq_list = self.dlapi.list_work_requests()
         for item in range(len(retlist)):
             workreq = retlist[item]

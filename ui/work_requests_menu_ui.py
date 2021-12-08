@@ -18,7 +18,7 @@ class WorkRequestMenu:
     def start(self):
          while True:
             workAscii()
-            operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor Name', 'See list of all requests', 'See list of requests ready to close']
+            operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor Name', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
             operations_menu = Menu(f'Work Requests in {self.destination}\nChoose options', operations)
