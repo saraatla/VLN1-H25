@@ -24,24 +24,33 @@ class EmployeeDL:
     def create_employee(self,emp):
         "This function appends a new employee to the csv file"
         with open(self.filepath,'a', newline='') as csvfile:
-            fieldnames = ['Name', 'SSN', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Airport', 'Title']
+            fieldnames = ['Name', 'SSN', 'Email', 'Address', 'Phone', 'GSM', 'Destination', 'Title']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
             writer.writerow({'Name': emp.name, 'SSN': emp.ssn, 'Email': emp.email, 'Address': emp.address, 
-            'Phone':emp.phone, 'GSM':emp.gsm, 'destination':emp.destination, 'Title':emp.title})
+            'Phone':emp.phone, 'GSM':emp.gsm, 'Destination':emp.destination, 'Title':emp.title})
     
-    def edit_employee(self, ssn, col, new_value): 
+
+    def save_employee(self, employee): 
         """This function edits a certain value for a certain employee (input by supervisor)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            for index,employee_value in enumerate(data_list):
-                # print(employee_value)
-                for value in employee_value:
-                    if value == ssn:
-                        data_list[index][col] = new_value
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile
-            writer.writerows(data_list)
+            for row in data_list:
+                if employee.ssn == row[1]:
+                    writer.writerow([employee.name, 
+                                     employee.ssn, 
+                                     employee.email, 
+                                     employee.address, 
+                                     employee.phone, 
+                                     employee.gsm, 
+                                     employee.destination, 
+                                     employee.title])
+                else:
+                    writer.writerow(row)
+
+
 
 
 
