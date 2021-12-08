@@ -33,18 +33,28 @@ class WorkRequestDL:
             'Destination': work_req.destination, 'Contractor':work_req.contractor, 'Date':work_req.date, 
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description, 'Workreport_ID':work_req.workreport_id})
     
-    def edit_work_request(self, workreq_no, col,new_value ):  
+    def edit_work_request(self, workreq):  
         """This function edits a certain value for a certain work request (input by Manager)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            for index, work_request_value in enumerate(data_list):
-                for value in work_request_value: 
-                    if value == workreq_no: 
-                        data_list[index][col] = new_value 
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
-            writer.writerows(data_list)
+            for row in data_list:
+                if workreq.workrequest_id == row[0]:
+                    writer.writerow([workreq.workrequest_id, 
+                                     workreq.title, 
+                                     workreq.property_id, 
+                                     workreq.destination, 
+                                     workreq.contractor, 
+                                     workreq.date, 
+                                     workreq.status, 
+                                     workreq.priority,
+                                     workreq.description,
+                                     workreq.workreport_id])
+                else:
+                    writer.writerow(row)
+
 
     def find_last_id(self):
         req_list = self.list_work_requests()

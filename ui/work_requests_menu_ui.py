@@ -43,6 +43,7 @@ class WorkRequestMenu:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
                     self.list_work_requests_ui(found_requests)
+                    self.open_request_from_list(found_requests)
 
             elif operation == 'Search by SSN': # EKKI RETT ÞETTA SKILAR LISTA
                 search = input('Enter SSN: ')
@@ -51,6 +52,7 @@ class WorkRequestMenu:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
                     self.list_work_requests_ui(found_requests)
+                    self.open_request_from_list(found_requests)
 
             elif operation == 'Search by contractor ID':
                 search = input('Enter contractor ID: ')
@@ -59,22 +61,13 @@ class WorkRequestMenu:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
                     self.list_work_requests_ui(found_requests)
+                    self.open_request_from_list(found_requests)
 
             elif operation == 'See list of all requests':
                 request_list = self.llapi.list_all_work_requests(self.destination)
                 self.list_work_requests_ui(request_list)
-                while True:
-                    command = input("Enter Number of request to open or B to Back:").upper()
-                    if command == "B":
-                        return
-                    if not command.isdigit():
-                        print("Invalid input, try again!")
-                    else:
-                        nr = int(command)
-                        for index, request in enumerate(request_list):
-                            if index+1 == nr:
-                                self.individual_work_request_ui(request,nr)
-                        break
+                self.open_request_from_list(request_list)
+                
 
             elif operation == "See list of requests by status":
                 while True:
@@ -85,21 +78,25 @@ class WorkRequestMenu:
                     else:
                         break
                 self.list_work_requests_ui(request_list)
-                while True:
-                    command = input("Enter Number of request to open or B to Back:").upper()
-                    if command == "B":
-                        return
-                    if not command.isdigit():
-                        print("Invalid input, try again!")
-                    else:
-                        nr = int(command)
-                        for index, request in enumerate(request_list):
-                            if index+1 == nr:
-                                self.individual_work_request_ui(request,nr)
-                        break
+                self.open_request_from_list(request_list)
+                
 
             elif operation == 'Add new':
                 self.create_work_request()
+
+    def open_request_from_list(self, request_list):
+        while True:
+            command = input("Enter Number of request to open or B to Back:").upper()
+            if command == "B":
+                return
+            if not command.isdigit():
+                print("Invalid input, try again!")
+            else:
+                nr = int(command)
+                for index, request in enumerate(request_list):
+                    if index+1 == nr:
+                        self.individual_work_request_ui(request,nr)
+                break
 
 
 
@@ -114,27 +111,47 @@ class WorkRequestMenu:
         print(table.draw())
 
 
-
-
-
     def individual_work_request_ui(self, request, nr=None):
         self.print_work_request_table(request, nr)
         if self.user_type == 'Employee':
-            return
-        while True:
-            print("1: Edit\nB: Back")
-            print(LINE)
-            command = input("Choose Options edit or back: ").upper()
-            print(LINE)
-            if command == "1":
-                self.edit_work_request(request)
-                self.print_work_request_table(request)
-            elif command == "B":
-                return
+            if request.status == 'open':
+                while True:
+                    print('1: Add report\nB: Back')
+                    print(LINE)
+                    command = input("Choose Options: ").upper()
+                    print(LINE)
+                    if command == "1":
+                        self.create_work_report(request)
+                    elif command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
             else:
-                print("Invalid option, try again ")
+                while True:
+                    command = input('Press B for Back: ').upper()
+                    print(LINE)
+                    if command == 'B':
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
+        elif self.user_type == 'Manager':
+            while True:
+                print("1: Edit\nB: Back")
                 print(LINE)
+                command = input("Choose Options edit or back: ").upper()
+                print(LINE)
+                if command == "1":
+                    self.edit_work_request(request)
+                    self.print_work_request_table(request)
+                elif command == "B":
+                    return
+                else:
+                    print("Invalid option, try again ")
+                    print(LINE)
     
+
     def print_work_request_table(self, request, nr=None):
         work_request_table = Texttable()
         if nr is not None:
@@ -152,12 +169,28 @@ class WorkRequestMenu:
         print(work_request_table.draw())
     
 
-    def edit_work_request(self, request):
-        pass
+    def edit_work_request(self, req):
+        while True:
+            fieldnames = ['Title', 'Property_ID', 'Destination', 'Contractor', 'Date', 'Status', 'Priority', 'Description']
+            for index, field in enumerate(fieldnames):
+                print(f"{index+1}: {field}")
+            col = input('What do you want to change? ')
+            try:
+                col = int(col)
+                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                setattr(req, fieldnames[col-1].lower(), newval)
+                return self.llapi.edit_work_request(req)
+            except:
+                print('Invalid input, try again!')
+
 
 
 
     def individual_work_report_ui(self, report, nr=None):
+        pass
+
+
+    def create_work_report(self, request):
         pass
 
 
