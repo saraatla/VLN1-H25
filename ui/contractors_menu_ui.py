@@ -77,21 +77,28 @@ class ContractorMenu:
 
     def individual_contractor_ui(self, contractor, nr=None):
         self.print_contractor_table(contractor, nr)
-        if self.user_type == 'Employee':
-            return
         while True:
-            print("1: Edit\nB: Back")
-            print(LINE)
-            command = input("Choose Options edit or back: ").upper()
-            print(LINE)
-            if command == "1":
-                self.edit_contractor(contractor)
-                self.print_contractor_table(contractor)
-            elif command == "B":
-                return
+            if self.user_type == 'Employee':
+                    command = input("Press B for back: ").upper()
+                    print(LINE)
+                    if command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
             else:
-                print("Invalid option, try again ")
+                print("1: Edit\nB: Back")
                 print(LINE)
+                command = input("Choose Options edit or back: ").upper()
+                print(LINE)
+                if command == "1":
+                    self.edit_contractor(contractor)
+                    self.print_contractor_table(contractor)
+                elif command == "B":
+                    return
+                else:
+                    print("Invalid option, try again ")
+                    print(LINE)
 
     def print_contractor_table(self, contractor, nr=None):
         contractor_table = Texttable()

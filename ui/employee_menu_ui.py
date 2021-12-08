@@ -77,21 +77,28 @@ class EmployeeMenu:
     
     def individual_employee_ui(self, employee, nr=None):
         self.print_employee_table(employee, nr)
-        if self.user_type == 'Employee':
-            return
-        while True:
-            print("1: Edit\nB: Back")
-            print(LINE)
-            command = input("Choose Options edit or back: ").upper()
-            print(LINE)
-            if command == "1":
-                self.edit_employee(employee)
-                self.print_employee_table(employee)
-            elif command == "B":
-                return
-            else:
-                print("Invalid option, try again ")
+        while True: 
+            if self.user_type == 'Employee':
+                command = input("Press B for back: ").upper()
                 print(LINE)
+                if command == "B":
+                    return
+                else:
+                    print("Invalid option, try again ")
+                    print(LINE)
+            else:
+                print("1: Edit\nB: Back")
+                print(LINE)
+                command = input("Choose Options edit or back: ").upper()
+                print(LINE)
+                if command == "1":
+                    self.edit_employee(employee)
+                    self.print_employee_table(employee)
+                elif command == "B":
+                    return
+                else:
+                    print("Invalid option, try again ")
+                    print(LINE)
     
 
     def print_employee_table(self, employee, nr=None):
