@@ -39,7 +39,6 @@ class WorkRequestMenu:
 
             elif operation == 'Search by property ID':
                 search = input('Enter property ID: ')
-                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_requests_prop(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -48,7 +47,6 @@ class WorkRequestMenu:
 
             elif operation == 'Search by SSN':
                 search = input('Enter SSN: ')
-                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -57,7 +55,6 @@ class WorkRequestMenu:
 
             elif operation == 'Search by contractor ID':
                 search = input('Enter contractor ID: ')
-                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_requests_cont(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
