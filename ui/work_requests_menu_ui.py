@@ -64,7 +64,7 @@ class WorkRequestMenu:
                 request_list = self.llapi.list_all_work_requests(self.destination)
                 self.list_work_requests_ui(request_list)
                 while True:
-                    command = input("Enter Number of reqest to open or B to Back:").upper()
+                    command = input("Enter Number of request to open or B to Back:").upper()
                     if command == "B":
                         return
                     if not command.isdigit():
@@ -77,7 +77,26 @@ class WorkRequestMenu:
                         break
 
             elif operation == "See list of requests by status":
-                self.llapi.workrequests_by_status() 
+                while True:
+                    status = input('Enter status: ').lower()
+                    request_list = self.llapi.workrequests_by_status(status, self.destination) 
+                    if request_list == []:
+                        print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
+                    else:
+                        break
+                self.list_work_requests_ui(request_list)
+                while True:
+                    command = input("Enter Number of request to open or B to Back:").upper()
+                    if command == "B":
+                        return
+                    if not command.isdigit():
+                        print("Invalid input, try again!")
+                    else:
+                        nr = int(command)
+                        for index, request in enumerate(request_list):
+                            if index+1 == nr:
+                                self.individual_work_request_ui(request,nr)
+                        break
 
             elif operation == 'Add new':
                 self.create_work_request()
