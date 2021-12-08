@@ -9,6 +9,7 @@ class DestinationMenu:
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
+        
     def start(self):
         while True:
             locAscii()
@@ -19,7 +20,7 @@ class DestinationMenu:
             if selection < 0:
                 return
             selection_str = options[selection]
-            operations = OperationsUI(selection_str, self.colored_user_type)
+            operations = OperationsUI(selection_str, self.user_type)
             operations.start()
     
 

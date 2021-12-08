@@ -2,6 +2,8 @@ from Extra.acci import acci
 from ui.destination_menu_ui import DestinationMenu
 from ui.menu import Menu
 import time
+from Extra.TermcolorFile.termcolor import colored, cprint
+
 
 class LogInUI:
     def __init__(self):

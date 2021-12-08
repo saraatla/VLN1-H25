@@ -1,4 +1,6 @@
+from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
+
 class Menu:
     def __init__(self, intro, options):
         self.intro = intro
@@ -12,7 +14,7 @@ class Menu:
         print("B: Back")
         print(LINE)
         while True:
-            command = input("Select option: ").upper()
+            command = input(colored("Select option: ",'green' ,attrs=['bold', 'underline'])).upper()
             print(LINE)
             if command == 'B':
                 return -1
