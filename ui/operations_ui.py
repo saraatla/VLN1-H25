@@ -5,11 +5,13 @@ from ui.contractors_menu_ui import ContractorMenu
 from ui.work_requests_menu_ui import WorkRequestMenu
 from ui.destination_ui import DestinationUI
 from logic.LLAPI import LLAPI
+from Extra.TermcolorFile.termcolor import colored, cprint
 
 
 class OperationsUI:
     def __init__(self, destination, user_type):
         self.destination = destination
+        self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
 
@@ -19,7 +21,7 @@ class OperationsUI:
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors',]
             else:
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors','Destination info']
-            operations_menu = Menu(f'Welcome to {self.destination}\nMain menu for {self.user_type}',operations)
+            operations_menu = Menu(f'Welcome to {self.destination_collor}\nMain menu for {self.user_type}',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
