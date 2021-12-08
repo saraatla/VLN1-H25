@@ -9,7 +9,9 @@ class ContractorDL:
 
     def list_contractors(self):
         """This function reads the csv file and makes a list with 
-        all the contractors along with their information"""
+        all the contractors along with their information
+        Returns:
+            list: list of contractor info."""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
@@ -20,16 +22,20 @@ class ContractorDL:
                 return_list.append(cont)
         return return_list
 
-    def create_contractor(self, cont):
-        "This function appends a new contractor to the csv file"
+    def create_contractor(self, contractor):
+        """This function appends a new contractor to the csv file.
+        Args:
+            contractor (class): model class attributes"""
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["Contractor_ID","Name", "Type", "Contact", "Contacts_phone", "Address", "Open_hours", "Review"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
-            writer.writerow({'Contractor_ID': cont.id,'Name': cont.name, 'Type': cont.type, 'Contact': cont.contact, 'Contacts_phone': cont.contacts_phone, 
-            'Address':cont.address, 'Open_hours':cont.open_hours, 'Review':cont.review}) 
+            writer.writerow({'Contractor_ID': contractor.id,'Name': contractor.name, 'Type': contractor.type, 'Contact': contractor.contact, 'Contacts_phone': contractor.contacts_phone, 
+            'Address':contractor.address, 'Open_hours':contractor.open_hours, 'Review':contractor.review}) 
 
     def edit_contractor(self, contractor):
-        """This function edits a certain value for a certain contractor (input by Managers)"""
+        """This function edits a certain value in the csv file for a certain contractor (input by Managers).
+        Args:
+            contractor (class): model class attributes"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader) 
