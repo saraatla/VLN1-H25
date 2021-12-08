@@ -99,6 +99,9 @@ class LLAPI:
     def get_new_id(self):
         return self.work_requestLL.get_new_id()
 
+    def get_list_of_workreq_on_period(self,request_list,start_date,end_date):
+        return self.work_requestLL.get_list_of_workreq_on_period(request_list,start_date,end_date)
+
     # Work Report LL
     def create_report(self, work_rep):
         return self.work_reportLL.create_report(work_rep)

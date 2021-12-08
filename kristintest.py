@@ -96,14 +96,14 @@ from logic.work_request_ll import WorkRequestLL
 
 dlapi = DLAPI('Svalbard - Longyearbyen')
 llapi = LLAPI('Svalbard - Longyearbyen')
-work_requestLL = WorkRequestLL('Svalbard - Longyearbyen')
+work_requestLL = WorkRequestLL('Faroe Islands - Tórshavn')
 
-reader = llapi.list_all_work_requests()
+reader = llapi.list_all_work_requests('Faroe Islands - Tórshavn')
 request_list = []
 for request in reader:
     request_list.append(request)
 
-start_date = '10/12/2021'
+start_date = '01/05/2021'
 end_date = '31/12/2021'
 
 def check_if_date_is_between(request_list,start_date,end_date):
@@ -111,11 +111,24 @@ def check_if_date_is_between(request_list,start_date,end_date):
     date_search_to = datetime.strptime(end_date,'%d/%m/%Y')
     request_list_by_date = []
     for request in request_list:
-        if date_search_from <= request.date <= date_search_to:
-            request_list_by_date.append(request)
+        if request.status == 'completed':
+            if date_search_from <= request.date <= date_search_to:
+                request_list_by_date.append(request)
     return request_list_by_date
 
-check_if_date_is_between(request_list,start_date,end_date)
+
+def list_work_requests_ui(request_list):
+        table = Texttable()
+        table.set_deco(Texttable.HEADER)
+        table.set_max_width(300)
+        for item in range(len(request_list)):
+            workreq = request_list[item]
+            table.add_rows([["Number.","Workrequest_ID", "Title", "Date", "Status", "Priority"], 
+                            [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
+        print(table.draw())
+
+bla = check_if_date_is_between(request_list,start_date,end_date)
+list_work_requests_ui(check_if_date_is_between(request_list,start_date,end_date))
 
 
 
