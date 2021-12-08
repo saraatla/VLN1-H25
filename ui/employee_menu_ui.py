@@ -1,5 +1,5 @@
 from Extra.texttableFile.texttable import Texttable
-from Extra.texttableFile.texttable import Texttable
+from Extra.acci import empAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 
@@ -13,6 +13,7 @@ class EmployeeMenu:
 
     def start(self):
         while True:
+            empAscii()
             operations =  ['Search by SSN', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')

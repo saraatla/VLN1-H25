@@ -13,7 +13,7 @@ class ContractorMenu:
 
     def start(self):
         while True:
-            # contAscii()
+            contAscii()
             operations =  ['Search by ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
