@@ -84,6 +84,7 @@ class WorkRequestMenu:
             elif operation == 'Add new':
                 self.create_work_request()
 
+
     def print_request_list(self, request_list):
         request_list_by_date = self.find_date_range(request_list)
         self.list_work_requests_ui(request_list_by_date)
@@ -96,7 +97,7 @@ class WorkRequestMenu:
             if command == "B":
                 break
             if command == "P":
-                self.find_date_range(request_list)
+                self.print_request_list(request_list)
             if not command.isdigit():
                 print("Invalid input, try again!")
             else:
