@@ -26,7 +26,7 @@ class PropertyDL:
     def create_property(self, property):
         """This function appends a new property to the csv file
         Args:
-            property (class): model class attribute"""
+            property (class instance): property model class"""
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["Destination", "Address", "Squarefoot", "Rooms", "Type", "Property_ID", "Facilities"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.

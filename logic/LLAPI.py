@@ -37,8 +37,8 @@ class LLAPI:
     def search_employee(self, ssn, destination):
         return self.employeeLL.search_employee(ssn, destination)
     
-    def save_employee(self,emp):
-        return self.employeeLL.save_employee(emp)
+    def edit_employee(self,emp):
+        return self.employeeLL.edit_employee(emp)
 
 
     # Property LL

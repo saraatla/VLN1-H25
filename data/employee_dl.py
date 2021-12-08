@@ -34,7 +34,7 @@ class EmployeeDL:
             'Phone':employee.phone, 'GSM':employee.gsm, 'Destination':employee.destination, 'Title':employee.title})
     
 
-    def save_employee(self, employee): 
+    def edit_employee(self, employee): 
         """This function edits a certain value for a certain employee (input by supervisor)
         Args:
             employee (class): model class attributes"""

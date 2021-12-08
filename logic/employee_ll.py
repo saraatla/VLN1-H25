@@ -30,6 +30,6 @@ class EmployeeLL:
         return None
 
 
-    def save_employee(self, emp):
-        return self.dlapi.save_employee(emp)
+    def edit_employee(self, emp):
+        return self.dlapi.edit_employee(emp)
 
