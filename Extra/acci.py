@@ -1,15 +1,15 @@
 import time
 from Extra.TermcolorFile.termcolor import colored
 def acci():
-        print(f'\x1b{colored("███╗   ██╗ █████╗ ███╗   ██╗     █████╗ ██╗██████╗ ","red")}')
+        print(f'\x1bc{colored("███╗   ██╗ █████╗ ███╗   ██╗     █████╗ ██╗██████╗ ","cyan")}')
         time.sleep(0.1)
-        print(colored("████╗  ██║██╔══██╗████╗  ██║    ██╔══██╗██║██╔══██╗","green"))
+        print(colored("████╗  ██║██╔══██╗████╗  ██║    ██╔══██╗██║██╔══██╗","cyan"))
         time.sleep(0.12)
-        print(colored("██╔██╗ ██║███████║██╔██╗ ██║    ███████║██║██████╔╝", "blue"))
+        print(colored("██╔██╗ ██║███████║██╔██╗ ██║    ███████║██║██████╔╝", "cyan"))
         time.sleep(0.13)
-        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", "white"))
+        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", "cyan"))
         time.sleep(0.14)
-        print(colored("██║ ╚████║██║  ██║██║ ╚████║    ██║  ██║██║██║  ██║", "magenta"))
+        print(colored("██║ ╚████║██║  ██║██║ ╚████║    ██║  ██║██║██║  ██║", "cyan"))
         time.sleep(0.15)
         print(colored("╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝", "cyan"))
         time.sleep(0.16)
