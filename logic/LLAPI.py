@@ -82,7 +82,7 @@ class LLAPI:
         return self.work_requestLL.workrequests_by_status()
 
     def search_work_requests_id(self, destination):
-        return self.work_requestLL.search_work_request_id(destinatino)
+        return self.work_requestLL.search_work_request_id(destination)
 
     def search_work_requests_prop(self):
         return self.work_requestLL.search_work_request_prop()
