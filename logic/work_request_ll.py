@@ -121,12 +121,11 @@ class WorkRequestLL:
             date_search_to = datetime.strptime(end_date,'%d/%m/%Y')
             request_list_by_date = []
             for request in request_list:
-                if request.status == 'completed':
-                    if date_search_from.date() <= request.date <= date_search_to.date():
-                        request_list_by_date.append(request)
+                if date_search_from.date() <= request.date <= date_search_to.date():
+                    request_list_by_date.append(request)
             return request_list_by_date
-        else:
-            return 'The inputs are not valid, try again'
+        return None
+
 
 
     
