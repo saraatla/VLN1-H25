@@ -28,17 +28,18 @@ class LLAPI:
         return self.destinations.search_destination(dest)
 
     # Employee LL
-    def create_employee(self):
-        return self.employeeLL.create_employee()
+    def create_employee(self, emp):
+        return self.employeeLL.create_employee(emp)
 
-    def list_employees(self):
-        return self.employeeLL.list_employees()
+    def list_employees(self, destination):
+        return self.employeeLL.list_employees(destination)
 
     def search_employee(self, emp='', nr=""):
         return self.employeeLL.search_employee(emp, nr)
+    
+    def save_employee(self,emp):
+        return self.employeeLL.save_employee(emp)
 
-    def edit_employee(self,emp):
-        return self.employeeLL.edit_employee(emp)
 
     # Property LL
     def create_property(self):
