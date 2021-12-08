@@ -44,9 +44,7 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    request_list_by_date = self.find_date_range(found_request)
-                    self.list_work_requests_ui(request_list_by_date)
-                    self.open_request_from_list(request_list_by_date)
+                    self.print_request_list(found_request)
 
             elif operation == 'Search by SSN':
                 search = input('Enter SSN: ')
@@ -55,9 +53,7 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    request_list_by_date = self.find_date_range(found_request)
-                    self.list_work_requests_ui(request_list_by_date)
-                    self.open_request_from_list(request_list_by_date)
+                    self.print_request_list(found_request)
 
             elif operation == 'Search by contractor ID':
                 search = input('Enter contractor ID: ')
@@ -66,9 +62,7 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    request_list_by_date = self.find_date_range(found_request)
-                    self.list_work_requests_ui(request_list_by_date)
-                    self.open_request_from_list(request_list_by_date)
+                    self.print_request_list(found_request)
 
             elif operation == 'See list of all requests':
                 request_list = self.llapi.list_all_work_requests(self.destination)
