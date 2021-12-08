@@ -135,7 +135,7 @@ class WorkRequestLL:
                     if destination == 'All destinations' or destination == request.destination:
                         request_list.append(request)
         return request_list
-        
+
         # contr_list = []
         # for row in reader_report:
         #     if search == row.contractor:

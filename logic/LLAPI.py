@@ -71,26 +71,26 @@ class LLAPI:
     def create_work_request(self, work_req):
         return self.work_requestLL.create_work_request(work_req)
 
-    def list_all_work_requests(self):
-        return self.work_requestLL.list_all_work_requests()
+    def list_all_work_requests(self, destination):
+        return self.work_requestLL.list_all_work_requests(destination)
     
-    def workrequests_by_status(self):
-        return self.work_requestLL.workrequests_by_status()
+    def workrequests_by_status(self, status, destination):
+        return self.work_requestLL.workrequests_by_status(status, destination)
 
-    def search_work_requests_id(self, destination):
-        return self.work_requestLL.search_work_request_id(destinatino)
+    def search_work_requests_id(self, id, destination):
+        return self.work_requestLL.search_work_request_id(id, destination)
 
-    def search_work_requests_prop(self):
-        return self.work_requestLL.search_work_request_prop()
+    def search_work_requests_prop(self, id, destination):
+        return self.work_requestLL.search_work_request_prop(id, destination)
 
-    def search_work_requests_cont(self):
-        return self.work_requestLL.search_work_request_cont()
+    def search_work_requests_cont(self, id, destination):
+        return self.work_requestLL.search_work_request_cont(id, destination)
 
     def edit_work_request(self,work_req):
         return self.work_requestLL.edit_work_request(work_req)
 
-    def search_work_request_ssn(self):
-        return self.work_requestLL.search_work_request_SSN()
+    def search_work_request_ssn(self, ssn, destination):
+        return self.work_requestLL.search_work_request_SSN(ssn, destination)
     
     def get_new_id(self):
         return self.work_requestLL.get_new_id()
