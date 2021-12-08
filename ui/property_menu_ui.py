@@ -34,7 +34,7 @@ class PropertyMenu:
             elif operation == 'See list':
                 prop_list = self.list_properties()
                 while True:
-                    command = input("Enter number of property to open or B to Back:").upper()
+                    command = input("Enter number of property to open or B to Back: ").upper()
                     if command == "B":
                         return
                     if not command.isdigit():
