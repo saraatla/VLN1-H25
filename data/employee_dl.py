@@ -12,7 +12,7 @@ class EmployeeDL:
         """This function reads the csv file and makes a list with 
         all the employees along with their information
         Returns:
-            list: list of employee info."""
+            return_list: list of employee info."""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 

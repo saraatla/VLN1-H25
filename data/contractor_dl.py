@@ -3,15 +3,15 @@ from models.contractor_model import Contractor
 
 class ContractorDL:
     """Contractor data layer class; Contains 4 functions: lists, 
-    makes new and changes information about a contractor"""
+    makes new and changes information about a contractor."""
     def __init__(self):
         self.filepath = "csv/Contractors.csv"
 
     def list_contractors(self):
         """This function reads the csv file and makes a list with 
-        all the contractors along with their information
+        all the contractors along with their information.
         Returns:
-            list: list of contractor info."""
+            return_list: list of contractor info."""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 

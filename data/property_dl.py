@@ -10,9 +10,9 @@ class PropertyDL:
     
     def list_properties(self):
         """This function reads the csv file and makes a list with 
-        all the properties along with their information
+        all the properties along with their information.
         Returns:
-            list: list of property info."""
+            return_list: list of property info."""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
@@ -24,7 +24,7 @@ class PropertyDL:
         return return_list
 
     def create_property(self, property):
-        """This function appends a new property to the csv file
+        """This function appends a new property to the csv file.
         Args:
             property (class instance): property model class"""
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
@@ -34,7 +34,7 @@ class PropertyDL:
             "Rooms": property.rooms, "Type": property.type, "Property_ID": property.property_id, "Facilities": property.facilities})
 
     def edit_property(self, property):  
-        """This function edits a certain value for a certain property (input by Manager)
+        """This function edits a certain value for a certain property (input by Manager).
         Args:
             property (class instance): property model class"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
