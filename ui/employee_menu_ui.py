@@ -2,12 +2,14 @@ from Extra.texttableFile.texttable import Texttable
 from Extra.acci import empAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
+from Extra.TermcolorFile.termcolor import colored, cprint
 
 LINE = '------------------------------------------'
 
 class EmployeeMenu:
     def __init__(self, destination, user_type):
         self.destination = destination
+        self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
 
@@ -17,7 +19,7 @@ class EmployeeMenu:
             operations =  ['Search by SSN', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Employees in {self.destination}\nChoose options',operations)
+            operations_menu = Menu(f'Employees in {self.destination_collor}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
@@ -34,7 +36,7 @@ class EmployeeMenu:
             elif operation == 'See list':
                 emp_list = self.list_employees()
                 while True:
-                    command = input("Enter number of employee to open or B to Back:").upper()
+                    command = input("Enter number of employee to open or B to Back: ").upper()
                     if command == "B":
                         return
                     if not command.isdigit():
