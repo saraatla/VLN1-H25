@@ -34,7 +34,7 @@ class PropertyDL:
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            for index, property_value in enumerate(data_list):
+            for index,property_value in enumerate(data_list):
                 for value in property_value: 
                     if value == prop_id: 
                         data_list[index][col] = new_value 

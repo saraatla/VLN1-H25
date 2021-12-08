@@ -1,6 +1,6 @@
 Destination,Address,Squarefoot,Rooms,Type,Property_ID,Facilities
-Svalbard - Longyearbyen,Vei 217,150m2,4 herbergi,Einbýlishús,FS1,
-Svalbard - Longyearbyen,Longyearbyen Harbor 1,5000m2,80 herbergi,Kafbátur,FS2,kjarnaofn. Gufubað. Lyftingasalur. Leikjaaðstaða. Billjardborð
+ttteast,2,Adress,60 test,Einbýlishús,FS1,einar er bestur
+1,Longyearbyen Harbor 1,2,3,4,FS2,kjarnaofn. Gufubað. Lyftingasalur. Leikjaaðstaða. Billjardborð
 Svalbard - Longyearbyen,Longyearbyen Harbor 1,5000m2,80 herbergi,Kafbátur,FS3,
 Svalbard - Longyearbyen,Longyearbyen Harbor 1,5000m2,80 herbergi,Kafbátur,FS4,
 Svalbard - Longyearbyen,Longyearbyen Harbor 1,5000m2,80 herbergi,Kafbátur,FS5,
@@ -105,3 +105,4 @@ Faroe Islands - Tórshavn,Nýggivegur 1,15m2,10 herbergi,Moldarhús,FF11,
 Faroe Islands - Tórshavn,Nýggivegur 1,15m2,10 herbergi,Moldarhús,FF12,
 Faroe Islands - Tórshavn,Nýggivegur 1,15m2,10 herbergi,Moldarhús,FF13,
 Faroe Islands - Tórshavn,Nýggivegur 1,15m2,10 herbergi,Moldarhús,FF14,
+,,,,,,

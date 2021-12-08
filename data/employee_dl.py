@@ -27,7 +27,7 @@ class EmployeeDL:
             fieldnames = ['Name', 'SSN', 'Email', 'Address', 'Phone', 'GSM', 'destination', 'Airport', 'Title']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
             writer.writerow({'Name': emp.name, 'SSN': emp.ssn, 'Email': emp.email, 'Address': emp.address, 
-            'Phone':emp.phone, 'GSM':emp.gsm, 'destination':emp.destination, 'Airport':emp.airport, 'Title':emp.title})
+            'Phone':emp.phone, 'GSM':emp.gsm, 'destination':emp.destination, 'Title':emp.title})
     
     def edit_employee(self, ssn, col, new_value): 
         """This function edits a certain value for a certain employee (input by supervisor)"""

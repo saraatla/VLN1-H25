@@ -16,3 +16,7 @@ Rooms: {self.rooms}
 Type: {self.type} 
 Property_ID: {self.property_id} 
 Facilities: {self.facilities}""" 
+
+
+        
+

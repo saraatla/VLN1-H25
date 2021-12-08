@@ -26,9 +26,12 @@ class PropertyMenu:
                 found_property = self.llapi.search_property()
                 if found_property is not None:
                     property_ui = PropertyUI(found_property, self.destination,self.user_type)
-                    property_ui.start()
+                    property_ui.starttest()
             elif operation == 'See list':
-                self.llapi.list_properties()
+                table, data, nr = self.llapi.list_properties()
+                if table is not None:
+                        property_ui =PropertyUI(table, self.destination, data, nr)
+                        property_ui.starttest()
                 print(LINE)
             elif operation == 'Add new':
                 self.llapi.create_property()

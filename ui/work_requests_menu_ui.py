@@ -1,5 +1,5 @@
 from datetime import date, timedelta, datetime
-from dateutil.relativedelta import relativedelta
+#from dateutil.relativedelta import relativedelta
 
 from ui.menu import Menu
 from logic.LLAPI import LLAPI

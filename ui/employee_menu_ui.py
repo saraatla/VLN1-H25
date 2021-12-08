@@ -26,9 +26,12 @@ class EmployeeMenu:
                     employee_ui = EmployeeUI(found_employee, self.destination, data)
                     employee_ui.start()
             elif operation == 'See list':
-                table, data, nr = self.llapi.list_employees()
-                if table is not None:
-                    employee_ui = EmployeeUI(table, self.destination, data, nr)
-                    employee_ui.start()
+                try:
+                    table, data, nr = self.llapi.list_employees()
+                    if table is not None:
+                        employee_ui = EmployeeUI(table, self.destination, data, nr)
+                        employee_ui.start()
+                except:
+                    continue
             elif operation == 'Add new':
                 self.llapi.create_employee()

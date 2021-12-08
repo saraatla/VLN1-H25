@@ -47,8 +47,8 @@ class LLAPI:
     def list_properties(self):
         return self.propertyLL.list_properties()
 
-    def search_property(self,prop=''):
-        return self.propertyLL.search_property(prop)
+    def search_property(self,prop='', nr=""):
+        return self.propertyLL.search_property(prop, nr)
 
     def edit_property(self,prop):
         return self.propertyLL.edit_property(prop)
