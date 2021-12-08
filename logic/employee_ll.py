@@ -19,7 +19,6 @@ class EmployeeLL:
 
     def create_employee(self, emp):
         self.dlapi.create_employee(Employee(emp)) 
-        
 
 
     def search_employee(self, ssn, destination):

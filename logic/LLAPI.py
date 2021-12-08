@@ -34,22 +34,22 @@ class LLAPI:
     def list_employees(self, destination):
         return self.employeeLL.list_employees(destination)
 
-    def search_employee(self, emp='', nr=""):
-        return self.employeeLL.search_employee(emp, nr)
+    def search_employee(self, ssn, destination):
+        return self.employeeLL.search_employee(ssn, destination)
     
     def save_employee(self,emp):
         return self.employeeLL.save_employee(emp)
 
 
     # Property LL
-    def create_property(self):
-        return self.propertyLL.create_property()
+    def create_property(self, prop):
+        return self.propertyLL.create_property(prop)
 
-    def list_properties(self):
-        return self.propertyLL.list_properties()
+    def list_properties(self, destination):
+        return self.propertyLL.list_properties(destination)
 
-    def search_property(self,prop='', nr=""):
-        return self.propertyLL.search_property(prop, nr)
+    def search_property(self, id, destination):
+        return self.propertyLL.search_property(id, destination)
 
     def edit_property(self,prop):
         return self.propertyLL.edit_property(prop)

@@ -12,8 +12,8 @@ class EmployeeMenu:
         self.user_type = user_type
 
     def start(self):
+        empAscii()
         while True:
-            empAscii()
             operations =  ['Search by SSN', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
@@ -45,6 +45,7 @@ class EmployeeMenu:
                             if index+1 == nr:
                                 self.individual_employee_ui(employee,nr)
                         break
+
             elif operation == 'Add new':
                 self.create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
@@ -115,12 +116,12 @@ class EmployeeMenu:
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
-            try:
-                col = int(col)
-                newval = input(f'What is the new {fieldnames[col-1]}? ')
-                setattr(emp, fieldnames[col-1].lower(), newval)
-                return self.llapi.save_employee(emp)
-            except:
-                print('Invalid input, try again!')
+            #try:
+            col = int(col)
+            newval = input(f'What is the new {fieldnames[col-1]}? ')
+            setattr(emp, fieldnames[col-1].lower(), newval)
+            return self.llapi.save_employee(emp)
+            #except:
+                #print('Invalid input, try again!')
 
 
