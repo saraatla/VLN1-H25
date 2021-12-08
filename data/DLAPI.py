@@ -47,8 +47,8 @@ class DLAPI:
     def list_contractors(self):
         return self.contractorDL.list_contractors()
 
-    def edit_contractor(self,id,col,newval):
-        return self.contractorDL.edit_contractor(id,col,newval)
+    def edit_contractor(self, contractor):
+        return self.contractorDL.edit_contractor(contractor)
 
     # Work Request DL
     def create_work_request(self, work_req):

@@ -23,7 +23,7 @@ class ContractorLL:
     def search_contractor(self, cont_id):
         reader = self.dlapi.list_contractors()
         for contractor in reader:
-            if contractor.contractor_id == cont_id:
+            if contractor.id == cont_id:
                 return contractor
         return None
     
