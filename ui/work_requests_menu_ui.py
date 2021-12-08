@@ -31,7 +31,7 @@ class WorkRequestMenu:
                 print('HEEEELLLOOOOOO')
                 if found_request is not None:
                     print('HÆÆÆÆÆÆÆÆÆÆÆÆ')
-                    work_request_ui = WorkRequestUI(found_request, self.destination, self.user_type)
+                    work_request_ui = WorkReqestUI(found_request, self.destination, self.user_type)
                     work_request_ui.start()
 
             elif operation == 'Search by property ID':
