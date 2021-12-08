@@ -16,6 +16,7 @@ class WorkRequestMenu:
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
+        self.report_ui = WorkReportUI(self.destination)
 
     def start(self):
         workAscii()
@@ -131,6 +132,8 @@ class WorkRequestMenu:
 
     def individual_work_request_ui(self, request, nr=None):
         self.print_work_request_table(request, nr)
+        print('hallo')
+        print(self.user_type)
         if self.user_type == 'Employee':
             if request.status == 'open':
                 while True:
@@ -139,7 +142,7 @@ class WorkRequestMenu:
                     command = input("Choose Options: ").upper()
                     print(LINE)
                     if command == "1":
-                        self.create_work_report(request)
+                        self.report_ui.create_work_report(request) ####  SSSSAARRRAAAAA  EEERERRRRR HÉERRRR
                     elif command == "B":
                         return
                     else:
@@ -209,17 +212,21 @@ class WorkRequestMenu:
 
 
     def create_work_report(self, request):
-        pass
+        print('Enter the following information: ')
+        print(LINE)
+        start_date, workreq = self.create_work_req_list()
+        print('Do you want to repeat this work request?')
+        options = ['Do no repeat', 'Daily', 'Weekly', 'Monthly', 'Yearly']
+        for i, option in enumerate(options):
+            print(f"{i+1}: {option}")
+        repeat = int(input('Choose option: '))
+        if repeat > 1:
+            self.repeat_work_request(start_date, repeat, workreq)
+        else:
+            self.llapi.create_work_request(workreq)
+            print(f'{LINE}\nWork request successfully created!\n{LINE}')
 
 
-
-
-
-
-
-
-
-    
     def create_work_request(self):
         print('Enter the following information: ')
         print(LINE)
@@ -235,6 +242,7 @@ class WorkRequestMenu:
             self.llapi.create_work_request(workreq)
             print(f'{LINE}\nWork request successfully created!\n{LINE}')
     
+
 
     def create_work_req_list(self):
         new_id = self.llapi.get_new_id()
