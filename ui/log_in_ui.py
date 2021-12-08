@@ -3,11 +3,11 @@ from ui.destination_menu_ui import DestinationMenu
 from ui.menu import Menu
 import time
 
-class StartUI:
+class LogInUI:
     def __init__(self):
         pass
 
-    def start(self):
+    def log_in(self):
         while True:
             acci()
             print("%s" % time.ctime())

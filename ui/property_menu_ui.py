@@ -35,7 +35,7 @@ class PropertyMenu:
             elif operation == 'See list':
                 prop_list = self.list_properties()
                 while True:
-                    command = input("Enter number of report to open or B to Back:").upper()
+                    command = input("Enter number of property to open or B to Back:").upper()
                     if command == "B":
                         return
                     if not command.isdigit():
@@ -70,7 +70,7 @@ class PropertyMenu:
         prop_list = self.llapi.list_properties(self.destination)
         for item in range(len(prop_list)):
             prop = prop_list[item]
-            table.add_rows([["Nr","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], 
+            table.add_rows([["Number","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], 
                             [item+1,prop.destination, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
         print(table.draw())
         return prop_list
@@ -109,7 +109,6 @@ class PropertyMenu:
 
     def edit_property(self, prop):
         while True:
-            id = prop.property_id
             fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Facilities']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")

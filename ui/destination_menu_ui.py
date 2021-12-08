@@ -21,6 +21,9 @@ class DestinationMenu:
             selection_str = options[selection]
             operations = OperationsUI(selection_str, self.user_type)
             operations.start()
+    
+
+    
 
             
 

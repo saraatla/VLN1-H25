@@ -1,4 +1,4 @@
-from ui.start_ui import StartUI
+from ui.log_in_ui import LogInUI
 if __name__ == '__main__':
-    main = StartUI()
-    main.start()
+    main = LogInUI()
+    main.log_in()

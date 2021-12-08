@@ -34,7 +34,7 @@ class EmployeeMenu:
             elif operation == 'See list':
                 emp_list = self.list_employees()
                 while True:
-                    command = input("Enter number of report to open or B to Back:").upper()
+                    command = input("Enter number of employee to open or B to Back:").upper()
                     if command == "B":
                         return
                     if not command.isdigit():
@@ -69,7 +69,7 @@ class EmployeeMenu:
         emp_list = self.llapi.list_employees(self.destination)
         for item in range(len(emp_list)):
             emp = emp_list[item]
-            table.add_rows([["Nr","Name","SSN","Email","Gsm","Destination","Title"], 
+            table.add_rows([["Number","Name","SSN","Email","Gsm","Destination","Title"], 
                             [item+1,emp.name, emp.ssn, emp.email, emp.gsm, emp.destination, emp.title]])
         print(table.draw())
         return emp_list
@@ -111,17 +111,16 @@ class EmployeeMenu:
 
     def edit_employee(self,emp):
         while True:
-            ssn = emp.ssn
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Destination', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
-            #try:
-            col = int(col)
-            newval = input(f'What is the new {fieldnames[col-1]}? ')
-            setattr(emp, fieldnames[col-1].lower(), newval)
-            return self.llapi.save_employee(emp)
-            #except:
-                #print('Invalid input, try again!')
+            try:
+                col = int(col)
+                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                setattr(emp, fieldnames[col-1].lower(), newval)
+                return self.llapi.save_employee(emp)
+            except:
+                print('Invalid input, try again!')
 
 
