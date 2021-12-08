@@ -115,14 +115,15 @@ class WorkRequestLL:
         """This function fetches a list og requests on a period input by user"""
         if start_date == '' and end_date == '':
             request_list_by_date = self.list_all_work_requests(self.destination)
-        date_search_from = datetime.strptime(start_date,'%d/%m/%Y')
-        date_search_to = datetime.strptime(end_date,'%d/%m/%Y')
-        request_list_by_date = []
-        for request in request_list:
-            if request.status == 'completed':
-                if date_search_from <= request.date <= date_search_to:
-                    print('hALO')
-                    request_list_by_date.append(request)
-        return request_list_by_date
+        else:
+            date_search_from = datetime.strptime(start_date,'%d/%m/%Y')
+            date_search_to = datetime.strptime(end_date,'%d/%m/%Y')
+            request_list_by_date = []
+            for request in request_list:
+                if request.status == 'completed':
+                    if date_search_from <= request.date <= date_search_to:
+                        print('hALO')
+                        request_list_by_date.append(request)
+            return request_list_by_date
 
     
