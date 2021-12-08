@@ -43,7 +43,7 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.print_request_list(found_request)
+                    self.print_request_list(found_requests)
 
             elif operation == 'Search by SSN':
                 search = input('Enter SSN: ')
@@ -51,7 +51,7 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.print_request_list(found_request)
+                    self.print_request_list(found_requests)
 
             elif operation == 'Search by contractor ID':
                 search = input('Enter contractor ID: ')
@@ -59,7 +59,7 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.print_request_list(found_request)
+                    self.print_request_list(found_requests)
 
             elif operation == 'See list of all requests':
                 request_list = self.llapi.list_all_work_requests(self.destination)
