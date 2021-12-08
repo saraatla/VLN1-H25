@@ -71,8 +71,8 @@ class LLAPI:
     def create_work_request(self, work_req):
         return self.work_requestLL.create_work_request(work_req)
 
-    def list_work_requests(self):
-        return self.work_requestLL.list_work_requests()
+    def list_all_work_requests(self):
+        return self.work_requestLL.list_all_work_requests()
     
     def workrequests_by_status(self):
         return self.work_requestLL.workrequests_by_status()

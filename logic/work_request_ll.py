@@ -36,7 +36,7 @@ class WorkRequestLL:
     #             print("Invalid input, try again!")
     #         self.table.reset()
 
-    def workrequests_by_status(self):
+    def workrequests_by_status(self): # WE ARE HERE
         """Prints a table of all request baised on their status. Requests that are ready to be closed
         are open and have a report signed to them."""
         reader_report = self.dlapi.list_work_reports()
@@ -60,17 +60,20 @@ class WorkRequestLL:
                 print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
 
 
-    def list_work_requests(self):
-        """Prints all work request in the system"""
-        workreq_list = self.dlapi.list_work_requests()
-        retlist = []
-        for item in workreq_list:
-            retlist.append(item)
-        if retlist:
-            self.list_works(retlist)
-            return True
-        else:
-            print('No request registered in the system')
+    def list_all_work_requests(self, destination):
+        """Prints all work request in the system according to destination"""
+        request_list = []
+        for request in self.dlapi.list_work_requests():
+            if destination == 'All destinations' or destination == request.destination:
+                request_list.append(request)
+        return request_list
+     
+        #     retlist.append(item)
+        # if retlist:
+        #     self.list_works(retlist)
+        #     return True
+        # else:
+        #     print('No request registered in the system')
 
 
     def create_work_request(self,workreq):
@@ -93,76 +96,83 @@ class WorkRequestLL:
             except:
                 print('Invalid input, try again!')
 
-    def search_work_request_id(self):
-        """Returns workrequests baised on their id"""
+    def search_work_request_id(self, req_id, destination):
+        """Returns workrequests based on their id"""
         reader = self.dlapi.list_work_requests()
-        search = input('Enter request ID: ')
-        retlist = []
-        for row in reader:
-            if search == row.workrequest_id:
-                retlist.append(row)
-        if retlist:
-            self.list_works(retlist)
-        else:
-            return False
+        for request in reader:
+            if request.workrequest_id == req_id:
+                if destination == 'All destinations' or destination == request.destination:
+                    return request
+        return None     
+        # if retlist:
+        #     self.list_works(retlist)
+        # else:
+        #     return False
 
-    def search_work_request_prop(self):
+    def search_work_request_prop(self, prop_id, destination):
         """Returns workrequests baised on the property they are assigned to"""
         reader = self.dlapi.list_work_requests()
-        search = input('Enter property ID: ')
-        retlist = []
-        for row in reader:
-            if search == row.property_id:
-                retlist.append(row)
-        if retlist:
-            self.list_works(retlist)
-        else:
-            return False
+        request_list = []
+        for request in reader:
+            if request.property_id == prop_id:
+                if destination == 'All destinations' or destination == request.destination:
+                    request_list.append(request)
+        return request_list
 
-    def search_work_request_SSN(self):
+
+    def search_work_request_SSN(self, ssn, destination):
         """Returns workrequests baised on the ssn of the employee that worked on the associated report"""
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
-        search = input('Enter SSN: ')
-        ssn_list = []
-        for row in reader_report:
-            if search == row.ssn:
-                ssn_list.append(row)
-        if ssn_list:
-            retlist = []
-            for row in ssn_list:
-                for line in reader_request:
-                    if row.workreport_id == line.workreport_id:
-                        retlist.append(line)
-            self.list_works(retlist)
-        else:
-            return False
+        report_list = []
+        for report in reader_report:
+            if report.ssn == ssn:
+                report_list.append(report)
+        request_list = []
+        for report in report_list:
+            for request in reader_request: 
+                if report.workreport_id == request.workreport_id:
+                    if destination == 'All destinations' or destination == request.destination:
+                        request_list.append(request)
+        return request_list
+        # ssn_list = []
+        # for row in reader_report:
+        #     if ssn == row.ssn:
+        #         ssn_list.append(row)
+        # if ssn_list:
+            #retlist = []
+            # for item in report_row: #indent follwing lines
 
-    def search_work_request_cont(self):
+
+    def search_work_request_cont(self, cont_id, destination):
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
-        search = input('Enter contractor ID: ')
-        contr_list = []
-        for row in reader_report:
-            if search == row.contractor:
-                contr_list.append(row)
-        if contr_list:
-            retlist = []
-            for row in contr_list:
-                for line in reader_request:
-                    if row.workreport_id == line.workrequest_id:
-                        retlist.append(line)
-            self.list_works(retlist)
-        else:
-            return False
+        report_list = []
+        for report in reader_report:
+            if report.contractor_id == cont_id:
+                report_list.append(report)
+        request_list = []
+        for report in report_list:
+            for request in reader_request: 
+                if report.workreport_id == request.workreport_id:
+                    if destination == 'All destinations' or destination == request.destination:
+                        request_list.append(request)
+        return request_list
+        # contr_list = []
+        # for row in reader_report:
+        #     if search == row.contractor:
+        #         contr_list.append(row)
+        # if contr_list:
+        #     retlist = []
+        #     for row in contr_list:
+        #         for line in reader_request:
+        #             if row.workreport_id == line.workrequest_id:
+        #                 retlist.append(line)
+        #     self.list_works(retlist)
+        # else:
+        #     return False
 
-    # def get_all_work_requests_by_status(self, status):
-    #     the_list = []
-    #     reader = self.dlapi.list_work_requests()
-    #     for row in reader:
-    #         if status == row.status:
-    #             the_list.append(row)
-    #     return the_list
+
 
     def format_for_single_workrequest(self,retlist,nr):
         for item in range(len(retlist)):
