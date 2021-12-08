@@ -23,7 +23,7 @@ class WorkRequestMenu:
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Work Requests in {self.destination_collor}\nChoose options', operations)
+            operations_menu = Menu(f'{LINE}\nWork Requests in {self.destination_collor}\nChoose options', operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
@@ -44,8 +44,9 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.list_work_requests_ui(found_requests)
-                    self.open_request_from_list(found_requests)
+                    request_list_by_date = self.find_date_range(found_request)
+                    self.list_work_requests_ui(request_list_by_date)
+                    self.open_request_from_list(request_list_by_date)
 
             elif operation == 'Search by SSN':
                 search = input('Enter SSN: ')
@@ -54,8 +55,9 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.list_work_requests_ui(found_requests)
-                    self.open_request_from_list(found_requests)
+                    request_list_by_date = self.find_date_range(found_request)
+                    self.list_work_requests_ui(request_list_by_date)
+                    self.open_request_from_list(request_list_by_date)
 
             elif operation == 'Search by contractor ID':
                 search = input('Enter contractor ID: ')
@@ -64,26 +66,14 @@ class WorkRequestMenu:
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.list_work_requests_ui(found_requests)
-                    self.open_request_from_list(found_requests)
+                    request_list_by_date = self.find_date_range(found_request)
+                    self.list_work_requests_ui(request_list_by_date)
+                    self.open_request_from_list(request_list_by_date)
 
             elif operation == 'See list of all requests':
-                while True:
-                    print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
-                    #start_date = input('Enter date to search from (dd/mm/yyyy):')
-                    #end_date = input('Enter date to end (dd/mm/yyyy):')
-                    start_date = self.check_date('date to search from')
-                    end_date = self.check_date('date to end')
-                    request_list = self.llapi.list_all_work_requests(self.destination)
-                    request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
-                    if request_list_by_date is None:
-                        print('The inputs are not valid, try again')
-                        break
-                    else:
-                        self.list_work_requests_ui(request_list_by_date)
-                        self.open_request_from_list(request_list_by_date)
-                    break
-                
+                request_list = self.llapi.list_all_work_requests(self.destination)
+                self.print_request_list(request_list)
+
 
             elif operation == "See list of requests by status":
                 while True:
@@ -100,13 +90,19 @@ class WorkRequestMenu:
             elif operation == 'Add new':
                 self.create_work_request()
 
+    def print_request_list(self, request_list):
+        request_list_by_date = self.find_date_range(request_list)
+        self.list_work_requests_ui(request_list_by_date)
+        self.open_request_from_list(request_list_by_date)
+
+
     def open_request_from_list(self, request_list):
         while True:
             command = input("Enter Number of request to open or B to Back:").upper()
             if command == "B":
                 break
             if command == "P":
-                self.print_with_date_range(request_list)
+                self.find_date_range(request_list)
             if not command.isdigit():
                 print("Invalid input, try again!")
             else:
@@ -117,9 +113,18 @@ class WorkRequestMenu:
                 break
 
 
-    def print_with_date_range(self, request_list):
-        pass
-
+    def find_date_range(self, request_list):
+        while True:
+            print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
+            start_date = self.check_date('date to search from')
+            end_date = self.check_date('date to end')
+            request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
+            if request_list_by_date is None:
+                print('The inputs are not valid, try again')
+                break
+            else:
+                return request_list_by_date
+                    
 
     def list_work_requests_ui(self, request_list):
         table = Texttable()
