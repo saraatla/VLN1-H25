@@ -1,7 +1,7 @@
 from data.employee_dl import EmployeeDL
 from models.employee_model import Employee
 from logic.employee_ll import EmployeeLL
-
+"""
 # d1 < d2
 import datetime
 
@@ -65,7 +65,61 @@ if date.today() < x:
 else:
     print("This date has already taken place")
 
+"""
+"""
+from datetime import datetime
+year = 2021
+month = 12
+day = 26
+date = datetime(year, month, day)
+date_search_from = datetime(2021, 12, 10)
+date_search_to = datetime(2021, 12, 31)
+if date_search_from <= date <= date_search_to:
+    print("date inbetween")
+else:
+    print("date out of range")
+date = datetime(2021, 12, 1)
 
+if date_search_from <= date <= date_search_to:
+    print("date inbetween")
+else:
+    print("date out of range")
+"""
+from datetime import datetime,date
+
+from os import read
+from Extra.texttableFile.texttable import Texttable
+from data.DLAPI import DLAPI
+from logic.LLAPI import LLAPI
+from models.work_request import WorkRequest
+from logic.work_request_ll import WorkRequestLL
+
+dlapi = DLAPI('Svalbard - Longyearbyen')
+llapi = LLAPI('Svalbard - Longyearbyen')
+work_requestLL = WorkRequestLL('Svalbard - Longyearbyen')
+
+reader = llapi.list_all_work_requests()
+request_list = []
+for request in reader:
+    request_list.append(request)
+
+start_date = '10/12/2021'
+end_date = '31/12/2021'
+
+def check_if_date_is_between(request_list,start_date,end_date):
+    date_search_from = datetime.strptime(start_date,'%d/%m/%Y')
+    date_search_to = datetime.strptime(end_date,'%d/%m/%Y')
+    request_list_by_date = []
+    for request in request_list:
+        if date_search_from <= request.date <= date_search_to:
+            request_list_by_date.append(request)
+    return request_list_by_date
+
+check_if_date_is_between(request_list,start_date,end_date)
+
+
+
+            
 
 
 

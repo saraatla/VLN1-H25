@@ -67,6 +67,10 @@ class LLAPI:
     def edit_contractor(self,id):
         return self.contractorLL.edit_contractor(id)
 
+    def get_new_cont_id(self):
+        return self.contractorLL.get_new_cont_id()
+
+
     # Work Request LL
     def create_work_request(self, work_req):
         return self.work_requestLL.create_work_request(work_req)
