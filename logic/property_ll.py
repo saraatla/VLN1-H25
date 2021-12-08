@@ -107,9 +107,9 @@ class PropertyLL:
             if nr:
                 if search:
                     for row in reader:
-                        # if self.destination == "All destinations":
-                        #     if search == row.property_id:
-                        #         return self.get_table(row,nr)
+                        if self.destination == "All destinations":
+                            if search == row.property_id:
+                                return self.get_table(row,nr)
                         if row.destination == self.destination:
                             if search == row.property_id:
                                 return self.get_table(row,nr)
