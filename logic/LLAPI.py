@@ -55,13 +55,13 @@ class LLAPI:
         return self.propertyLL.edit_property(prop)
 
     # Contractor LL
-    def create_contractor(self):
-        return self.contractorLL.create_contractor()
+    def create_contractor(self, cont):
+        return self.contractorLL.create_contractor(cont)
 
     def list_contractors(self):
         return self.contractorLL.list_contractors()
 
-    def search_contractor(self,cont=''):
+    def search_contractor(self,cont):
         return self.contractorLL.search_contractor(cont)
 
     def edit_contractor(self,id):
@@ -77,8 +77,8 @@ class LLAPI:
     def workrequests_by_status(self):
         return self.work_requestLL.workrequests_by_status()
 
-    def search_work_requests_id(self):
-        return self.work_requestLL.search_work_request_id()
+    def search_work_requests_id(self, destination):
+        return self.work_requestLL.search_work_request_id(destinatino)
 
     def search_work_requests_prop(self):
         return self.work_requestLL.search_work_request_prop()

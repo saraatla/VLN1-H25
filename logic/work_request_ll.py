@@ -36,7 +36,7 @@ class WorkRequestLL:
     #             print("Invalid input, try again!")
     #         self.table.reset()
 
-    def workrequests_by_status(self): # WE ARE HERE
+    def workrequests_by_status(self): 
         """Prints a table of all request baised on their status. Requests that are ready to be closed
         are open and have a report signed to them."""
         reader_report = self.dlapi.list_work_reports()

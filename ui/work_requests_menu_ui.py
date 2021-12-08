@@ -77,7 +77,7 @@ class WorkRequestMenu:
                         break
 
             elif operation == "See list of requests by status":
-                self.llapi.workrequests_by_status() #DO THIS
+                self.llapi.workrequests_by_status() 
 
             elif operation == 'Add new':
                 self.create_work_request()
