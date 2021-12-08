@@ -36,7 +36,7 @@ class ContractorDL:
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile) # converts the value into delimited string on the csvfile
             for row in data_list:
-                if contractor.id == row[0:]:
+                if contractor.id == row[0]:
                     writer.writerow([contractor.id, 
                                      contractor.name, 
                                      contractor.type, 
