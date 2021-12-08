@@ -3,13 +3,19 @@ from models.employee_model import Employee
 LINE = '------------------------------------------'
 
 class EmployeeLL:
-    """Employee logic layer class; Contains X functions: fetches the functions in the data layer API,"""
+    """Employee logic layer class; Contains 5 functions: fetches the functions in the data layer API,
+    search for a employee by ssn and lists employees in the destination the user wants to see"""
     def __init__(self, destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
 
 
     def list_employees(self, destination):
+        """This function lists employees in the destination input by user
+        Args:
+            destination (str) : destination chosen by user
+        Returns:
+            employee_list (list): list of employees in given destination"""
         employee_list = []
         for employee in self.dlapi.list_employees():
             if destination == 'All destinations' or destination == employee.destination:
@@ -17,11 +23,17 @@ class EmployeeLL:
         return employee_list
         
 
-    def create_employee(self, emp):
-        self.dlapi.create_employee(Employee(emp)) 
+    def create_employee(self, employee):
+        self.dlapi.create_employee(Employee(employee)) 
 
 
     def search_employee(self, ssn, destination):
+        """This function searches for a employee by his ssn in list of all employees.
+        Args:
+            ssn (str): employee ssn input by user
+            destination (str) : destination chosen by user
+        Returns: 
+            employee (class instance): employee model class"""
         reader = self.dlapi.list_employees()
         for employee in reader:
             if employee.ssn == ssn:
@@ -30,6 +42,6 @@ class EmployeeLL:
         return None
 
 
-    def edit_employee(self, emp):
-        return self.dlapi.edit_employee(emp)
+    def edit_employee(self, employee):
+        return self.dlapi.edit_employee(employee)
 

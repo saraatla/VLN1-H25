@@ -112,7 +112,7 @@ def check_if_date_is_between(request_list,start_date,end_date):
     request_list_by_date = []
     for request in request_list:
         if request.status == 'completed':
-            if date_search_from <= request.date <= date_search_to:
+            if date_search_from.date() <= request.date <= date_search_to.date():
                 request_list_by_date.append(request)
     return request_list_by_date
 
@@ -131,8 +131,13 @@ bla = check_if_date_is_between(request_list,start_date,end_date)
 list_work_requests_ui(check_if_date_is_between(request_list,start_date,end_date))
 
 
-
-            
+dlapi = DLAPI('Svalbard - Longyearbyen')
+string = 'hwllo'         
+reader = dlapi.list_contractors()
+for contractor in reader:
+    print(type(contractor))
+    print(type(string))
+    print(type(dlapi))
 
 
 

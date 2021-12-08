@@ -6,6 +6,7 @@ class DestinationLL:
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
 
+
     def destination_dict(self):
         all_destinations = self.dlapi.list_destinations()
         temp = []
@@ -19,12 +20,14 @@ class DestinationLL:
 
         return destination_dict
     
+
     def list_of_destinations(self):
         destination_dict = self.destination_dict()
         loc_list = []
         for value in destination_dict.values():
             loc_list.append(value)
         return loc_list
+    
     
     def search_destination(self, dest):
         while True:

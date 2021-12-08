@@ -42,22 +42,22 @@ class WorkRequestLL:
         return request_list
 
 
-    def create_work_request(self,workreq):
+    def create_work_request(self,workrequest):
         """Creates new work requests"""
-        self.dlapi.create_work_request(WorkRequest(workreq))
+        self.dlapi.create_work_request(WorkRequest(workrequest))
 
 
-    def edit_work_request(self, req):
+    def edit_work_request(self, workrequest):
         """Edits workrequest"""
-        return self.dlapi.edit_work_request(req)
+        return self.dlapi.edit_work_request(workrequest)
  
 
 
-    def search_work_request_id(self, req_id, destination):
+    def search_work_request_id(self, workreq_id, destination):
         """Returns workrequests based on their id"""
         reader = self.dlapi.list_work_requests()
         for request in reader:
-            if request.workrequest_id == req_id:
+            if request.workrequest_id == workreq_id:
                 if destination == 'All destinations' or destination == request.destination:
                     return request
         return None     
@@ -74,7 +74,7 @@ class WorkRequestLL:
         return request_list
 
 
-    def search_work_request_SSN(self, ssn, destination):
+    def search_work_request_ssn(self, ssn, destination):
         """Returns workrequests baised on the ssn of the employee that worked on the associated report"""
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
