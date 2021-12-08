@@ -2,7 +2,7 @@ from os import read
 from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 from models.work_request import WorkRequest
-from datetime import datetime
+from datetime import datetime,date
 LINE = '------------------------------------------'
 
 class WorkRequestLL:
@@ -116,17 +116,17 @@ class WorkRequestLL:
         if start_date == '' and end_date == '':
             request_list_by_date = request_list
             return request_list_by_date
-        elif len(start_date) > 0 and len(start_date)>0:
+        elif len(start_date) > 0 and len(end_date)>0:
             date_search_from = datetime.strptime(start_date,'%d/%m/%Y')
             date_search_to = datetime.strptime(end_date,'%d/%m/%Y')
             request_list_by_date = []
             for request in request_list:
                 if request.status == 'completed':
-                    if date_search_from <= request.date <= date_search_to:
+                    if date_search_from.date() <= request.date <= date_search_to.date():
                         request_list_by_date.append(request)
             return request_list_by_date
         else:
-            return []
+            return 'The inputs are not valid, try again'
 
 
     
