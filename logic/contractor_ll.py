@@ -29,3 +29,6 @@ class ContractorLL:
     
     def edit_contractor(self, cont):
         return self.dlapi.edit_contractor(cont)
+
+    def get_new_cont_id(self):
+        return 'C' + str(int(self.dlapi.list_contractors()[-1].id[1:])+1)
