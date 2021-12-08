@@ -54,8 +54,12 @@ class PropertyMenu:
     def create_property(self):
         print('Enter the following information: ')
         print(LINE)
-        prop = []
-        fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
+        fieldnames = ['Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
+        if self.destination != 'All destinations':
+            prop = [self.destination]
+        else:
+            prop = []
+            fieldnames.insert(0, 'Destination')        
         for field in fieldnames:
             val = input(f'{field}: ')
             prop.append(val)

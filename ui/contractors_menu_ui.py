@@ -10,6 +10,7 @@ class ContractorMenu:
         self.destination = destination
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
+        self.table = Texttable
 
     def start(self):
         contAscii()
@@ -32,7 +33,7 @@ class ContractorMenu:
                     self.individual_contractor_ui(found_contractor)
 
             elif operation == 'See list':
-                cont_list = self.list_contractors()
+                cont_list = self.list_contractors(self.destination)
                 while True:
                     command = input("Enter number of contractor to open or B to Back:").upper()
                     if command == "B":
@@ -62,15 +63,15 @@ class ContractorMenu:
             cont.append(val)
         return self.llapi.create_contractor(cont)
 
-    def list_contractors(self):
+    def list_contractors(self, destination):
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(118)
-        cont_list = self.llapi.list_contractors(self.destination)
+        cont_list = self.llapi.list_contractors()
         for item in range(len(cont_list)):
             cont = cont_list[item]
-            self.table.add_rows([["Number", "Contractor_ID", "Name", "Type", "Contact", "Contact's phone", "Address", "Open_hours", "Review"], 
-            [item+1, cont.id, cont.name, cont.type, cont.contact, cont.contacts_phone, cont.address, cont.open_hours, cont.review]])
+            table.add_rows([["Number", "Contractor_ID", "Name", "Type", "Contact", "Contact's phone", "Address", "Open_hours", "Review"], 
+                                [item+1, cont.id, cont.name, cont.type, cont.contact, cont.contacts_phone, cont.address, cont.open_hours, cont.review]])
         print(table.draw())
         return cont_list
 
