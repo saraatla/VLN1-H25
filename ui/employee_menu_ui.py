@@ -75,6 +75,8 @@ class EmployeeMenu:
     
     def individual_employee_ui(self, employee, nr=None):
         self.print_employee_table(employee, nr)
+        if self.user_type == 'Employee':
+            return
         while True:
             print("1: Edit\nB: Back")
             print(LINE)
