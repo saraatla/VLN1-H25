@@ -22,8 +22,8 @@ class WorkRequestUI:
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
 
     def _workrequest_menu_start(self):
+        workAscii()
         while True:
-            workAscii()
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
@@ -84,6 +84,7 @@ class WorkRequestUI:
 
             elif operation == 'Add new':
                 self.__create_work_request()
+            workAscii()
 
 
     def __print_request_list(self, request_list):
