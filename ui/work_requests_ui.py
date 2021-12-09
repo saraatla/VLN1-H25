@@ -406,7 +406,7 @@ class WorkRequestUI:
 
 
     def __create_repeated(self, workreq, date_var, new_date):
-        """""""
+        """ """
 
         date_work_req = date_var + new_date
         date_work_req = date_work_req.strftime('%d/%m/%Y')
