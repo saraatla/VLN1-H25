@@ -46,7 +46,7 @@ class WorkReportUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, please try again")
                         print(LINE)
             else:
                 while True:
@@ -55,7 +55,7 @@ class WorkReportUI:
                     if command == 'B':
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, please try again")
                         print(LINE)
         if self.user_type == 'Manager':
             while True:
@@ -67,7 +67,7 @@ class WorkReportUI:
                 if command == 'B':
                     return
                 if not command.isdigit():
-                    print("Invalid option, try again ")
+                    print("Invalid option, please try again")
                     print(LINE)
                 if command == '1':
                     self._approve_report(report.workreport_id, request)
@@ -101,7 +101,7 @@ class WorkReportUI:
                 setattr(report, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_work_report(report)
             except:
-                print('Invalid input, try again!')
+                print('Invalid input, please try again')
 
                 
     def __print_work_report_table(self, report, nr=None):

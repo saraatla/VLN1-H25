@@ -44,7 +44,7 @@ class PropertyUI:
                     if command == "B":
                         break
                     if not command.isdigit():
-                        print("Invalid input, try again!")
+                        print("Invalid input, please try again")
                     else:
                         nr = int(command)
                         for index, property in enumerate(prop_list):
@@ -101,7 +101,7 @@ class PropertyUI:
             elif command == "B":
                 return
             else:
-                print("Invalid option, try again ")
+                print("Invalid option, please try again")
                 print(LINE)
 
     def __print_property_table(self, property, nr=None):
@@ -129,7 +129,7 @@ class PropertyUI:
                 setattr(prop, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_property(prop)
             except:
-                print('Invalid input, try again!')
+                print('Invalid input, please try again')
 
 
 

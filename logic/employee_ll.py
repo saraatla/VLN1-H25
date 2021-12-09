@@ -1,6 +1,5 @@
 from data.DLAPI import DLAPI
 from models.employee_model import Employee
-LINE = '------------------------------------------'
 
 class EmployeeLL:
     """Employee logic layer class; Contains 5 functions: fetches the functions in the data layer API,

@@ -3,7 +3,6 @@ from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 from models.work_request import WorkRequest
 from datetime import datetime
-LINE = '------------------------------------------'
 
 class WorkRequestLL:
     """Work Request logic layer class; Contains 11 functions: fetches the functions in the data layer API,

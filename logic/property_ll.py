@@ -1,6 +1,5 @@
 from data.DLAPI import DLAPI
 from models.property_model import Property
-LINE = '------------------------------------------'
 
 class PropertyLL:
     """Property logic layer class; Contains 5 functions: fetches the functions in the data layer API,
