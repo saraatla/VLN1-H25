@@ -42,7 +42,6 @@ class WorkReportUI:
                     print(LINE)
                     if command == "1":
                         self._edit_work_report(report)
-                        self.__print_work_report_table(report)
                     elif command == "B":
                         return
                     else:
