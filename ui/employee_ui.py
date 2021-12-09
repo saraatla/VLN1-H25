@@ -7,7 +7,7 @@ from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
 
 class EmployeeUI:
-    """Employee UI layer class. Contains  """
+    """Employee UI layer class. Contains 7 functions"""
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -16,6 +16,11 @@ class EmployeeUI:
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
     def _employee_menu_start(self):
+        """This function makes the employee menu function. It depends on the inputs by user: 
+        Search by SSN: allows the user to search an employee by SSN, 
+        See list: prompts a list of all the employees along with their information,
+        if the user logged in as a manager he also sees
+        Add new: makes it possible to add a new employee to the system."""
         empAscii()
         while True:
             operations =  ['Search by SSN', 'See list']
@@ -56,6 +61,8 @@ class EmployeeUI:
 
 
     def __create_employee(self):
+        """This function runs when the user (manager) chooses 'Add new' . 
+        The employee will be given a destination according to the user's choice in the destination menu."""
         print('Enter the following information: ')
         print(LINE)
         fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Title']
@@ -71,6 +78,8 @@ class EmployeeUI:
 
 
     def __list_employees(self):
+        """This function runs when the user chooses 'See list'.
+        It will show the list of employees with a printable template format."""
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)
@@ -84,6 +93,7 @@ class EmployeeUI:
 
     
     def __individual_employee_ui(self, employee, nr=None):
+        """This function """
         self.__print_employee_table(employee, nr)
         while True: 
             if self.user_type == 'Employee':
