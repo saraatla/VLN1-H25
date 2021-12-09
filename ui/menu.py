@@ -11,8 +11,10 @@ class Menu:
         self.intro = intro
         self.options = options
 
-    def _draw_options(self):
-        """This function """
+    def draw_options(self):
+        """This function is used in all the other UI layers. It prints out the options and 
+        checks if the user's input is correct."""
+        
         print(self.intro)
         print(LINE)
         for i, option in enumerate(self.options):

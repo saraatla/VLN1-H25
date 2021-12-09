@@ -24,14 +24,14 @@ class DestinationMenu:
         he wants to see.  After choosing a destination all the information later on in the
         program will only show employees, work requests, contractors and properties in that
         destination.
-        Add new destination: makes it possible to add a new destination to the system."""
+        Add new destination: makes it possible for the manager to add a new destination to the system."""
 
         while True:
             locAscii()
             options = self.llapi._list_of_destinations()
             options.append('All destinations')
             if self.user_type == "Manager":
-                options.append('Add new destination')                          #{colored(self.location, attrs=['bold'])}
+                options.append('Add new destination')        
             destination_menu = Menu(f"Welcome you are signed in as {self.colored_user_type}\nPlease choose destination", options)
             selection  = destination_menu.draw_options()
             if selection < 0:

@@ -9,6 +9,11 @@ from Extra.TermcolorFile.termcolor import colored
 
 
 class OperationsUI:
+    """Operations UI class. Contains 2 functions. The class contains an instance of the LLAPI class.
+    Args:
+        destination (str): destination chosen by user
+        user_type (str): user type chosen by user (manager/employee)"""
+
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -17,6 +22,13 @@ class OperationsUI:
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
     def start(self):
+        """This function prompts the main menu. 
+        Employees: leads to the employee menu
+        Properties: -||- property menu
+        Work requests: -||- work request menu where the work reports can also be found
+        Contractors: -||- contractor menu
+        Destination info: -||- destination menu if the user chose a specific destination (not All destinations)"""
+        
         while True:
             if self.destination == 'All destinations':
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors',]
