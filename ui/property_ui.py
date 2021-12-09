@@ -30,7 +30,7 @@ class PropertyUI:
             operation = operations[selected_operation]
 
             if operation  == 'Search by ID':
-                search = input(self.color_format.format('Enter property ID: '))
+                search = input(self.color_format.format('Enter property ID: ')).upper()
                 found_property = self.llapi._search_property(search, self.destination)
                 if found_property is None:
                     print(f'{LINE}\nProperty not found\n{LINE}')
