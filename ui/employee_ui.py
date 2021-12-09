@@ -79,7 +79,7 @@ class EmployeeUI:
 
     def __list_employees(self):
         """This function runs when the user chooses 'See list'.
-        It will show the list of employees with a printable template format."""
+        It will show the list of employees in a printable template format."""
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)

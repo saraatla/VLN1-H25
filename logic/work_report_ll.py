@@ -2,8 +2,9 @@ from data.DLAPI import DLAPI
 from models.work_report import WorkReport
  
 class WorkReportLL:
-    """Work Report logic layer class; Contains X functions: fetches the functions in the data layer API,"""
-    APPROVED_INDEX = 7
+    """Work Report logic layer class; Contains 6 functions: fetches the functions in the data layer API,
+    """
+    
 
     def __init__(self,destination):
         self.destination = destination
