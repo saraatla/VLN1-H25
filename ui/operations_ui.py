@@ -52,7 +52,7 @@ class OperationsUI:
                 contractor_menu  = ContractorUI(self.destination,self.user_type)
                 contractor_menu._contractor_menu_start()
             elif operation == 'Destination info':
-                destination = self.llapi.search_destination(self.destination)
+                destination = self.llapi._search_destination(self.destination)
                 destination_ui = DestinationUI(destination)
                 destination_ui._destination_info_ui()
 
