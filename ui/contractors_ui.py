@@ -43,7 +43,7 @@ class ContractorUI:
                     if command == "B":
                         break
                     if not command.isdigit():
-                        print("Invalid input, try again!")
+                        print("Invalid input, please try again")
                     else:
                         nr = int(command)
                         for index, contractor in enumerate(cont_list):
@@ -88,7 +88,7 @@ class ContractorUI:
                     if command == "B":
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, please try again")
                         print(LINE)
             else:
                 print("1: Edit\nB: Back")
@@ -101,7 +101,7 @@ class ContractorUI:
                 elif command == "B":
                     return
                 else:
-                    print("Invalid option, try again ")
+                    print("Invalid option, please try again")
                     print(LINE)
 
     def __print_contractor_table(self, contractor, nr=None):
@@ -123,11 +123,11 @@ class ContractorUI:
             fieldnames = ["Name", "Type", "Contact", "Contact's phone", "Address", "Open_hours", "Review"]
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input(self.color_format.format('What do you want to change? '))
+            col = input(self.color_format.format('What do you want to change?'))
             try:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
                 setattr(cont, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_contractor(cont)
             except:
-                print('Invalid input, try again!')
+                print('Invalid input, please try again')
