@@ -35,7 +35,7 @@ class OperationsUI:
                 property_menu._property_menu_start()
             elif operation == 'Work requests':
                 work_request_menu  = WorkRequestUI(self.destination,self.user_type)
-                work_request_menu.workrequest_menu_start()
+                work_request_menu._workrequest_menu_start()
             elif operation == 'Contractors':
                 contractor_menu  = ContractorUI(self.destination,self.user_type)
                 contractor_menu._contractor_menu_start()
