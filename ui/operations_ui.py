@@ -42,5 +42,5 @@ class OperationsUI:
             elif operation == 'Destination info':
                 destination = self.llapi.search_destination(self.destination)
                 destination_ui = DestinationUI(destination)
-                destination_ui.destination_info_ui()
+                destination_ui._destination_info_ui()
 

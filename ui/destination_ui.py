@@ -7,8 +7,10 @@ class DestinationUI:
         self.destination = destination
         self.options = """B: Back"""
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
-    def destination_info_ui(self):
-        self.print_destination_info_table(self.destination)
+
+
+    def _destination_info_ui(self):
+        self.__print_destination_info_table(self.destination)
         print(LINE)
         while True:
             command = input(self.color_format.format("Enter B to go back: ")).upper()
@@ -18,7 +20,8 @@ class DestinationUI:
             else:
                 print("Invalid input, please try again")
     
-    def print_destination_info_table(self, destination):
+
+    def __print_destination_info_table(self, destination):
         destination_table = Texttable()
         destination_table.add_row([get_color_string(bcolors.GREEN,"Destination"),destination.destination])
         destination_table.add_row([get_color_string(bcolors.GREEN,"Phone"),destination.phone])
