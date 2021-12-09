@@ -118,4 +118,4 @@ class WorkReportUI:
         work_report_table.add_row(["Description",report.description])
         work_report_table.add_row(["Approved",report.approved])
         work_report_table.add_row(["Manager_comment",report.manager_cmt])
-        print(work_report_table.draw())
+        print(f'\n{work_report_table.draw()}\n')
