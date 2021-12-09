@@ -37,7 +37,7 @@ class PropertyUI:
                 while True:
                     command = input("Enter number of property to open or B to Back: ").upper()
                     if command == "B":
-                        return
+                        break
                     if not command.isdigit():
                         print("Invalid input, try again!")
                     else:

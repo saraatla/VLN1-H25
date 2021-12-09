@@ -38,7 +38,7 @@ class ContractorUI:
                 while True:
                     command = input(colored("Enter number of contractor to open or B to Back: ",'green' ,attrs=['bold', 'underline'])).upper()
                     if command == "B":
-                        return
+                        break
                     if not command.isdigit():
                         print("Invalid input, try again!")
                     else:
