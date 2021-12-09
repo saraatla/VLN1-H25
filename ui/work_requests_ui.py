@@ -262,9 +262,6 @@ class WorkRequestUI:
                 print('Invalid input, please try again')
 
 
-
-
-
     def __create_work_request(self):
         print('Enter the following information: ')
         print(LINE)
@@ -279,7 +276,6 @@ class WorkRequestUI:
         else:
             self.llapi._create_work_request(workreq)
             print(f'{LINE}\nWork request successfully created!\n{LINE}')
-    
 
 
     def __create_work_req_list(self):
@@ -313,7 +309,8 @@ class WorkRequestUI:
 
 
     def __repeat_work_request(self,start_date, repeat, workreq):
-        date_var = datetime.strptime(start_date,'%d/%m/%Y')
+        date_var = datetime.strptime(start_date,'%d/%m/%Y').date()
+        print(date_var)
         if date.today() <= date_var:
             i = 0
             if repeat == 2:
