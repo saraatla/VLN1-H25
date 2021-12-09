@@ -97,7 +97,7 @@ class WorkRequestUI:
     def __open_request_from_list(self, request_list):
         while True:
             print(LINE)
-            command = input(self.color_format.format("Enter Number of request to open or B to Back:")).upper()
+            command = input(self.color_format.format("Enter Number of request to open or B to Back: ")).upper()
             if command == "B":
                 break
             if command == "P":
@@ -153,7 +153,7 @@ class WorkRequestUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, try again")
                         print(LINE)
             elif request.status == 'closed':
                 while True:
@@ -163,7 +163,7 @@ class WorkRequestUI:
                     if command == 'B':
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, try again")
                         print(LINE)
             else:
                 while True:
@@ -178,7 +178,7 @@ class WorkRequestUI:
                     if command == 'B':
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, try again")
                         print(LINE)
         elif self.user_type == 'Manager':
             if request.status == 'completed':
@@ -197,7 +197,7 @@ class WorkRequestUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, try again")
                         print(LINE)
             elif request.status == 'open' and request.workreport_id is not None:
                 while True:
@@ -214,7 +214,7 @@ class WorkRequestUI:
                     elif command == 'B':
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, try again")
                         print(LINE)
             else:
                 while True:
@@ -230,7 +230,7 @@ class WorkRequestUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, try again")
                         print(LINE)
     
 
@@ -256,7 +256,7 @@ class WorkRequestUI:
             fieldnames = ['Title', 'Property_ID', 'Destination', 'Contractor', 'Date', 'Status', 'Priority', 'Description']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What do you want to change? ')
+            col = input('What do you want to change?')
             try:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
