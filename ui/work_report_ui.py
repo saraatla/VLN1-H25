@@ -71,7 +71,7 @@ class WorkReportUI:
                     print("Invalid option, try again ")
                     print(LINE)
                 if command == '1':
-                    self.llapi._approve_report(report.workreport_id, request)
+                    self._approve_report(report.workreport_id, request)
                     return
                 elif command == '2':
                     report.manager_cmt = input('Enter comment:')
