@@ -19,8 +19,9 @@ class ContractorLL:
         #return cont_list
 
 
-    def create_contractor(self, contractor):
-        return self.dlapi.create_contractor(Contractor(contractor))
+    def create_contractor(self, contractor): 
+        """Creates new contractor"""
+        self.dlapi.create_contractor(Contractor(contractor))
 
 
     def search_contractor(self, cont_id):
@@ -37,12 +38,13 @@ class ContractorLL:
     
 
     def edit_contractor(self, contractor):
+        """Edits contractor info"""
         return self.dlapi.edit_contractor(contractor)
 
 
     def get_new_cont_id(self):
         """Gets the ID of the last contractor in the csv file and
-            adds one to get the new contractor id
-            Returns:
-                the next contractor id (str)"""
+        adds one to get the new contractor id.
+        Returns:
+            the next contractor id (str)"""
         return 'C' + str(int(self.dlapi.list_contractors()[-1].id[1:])+1)

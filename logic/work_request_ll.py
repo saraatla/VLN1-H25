@@ -6,7 +6,7 @@ from datetime import datetime,date
 LINE = '------------------------------------------'
 
 class WorkRequestLL:
-    """Work Request logic layer class; Contains X functions: fetches the functions in the data layer API,"""
+    """Work Request logic layer class; Contains 11 functions: fetches the functions in the data layer API,"""
     def __init__(self, destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
@@ -34,7 +34,11 @@ class WorkRequestLL:
        
 
     def list_all_work_requests(self, destination):
-        """Prints all work request in the system according to destination"""
+        """This function lists work requests according to destination.
+        Args:
+            destination (str) : destination chosen by user
+        Returns:
+            request_list (list): list of work requests in given destination"""
         request_list = []
         for request in self.dlapi.list_work_requests():
             if destination == 'All destinations' or destination == request.destination:
@@ -48,13 +52,18 @@ class WorkRequestLL:
 
 
     def edit_work_request(self, workrequest):
-        """Edits workrequest"""
+        """Edits work request info"""
         return self.dlapi.edit_work_request(workrequest)
- 
 
 
     def search_work_request_id(self, workreq_id, destination):
-        """Returns workrequests based on their id"""
+        """This function searches for a work request by it's id in list of all work requests.
+        Args:
+            workreq_id (str): work request id input by user
+            destination (str) : destination chosen by user
+        Returns: 
+            request (class instance): work request model class, or
+            None"""
         reader = self.dlapi.list_work_requests()
         for request in reader:
             if request.workrequest_id == workreq_id:
@@ -64,7 +73,12 @@ class WorkRequestLL:
 
 
     def search_work_request_prop(self, prop_id, destination):
-        """Returns workrequests baised on the property they are assigned to"""
+        """This function returns workrequests based on the property they are assigned to
+        Args:
+            prop_id (str): property id input by user
+            destination (str) : destination chosen by user
+        Returns: 
+            request_list (list): list of work requests according to property id"""
         reader = self.dlapi.list_work_requests()
         request_list = []
         for request in reader:
@@ -75,7 +89,12 @@ class WorkRequestLL:
 
 
     def search_work_request_ssn(self, ssn, destination):
-        """Returns workrequests baised on the ssn of the employee that worked on the associated report"""
+        """This function returns work requests based on the ssn of the employee that worked on the associated report
+        Args:
+            ssn (str): ssn input by user
+            destination (str) : destination chosen by user
+        Returns: 
+            request_list (list): list of work requests according to ssn"""
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
         report_list = []
@@ -92,6 +111,13 @@ class WorkRequestLL:
 
 
     def search_work_request_cont(self, cont_id, destination):
+        """This function returns work requests based on the contractor that worked with the employee who wrote
+        the workreport.
+        Args:
+            cont_id (str): contractor id input by user
+            destination (str) : destination chosen by user
+        Returns: 
+            request_list (list): list of work requests according to contractor id"""
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
         report_list = []
@@ -107,12 +133,22 @@ class WorkRequestLL:
         return request_list
 
     def get_new_id(self):
+        """This function finds the last workrequest id and returns the next one 
+        if a new one is made.
+        Returns:
+            the next work request id (str)"""
         last_id = self.dlapi.find_last_id()
         new_id = int(last_id[1:])+1
         return f'w{new_id}'
 
     def get_list_of_workreq_on_period(self,request_list,start_date,end_date):
-        """This function fetches a list og requests on a period input by user"""
+        """This function fetches a list of work requests on a period input by user
+        Args:
+            request_list (list): 
+            start_date (str) : start date input by user
+            end_date (str) : end date input by user
+        Returns:
+            request_list_by_date (list): list of workrequests for certain period"""
         if start_date == '' and end_date == '':
             request_list_by_date = request_list
             return request_list_by_date

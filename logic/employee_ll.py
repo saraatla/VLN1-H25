@@ -11,7 +11,7 @@ class EmployeeLL:
 
 
     def list_employees(self, destination):
-        """This function lists employees in the destination input by user
+        """This function lists employees according to destination.
         Args:
             destination (str) : destination chosen by user
         Returns:
@@ -24,6 +24,7 @@ class EmployeeLL:
         
 
     def create_employee(self, employee):
+        """Creates new employee"""
         self.dlapi.create_employee(Employee(employee)) 
 
 
@@ -43,5 +44,6 @@ class EmployeeLL:
 
 
     def edit_employee(self, employee):
+        """Edits employee info"""
         return self.dlapi.edit_employee(employee)
 

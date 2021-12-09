@@ -10,7 +10,7 @@ class PropertyLL:
 
 
     def list_properties(self, destination):
-        """This function lists poroperties in the destination input by user
+        """This function lists poroperties according to destination.
         Args:
             destination (str) : destination chosen by user
         Returns:
@@ -23,6 +23,7 @@ class PropertyLL:
 
 
     def create_property(self, property):
+        """Creates new property"""
         self.dlapi.create_property(Property(property))
         
 
@@ -42,4 +43,5 @@ class PropertyLL:
         return None
            
     def edit_property(self, property):
+        """Edits property info"""
         return self.dlapi.edit_property(property)
