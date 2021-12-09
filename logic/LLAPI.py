@@ -17,14 +17,14 @@ class LLAPI:
         self.work_reportLL = WorkReportLL(self.destination)
 
     # Destination LL
-    def list_of_destinations(self):
-        return self.destinationLL.list_of_destinations()
+    def _list_of_destinations(self):
+        return self.destinationLL._list_of_destinations()
     
-    def search_destination(self, destination):
-        return self.destinationLL.search_destination(destination)
+    def _search_destination(self, destination):
+        return self.destinationLL._search_destination(destination)
 
-    def create_destination(self, destination):
-        return self.destinationLL.create_destination(destination)
+    def _create_destination(self, destination):
+        return self.destinationLL._create_destination(destination)
 
     # Employee LL
     def _create_employee(self, employee):

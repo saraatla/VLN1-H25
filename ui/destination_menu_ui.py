@@ -17,7 +17,7 @@ class DestinationMenu:
     def _destination_menu_start(self):
         while True:
             locAscii()
-            options = self.llapi.list_of_destinations()
+            options = self.llapi._list_of_destinations()
             options.append('All destinations')
             if self.user_type == "Manager":
                 options.append('Add new destination')                          #{colored(self.location, attrs=['bold'])}
@@ -35,7 +35,7 @@ class DestinationMenu:
                     for field in fieldnames:
                         val = input(self.color_format.format(f'{field}: '))
                         dest.append(val)
-                    return self.llapi.create_destination(dest)
+                    return self.llapi._create_destination(dest)
             selection_str = options[selection]
             operations = OperationsUI(selection_str, self.user_type)
             operations.start()
