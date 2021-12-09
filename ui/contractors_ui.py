@@ -13,7 +13,7 @@ class ContractorUI:
         self.user_type = user_type
         self.table = Texttable
 
-    def contractor_menu_start(self):
+    def _contractor_menu_start(self):
         contAscii()
         while True:
             operations =  ['Search by ID', 'See list']
