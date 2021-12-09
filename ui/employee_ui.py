@@ -94,7 +94,10 @@ class EmployeeUI:
 
     
     def __individual_employee_ui(self, employee, nr=None):
-        """This function """
+        """This function runs when the user chooses 'Search by SSN' and inputs a SSN that's in the system.
+        It will show information about an employee and also the oprion edit if the user is a Manager
+        Args:
+            employee (class instance): employee model class"""
         self.__print_employee_table(employee, nr)
         while True: 
             if self.user_type == 'Employee':
@@ -121,6 +124,7 @@ class EmployeeUI:
     
 
     def __print_employee_table(self, employee, nr=None):
+        """This function prints employee info in a printable template format."""
         employee_table = Texttable()
         if nr is not None:
             employee_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
@@ -136,6 +140,8 @@ class EmployeeUI:
 
 
     def __edit_employee(self,emp):
+        """This function runs the the user is a Manager and chooses to Edit employee.
+        The user chooses what to edit according to the available options"""
         while True:
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Destination', 'Title']
             for index, field in enumerate(fieldnames):
