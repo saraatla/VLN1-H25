@@ -150,6 +150,14 @@ class WorkRequestMenu:
                     else:
                         print("Invalid option, try again ")
                         print(LINE)
+            elif request.status == 'closed':
+                while True:
+                    command = input('Press B for back: ').upper()
+                    if command == 'B':
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
             else:
                 while True:
                     print('1: See report\nB: Back ')
@@ -230,12 +238,6 @@ class WorkRequestMenu:
 
 
 
-    def individual_work_report_ui(self, report, nr=None):
-        pass
-
-
-    def create_work_report(self, request):
-        pass
 
     def create_work_request(self):
         print('Enter the following information: ')
