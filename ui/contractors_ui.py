@@ -1,4 +1,5 @@
-from Extra.texttableFile.texttable import Texttable
+
+from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.acci import contAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
@@ -12,6 +13,8 @@ class ContractorUI:
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
         self.table = Texttable
+        self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
+        self.Contractors_menu_color = colored("Contractors Menu",'red' ,attrs=['bold', 'underline'])
 
     def _contractor_menu_start(self):
         contAscii()
@@ -19,14 +22,14 @@ class ContractorUI:
             operations =  ['Search by ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Contractors in {self.destination_collor}\nChoose options',operations)
+            operations_menu = Menu(f'{self.Contractors_menu_color} in {self.destination_collor}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
             operation = operations[selected_operation]
 
             if operation  == 'Search by ID':
-                search = input(colored('Enter contractor ID: ','green' ,attrs=['bold', 'underline']))
+                search = input(self.color_format.format('Enter contractor ID: '))
                 found_contractor = self.llapi._search_contractor(search)
                 if found_contractor is None:
                     print(f'{LINE}\nContractor not found\n{LINE}')
@@ -36,7 +39,7 @@ class ContractorUI:
             elif operation == 'See list':
                 cont_list = self.__list_contractors()
                 while True:
-                    command = input(colored("Enter number of contractor to open or B to Back: ",'green' ,attrs=['bold', 'underline'])).upper()
+                    command = input(self.color_format.format("Enter number of contractor to open or B to Back: ")).upper()
                     if command == "B":
                         break
                     if not command.isdigit():
@@ -71,8 +74,8 @@ class ContractorUI:
         cont_list = self.llapi._list_contractors()
         for item in range(len(cont_list)):
             cont = cont_list[item]
-            table.add_rows([["Number", "Contractor_ID", "Name", "Type", "Contact", "Contact's phone", "Address", "Open_hours", "Review"], 
-                                [item+1, cont.id, cont.name, cont.type, cont.contact, cont.contacts_phone, cont.address, cont.open_hours, cont.review]])
+            table.add_rows([[get_color_string(bcolors.GREEN,"Number"), get_color_string(bcolors.GREEN,"Contractor_ID"), get_color_string(bcolors.GREEN,"Name"), get_color_string(bcolors.GREEN,"Type"), get_color_string(bcolors.GREEN,"Address"), get_color_string(bcolors.GREEN,"Open_hours"), get_color_string(bcolors.GREEN,"Review")], 
+                                [get_color_string(bcolors.GREEN,item+1), cont.id, cont.name, cont.type, cont.address, cont.open_hours, cont.review]])
         print(table.draw())
         return cont_list
 
@@ -80,7 +83,7 @@ class ContractorUI:
         self.__print_contractor_table(contractor, nr)
         while True:
             if self.user_type == 'Employee':
-                    command = input("Press B for back: ").upper()
+                    command = input(self.color_format.format("Press B for back: ")).upper()
                     print(LINE)
                     if command == "B":
                         return
@@ -90,7 +93,7 @@ class ContractorUI:
             else:
                 print("1: Edit\nB: Back")
                 print(LINE)
-                command = input("Choose Options edit or back: ").upper()
+                command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                 print(LINE)
                 if command == "1":
                     self.__edit_contractor(contractor)
@@ -104,15 +107,15 @@ class ContractorUI:
     def __print_contractor_table(self, contractor, nr=None):
         contractor_table = Texttable()
         if nr is not None:
-            contractor_table.add_row(["Number",nr])
-        contractor_table.add_row(["ID",contractor.id])
-        contractor_table.add_row(["Name",contractor.name])
-        contractor_table.add_row(["Type",contractor.type])
-        contractor_table.add_row(["Contact",contractor.contact])
-        contractor_table.add_row(["Contacts_phone",contractor.contacts_phone])
-        contractor_table.add_row(["Address",contractor.address])
-        contractor_table.add_row(["Open_hours",contractor.open_hours])
-        contractor_table.add_row(["Review",contractor.review])
+            contractor_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"ID"),contractor.id])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"Name"),contractor.name])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"Type"),contractor.type])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"Contact"),contractor.contact])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"Contacts_phone"),contractor.contacts_phone])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"Address"),contractor.address])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"Open_hours"),contractor.open_hours])
+        contractor_table.add_row([get_color_string(bcolors.GREEN,"Review"),contractor.review])
         print(contractor_table.draw())
 
     def __edit_contractor(self, cont):
@@ -120,10 +123,10 @@ class ContractorUI:
             fieldnames = ["Name", "Type", "Contact", "Contact's phone", "Address", "Open_hours", "Review"]
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What do you want to change? ')
+            col = input(self.color_format.format('What do you want to change? '))
             try:
                 col = int(col)
-                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
                 setattr(cont, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_contractor(cont)
             except:

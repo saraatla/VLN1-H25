@@ -20,6 +20,8 @@ class WorkRequestUI:
         self.user_type = user_type
         self.report_ui = WorkReportUI(self.destination, self.user_type)
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
+        self.Work_Requests_menu_color = colored("Work Requests Menu",'red' ,attrs=['bold', 'underline'])
+
 
     def _workrequest_menu_start(self):
         workAscii()
@@ -27,7 +29,7 @@ class WorkRequestUI:
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'{LINE}\nWork Requests in {self.destination_collor}\nChoose options', operations)
+            operations_menu = Menu(f'{LINE}\n{self.Work_Requests_menu_color} in {self.destination_collor}\nChoose options', operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
