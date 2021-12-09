@@ -7,7 +7,11 @@ from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
 
 class EmployeeUI:
-    """Employee UI layer class. Contains 7 functions"""
+    """Employee UI layer class. Contains 7 functions. The class contains an instance of the LLAPI class.
+    Args:
+        destination (str): destination chosen by user
+        user_type (str): user type chosen by user (manager/employee)"""
+        
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])

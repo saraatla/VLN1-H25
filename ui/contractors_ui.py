@@ -7,7 +7,7 @@ from Extra.TermcolorFile.termcolor import colored
 LINE = '------------------------------------------'
 
 class ContractorUI:
-    """Contractor UI layer class: Contains 7 functions.
+    """Contractor UI layer class: Contains 7 functions. The class contains an instance of the LLAPI class
     Args:
         destination (str): destination chosen by user
         user_type (str): user type chosen by user (manager/employee)"""

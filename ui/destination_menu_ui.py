@@ -7,7 +7,7 @@ from Extra.TermcolorFile.termcolor import colored
 LINE = '------------------------------------------'
 
 class DestinationMenu:
-    """Destination Menu UI class: contains 2 functions.
+    """Destination Menu UI class: contains 2 functions. The class contains an instance of the LLAPI class
     Args:
         user_type (str): user 
         destination (str): destination chosen by user."""
