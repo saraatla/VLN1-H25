@@ -16,7 +16,7 @@ class DestinationUI:
             if command == "B":
                 return
             else:
-                print("Invalid input, try again!")
+                print("Invalid input, please try again")
     
     def print_destination_info_table(self, destination):
         destination_table = Texttable()
