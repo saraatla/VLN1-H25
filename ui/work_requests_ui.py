@@ -198,7 +198,7 @@ class WorkRequestUI:
                     else:
                         print("Invalid option, please try again")
                         print(LINE)
-            elif request.status == 'open' and request.workreport_id is not None:
+            elif request.status == 'open' and request.workreport_id:
                 while True:
                     self.__print_work_request_table(request, nr)
                     print(f"{LINE}\n1: See report\n2: Edit\nB: Back")
