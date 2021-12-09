@@ -6,7 +6,7 @@ from Extra.TermcolorFile.termcolor import colored, cprint
 
 LINE = '------------------------------------------'
 
-class EmployeeMenu:
+class EmployeeUI:
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])

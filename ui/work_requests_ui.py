@@ -11,7 +11,7 @@ from ui.work_report_ui import WorkReportUI
 
 LINE = '------------------------------------------'
 
-class WorkRequestMenu:
+class WorkRequestUI:
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])

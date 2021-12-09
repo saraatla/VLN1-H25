@@ -1,8 +1,8 @@
 from ui.menu import Menu
-from ui.employee_ui import EmployeeMenu
-from ui.property_ui import PropertyMenu
-from ui.contractors_ui import ContractorMenu
-from ui.work_requests_ui import WorkRequestMenu
+from ui.employee_ui import EmployeeUI
+from ui.property_ui import PropertyUI
+from ui.contractors_ui import ContractorUI
+from ui.work_requests_ui import WorkRequestUI
 from ui.destination_ui import DestinationUI
 from logic.LLAPI import LLAPI
 from Extra.TermcolorFile.termcolor import colored, cprint
@@ -28,16 +28,16 @@ class OperationsUI:
                 return
             operation = operations[selected_operation]
             if operation  == 'Employees':
-                employee_menu  = EmployeeMenu(self.destination,self.user_type)
+                employee_menu  = EmployeeUI(self.destination,self.user_type)
                 employee_menu.employee_menu_start()
             elif operation == 'Properties':
-                property_menu  = PropertyMenu(self.destination,self.user_type)
+                property_menu  = PropertyUI(self.destination,self.user_type)
                 property_menu.property_menu_start()
             elif operation == 'Work requests':
-                work_request_menu  = WorkRequestMenu(self.destination,self.user_type)
+                work_request_menu  = WorkRequestUI(self.destination,self.user_type)
                 work_request_menu.workrequest_menu_start()
             elif operation == 'Contractors':
-                contractor_menu  = ContractorMenu(self.destination,self.user_type)
+                contractor_menu  = ContractorUI(self.destination,self.user_type)
                 contractor_menu.contractor_menu_start()
             elif operation == 'Destination info':
                 destination = self.llapi.search_destination(self.destination)

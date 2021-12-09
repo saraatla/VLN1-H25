@@ -5,7 +5,7 @@ from logic.LLAPI import LLAPI
 from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
 
-class PropertyMenu:
+class PropertyUI:
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
