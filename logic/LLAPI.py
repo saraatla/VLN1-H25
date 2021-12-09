@@ -111,9 +111,6 @@ class LLAPI:
 
     def _edit_work_report(self,work_rep):
         return self.work_reportLL._edit_work_report(work_rep)
-
-    def _approve_report(self, workreport_id):
-        return self.work_reportLL._approve_report(workreport_id)
     
     def _get_new_report_id(self):
         return self.work_reportLL._get_new_id()
