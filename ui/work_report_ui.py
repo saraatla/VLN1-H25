@@ -9,10 +9,10 @@ class WorkReportUI:
         self.llapi= LLAPI(self.destination)
 
 
-    def create_work_report(self, request):
+    def _create_work_report(self, request):
         print('Enter the following information: ')
         print(LINE)
-        new_id = self.llapi.get_new_report_id()
+        new_id = self.llapi._get_new_report_id()
         workrep = [new_id]
         fieldnames = ['SSN:', 'Contractor_ID', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description']
         for field in fieldnames:
@@ -22,26 +22,26 @@ class WorkReportUI:
         workrep.append(approved)
         manager_comment = None
         workrep.append(manager_comment)
-        work_report = self.llapi.create_report(workrep)
+        work_report = self.llapi._create_report(workrep)
         print(f'{LINE}\nWork report successfully created!\n{LINE}')
         request.workreport_id = new_id
-        self.llapi.edit_work_request(request)
+        self.llapi._edit_work_request(request)
         return work_report
 
     
-    def individual_work_report_ui(self, report, request, nr=None):
+    def _individual_work_report_ui(self, report, request, nr=None):
         if self.user_type == 'Employee':
             if request.status == 'open' and request.workreport_id is not None:
                 while True:
                     print('Work report: ')
-                    self.print_work_report_table(report)
+                    self.__print_work_report_table(report)
                     print("1: Edit\nB: Back")
                     print(LINE)
                     command = input("Choose Options edit or back: ").upper()
                     print(LINE)
                     if command == "1":
-                        self.edit_work_report(report)
-                        self.print_work_report_table(report)
+                        self.__edit_work_report(report)
+                        self.__print_work_report_table(report)
                     elif command == "B":
                         return
                     else:
@@ -50,7 +50,7 @@ class WorkReportUI:
             else:
                 while True:
                     print('Work report: ')
-                    self.print_work_report_table(report)
+                    self.__print_work_report_table(report)
                     command = input('Press B for back').upper()
                     if command == 'B':
                         return
@@ -60,7 +60,7 @@ class WorkReportUI:
         if self.user_type == 'Manager':
             while True:
                 print('Work report: ')
-                self.print_work_report_table(report)
+                self.__print_work_report_table(report)
                 print('1: Approve report and close request\n2: Add comment on report\nB: Back')
                 print(LINE)
                 command = input("Choose Options: ").upper()
@@ -71,29 +71,29 @@ class WorkReportUI:
                     print("Invalid option, try again ")
                     print(LINE)
                 if command == '1':
-                    self.llapi.approve_report(report.workreport_id, request)
+                    self.llapi._approve_report(report.workreport_id, request)
                     break
                 elif command == '2':
                     report.manager_cmt = input('Enter comment:')
-                    self.llapi.edit_work_report(report)
-                    self.print_work_report_table(report)
+                    self.llapi._edit_work_report(report)
+                    self.__print_work_report_table(report)
 
 
-    def approve_report(self, report_id, request):
-        reader = self.llapi.list_work_reports()
+    def _approve_report(self, report_id, request):
+        reader = self.llapi._list_work_reports()
         i = 0
         for report in reader:
             if report_id == report.workreport_id:
                 request.status = 'completed'
                 report.approved = True
-                self.llapi.edit_work_report(report)
-                self.llapi.edit_work_request(request)
+                self.llapi._edit_work_report(report)
+                self.llapi._edit_work_request(request)
                 return 'Report has been marked approved!' #HERNA
             i += 1    
         return 'No report found'
 
 
-    def edit_work_report(self, report):
+    def __edit_work_report(self, report):
         while True:
             fieldnames = ['SSN','Contractor_ID','Contractor_review','Contractor_remuneration','Totel_cost','Description']
             for index, field in enumerate(fieldnames):
@@ -103,12 +103,12 @@ class WorkReportUI:
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 setattr(report, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_work_report(report)
+                return self.llapi._edit_work_report(report)
             except:
                 print('Invalid input, try again!')
 
                 
-    def print_work_report_table(self, report, nr=None):
+    def __print_work_report_table(self, report, nr=None):
         work_report_table = Texttable()
         if nr is not None:
             work_report_table.add_row(["Number.",nr])
