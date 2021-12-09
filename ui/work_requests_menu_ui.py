@@ -19,7 +19,7 @@ class WorkRequestMenu:
         self.user_type = user_type
         self.report_ui = WorkReportUI(self.destination, self.user_type)
 
-    def start(self):
+    def workrequest_menu_start(self):
         workAscii()
         while True:
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
@@ -133,10 +133,11 @@ class WorkRequestMenu:
 
 
     def individual_work_request_ui(self, request, nr=None):
-        self.print_work_request_table(request, nr)
         if self.user_type == 'Employee':
             if request.status == 'open' and request.workreport_id is None:
                 while True:
+                    print('Work request: ')
+                    self.print_work_request_table(request, nr)
                     print('1: Add report\nB: Back')
                     print(LINE)
                     command = input("Choose Options: ").upper()
@@ -152,6 +153,8 @@ class WorkRequestMenu:
                         print(LINE)
             elif request.status == 'closed':
                 while True:
+                    print('Work request: ')
+                    self.print_work_request_table(request, nr)
                     command = input('Press B for back: ').upper()
                     if command == 'B':
                         return
@@ -160,12 +163,14 @@ class WorkRequestMenu:
                         print(LINE)
             else:
                 while True:
+                    print('Work request: ')
+                    self.print_work_request_table(request, nr)
                     print('1: See report\nB: Back ')
                     print(LINE)
                     command = input("Choose Options: ").upper()
                     if command == '1':
                         report = self.llapi.search_work_report(request.workreport_id)
-                        self.report_ui.individual_work_report_ui(report)
+                        self.report_ui.individual_work_report_ui(report, request)
                     if command == 'B':
                         return
                     else:
@@ -174,6 +179,8 @@ class WorkRequestMenu:
         elif self.user_type == 'Manager':
             if request.status == 'completed':
                 while True:
+                    print('Work request: ')
+                    self.print_work_request_table(request, nr)
                     print("1: Reopen request\nB: Back")
                     print(LINE)
                     command = input("Choose Options reopen or back: ").upper()
@@ -190,11 +197,13 @@ class WorkRequestMenu:
                         print(LINE)
             elif request.status == 'open' and request.workreport_id is not None:
                 while True:
+                    print('Work request: ')
+                    self.print_work_request_table(request, nr)
                     print("1: See report\n2: Edit\nB: Back")
                     command = input('Choose options: ').upper()
                     if command == '1':
                         report = self.llapi.search_work_report(request.workreport_id)
-                        self.report_ui.individual_work_report_ui(report)
+                        self.report_ui.individual_work_report_ui(report, request)
                     elif command == '2':
                         self.edit_work_request(request)
                         self.print_work_request_table(request)
@@ -205,6 +214,8 @@ class WorkRequestMenu:
                         print(LINE)
             else:
                 while True:
+                    print('Work request: ')
+                    self.print_work_request_table(request, nr)
                     print("1: Edit\nB: Back")
                     print(LINE)
                     command = input("Choose Options edit or back: ").upper()

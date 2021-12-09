@@ -30,30 +30,37 @@ class WorkReportUI:
 
     
     def individual_work_report_ui(self, report, request, nr=None):
-        self.print_work_report_table(report)
         if self.user_type == 'Employee':
             if request.status == 'open' and request.workreport_id is not None:
-                print("1: Edit\nB: Back")
-                print(LINE)
-                command = input("Choose Options edit or back: ").upper()
-                print(LINE)
-                if command == "1":
-                    self.edit_work_report(report)
+                while True:
+                    print('Work report: ')
                     self.print_work_report_table(report)
-                elif command == "B":
-                    return
-                else:
-                    print("Invalid option, try again ")
+                    print("1: Edit\nB: Back")
                     print(LINE)
+                    command = input("Choose Options edit or back: ").upper()
+                    print(LINE)
+                    if command == "1":
+                        self.edit_work_report(report)
+                        self.print_work_report_table(report)
+                    elif command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
             else:
-                command = input('Press B for back').upper()
-                if command == 'B':
-                    return
-                else:
-                    print("Invalid option, try again ")
-                    print(LINE)
+                while True:
+                    print('Work report: ')
+                    self.print_work_report_table(report)
+                    command = input('Press B for back').upper()
+                    if command == 'B':
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
         if self.user_type == 'Manager':
-            if request.status == 'open' and request.workreport_id is not None:
+            while True:
+                print('Work report: ')
+                self.print_work_report_table(report)
                 print('1: Approve report and close request\n2: Add comment on report\nB: Back')
                 print(LINE)
                 command = input("Choose Options: ").upper()
@@ -64,20 +71,23 @@ class WorkReportUI:
                     print("Invalid option, try again ")
                     print(LINE)
                 if command == '1':
-                    self.llapi.approve_report(report.workreport_id)
+                    self.llapi.approve_report(report.workreport_id, request)
+                    break
                 elif command == '2':
                     report.manager_cmt = input('Enter comment:')
                     self.llapi.edit_work_report(report)
                     self.print_work_report_table(report)
 
-    def approve_report(self, report_id):
+
+    def approve_report(self, report_id, request):
         reader = self.llapi.list_work_reports()
         i = 0
         for report in reader:
             if report_id == report.workreport_id:
-                report.status = 'completed'
+                request.status = 'completed'
                 report.approved = True
                 self.llapi.edit_work_report(report)
+                self.llapi.edit_work_request(request)
                 return 'Report has been marked approved!' #HERNA
             i += 1    
         return 'No report found'
