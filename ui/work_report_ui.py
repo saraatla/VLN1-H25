@@ -41,7 +41,7 @@ class WorkReportUI:
                     command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                     print(LINE)
                     if command == "1":
-                        self.__edit_work_report(report)
+                        self._edit_work_report(report)
                         self.__print_work_report_table(report)
                     elif command == "B":
                         return
@@ -89,7 +89,7 @@ class WorkReportUI:
                 print('Report has been marked approved and request has been closed!') 
 
 
-    def __edit_work_report(self, report):
+    def _edit_work_report(self, report):
         while True:
             fieldnames = ['Employee SSN','Contractor_ID','Contractor_review','Contractor_remuneration','Totel_cost','Description']
             for index, field in enumerate(fieldnames):
