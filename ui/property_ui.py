@@ -20,7 +20,7 @@ class PropertyUI:
     def _property_menu_start(self):
         propAscii()
         while True:
-            operations =  ['Search by ID', 'See list']
+            operations =  ['Search by property ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
             operations_menu = Menu(f'{self.Properties_menu_color} in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)

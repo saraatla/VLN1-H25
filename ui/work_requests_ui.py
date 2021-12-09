@@ -28,7 +28,7 @@ class WorkRequestUI:
         while True:
             operations = ['Search by work request ID', 'Search by property ID', 'Search by employee SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
-                operations.append('Add new')
+                operations.append('Create new')
             operations_menu = Menu(f'{LINE}\n{self.Work_Requests_menu_color} in {self.destination_collor}\nChoose options', operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
@@ -87,7 +87,7 @@ class WorkRequestUI:
                     self.__open_request_from_list(request_list)
                 
 
-            elif operation == 'Add new':
+            elif operation == 'Create new':
                 self.__create_work_request()
 
 
