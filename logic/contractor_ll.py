@@ -1,7 +1,6 @@
 from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 from models.contractor_model import Contractor
-LINE = '------------------------------------------'
 
 class ContractorLL:
     """Contractor logic layer class; Contains 6 functions: fetches the functions in the data layer API, 
