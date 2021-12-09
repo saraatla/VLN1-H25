@@ -128,7 +128,7 @@ class WorkRequestUI:
         for item in range(len(request_list)):
             workreq = request_list[item]
             table.add_rows([["Number.","Workrequest_ID", "Title", "Date", "Status", "Priority"], 
-                            [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
+                            [item+1, workreq.workrequest_id, workreq.title, workreq.date.strftime('%d/%m/%Y'), workreq.status, workreq.priority]])
         print(f'\n{table.draw()}\n')
 
 
