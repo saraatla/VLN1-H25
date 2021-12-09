@@ -1,19 +1,23 @@
 """Workrequest_ID,Title,Property_ID,Destination_ID,Contractor,Date,Status,Priority,Description"""
+import datetime
 from datetime import datetime
 import csv
 from models.work_request import WorkRequest
+from datetime import datetime
 
 class WorkRequestDL:
     """WorkRequest data layer class; Contains 4 functions: lists, 
-    makes new and changes information about a work request"""
+    makes new and changes information about a work request."""
     def __init__(self, destination):
         self.filepath = "csv/Workrequest.csv"
         self.destination = destination
     
     def list_work_requests(self):
         """This function reads the csv file and makes a list with 
-        all the work requests along with their information"""
-        ret_list = []
+        all the work requests along with their information.
+        Returns: 
+            return_list : list of work request info"""
+        return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
@@ -21,11 +25,13 @@ class WorkRequestDL:
                 work_reqdate = datetime.strptime(row["Date"],'%d/%m/%Y')
                 work_req = WorkRequest([row["Workrequest_ID"], row["Title"], row["Property_ID"], row["Destination"],
                 row["Contractor"], work_reqdate.date(),row["Status"], row["Priority"], row["Description"], row["Workreport_ID"]])
-                ret_list.append(work_req)
-        return ret_list
+                return_list.append(work_req)
+        return return_list
 
     def create_work_request(self,work_req):
-        "This function appends a new work request to the csv file"
+        """This function appends a new work request to the csv file.
+        Args: 
+            work_req (class instance) : work request model class"""
         with open(self.filepath, 'a', newline='') as csvfile:
             fieldnames = ['Workrequest_ID', 'Title', 'Property_ID', 'Destination', 'Contractor', 'Date', 'Status','Priority','Description','Workreport_ID']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
@@ -34,7 +40,9 @@ class WorkRequestDL:
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description, 'Workreport_ID':work_req.workreport_id})
     
     def edit_work_request(self, workreq):  
-        """This function edits a certain value for a certain work request (input by Manager)"""
+        """This function edits a certain value for a certain work request (input by Manager).
+        Args: 
+            work_req (class instance) : work request model class"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
@@ -47,7 +55,7 @@ class WorkRequestDL:
                                      workreq.property_id, 
                                      workreq.destination, 
                                      workreq.contractor, 
-                                     workreq.date, 
+                                     workreq.date.strftime('%d/%m/%Y'), 
                                      workreq.status, 
                                      workreq.priority,
                                      workreq.description,
@@ -56,7 +64,7 @@ class WorkRequestDL:
                     writer.writerow(row)
 
 
-    def find_last_id(self):
+    def find_last_request_id(self):
         req_list = self.list_work_requests()
         return req_list[-1].workrequest_id
 

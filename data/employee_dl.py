@@ -10,28 +10,34 @@ class EmployeeDL:
     
     def list_employees(self):
         """This function reads the csv file and makes a list with 
-        all the employees along with their information"""
+        all the employees along with their information
+        Returns:
+            return_list: list of employee info."""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                emp = Employee([row["Name"], row["SSN"], row["Email"], row["Address"], row["Phone"], 
+                employee = Employee([row["Name"], row["SSN"], row["Email"], row["Address"], row["Phone"], 
                 row["GSM"], row["Destination"], row["Title"]]) # Make an instance of Employee# Make an instance of Employee
-                return_list.append(emp)
+                return_list.append(employee)
         return return_list
 
-    def create_employee(self,emp):
-        "This function appends a new employee to the csv file"
+    def create_employee(self,employee):
+        """This function appends a new employee to the csv file
+        Args:
+            employee (class instance): employee model class"""
         with open(self.filepath,'a', newline='') as csvfile:
             fieldnames = ['Name', 'SSN', 'Email', 'Address', 'Phone', 'GSM', 'Destination', 'Title']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
-            writer.writerow({'Name': emp.name, 'SSN': emp.ssn, 'Email': emp.email, 'Address': emp.address, 
-            'Phone':emp.phone, 'GSM':emp.gsm, 'Destination':emp.destination, 'Title':emp.title})
+            writer.writerow({'Name': employee.name, 'SSN': employee.ssn, 'Email': employee.email, 'Address': employee.address, 
+            'Phone':employee.phone, 'GSM':employee.gsm, 'Destination':employee.destination, 'Title':employee.title})
     
 
-    def save_employee(self, employee): 
-        """This function edits a certain value for a certain employee (input by supervisor)"""
+    def edit_employee(self, employee): 
+        """This function edits a certain value for a certain employee (input by supervisor)
+        Args:
+            employee (class): model class attributes"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)

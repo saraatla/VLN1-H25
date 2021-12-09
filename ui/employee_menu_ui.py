@@ -12,6 +12,7 @@ class EmployeeMenu:
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
+        self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
     def start(self):
         empAscii()

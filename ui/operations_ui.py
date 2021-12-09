@@ -14,6 +14,7 @@ class OperationsUI:
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
+        self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
     def start(self):
         while True:
@@ -21,7 +22,7 @@ class OperationsUI:
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors',]
             else:
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors','Destination info']
-            operations_menu = Menu(f'Welcome to {self.destination_collor}\nMain menu for {self.user_type}',operations)
+            operations_menu = Menu(f'Welcome to {self.destination_collor}\nMain menu for {self.colored_user_type}',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return

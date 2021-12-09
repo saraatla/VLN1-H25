@@ -1,10 +1,11 @@
+import datetime
 from datetime import date, timedelta, datetime
-from Extra.pythondateutil.dateutil.relativedelta import relativedelta
+from dateutil.relativedelta import relativedelta
 from Extra.texttableFile.texttable import Texttable
+from Extra.TermcolorFile.termcolor import colored, cprint
 from Extra.acci import workAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-from Extra.TermcolorFile.termcolor import colored, cprint
 from ui.work_report_ui import WorkReportUI
 
 
@@ -16,6 +17,7 @@ class WorkRequestMenu:
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
+        self.report_ui = WorkReportUI(self.destination, self.user_type)
 
     def start(self):
         workAscii()
@@ -23,7 +25,7 @@ class WorkRequestMenu:
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Work Requests in {self.destination_collor}\nChoose options', operations)
+            operations_menu = Menu(f'{LINE}\nWork Requests in {self.destination_collor}\nChoose options', operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
@@ -39,51 +41,32 @@ class WorkRequestMenu:
 
             elif operation == 'Search by property ID':
                 search = input('Enter property ID: ')
-                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_requests_prop(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.list_work_requests_ui(found_requests)
-                    self.open_request_from_list(found_requests)
+                    self.print_request_list(found_requests)
 
             elif operation == 'Search by SSN':
                 search = input('Enter SSN: ')
-                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.list_work_requests_ui(found_requests)
-                    self.open_request_from_list(found_requests)
+                    self.print_request_list(found_requests)
 
             elif operation == 'Search by contractor ID':
                 search = input('Enter contractor ID: ')
-                print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
                 found_requests = self.llapi.search_work_requests_cont(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
-                    self.list_work_requests_ui(found_requests)
-                    self.open_request_from_list(found_requests)
+                    self.print_request_list(found_requests)
 
             elif operation == 'See list of all requests':
-                while True:
-                    print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
-                    #start_date = input('Enter date to search from (dd/mm/yyyy):')
-                    #end_date = input('Enter date to end (dd/mm/yyyy):')
-                    start_date = self.check_date('date to search from')
-                    end_date = self.check_date('date to end')
-                    request_list = self.llapi.list_all_work_requests(self.destination)
-                    request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
-                    if request_list_by_date is None:
-                        print('The inputs are not valid, try again')
-                        break
-                    else:
-                        self.list_work_requests_ui(request_list_by_date)
-                        self.open_request_from_list(request_list_by_date)
-                    break
-                
+                request_list = self.llapi.list_all_work_requests(self.destination)
+                self.print_request_list(request_list)
+
 
             elif operation == "See list of requests by status":
                 while True:
@@ -100,11 +83,21 @@ class WorkRequestMenu:
             elif operation == 'Add new':
                 self.create_work_request()
 
+
+    def print_request_list(self, request_list):
+        request_list_by_date = self.find_date_range(request_list)
+        self.list_work_requests_ui(request_list_by_date)
+        self.open_request_from_list(request_list_by_date)
+
+
     def open_request_from_list(self, request_list):
         while True:
+            print(LINE)
             command = input("Enter Number of request to open or B to Back:").upper()
             if command == "B":
                 break
+            if command == "P":
+                self.print_request_list(request_list)
             if not command.isdigit():
                 print("Invalid input, try again!")
             else:
@@ -115,6 +108,18 @@ class WorkRequestMenu:
                 break
 
 
+    def find_date_range(self, request_list):
+        while True:
+            print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
+            start_date = self.check_date('date to search from')
+            end_date = self.check_date('date to end')
+            request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
+            if request_list_by_date is None:
+                print('The inputs are not valid, try again')
+                break
+            else:
+                return request_list_by_date
+                    
 
     def list_work_requests_ui(self, request_list):
         table = Texttable()
@@ -124,20 +129,22 @@ class WorkRequestMenu:
             workreq = request_list[item]
             table.add_rows([["Number.","Workrequest_ID", "Title", "Date", "Status", "Priority"], 
                             [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
-        print(table.draw())
+        print(f'\n{table.draw()}\n')
 
 
     def individual_work_request_ui(self, request, nr=None):
         self.print_work_request_table(request, nr)
         if self.user_type == 'Employee':
-            if request.status == 'open':
+            if request.status == 'open' and request.workreport_id is None:
                 while True:
                     print('1: Add report\nB: Back')
                     print(LINE)
                     command = input("Choose Options: ").upper()
                     print(LINE)
                     if command == "1":
-                        self.create_work_report(request)
+                        work_report = self.report_ui.create_work_report(request)
+                        self.report_ui.individual_work_report_ui(work_report, request)
+                        break
                     elif command == "B":
                         return
                     else:
@@ -145,27 +152,48 @@ class WorkRequestMenu:
                         print(LINE)
             else:
                 while True:
-                    command = input('Press B for Back: ').upper()
+                    print('1: See report\nB: Back ')
                     print(LINE)
+                    command = input("Choose Options: ").upper()
+                    if command == '1':
+                        report = self.llapi.search_work_report(request[-1])
+                        self.report_ui.individual_work_report_ui(report)
                     if command == 'B':
                         return
                     else:
                         print("Invalid option, try again ")
                         print(LINE)
         elif self.user_type == 'Manager':
-            while True:
-                print("1: Edit\nB: Back")
-                print(LINE)
-                command = input("Choose Options edit or back: ").upper()
-                print(LINE)
-                if command == "1":
-                    self.edit_work_request(request)
-                    self.print_work_request_table(request)
-                elif command == "B":
-                    return
-                else:
-                    print("Invalid option, try again ")
+            if request.status == 'completed':
+                while True:
+                    print("1: Reopen request\nB: Back")
                     print(LINE)
+                    command = input("Choose Options reopen or back: ").upper()
+                    print(LINE)
+                    if command == "1":
+                        request.status = 'open'
+                        self.llapi.edit_work_request(request)
+                        self.print_work_request_table(request)
+                        break
+                    elif command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
+            else:
+                while True:
+                    print("1: Edit\nB: Back")
+                    print(LINE)
+                    command = input("Choose Options edit or back: ").upper()
+                    print(LINE)
+                    if command == "1":
+                        self.edit_work_request(request)
+                        self.print_work_request_table(request)
+                    elif command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
     
 
     def print_work_request_table(self, request, nr=None):
@@ -177,12 +205,12 @@ class WorkRequestMenu:
         work_request_table.add_row(["Property_ID",request.property_id])
         work_request_table.add_row(["Destination",request.destination])
         work_request_table.add_row(["Contractor",request.contractor])
-        work_request_table.add_row(["Date",request.date])
+        work_request_table.add_row(["Date",request.date.strftime('%d/%m/%Y')])
         work_request_table.add_row(["Status",request.status])
         work_request_table.add_row(["Priority",request.priority])
         work_request_table.add_row(["Description",request.description])
         work_request_table.add_row(["Workreport ID",request.workreport_id])
-        print(work_request_table.draw())
+        print(f'\n{work_request_table.draw()}\n')
     
 
     def edit_work_request(self, req):
@@ -209,15 +237,6 @@ class WorkRequestMenu:
     def create_work_report(self, request):
         pass
 
-
-
-
-
-
-
-
-
-    
     def create_work_request(self):
         print('Enter the following information: ')
         print(LINE)
@@ -234,8 +253,9 @@ class WorkRequestMenu:
             print(f'{LINE}\nWork request successfully created!\n{LINE}')
     
 
+
     def create_work_req_list(self):
-        new_id = self.llapi.get_new_id()
+        new_id = self.llapi.get_new_request_id()
         workreq = [new_id]
         fieldnames = ["Title", "Property_ID"]
         for field in fieldnames:
@@ -259,7 +279,7 @@ class WorkRequestMenu:
         workreq.append(priority)
         description = input('Description: ')
         workreq.append(description)
-        report_id = 'None'
+        report_id = None
         workreq.append(report_id)
         return start_date, workreq
 

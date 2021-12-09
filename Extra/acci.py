@@ -1,17 +1,19 @@
 import time
 from Extra.TermcolorFile.termcolor import colored
+
 def acci():
-        print(f'\x1bc{colored("███╗   ██╗ █████╗ ███╗   ██╗     █████╗ ██╗██████╗ ","cyan")}')
+        x = colored("███╗   ██╗ █████╗ ███╗   ██╗     █████╗ ██╗██████╗ ",'green',attrs=['bold'])
+        print(f'\x1bc{x}')
         time.sleep(0.1)
-        print(colored("████╗  ██║██╔══██╗████╗  ██║    ██╔══██╗██║██╔══██╗","cyan"))
+        print(colored("████╗  ██║██╔══██╗████╗  ██║    ██╔══██╗██║██╔══██╗",'green' ,attrs=['bold']))
         time.sleep(0.12)
-        print(colored("██╔██╗ ██║███████║██╔██╗ ██║    ███████║██║██████╔╝", "cyan"))
+        print(colored("██╔██╗ ██║███████║██╔██╗ ██║    ███████║██║██████╔╝",'green' ,attrs=['bold']))
         time.sleep(0.13)
-        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", "cyan"))
+        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", 'green' ,attrs=['bold']))
         time.sleep(0.14)
-        print(colored("██║ ╚████║██║  ██║██║ ╚████║    ██║  ██║██║██║  ██║", "cyan"))
+        print(colored("██║ ╚████║██║  ██║██║ ╚████║    ██║  ██║██║██║  ██║", 'green' ,attrs=['bold']))
         time.sleep(0.15)
-        print(colored("╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝", "cyan"))
+        print(colored("╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝", 'green' ,attrs=['bold']))
         time.sleep(0.16)
 
 def empAscii():
@@ -29,7 +31,7 @@ def locAscii():
         |/               `^ .'""")
 
 def contAscii():
-        print("""\x1bc     _.---.                            .---.
+        print("""     _.---.                            .---.
     '---,  `.________________________.'  _  `.
          )   ________________________   (_)  :
     .---'  .'                        `.     .'

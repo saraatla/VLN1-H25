@@ -10,27 +10,33 @@ class PropertyDL:
     
     def list_properties(self):
         """This function reads the csv file and makes a list with 
-        all the properties along with their information"""
+        all the properties along with their information.
+        Returns:
+            return_list: list of property info."""
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                prop = Property([row["Destination"], row["Address"], row["Squarefoot"], 
+                property = Property([row["Destination"], row["Address"], row["Squarefoot"], 
                 row["Rooms"], row["Type"], row["Property_ID"], row["Facilities"]]) # Make an instance of Property
-                return_list.append(prop)
+                return_list.append(property)
         return return_list
 
-    def create_property(self, prop):
-        "This function appends a new property to the csv file"
+    def create_property(self, property):
+        """This function appends a new property to the csv file.
+        Args:
+            property (class instance): property model class"""
         with open(self.filepath, 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ["Destination", "Address", "Squarefoot", "Rooms", "Type", "Property_ID", "Facilities"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
-            writer.writerow({'Destination': prop.destination, "Address": prop.address, "Squarefoot": prop.squarefoot, 
-            "Rooms": prop.rooms, "Type": prop.type, "Property_ID": prop.property_id, "Facilities": prop.facilities})
+            writer.writerow({'Destination': property.destination, "Address": property.address, "Squarefoot": property.squarefoot, 
+            "Rooms": property.rooms, "Type": property.type, "Property_ID": property.property_id, "Facilities": property.facilities})
 
     def edit_property(self, property):  
-        """This function edits a certain value for a certain property (input by Manager)"""
+        """This function edits a certain value for a certain property (input by Manager).
+        Args:
+            property (class instance): property model class"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)

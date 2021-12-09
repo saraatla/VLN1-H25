@@ -27,8 +27,8 @@ class DLAPI:
     def list_employees(self):
         return self.employeeDL.list_employees()
     
-    def save_employee(self,emp):
-        return self.employeeDL.save_employee(emp)
+    def edit_employee(self,emp):
+        return self.employeeDL.edit_employee(emp)
 
     # Property DL
     def create_property(self, prop):
@@ -60,15 +60,19 @@ class DLAPI:
     def edit_work_request(self,work_req):
         return self.work_requestDL.edit_work_request(work_req)
 
-    def find_last_id(self):
-        return self.work_requestDL.find_last_id()
+    def find_last_request_id(self):
+        return self.work_requestDL.find_last_request_id()
 
     # Work Report DL
     def create_work_report(self, work_rep):
-        return self.work_reportDL.create_work_report(work_rep)
+        self.work_reportDL.create_work_report(work_rep)
+        return work_rep
 
     def list_work_reports(self):
         return self.work_reportDL.list_work_reports()
 
     def edit_work_report(self,work_rep):
         return self.work_reportDL.edit_work_report(work_rep)
+    
+    def find_last_report_id(self):
+        return self.work_reportDL.find_last_report_id()
