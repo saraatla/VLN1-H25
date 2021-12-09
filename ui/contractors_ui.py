@@ -29,7 +29,7 @@ class ContractorUI:
             operation = operations[selected_operation]
 
             if operation  == 'Search by ID':
-                search = input(self.color_format.format('Enter contractor ID: '))
+                search = input(self.color_format.format('Enter contractor ID: ')).upper()
                 found_contractor = self.llapi._search_contractor(search)
                 if found_contractor is None:
                     print(f'{LINE}\nContractor not found\n{LINE}')
