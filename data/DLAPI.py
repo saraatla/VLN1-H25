@@ -17,11 +17,11 @@ class DLAPI:
         self.work_reportDL = WorkReportDL(self.destination)
 
     # Destination DL
-    def list_destinations(self):
-        return self.destinationDL.list_destinations()
+    def _list_destinations(self):
+        return self.destinationDL._list_destinations()
 
-    def create_destination(self, destination):
-        return self.destinationDL.create_destination(destination)
+    def _create_destination(self, destination):
+        return self.destinationDL._create_destination(destination)
 
     # Employee DL
     def _create_employee(self, emp):
