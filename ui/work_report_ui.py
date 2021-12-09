@@ -72,7 +72,7 @@ class WorkReportUI:
                     print(LINE)
                 if command == '1':
                     self.llapi._approve_report(report.workreport_id, request)
-                    break
+                    return
                 elif command == '2':
                     report.manager_cmt = input('Enter comment:')
                     self.llapi._edit_work_report(report)
@@ -81,16 +81,13 @@ class WorkReportUI:
 
     def _approve_report(self, report_id, request):
         reader = self.llapi._list_work_reports()
-        i = 0
         for report in reader:
             if report_id == report.workreport_id:
                 request.status = 'completed'
                 report.approved = True
                 self.llapi._edit_work_report(report)
                 self.llapi._edit_work_request(request)
-                return 'Report has been marked approved!' #HERNA
-            i += 1    
-        return 'No report found'
+                print('Report has been marked approved and request has been closed!') 
 
 
     def __edit_work_report(self, report):
@@ -121,4 +118,4 @@ class WorkReportUI:
         work_report_table.add_row(["Description",report.description])
         work_report_table.add_row(["Approved",report.approved])
         work_report_table.add_row(["Manager_comment",report.manager_cmt])
-        print(work_report_table.draw())
+        print(f'\n{work_report_table.draw()}\n')
