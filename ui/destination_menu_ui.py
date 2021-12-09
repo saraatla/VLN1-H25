@@ -18,7 +18,8 @@ class DestinationMenu:
             locAscii()
             options = self.llapi.list_of_destinations()
             options.append('All destinations')
-            options.append('Add new destination')                          #{colored(self.location, attrs=['bold'])}
+            if self.user_type == 'Manager':
+                options.append('Add new destination')                          #{colored(self.location, attrs=['bold'])}
             destination_menu = Menu(f"Welcome you are signed in as {self.colored_user_type}\nPlease choose destination", options)
             selection  = destination_menu.draw_options()
             if selection < 0:
