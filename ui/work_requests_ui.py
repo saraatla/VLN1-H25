@@ -1,12 +1,13 @@
 import datetime
 from datetime import date, timedelta, datetime
 from dateutil.relativedelta import relativedelta
-from Extra.texttableFile.texttable import Texttable
+from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.TermcolorFile.termcolor import colored, cprint
 from Extra.acci import workAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.work_report_ui import WorkReportUI
+
 
 
 LINE = '------------------------------------------'
@@ -18,10 +19,11 @@ class WorkRequestUI:
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
         self.report_ui = WorkReportUI(self.destination, self.user_type)
+        self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
 
     def _workrequest_menu_start(self):
-        workAscii()
         while True:
+            workAscii()
             operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
@@ -32,7 +34,7 @@ class WorkRequestUI:
             operation = operations[selected_operation]
 
             if operation == 'Search by work request ID':
-                search = input('Enter work request ID: ')
+                search = input(self.color_format.format('Enter work request ID: '))
                 found_request = self.llapi._search_work_requests_id(search, self.destination)
                 if found_request is None:
                     print(f'{LINE}\nWork request not found\n{LINE}')
@@ -40,7 +42,7 @@ class WorkRequestUI:
                     self.__individual_work_request_ui(found_request)
 
             elif operation == 'Search by property ID':
-                search = input('Enter property ID: ')
+                search = input(self.color_format.format('Enter property ID: '))
                 found_requests = self.llapi._search_work_requests_prop(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -48,7 +50,7 @@ class WorkRequestUI:
                     self.__print_request_list(found_requests)
 
             elif operation == 'Search by SSN':
-                search = input('Enter SSN: ')
+                search = input(self.color_format.format('Enter SSN: '))
                 found_requests = self.llapi._search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -56,7 +58,7 @@ class WorkRequestUI:
                     self.__print_request_list(found_requests)
 
             elif operation == 'Search by contractor ID':
-                search = input('Enter contractor ID: ')
+                search = input(self.color_format.format('Enter contractor ID: '))
                 found_requests = self.llapi._search_work_requests_cont(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -70,7 +72,7 @@ class WorkRequestUI:
 
             elif operation == "See list of requests by status":
                 while True:
-                    status = input('Enter status: ').lower()
+                    status = input(self.color_format.format('Enter status: ')).lower()
                     request_list = self.llapi._workrequests_by_status(status, self.destination) 
                     if request_list == []:
                         print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
@@ -93,7 +95,7 @@ class WorkRequestUI:
     def __open_request_from_list(self, request_list):
         while True:
             print(LINE)
-            command = input("Enter Number of request to open or B to Back:").upper()
+            command = input(self.color_format.format("Enter Number of request to open or B to Back:")).upper()
             if command == "B":
                 break
             if command == "P":
@@ -127,8 +129,8 @@ class WorkRequestUI:
         table.set_max_width(300)
         for item in range(len(request_list)):
             workreq = request_list[item]
-            table.add_rows([["Number.","Workrequest_ID", "Title", "Date", "Status", "Priority"], 
-                            [item+1, workreq.workrequest_id, workreq.title, workreq.date.strftime('%d/%m/%Y'), workreq.status, workreq.priority]])
+            table.add_rows([[get_color_string(bcolors.GREEN,"Number."),get_color_string(bcolors.GREEN,"Workrequest_ID"), get_color_string(bcolors.GREEN,"Title"), get_color_string(bcolors.GREEN,"Date"), get_color_string(bcolors.GREEN,"Status"), get_color_string(bcolors.GREEN,"Priority")], 
+                            [get_color_string(bcolors.GREEN,item+1), workreq.workrequest_id, workreq.title, workreq.date.strftime('%d/%m/%Y'), workreq.status, workreq.priority]])
         print(f'\n{table.draw()}\n')
 
 
@@ -140,7 +142,7 @@ class WorkRequestUI:
                     self.__print_work_request_table(request, nr)
                     print('1: Add report\nB: Back')
                     print(LINE)
-                    command = input("Choose Options: ").upper()
+                    command = input(self.color_format.format("Choose Options: ")).upper()
                     print(LINE)
                     if command == "1":
                         work_report = self.report_ui._create_work_report(request)
@@ -155,7 +157,7 @@ class WorkRequestUI:
                 while True:
                     print('Work request: ')
                     self.__print_work_request_table(request, nr)
-                    command = input('Press B for back: ').upper()
+                    command = input(self.color_format.format('Press B for back: ')).upper()
                     if command == 'B':
                         return
                     else:
@@ -167,7 +169,7 @@ class WorkRequestUI:
                     self.__print_work_request_table(request, nr)
                     print('1: See report\nB: Back ')
                     print(LINE)
-                    command = input("Choose Options: ").upper()
+                    command = input(self.color_format.format("Choose Options: ")).upper()
                     if command == '1':
                         report = self.llapi._search_work_report(request.workreport_id)
                         self.report_ui._individual_work_report_ui(report, request)
@@ -183,7 +185,7 @@ class WorkRequestUI:
                     self.__print_work_request_table(request, nr)
                     print("1: Reopen request\nB: Back")
                     print(LINE)
-                    command = input("Choose Options reopen or back: ").upper()
+                    command = input(self.color_format.format("Choose Options reopen or back: ")).upper()
                     print(LINE)
                     if command == "1":
                         request.status = 'open'
@@ -200,7 +202,7 @@ class WorkRequestUI:
                     print('Work request: ')
                     self.__print_work_request_table(request, nr)
                     print("1: See report\n2: Edit\nB: Back")
-                    command = input('Choose options: ').upper()
+                    command = input(self.color_format.format('Choose options: ')).upper()
                     if command == '1':
                         report = self.llapi._search_work_report(request.workreport_id)
                         self.report_ui._individual_work_report_ui(report, request)
@@ -218,7 +220,7 @@ class WorkRequestUI:
                     self.__print_work_request_table(request, nr)
                     print("1: Edit\nB: Back")
                     print(LINE)
-                    command = input("Choose Options edit or back: ").upper()
+                    command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                     print(LINE)
                     if command == "1":
                         self.__edit_work_request(request)
@@ -233,17 +235,17 @@ class WorkRequestUI:
     def __print_work_request_table(self, request, nr=None):
         work_request_table = Texttable()
         if nr is not None:
-            work_request_table.add_row(["Number.",nr])
-        work_request_table.add_row(["Workrequest_ID",request.workrequest_id])
-        work_request_table.add_row(["Title",request.title])
-        work_request_table.add_row(["Property_ID",request.property_id])
-        work_request_table.add_row(["Destination",request.destination])
-        work_request_table.add_row(["Contractor",request.contractor])
-        work_request_table.add_row(["Date",request.date.strftime('%d/%m/%Y')])
-        work_request_table.add_row(["Status",request.status])
-        work_request_table.add_row(["Priority",request.priority])
-        work_request_table.add_row(["Description",request.description])
-        work_request_table.add_row(["Workreport ID",request.workreport_id])
+            work_request_table.add_row([get_color_string(bcolors.GREEN,"Number."),nr])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Workrequest_ID"),request.workrequest_id])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Title"),request.title])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Property_ID"),request.property_id])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Destination"),request.destination])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Contractor"),request.contractor])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Date"),request.date.strftime('%d/%m/%Y')])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Status"),request.status])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Priority"),request.priority])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Description"),request.description])
+        work_request_table.add_row([get_color_string(bcolors.GREEN,"Workreport ID"),request.workreport_id])
         print(f'\n{work_request_table.draw()}\n')
     
 
@@ -255,7 +257,7 @@ class WorkRequestUI:
             col = input('What do you want to change? ')
             try:
                 col = int(col)
-                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
                 setattr(req, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_work_request(req)
             except:
@@ -273,7 +275,7 @@ class WorkRequestUI:
         options = ['Do no repeat', 'Daily', 'Weekly', 'Monthly', 'Yearly']
         for i, option in enumerate(options):
             print(f"{i+1}: {option}")
-        repeat = int(input('Choose option: '))
+        repeat = int(input(self.color_format.format('Choose option: ')))
         if repeat > 1:
             self.__repeat_work_request(start_date, repeat, workreq)
         else:
@@ -290,7 +292,7 @@ class WorkRequestUI:
             val = input(f'{field}: ')
             workreq.append(val)
         workreq.append(self.destination)
-        contractor = input('Is a contractor needed for this work request: ')
+        contractor = input(self.color_format.format('Is a contractor needed for this work request: '))
         workreq.append(contractor)
         start_date = self.__check_date('start date')
         workreq.append(start_date)
@@ -302,10 +304,10 @@ class WorkRequestUI:
         priority_options  = ['Emergengy', 'Now', 'ASAP']
         for i, option in enumerate(priority_options):
             print(f"{i+1}: {option}")
-        index = int(input('Choose priority: '))
+        index = int(input(self.color_format.format('Choose priority: ')))
         priority = priority_options[index-1]
         workreq.append(priority)
-        description = input('Description: ')
+        description = input(self.color_format.format('Description: '))
         workreq.append(description)
         report_id = None
         workreq.append(report_id)
@@ -317,22 +319,22 @@ class WorkRequestUI:
         if date.today() <= date_var:
             i = 0
             if repeat == 2:
-                how_many = int(input('for how many days: '))
+                how_many = int(input(self.color_format.format('for how many days: ')))
                 for i in range(how_many):
                     new_date = timedelta(days = 1*i)
                     self.__create_repeated(workreq, date_var, new_date)
             elif repeat == 3:
-                how_many = int(input('for how many weeks: '))
+                how_many = int(input(self.color_format.format('for how many weeks: ')))
                 for i in range(how_many):
                     new_date = timedelta(weeks = 1*i)
                     self.__create_repeated(workreq, date_var, new_date)
             elif repeat == 4:
-                how_many = int(input('for how many months: '))
+                how_many = int(input(self.color_format.format('for how many months: ')))
                 for i in range(how_many):
                     new_date = relativedelta(months =+1*i)
                     self.__create_repeated(workreq, date_var, new_date)
             elif repeat == 5:
-                how_many = int(input('for how many years: '))
+                how_many = int(input(self.color_format.format('for how many years: ')))
                 for i in range(how_many):
                     new_date = relativedelta(years =+1*i)
                     self.__create_repeated(workreq, date_var, new_date)
@@ -353,7 +355,7 @@ class WorkRequestUI:
 
     def __check_date(self, date_str):
         while True:
-            date_string = input(f'Enter {date_str}, dd/mm/yyyy: ')
+            date_string = input(self.color_format.format(f'Enter {date_str}, dd/mm/yyyy: '))
             if date_string == '' and date_str is not 'start date':
                 return date_string
             format = "%d/%m/%Y"
