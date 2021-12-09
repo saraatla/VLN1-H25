@@ -12,7 +12,7 @@ class PropertyMenu:
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
 
-    def start(self):
+    def property_menu_start(self):
         propAscii()
         while True:
             operations =  ['Search by ID', 'See list']

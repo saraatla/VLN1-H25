@@ -10,7 +10,7 @@ class DestinationMenu:
         self.user_type = user_type
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
         
-    def start(self):
+    def destination_menu_start(self):
         while True:
             locAscii()
             options = self.llapi.list_of_destinations()

@@ -14,7 +14,7 @@ class EmployeeMenu:
         self.user_type = user_type
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
-    def start(self):
+    def employee_menu_start(self):
         empAscii()
         while True:
             operations =  ['Search by SSN', 'See list']
@@ -133,7 +133,7 @@ class EmployeeMenu:
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 setattr(emp, fieldnames[col-1].lower(), newval)
-                return self.llapi.save_employee(emp)
+                return self.llapi.edit_employee(emp)
             except:
                 print('Invalid input, try again!')
 

@@ -29,18 +29,18 @@ class OperationsUI:
             operation = operations[selected_operation]
             if operation  == 'Employees':
                 employee_menu  = EmployeeMenu(self.destination,self.user_type)
-                employee_menu.start()
+                employee_menu.employee_menu_start()
             elif operation == 'Properties':
                 property_menu  = PropertyMenu(self.destination,self.user_type)
-                property_menu.start()
+                property_menu.property_menu_start()
             elif operation == 'Work requests':
                 work_request_menu  = WorkRequestMenu(self.destination,self.user_type)
                 work_request_menu.start()
             elif operation == 'Contractors':
                 contractor_menu  = ContractorMenu(self.destination,self.user_type)
-                contractor_menu.start()
+                contractor_menu.contractor_menu_start()
             elif operation == 'Destination info':
                 destination = self.llapi.search_destination(self.destination)
                 destination_ui = DestinationUI(destination)
-                destination_ui.start()
+                destination_ui.destination_info_ui()
 
