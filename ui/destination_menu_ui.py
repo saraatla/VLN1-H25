@@ -7,6 +7,11 @@ from Extra.TermcolorFile.termcolor import colored
 LINE = '------------------------------------------'
 
 class DestinationMenu:
+    """Destination Menu UI class: contains 2 functions.
+    Args:
+        user_type (str): user 
+        destination (str): destination chosen by user."""
+
     def __init__(self,user_type,destination=""):
         self.destination = destination
         self.llapi = LLAPI(self.destination)
@@ -15,6 +20,12 @@ class DestinationMenu:
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
         
     def _destination_menu_start(self):
+        """This function makes the destination menu function. The user chooses which destination
+        he wants to see.  After choosing a destination all the information later on in the
+        program will only show employees, work requests, contractors and properties in that
+        destination.
+        Add new destination: makes it possible to add a new destination to the system."""
+
         while True:
             locAscii()
             options = self.llapi._list_of_destinations()
