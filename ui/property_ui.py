@@ -12,6 +12,7 @@ class PropertyUI:
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
+        self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
         
         
 
@@ -21,7 +22,7 @@ class PropertyUI:
             operations =  ['Search by ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Properties in {self.destination_collor}\nChoose options',operations)
+            operations_menu = Menu(f'Properties in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
@@ -74,7 +75,7 @@ class PropertyUI:
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(0)
-        prop_list = self.llapi.list_properties(self.destination)
+        prop_list = self.llapi._list_properties(self.destination)
         for item in range(len(prop_list)):
             prop = prop_list[item]                                                                                                             
             table.add_rows([[get_color_string(bcolors.GREEN, "Number"),get_color_string(bcolors.GREEN,"Property_ID"),get_color_string(bcolors.GREEN,"Type"),get_color_string(bcolors.GREEN,"Address"),get_color_string(bcolors.GREEN,"Destination")], 
