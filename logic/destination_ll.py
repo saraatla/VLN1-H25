@@ -1,4 +1,5 @@
 from data.DLAPI import DLAPI
+from models.destination_model import Destination
 
 class DestinationLL:
     """Destination logic layer class; Contains 3 functions: fetches the functions in the data layer API,
@@ -30,4 +31,8 @@ class DestinationLL:
             for dest in reader:
                 if destination == dest.destination:
                     return dest
+    
+    def create_destination(self, dest):
+        self.dlapi.create_destination(Destination(dest))
+
 

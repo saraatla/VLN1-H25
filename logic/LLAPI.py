@@ -9,7 +9,7 @@ class LLAPI:
     """Logic Layer API fetches all the functions in the logic layer"""
     def __init__(self,destination):
         self.destination = destination
-        self.destinations = DestinationLL(self.destination)
+        self.destinationLL = DestinationLL(self.destination)
         self.employeeLL  = EmployeeLL(self.destination)
         self.propertyLL = PropertyLL(self.destination)
         self.contractorLL  = ContractorLL(destination)
@@ -18,10 +18,13 @@ class LLAPI:
 
     # Destination LL
     def list_of_destinations(self):
-        return self.destinations.list_of_destinations()
+        return self.destinationLL.list_of_destinations()
     
     def search_destination(self, destination):
-        return self.destinations.search_destination(destination)
+        return self.destinationLL.search_destination(destination)
+
+    def create_destination(self, destination):
+        return self.destinationLL.create_destination(destination)
 
     # Employee LL
     def create_employee(self, employee):
