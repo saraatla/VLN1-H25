@@ -48,7 +48,7 @@ class EmployeeUI:
                     if command == "B":
                         break
                     if not command.isdigit():
-                        print("Invalid input, try again!")
+                        print("Invalid input, please try again")
                     else:
                         nr = int(command)
                         for index, employee in enumerate(emp_list):
@@ -106,7 +106,7 @@ class EmployeeUI:
                 if command == "B":
                     return
                 else:
-                    print("Invalid option, try again ")
+                    print("Invalid option, please try again")
                     print(LINE)
             else:
                 print("1: Edit\nB: Back")
@@ -119,7 +119,7 @@ class EmployeeUI:
                 elif command == "B":
                     return
                 else:
-                    print("Invalid option, try again ")
+                    print("Invalid option, please try again")
                     print(LINE)
     
 
@@ -153,6 +153,6 @@ class EmployeeUI:
                 setattr(emp, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_employee(emp)
             except:
-                print('Invalid input, try again!')
+                print('Invalid input, please try again')
 
 
