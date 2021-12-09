@@ -266,6 +266,9 @@ class WorkRequestUI:
 
 
     def __create_work_request(self):
+        """This function runs when the user (manager) chooses 'Add new' . 
+        The employee will be given a destination according to the user's choice in the destination menu."""
+        
         print('Enter the following information: ')
         print(LINE)
         start_date, workreq = self.__create_work_req_list()
