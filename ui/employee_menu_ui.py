@@ -1,4 +1,3 @@
-
 from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.acci import empAscii
 from ui.menu import Menu
@@ -7,7 +6,7 @@ from Extra.TermcolorFile.termcolor import colored, cprint
 
 LINE = '------------------------------------------'
 
-class EmployeeUI:
+class EmployeeMenu:
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -15,7 +14,7 @@ class EmployeeUI:
         self.user_type = user_type
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
-    def employee_menu_start(self):
+    def start(self):
         empAscii()
         while True:
             operations =  ['Search by SSN', 'See list']
@@ -134,7 +133,7 @@ class EmployeeUI:
                 col = int(col)
                 newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(emp, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_employee(emp)
+                return self.llapi.save_employee(emp)
             except:
                 print('Invalid input, try again!')
 

@@ -1,4 +1,4 @@
-from Extra.texttableFile.texttable import Texttable
+from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.acci import propAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
@@ -11,6 +11,9 @@ class PropertyUI:
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
+        self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
+        
+        
 
     def property_menu_start(self):
         propAscii()
@@ -25,7 +28,7 @@ class PropertyUI:
             operation = operations[selected_operation]
 
             if operation  == 'Search by ID':
-                search = input('Enter property ID: ')
+                search = input(self.color_format.format('Enter property ID: '))
                 found_property = self.llapi.search_property(search, self.destination)
                 if found_property is None:
                     print(f'{LINE}\nProperty not found\n{LINE}')
@@ -35,7 +38,7 @@ class PropertyUI:
             elif operation == 'See list':
                 prop_list = self.list_properties()
                 while True:
-                    command = input("Enter number of property to open or B to Back: ").upper()
+                    command = input(self.color_format.format("Enter number of property to open or B to Back: ")).upper()
                     if command == "B":
                         return
                     if not command.isdigit():
@@ -62,7 +65,7 @@ class PropertyUI:
             prop = []
             fieldnames.insert(0, 'Destination')        
         for field in fieldnames:
-            val = input(f'{field}: ')
+            val = input(self.color_format.format(f'{field}: '))
             prop.append(val)
         return self.llapi.create_property(prop)
 
@@ -70,12 +73,13 @@ class PropertyUI:
     def list_properties(self):
         table = Texttable()
         table.set_deco(Texttable.HEADER)
-        table.set_max_width(300)
+        table.set_max_width(0)
         prop_list = self.llapi.list_properties(self.destination)
         for item in range(len(prop_list)):
-            prop = prop_list[item]
-            table.add_rows([["Number","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], 
-                            [item+1,prop.destination, prop.address, prop.squarefoot, prop.rooms, prop.type, prop.property_id, prop.facilities]])
+            prop = prop_list[item]                                                                                                             
+            table.add_rows([[get_color_string(bcolors.GREEN, "Number"),get_color_string(bcolors.GREEN,"Property_ID"),get_color_string(bcolors.GREEN,"Type"),get_color_string(bcolors.GREEN,"Address"),get_color_string(bcolors.GREEN,"Destination")], 
+                            [get_color_string(bcolors.GREEN,item+1),prop.property_id, prop.type,prop.address, prop.destination]])
+                                    
         print(table.draw())
         return prop_list
 
@@ -87,7 +91,7 @@ class PropertyUI:
         while True:
             print("1: Edit\nB: Back")
             print(LINE)
-            command = input("Choose Options edit or back: ").upper()
+            command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
             print(LINE)
             if command == "1":
                 self.edit_property(property)
@@ -101,14 +105,14 @@ class PropertyUI:
     def print_property_table(self, property, nr=None):
         property_table = Texttable()
         if nr is not None:
-            property_table.add_row(["Number",nr])
-        property_table.add_row(["Destination",property.destination])
-        property_table.add_row(["Address",property.address])
-        property_table.add_row(["Squarefoot",property.squarefoot])
-        property_table.add_row(["Rooms",property.rooms])
-        property_table.add_row(["Type",property.type])
-        property_table.add_row(["Property_id",property.property_id])
-        property_table.add_row(["Facilities",property.facilities])
+            property_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
+        property_table.add_row([get_color_string(bcolors.GREEN,"Destination"),property.destination])
+        property_table.add_row([get_color_string(bcolors.GREEN,"Address"),property.address])
+        property_table.add_row([get_color_string(bcolors.GREEN,"Squarefoot"),property.squarefoot])
+        property_table.add_row([get_color_string(bcolors.GREEN,"Rooms"),property.rooms])
+        property_table.add_row([get_color_string(bcolors.GREEN,"Type"),property.type])
+        property_table.add_row([get_color_string(bcolors.GREEN,"Property_id"),property.property_id])
+        property_table.add_row([get_color_string(bcolors.GREEN,"Facilities"),property.facilities])
         print(property_table.draw())
 
     def edit_property(self, prop):
@@ -116,10 +120,10 @@ class PropertyUI:
             fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Facilities']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What do you want to change? ')
+            col = input(colored('What do you want to change? ','green' ,attrs=['bold', 'underline']))
             try:
                 col = int(col)
-                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(prop, fieldnames[col-1].lower(), newval)
                 return self.llapi.edit_property(prop)
             except:
