@@ -164,7 +164,7 @@ class WorkRequestMenu:
                     print(LINE)
                     command = input("Choose Options: ").upper()
                     if command == '1':
-                        report = self.llapi.search_work_report(request[-1])
+                        report = self.llapi.search_work_report(request.workreport_id)
                         self.report_ui.individual_work_report_ui(report)
                     if command == 'B':
                         return
@@ -184,6 +184,21 @@ class WorkRequestMenu:
                         self.print_work_request_table(request)
                         break
                     elif command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
+            elif request.status == 'open' and request.workreport_id is not None:
+                while True:
+                    print("1: See report\n2: Edit\nB: Back")
+                    command = input('Choose options: ').upper()
+                    if command == '1':
+                        report = self.llapi.search_work_report(request.workreport_id)
+                        self.report_ui.individual_work_report_ui(report)
+                    elif command == '2':
+                        self.edit_work_request(request)
+                        self.print_work_request_table(request)
+                    elif command == 'B':
                         return
                     else:
                         print("Invalid option, try again ")

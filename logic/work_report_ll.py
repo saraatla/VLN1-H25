@@ -29,9 +29,12 @@ class WorkReportLL:
     def approve_report(self, workreport_id):
         reader = self.list_work_reports()
         i = 0
-        for row in reader:
-            if workreport_id == row.workreport_id:
-                self.dlapi.edit_work_report(i, self.APPROVED_INDEX, True)
+        for report in reader:
+            if workreport_id == report.workreport_id:
+                report.status = 'completed'
+                report.approved = True
+                #self.dlapi.edit_work_report(i, self.APPROVED_INDEX, True)
+                
                 return 'Report has been marked approved!'
             i += 1    
         return 'No report found'

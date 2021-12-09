@@ -70,6 +70,18 @@ class WorkReportUI:
                     self.llapi.edit_work_report(report)
                     self.print_work_report_table(report)
 
+    def approve_report(self, report_id):
+        reader = self.llapi.list_work_reports()
+        i = 0
+        for report in reader:
+            if report_id == report.workreport_id:
+                report.status = 'completed'
+                report.approved = True
+                self.llapi.edit_work_report(report)
+                return 'Report has been marked approved!' #HERNA
+            i += 1    
+        return 'No report found'
+
 
     def edit_work_report(self, report):
         while True:
