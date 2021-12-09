@@ -20,14 +20,14 @@ class EmployeeMenu:
             operations =  ['Search by SSN', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Employees in {self.destination_collor}\nChoose options',operations)
+            operations_menu = Menu(f'Employees in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
             operation = operations[selected_operation]
 
             if operation  == 'Search by SSN':
-                search = input('Enter SSN: ')
+                search = input(colored('Enter SSN: ','green' ,attrs=['bold', 'underline']))
                 found_employee = self.llapi.search_employee(search, self.destination)
                 if found_employee is None: 
                     print(f'{LINE}\nEmployee not found\n{LINE}')
@@ -37,7 +37,7 @@ class EmployeeMenu:
             elif operation == 'See list':
                 emp_list = self.list_employees()
                 while True:
-                    command = input("Enter number of employee to open or B to Back: ").upper()
+                    command = input(colored("Enter number of employee to open or B to Back: ",'green' ,attrs=['bold', 'underline'])).upper()
                     if command == "B":
                         return
                     if not command.isdigit():
@@ -62,7 +62,7 @@ class EmployeeMenu:
         if self.destination == 'All destinations':
             fieldnames.insert(6, 'Destination')
         for field in fieldnames:
-            val = input(f'{field}: ')
+            val = input(colored(f'{field}: ','green' ,attrs=['bold', 'underline']))
             emp.append(val)
         if self.destination != 'All destinations':
             emp.insert(6, self.destination)
@@ -86,7 +86,7 @@ class EmployeeMenu:
         self.print_employee_table(employee, nr)
         while True: 
             if self.user_type == 'Employee':
-                command = input("Press B for back: ").upper()
+                command = input(colored("Press B for back: ",'green' ,attrs=['bold', 'underline'])).upper()
                 print(LINE)
                 if command == "B":
                     return
@@ -96,7 +96,7 @@ class EmployeeMenu:
             else:
                 print("1: Edit\nB: Back")
                 print(LINE)
-                command = input("Choose Options edit or back: ").upper()
+                command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
                 print(LINE)
                 if command == "1":
                     self.edit_employee(employee)
@@ -128,10 +128,10 @@ class EmployeeMenu:
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Destination', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What do you want to change? ')
+            col = input(colored('What do you want to change? ','green' ,attrs=['bold', 'underline']))
             try:
                 col = int(col)
-                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(emp, fieldnames[col-1].lower(), newval)
                 return self.llapi.save_employee(emp)
             except:
