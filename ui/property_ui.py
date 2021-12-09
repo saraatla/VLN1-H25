@@ -15,7 +15,7 @@ class PropertyUI:
         
         
 
-    def property_menu_start(self):
+    def _property_menu_start(self):
         propAscii()
         while True:
             operations =  ['Search by ID', 'See list']
@@ -33,29 +33,29 @@ class PropertyUI:
                 if found_property is None:
                     print(f'{LINE}\nProperty not found\n{LINE}')
                 else:
-                    self.individual_property_ui(found_property)
+                    self.__individual_property_ui(found_property)
 
             elif operation == 'See list':
-                prop_list = self.list_properties()
+                prop_list = self.__list_properties()
                 while True:
                     command = input(self.color_format.format("Enter number of property to open or B to Back: ")).upper()
                     if command == "B":
-                        return
+                        break
                     if not command.isdigit():
                         print("Invalid input, try again!")
                     else:
                         nr = int(command)
                         for index, property in enumerate(prop_list):
                             if index+1 == nr:
-                                self.individual_property_ui(property, nr)
+                                self.__individual_property_ui(property, nr)
                         break
 
             elif operation == 'Add new':
-                self.create_property()
+                self.__create_property()
                 print(f'{LINE}\nProperty successfully created!\n{LINE}')
 
 
-    def create_property(self):
+    def __create_property(self):
         print('Enter the following information: ')
         print(LINE)
         fieldnames = ['Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
@@ -67,10 +67,10 @@ class PropertyUI:
         for field in fieldnames:
             val = input(self.color_format.format(f'{field}: '))
             prop.append(val)
-        return self.llapi.create_property(prop)
+        return self.llapi._create_property(prop)
 
 
-    def list_properties(self):
+    def __list_properties(self):
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(0)
@@ -84,8 +84,8 @@ class PropertyUI:
         return prop_list
 
 
-    def individual_property_ui(self, property, nr=None):
-        self.print_property_table(property, nr)
+    def __individual_property_ui(self, property, nr=None):
+        self.__print_property_table(property, nr)
         if self.user_type == 'Employee':
             return
         while True:
@@ -94,15 +94,15 @@ class PropertyUI:
             command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
             print(LINE)
             if command == "1":
-                self.edit_property(property)
-                self.print_property_table(property)
+                self.__edit_property(property)
+                self.__print_property_table(property)
             elif command == "B":
                 return
             else:
                 print("Invalid option, try again ")
                 print(LINE)
 
-    def print_property_table(self, property, nr=None):
+    def __print_property_table(self, property, nr=None):
         property_table = Texttable()
         if nr is not None:
             property_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
@@ -115,7 +115,7 @@ class PropertyUI:
         property_table.add_row([get_color_string(bcolors.GREEN,"Facilities"),property.facilities])
         print(property_table.draw())
 
-    def edit_property(self, prop):
+    def __edit_property(self, prop):
         while True:
             fieldnames = ['Destination', 'Address', 'Squarefoot', 'Rooms', 'Type', 'Facilities']
             for index, field in enumerate(fieldnames):
@@ -125,7 +125,7 @@ class PropertyUI:
                 col = int(col)
                 newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(prop, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_property(prop)
+                return self.llapi._edit_property(prop)
             except:
                 print('Invalid input, try again!')
 

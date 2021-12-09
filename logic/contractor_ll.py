@@ -11,37 +11,37 @@ class ContractorLL:
         self.table = Texttable()
 
 
-    def list_contractors(self):
+    def _list_contractors(self):
         """This function makes a list of contractor info"""
-        return self.dlapi.list_contractors()
+        return self.dlapi._list_contractors()
 
 
-    def create_contractor(self, contractor): 
+    def _create_contractor(self, contractor): 
         """Creates new contractor"""
-        self.dlapi.create_contractor(Contractor(contractor))
+        self.dlapi._create_contractor(Contractor(contractor))
 
 
-    def search_contractor(self, cont_id):
+    def _search_contractor(self, cont_id):
         """This function searches for a contractor by his id in list of all contractors.
         Args:
             cont_id (str): contractor id input by user
         Returns: 
             contractor (class instance): contractor model class"""
-        reader = self.dlapi.list_contractors()
+        reader = self.dlapi._list_contractors()
         for contractor in reader:
             if contractor.id == cont_id:
                 return contractor
         return None
     
 
-    def edit_contractor(self, contractor):
+    def _edit_contractor(self, contractor):
         """Edits contractor info"""
-        return self.dlapi.edit_contractor(contractor)
+        return self.dlapi._edit_contractor(contractor)
 
 
-    def get_new_cont_id(self):
+    def _get_new_cont_id(self):
         """Gets the ID of the last contractor in the csv file and
         adds one to get the new contractor id.
         Returns:
             the next contractor id (str)"""
-        return 'C' + str(int(self.dlapi.list_contractors()[-1].id[1:])+1)
+        return 'C' + str(int(self.dlapi._list_contractors()[-1].id[1:])+1)

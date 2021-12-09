@@ -18,8 +18,19 @@ class DestinationDL:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
                                              # are given by the optional fieldnames parameter.
             for row in reader:
-                dest = Destination(row["Destination"], row["Phone_number"], 
-                row["Opening_hours"],row["Manager_ssn"]) # Make an instance of Destination
+                dest = Destination([row["Destination"], row["Phone_number"], 
+                row["Opening_hours"],row["Manager_SSN"]]) # Make an instance of Destination
                 return_list.append(dest)
         return return_list
+
+    def create_destination(self,destination):
+        """This function appends a new employee to the csv file
+        Args:
+            employee (class instance): employee model class"""
+        with open(self.filepath,'a', newline='') as csvfile:
+            fieldnames = ['Destination', 'Phone_number', 'Opening_hours', 'Manager_SSN']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames) # writer maps dictionaries onto output rows.
+            writer.writerow({'Destination': destination.destination, 'Phone_number': destination.phone, 'Opening_hours': destination.open_hours, 'Manager_SSN': destination.manager})
+    
+
         
