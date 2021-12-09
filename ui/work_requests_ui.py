@@ -84,7 +84,6 @@ class WorkRequestUI:
 
             elif operation == 'Add new':
                 self.__create_work_request()
-            workAscii()
 
 
     def __print_request_list(self, request_list):
