@@ -205,7 +205,7 @@ class WorkRequestMenu:
         work_request_table.add_row(["Property_ID",request.property_id])
         work_request_table.add_row(["Destination",request.destination])
         work_request_table.add_row(["Contractor",request.contractor])
-        work_request_table.add_row(["Date",request.date])
+        work_request_table.add_row(["Date",request.date.strftime('%d/%m/%Y')])
         work_request_table.add_row(["Status",request.status])
         work_request_table.add_row(["Priority",request.priority])
         work_request_table.add_row(["Description",request.description])
