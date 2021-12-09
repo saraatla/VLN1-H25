@@ -32,7 +32,7 @@ class ContractorUI:
         while True:
             operations =  ['Search by contractor ID', 'See list']
             if self.user_type == 'Manager':
-                operations.append('Create new')
+                operations.append('Add new')
             operations_menu = Menu(f'{self.Contractors_menu_color} in {self.destination_collor}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
@@ -62,7 +62,7 @@ class ContractorUI:
                                 self.__individual_contractor_ui(contractor,nr)
                         break
 
-            elif operation == 'Create new':
+            elif operation == 'Add new':
                 self.__create_contractor()
                 print(f'{LINE}\nContractor successfully created!\n{LINE}')
 

@@ -4,6 +4,11 @@ from logic.LLAPI import LLAPI
 LINE = '------------------------------------------'
 
 class WorkReportUI:
+    """Work Report UI layer class. Contains 6 functions. The class contains an instance of the LLAPI class.
+    Args:
+        destination (str): destination chosen by user
+        user_type (str): user type chosen by user (manager/employee)"""
+
     def __init__(self, destination, user_type):
         self.destination = destination
         self.user_type = user_type
@@ -11,7 +16,11 @@ class WorkReportUI:
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
 
 
-    def _create_work_report(self, request):
+    def create_work_report(self, request):
+        """This function runs when the user (employee) chooses 'Create new' . 
+        The work report will be given a destination according to the user's choice in the destination menu.
+        When the work report is made it is by default not approved by the manager."""
+
         print('Enter the following information: ')
         print(LINE)
         new_id = self.llapi._get_new_report_id()
@@ -32,6 +41,13 @@ class WorkReportUI:
 
     
     def _individual_work_report_ui(self, report, request, nr=None):
+        """This function runs when the user chooses to see report for a work request.
+        It will show information of the report and also the option to edit if the user is a employee.
+        Args:
+            report (class instance): work report model class,
+            request (class instance): work request model class
+            nr : either None or int. """
+
         if self.user_type == 'Employee':
             if request.status == 'open' and request.workreport_id is not None:
                 while True:
@@ -77,6 +93,11 @@ class WorkReportUI:
 
 
     def __approve_report(self, report_id, request):
+        """This function runs if a user (manager) chooses to approve report.
+        Args:
+            report_id (str): work report id
+            request (class instance): work request model class """
+
         reader = self.llapi._list_work_reports()
         for report in reader:
             if report_id == report.workreport_id:
@@ -88,6 +109,11 @@ class WorkReportUI:
 
 
     def __edit_work_report(self, report):
+        """This function runs if the user is an Employee and chooses to Edit work report.
+        The user chooses what to edit according to the available options.
+        Args:
+            report (class instance): work report model class."""
+
         while True:
             fieldnames = ['Employee_SSN','Contractor_ID','Contractor_review','Contractor_remuneration','Total_cost','Description']
             for index, field in enumerate(fieldnames):
@@ -103,6 +129,11 @@ class WorkReportUI:
 
                 
     def __print_work_report_table(self, report, nr=None):
+        """This function prints work report info in a printable template format.
+        Args:
+            report (class instance): work report model class,
+            nr : either None or int. """
+
         work_report_table = Texttable()
         work_report_table.add_row([get_color_string(bcolors.BLUE,"Work report\n⬇⬇⬇⬇⬇"),get_color_string(bcolors.BLUE,"Work report\n⬇⬇⬇⬇⬇")])
         if nr is not None:

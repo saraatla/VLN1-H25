@@ -3,7 +3,10 @@ from models.employee_model import Employee
 
 class EmployeeLL:
     """Employee logic layer class; Contains 5 functions: fetches the functions in the data layer API,
-    search for a employee by ssn and lists employees in the destination the user wants to see"""
+    search for a employee by ssn and lists employees in the destination the user wants to see
+    Args:
+        destination (str): destination chosen by user"""
+        
     def __init__(self, destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)

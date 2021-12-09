@@ -3,7 +3,10 @@ from models.destination_model import Destination
 
 class DestinationLL:
     """Destination logic layer class; Contains 3 functions: fetches the functions in the data layer API,
-    makes list of destination names and finds information about a destination chosen by user"""
+    makes list of destination names and finds information about a destination chosen by user
+    Args:
+        destination (str): destination chosen by user"""
+        
     def __init__(self,destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)

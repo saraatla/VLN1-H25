@@ -67,8 +67,8 @@ class DLAPI:
         return self.work_requestDL._find_last_request_id()
 
     # Work Report DL
-    def _create_work_report(self, work_rep):
-        self.work_reportDL._create_work_report(work_rep)
+    def create_work_report(self, work_rep):
+        self.work_reportDL.create_work_report(work_rep)
         return work_rep
 
     def _list_work_reports(self):

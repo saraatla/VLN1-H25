@@ -1,17 +1,17 @@
-from os import read
-from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 from models.work_request import WorkRequest
 from datetime import datetime
 
 class WorkRequestLL:
     """Work Request logic layer class; Contains 11 functions: fetches the functions in the data layer API,
-    lists work requests according to destination chosen by user, lists all finds information about a property chosen by user in destination """
+    lists work requests on a specific period or not according to the users choice, lists all information about a work request 
+    chosen by user, lists work requests by status chosen by user, creates the id for a new work request.
+    Args:
+        destination (str): destination chosen by user"""
+        
     def __init__(self, destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
-        self.table = Texttable()
-        self.table2 = Texttable()
    
 
     def _workrequests_by_status(self, status, destination): 

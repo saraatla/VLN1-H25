@@ -10,7 +10,6 @@ class DestinationUI:
     def __init__(self, destination):
         self.table = Texttable
         self.destination = destination
-        self.options = """B: Back"""
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
 
 

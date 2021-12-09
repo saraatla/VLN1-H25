@@ -3,7 +3,10 @@ from models.property_model import Property
 
 class PropertyLL:
     """Property logic layer class; Contains 5 functions: fetches the functions in the data layer API,
-    lists properties according to destination chosen by user, finds information about a property chosen by user in destination """
+    lists properties according to destination chosen by user, finds information about a property chosen by user in destination
+    Args:
+        destination (str): destination chosen by user"""
+        
     def __init__(self,destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)

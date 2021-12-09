@@ -11,7 +11,7 @@ class EmployeeUI:
     Args:
         destination (str): destination chosen by user
         user_type (str): user type chosen by user (manager/employee)"""
-        
+
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -31,7 +31,7 @@ class EmployeeUI:
         while True:
             operations =  ['Search by employee SSN', 'See list']
             if self.user_type == 'Manager':
-                operations.append('Create new')
+                operations.append('Add new')
             operations_menu = Menu(f'{self.employee_menu_collor} in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
@@ -61,7 +61,7 @@ class EmployeeUI:
                                 self.__individual_employee_ui(employee,nr)
                         break
 
-            elif operation == 'Create new':
+            elif operation == 'Add new':
                 self.__create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 

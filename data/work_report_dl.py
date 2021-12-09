@@ -20,7 +20,7 @@ class WorkReportDL:
                 return_list.append(work_rep)
             return return_list
 
-    def _create_work_report(self, work_rep):
+    def create_work_report(self, work_rep):
         "This function appends a new work report to the csv file"
         with open(self.filepath, 'a', newline='') as csvfile:
             fieldnames = ['Workreport_ID', 'Employee_SSN', 'Contractor_ID', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description', 'Approved','Manager_comment']
