@@ -75,13 +75,16 @@ class WorkRequestUI:
             elif operation == "See list of requests by status":
                 while True:
                     status = input(self.color_format.format('Enter status: ')).lower()
-                    request_list = self.llapi._workrequests_by_status(status, self.destination) 
+                    if status == 'b':
+                        break
+                    request_list = self.llapi._workrequests_by_status(status, self.destination)
                     if request_list == []:
-                        print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
+                        print('No {} work request found.\nPlease enter "open", "closed", "ready for closing",\n"completed" or "B" to go back'.format(status))
                     else:
                         break
-                self.__list_work_requests_ui(request_list)
-                self.__open_request_from_list(request_list)
+                if status != 'b':
+                    self.__list_work_requests_ui(request_list)
+                    self.__open_request_from_list(request_list)
                 
 
             elif operation == 'Add new':
