@@ -103,7 +103,7 @@ class WorkRequestUI:
             if command == "P":
                 self.__print_request_list(request_list)
             if not command.isdigit():
-                print("Invalid input, try again!")
+                print("Invalid input, please try again")
             else:
                 nr = int(command)
                 for index, request in enumerate(request_list):
@@ -119,7 +119,7 @@ class WorkRequestUI:
             end_date = self.__check_date('date to end')
             request_list_by_date = self.llapi._get_list_of_workreq_on_period(request_list,start_date,end_date)
             if request_list_by_date is None:
-                print('The inputs are not valid, try again')
+                print('The inputs are not valid, please try again')
                 break
             else:
                 return request_list_by_date
@@ -153,7 +153,7 @@ class WorkRequestUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again")
+                        print("Invalid option, please try again")
                         print(LINE)
             elif request.status == 'closed':
                 while True:
@@ -163,7 +163,7 @@ class WorkRequestUI:
                     if command == 'B':
                         return
                     else:
-                        print("Invalid option, try again")
+                        print("Invalid option, please try again")
                         print(LINE)
             else:
                 while True:
@@ -178,7 +178,7 @@ class WorkRequestUI:
                     if command == 'B':
                         return
                     else:
-                        print("Invalid option, try again")
+                        print("Invalid option, please try again")
                         print(LINE)
         elif self.user_type == 'Manager':
             if request.status == 'completed':
@@ -197,7 +197,7 @@ class WorkRequestUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again")
+                        print("Invalid option, please try again")
                         print(LINE)
             elif request.status == 'open' and request.workreport_id is not None:
                 while True:
@@ -214,7 +214,7 @@ class WorkRequestUI:
                     elif command == 'B':
                         return
                     else:
-                        print("Invalid option, try again")
+                        print("Invalid option, please try again")
                         print(LINE)
             else:
                 while True:
@@ -230,7 +230,7 @@ class WorkRequestUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again")
+                        print("Invalid option, please try again")
                         print(LINE)
     
 
@@ -263,7 +263,7 @@ class WorkRequestUI:
                 setattr(req, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_work_request(req)
             except:
-                print('Invalid input, try again!')
+                print('Invalid input, please try again')
 
 
 
