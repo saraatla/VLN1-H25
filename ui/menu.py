@@ -21,9 +21,9 @@ class Menu:
             try:
                 command = int(command)
                 if command > len(self.options):
-                    print("Invalid option, try again!")
+                    print("Invalid option, please try again")
                 else:
                     return command - 1
             except:
-                print("Invalid option, try again!")
+                print("Invalid option, please try again")
     
