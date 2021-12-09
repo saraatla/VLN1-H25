@@ -16,7 +16,7 @@ class WorkReportUI:
         print(LINE)
         new_id = self.llapi._get_new_report_id()
         workrep = [new_id]
-        fieldnames = ['SSN', 'Contractor_ID', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description']
+        fieldnames = ['Eployee SSN', 'Contractor_ID', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description']
         for field in fieldnames:
             val = input(self.color_format.format(f'{field}: '))
             workrep.append(val)
@@ -73,7 +73,7 @@ class WorkReportUI:
                     self._approve_report(report.workreport_id, request)
                     return
                 elif command == '2':
-                    report.manager_cmt = input(self.color_format.format('Enter comment:'))
+                    report.manager_cmt = input(self.color_format.format('Enter comment: '))
                     self.llapi._edit_work_report(report)
                     self.__print_work_report_table(report)
 
@@ -91,7 +91,7 @@ class WorkReportUI:
 
     def __edit_work_report(self, report):
         while True:
-            fieldnames = ['SSN','Contractor_ID','Contractor_review','Contractor_remuneration','Totel_cost','Description']
+            fieldnames = ['Employee SSN','Contractor_ID','Contractor_review','Contractor_remuneration','Totel_cost','Description']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input(self.color_format.format('What do you want to change? '))
@@ -110,7 +110,7 @@ class WorkReportUI:
         if nr is not None:
             work_report_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
         work_report_table.add_row([get_color_string(bcolors.GREEN,"Workreport_ID"),report.workreport_id])
-        work_report_table.add_row([get_color_string(bcolors.GREEN,"SSN"),report.ssn])
+        work_report_table.add_row([get_color_string(bcolors.GREEN,"Employee SSN"),report.ssn])
         work_report_table.add_row([get_color_string(bcolors.GREEN,"Contractor_ID"),report.contractor_id])
         work_report_table.add_row([get_color_string(bcolors.GREEN,"Contractor_review"),report.contractor_review])
         work_report_table.add_row([get_color_string(bcolors.GREEN,"Contractor_remuneration"),report.contractor_remuneration])

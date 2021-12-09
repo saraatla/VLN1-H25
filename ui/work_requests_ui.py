@@ -26,7 +26,7 @@ class WorkRequestUI:
     def _workrequest_menu_start(self):
         workAscii()
         while True:
-            operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
+            operations = ['Search by work request ID', 'Search by property ID', 'Search by employee SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
             if self.user_type == 'Manager':
                 operations.append('Add new')
             operations_menu = Menu(f'{LINE}\n{self.Work_Requests_menu_color} in {self.destination_collor}\nChoose options', operations)
@@ -36,7 +36,7 @@ class WorkRequestUI:
             operation = operations[selected_operation]
 
             if operation == 'Search by work request ID':
-                search = input(self.color_format.format('Enter work request ID: '))
+                search = input(self.color_format.format('Enter work request ID: ')).lower()
                 found_request = self.llapi._search_work_requests_id(search, self.destination)
                 if found_request is None:
                     print(f'{LINE}\nWork request not found\n{LINE}')
@@ -44,15 +44,15 @@ class WorkRequestUI:
                     self.__individual_work_request_ui(found_request)
 
             elif operation == 'Search by property ID':
-                search = input(self.color_format.format('Enter property ID: '))
+                search = input(self.color_format.format('Enter property ID: ')).upper()
                 found_requests = self.llapi._search_work_requests_prop(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
                     self.__print_request_list(found_requests)
 
-            elif operation == 'Search by SSN':
-                search = input(self.color_format.format('Enter SSN: '))
+            elif operation == 'Search by employee SSN':
+                search = input(self.color_format.format('Enter epmloyee SSN: '))
                 found_requests = self.llapi._search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
@@ -60,7 +60,7 @@ class WorkRequestUI:
                     self.__print_request_list(found_requests)
 
             elif operation == 'Search by contractor ID':
-                search = input(self.color_format.format('Enter contractor ID: '))
+                search = input(self.color_format.format('Enter contractor ID: ')).upper()
                 found_requests = self.llapi._search_work_requests_cont(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
