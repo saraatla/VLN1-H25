@@ -74,7 +74,6 @@ class WorkReportUI:
                 elif command == '2':
                     report.manager_cmt = input(self.color_format.format('Enter comment: '))
                     self.llapi._edit_work_report(report)
-                    self.__print_work_report_table(report)
 
 
     def _approve_report(self, report_id, request):
