@@ -26,7 +26,7 @@ class PropertyUI:
 
             if operation  == 'Search by ID':
                 search = input('Enter property ID: ')
-                found_property = self.llapi.search_property(search, self.destination)
+                found_property = self.llapi._search_property(search, self.destination)
                 if found_property is None:
                     print(f'{LINE}\nProperty not found\n{LINE}')
                 else:
@@ -64,14 +64,14 @@ class PropertyUI:
         for field in fieldnames:
             val = input(f'{field}: ')
             prop.append(val)
-        return self.llapi.create_property(prop)
+        return self.llapi._create_property(prop)
 
 
     def __list_properties(self):
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)
-        prop_list = self.llapi.list_properties(self.destination)
+        prop_list = self.llapi._list_properties(self.destination)
         for item in range(len(prop_list)):
             prop = prop_list[item]
             table.add_rows([["Number","Destination", "Address","Squarefoot","Rooms","Type","Property_ID","Facilites"], 
@@ -121,7 +121,7 @@ class PropertyUI:
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 setattr(prop, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_property(prop)
+                return self.llapi._edit_property(prop)
             except:
                 print('Invalid input, try again!')
 

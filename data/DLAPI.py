@@ -21,58 +21,58 @@ class DLAPI:
         return self.destinationDL.list_destinations()
     
     # Employee DL
-    def create_employee(self, emp):
-        return self.employeeDL.create_employee(emp)
+    def _create_employee(self, emp):
+        return self.employeeDL._create_employee(emp)
 
-    def list_employees(self):
-        return self.employeeDL.list_employees()
+    def _list_employees(self):
+        return self.employeeDL._list_employees()
     
-    def edit_employee(self,emp):
-        return self.employeeDL.edit_employee(emp)
+    def _edit_employee(self,emp):
+        return self.employeeDL._edit_employee(emp)
 
     # Property DL
-    def create_property(self, prop):
-        return self.propertyDL.create_property(prop)
+    def _create_property(self, prop):
+        return self.propertyDL._create_property(prop)
 
-    def list_properties(self):
-        return self.propertyDL.list_properties()
+    def _list_properties(self):
+        return self.propertyDL._list_properties()
 
-    def edit_property(self,prop):
-        return self.propertyDL.edit_property(prop)
+    def _edit_property(self,prop):
+        return self.propertyDL._edit_property(prop)
 
     # Contractor DL
-    def create_contractor(self, cont):
-        return self.contractorDL.create_contractor(cont)
+    def _create_contractor(self, cont):
+        return self.contractorDL._create_contractor(cont)
 
-    def list_contractors(self):
-        return self.contractorDL.list_contractors()
+    def _list_contractors(self):
+        return self.contractorDL._list_contractors()
 
-    def edit_contractor(self, contractor):
-        return self.contractorDL.edit_contractor(contractor)
+    def _edit_contractor(self, contractor):
+        return self.contractorDL._edit_contractor(contractor)
 
     # Work Request DL
-    def create_work_request(self, work_req):
-        return self.work_requestDL.create_work_request(work_req)
+    def _create_work_request(self, work_req):
+        return self.work_requestDL._create_work_request(work_req)
 
-    def list_work_requests(self):
-        return self.work_requestDL.list_work_requests()
+    def _list_work_requests(self):
+        return self.work_requestDL._list_work_requests()
 
-    def edit_work_request(self,work_req):
-        return self.work_requestDL.edit_work_request(work_req)
+    def _edit_work_request(self,work_req):
+        return self.work_requestDL._edit_work_request(work_req)
 
-    def find_last_request_id(self):
-        return self.work_requestDL.find_last_request_id()
+    def _find_last_request_id(self):
+        return self.work_requestDL._find_last_request_id()
 
     # Work Report DL
-    def create_work_report(self, work_rep):
-        self.work_reportDL.create_work_report(work_rep)
+    def _create_work_report(self, work_rep):
+        self.work_reportDL._create_work_report(work_rep)
         return work_rep
 
-    def list_work_reports(self):
-        return self.work_reportDL.list_work_reports()
+    def _list_work_reports(self):
+        return self.work_reportDL._list_work_reports()
 
-    def edit_work_report(self,work_rep):
-        return self.work_reportDL.edit_work_report(work_rep)
+    def _edit_work_report(self,work_rep):
+        return self.work_reportDL._edit_work_report(work_rep)
     
-    def find_last_report_id(self):
-        return self.work_reportDL.find_last_report_id()
+    def _find_last_report_id(self):
+        return self.work_reportDL._find_last_report_id()

@@ -29,7 +29,7 @@ class EmployeeUI:
 
             if operation  == 'Search by SSN':
                 search = input(colored('Enter SSN: ','green' ,attrs=['bold', 'underline']))
-                found_employee = self.llapi.search_employee(search, self.destination)
+                found_employee = self.llapi._search_employee(search, self.destination)
                 if found_employee is None: 
                     print(f'{LINE}\nEmployee not found\n{LINE}')
                 else:
@@ -47,7 +47,7 @@ class EmployeeUI:
                         nr = int(command)
                         for index, employee in enumerate(emp_list):
                             if index+1 == nr:
-                                self.individual_employee_ui(employee,nr)
+                                self.__individual_employee_ui(employee,nr)
                         break
 
             elif operation == 'Add new':
@@ -67,14 +67,14 @@ class EmployeeUI:
             emp.append(val)
         if self.destination != 'All destinations':
             emp.insert(6, self.destination)
-        return self.llapi.create_employee(emp) 
+        return self.llapi._create_employee(emp) 
 
 
     def __list_employees(self):
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)
-        emp_list = self.llapi.list_employees(self.destination)
+        emp_list = self.llapi._list_employees(self.destination)
         for item in range(len(emp_list)):
             emp = emp_list[item]
             table.add_rows([["Number","Name","SSN","Email","Gsm","Destination","Title"], 
@@ -134,7 +134,7 @@ class EmployeeUI:
                 col = int(col)
                 newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(emp, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_employee(emp)
+                return self.llapi._edit_employee(emp)
             except:
                 print('Invalid input, try again!')
 
