@@ -55,12 +55,10 @@ class EmployeeUI:
                             if index+1 == nr:
                                 self.__individual_employee_ui(employee,nr)
                         break
-                    
 
             elif operation == 'Add new':
                 self.__create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
-            empAscii()
 
 
     def __create_employee(self):
