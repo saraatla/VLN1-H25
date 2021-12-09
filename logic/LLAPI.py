@@ -17,9 +17,6 @@ class LLAPI:
         self.work_reportLL = WorkReportLL(self.destination)
 
     # Destination LL
-    def destination_dict(self):
-        return self.destinations.destination_dict()
-    
     def list_of_destinations(self):
         return self.destinations.list_of_destinations()
     

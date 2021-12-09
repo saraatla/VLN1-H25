@@ -18,23 +18,25 @@ class WorkRequestLL:
         """Prints a table of all request baised on their status. Requests that are ready to be closed
         are open and have a report signed to them
         Args:
-        
+            status (str): status of work request input by user
+            destination (str): destination chosen by user
         Returns:
+            request_list (list): list 
         
         """
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
         request_list = []
         if status == 'ready for closing':
-            for row in reader_report:
-                for line in reader_request:
-                    if row.workreport_id == line.workreport_id and line.status == 'open':
-                        if destination == 'All destinations' or destination == line.destination:
-                            request_list.append(line)
+            for report in reader_report:
+                for request  in reader_request:
+                    if report.workreport_id == request.workreport_id and request.status == 'open':
+                        if destination == 'All destinations' or destination == request.destination:
+                            request_list.append(request)
         else:
-            for line in reader_request:
-                if line.status == status:
-                    request_list.append(line)
+            for request in reader_request:
+                if request.status == status:
+                    request_list.append(request)
         return request_list
        
 

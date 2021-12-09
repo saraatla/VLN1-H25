@@ -3,7 +3,8 @@ from models.property_model import Property
 LINE = '------------------------------------------'
 
 class PropertyLL:
-    """Property logic layer class; Contains 5 functions: fetches the functions in the data layer API,"""
+    """Property logic layer class; Contains 5 functions: fetches the functions in the data layer API,
+    lists properties according to destination chosen by user, finds information about a property chosen by user in destination """
     def __init__(self,destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
@@ -28,7 +29,8 @@ class PropertyLL:
         
 
     def search_property(self, prop_id, destination):
-        """This function searches for a property by it's id in list of all employees.
+        """This function searches for a property in destination by it's id in list of all properties,
+        returns it's information.
         Args:
             prop_id (str): property id input by user
             destination (str) : destination chosen by user

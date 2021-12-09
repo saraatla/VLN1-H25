@@ -12,11 +12,8 @@ class ContractorLL:
 
 
     def list_contractors(self):
+        """This function makes a list of contractor info"""
         return self.dlapi.list_contractors()
-        #cont_list = []
-        #for contractor in self.dlapi.list_contractors():
-            #cont_list.append(contractor)
-        #return cont_list
 
 
     def create_contractor(self, contractor): 

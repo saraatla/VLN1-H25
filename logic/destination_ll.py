@@ -1,38 +1,33 @@
 from data.DLAPI import DLAPI
 
 class DestinationLL:
-    """destination logic layer class; Contains X functions: fetches the functions in the data layer API,"""
+    """Destination logic layer class; Contains 3 functions: fetches the functions in the data layer API,
+    makes list of destination names and finds information about a destination chosen by user"""
     def __init__(self,destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
 
 
-    def destination_dict(self):
-        all_destinations = self.dlapi.list_destinations()
-        temp = []
-        loc = all_destinations
-        for i in range(len(all_destinations)):
-            loc = all_destinations[i]
-            for j in (loc.destination).strip().split(','):
-                if j not in temp:
-                    temp.append(j)
-        destination_dict = { str(i+1) : temp[i] for i in range(0, len(temp))}
-
-        return destination_dict
-    
-
     def list_of_destinations(self):
-        destination_dict = self.destination_dict()
-        loc_list = []
-        for value in destination_dict.values():
-            loc_list.append(value)
-        return loc_list
+        """This function makes a list of the destination names
+        Returns:
+        dest_name_list (list): [name1,name2,name3,etc]"""
+        dest_list = self.dlapi.list_destinations()
+        dest_name_list = []
+        for value in dest_list: 
+            dest_name_list.append(value.destination)
+        return dest_name_list
     
-    
-    def search_destination(self, dest):
+
+    def search_destination(self, destination):
+        """This function searches for a employee by his ssn in list of all employees.
+        Args:
+            destination (str): destination name chosen by user
+        Returns: 
+            dest (class instance): destination model class"""
         while True:
             reader = self.dlapi.list_destinations()
-            for row in reader:
-                if dest == row.destination:
-                    return row
+            for dest in reader:
+                if destination == dest.destination:
+                    return dest
 
