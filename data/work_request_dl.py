@@ -55,7 +55,7 @@ class WorkRequestDL:
                                      workreq.property_id, 
                                      workreq.destination, 
                                      workreq.contractor, 
-                                     workreq.date, 
+                                     workreq.date.strftime('%d/%m/%Y'), 
                                      workreq.status, 
                                      workreq.priority,
                                      workreq.description,
@@ -64,7 +64,7 @@ class WorkRequestDL:
                     writer.writerow(row)
 
 
-    def find_last_id(self):
+    def find_last_request_id(self):
         req_list = self.list_work_requests()
         return req_list[-1].workrequest_id
 

@@ -1,4 +1,5 @@
 import csv
+from datetime import date
 from models.work_report import WorkReport
 
 class WorkReportDL:
@@ -22,21 +23,33 @@ class WorkReportDL:
     def create_work_report(self, work_rep):
         "This function appends a new work report to the csv file"
         with open(self.filepath, 'a', newline='') as csvfile:
-            fieldnames = ['Workreport_ID', 'SSN', 'Contractor', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description', 'Approved']
+            fieldnames = ['Workreport_ID', 'SSN', 'Contractor_ID', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description', 'Approved','Manager_comment']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writerow({'Workreport_ID': work_rep.workreport_id, 'SSN': work_rep.ssn, 'Contractor': work_rep.contractor, 
+            writer.writerow({'Workreport_ID': work_rep.workreport_id, 'SSN': work_rep.ssn, 'Contractor_ID': work_rep.contractor_id, 
             'Contractor_review': work_rep.contractor_review, 'Contractor_remuneration':work_rep.contractor_remuneration,
             'Total_cost':work_rep.total_cost, 'Description':work_rep.description, 'Approved':work_rep.approved, 'Manager_comment':work_rep.manager_cmt})
 
-    def edit_work_report(self, workrep_no, col, new_value):
+    def edit_work_report(self, report):
         """This function edits a certain value for a certain work report (input by employee)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
             data_list = list(reader)
-            for index, work_report_value in enumerate(data_list):
-                for value in work_report_value: 
-                    if value == workrep_no: 
-                        data_list[index][col] = new_value
         with open(self.filepath, "w", newline="", encoding='utf-8') as csvfile:
             writer = csv.writer(csvfile)  # converts the value into delimited string on the csvfile
-            writer.writerows(data_list)
+            for row in data_list:
+                if report.workreport_id == row[0]:
+                    writer.writerow([report.workreport_id,
+                                     report.ssn,
+                                     report.contractor_id,
+                                     report.contractor_review,
+                                     report.contractor_remuneration,
+                                     report.total_cost,
+                                     report.description,
+                                     report.approved,
+                                     report.manager_cmt])
+                else:
+                    writer.writerow(row)
+        
+    def find_last_report_id(self):
+        rep_list = self.list_work_reports()
+        return rep_list[-1].workreport_id

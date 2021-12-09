@@ -1,10 +1,11 @@
 import datetime
 from datetime import date, timedelta, datetime
+from dateutil.relativedelta import relativedelta
 from Extra.texttableFile.texttable import Texttable
+from Extra.TermcolorFile.termcolor import colored, cprint
 from Extra.acci import workAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-from Extra.TermcolorFile.termcolor import colored, cprint
 from ui.work_report_ui import WorkReportUI
 
 
@@ -16,7 +17,7 @@ class WorkRequestMenu:
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
-        self.report_ui = WorkReportUI(self.destination)
+        self.report_ui = WorkReportUI(self.destination, self.user_type)
 
     def start(self):
         workAscii()
@@ -91,6 +92,7 @@ class WorkRequestMenu:
 
     def open_request_from_list(self, request_list):
         while True:
+            print(LINE)
             command = input("Enter Number of request to open or B to Back:").upper()
             if command == "B":
                 break
@@ -127,22 +129,22 @@ class WorkRequestMenu:
             workreq = request_list[item]
             table.add_rows([["Number.","Workrequest_ID", "Title", "Date", "Status", "Priority"], 
                             [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
-        print(table.draw())
+        print(f'\n{table.draw()}\n')
 
 
     def individual_work_request_ui(self, request, nr=None):
         self.print_work_request_table(request, nr)
-        print('hallo')
-        print(self.user_type)
         if self.user_type == 'Employee':
-            if request.status == 'open':
+            if request.status == 'open' and request.workreport_id is None:
                 while True:
                     print('1: Add report\nB: Back')
                     print(LINE)
                     command = input("Choose Options: ").upper()
                     print(LINE)
                     if command == "1":
-                        self.report_ui.create_work_report(request) ####  SSSSAARRRAAAAA  EEERERRRRR HÉERRRR
+                        work_report = self.report_ui.create_work_report(request)
+                        self.report_ui.individual_work_report_ui(work_report, request)
+                        break
                     elif command == "B":
                         return
                     else:
@@ -150,27 +152,48 @@ class WorkRequestMenu:
                         print(LINE)
             else:
                 while True:
-                    command = input('Press B for Back: ').upper()
+                    print('1: See report\nB: Back ')
                     print(LINE)
+                    command = input("Choose Options: ").upper()
+                    if command == '1':
+                        report = self.llapi.search_work_report(request[-1])
+                        self.report_ui.individual_work_report_ui(report)
                     if command == 'B':
                         return
                     else:
                         print("Invalid option, try again ")
                         print(LINE)
         elif self.user_type == 'Manager':
-            while True:
-                print("1: Edit\nB: Back")
-                print(LINE)
-                command = input("Choose Options edit or back: ").upper()
-                print(LINE)
-                if command == "1":
-                    self.edit_work_request(request)
-                    self.print_work_request_table(request)
-                elif command == "B":
-                    return
-                else:
-                    print("Invalid option, try again ")
+            if request.status == 'completed':
+                while True:
+                    print("1: Reopen request\nB: Back")
                     print(LINE)
+                    command = input("Choose Options reopen or back: ").upper()
+                    print(LINE)
+                    if command == "1":
+                        request.status = 'open'
+                        self.llapi.edit_work_request(request)
+                        self.print_work_request_table(request)
+                        break
+                    elif command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
+            else:
+                while True:
+                    print("1: Edit\nB: Back")
+                    print(LINE)
+                    command = input("Choose Options edit or back: ").upper()
+                    print(LINE)
+                    if command == "1":
+                        self.edit_work_request(request)
+                        self.print_work_request_table(request)
+                    elif command == "B":
+                        return
+                    else:
+                        print("Invalid option, try again ")
+                        print(LINE)
     
 
     def print_work_request_table(self, request, nr=None):
@@ -187,7 +210,7 @@ class WorkRequestMenu:
         work_request_table.add_row(["Priority",request.priority])
         work_request_table.add_row(["Description",request.description])
         work_request_table.add_row(["Workreport ID",request.workreport_id])
-        print(work_request_table.draw())
+        print(f'\n{work_request_table.draw()}\n')
     
 
     def edit_work_request(self, req):
@@ -212,20 +235,7 @@ class WorkRequestMenu:
 
 
     def create_work_report(self, request):
-        print('Enter the following information: ')
-        print(LINE)
-        start_date, workreq = self.create_work_req_list()
-        print('Do you want to repeat this work request?')
-        options = ['Do no repeat', 'Daily', 'Weekly', 'Monthly', 'Yearly']
-        for i, option in enumerate(options):
-            print(f"{i+1}: {option}")
-        repeat = int(input('Choose option: '))
-        if repeat > 1:
-            self.repeat_work_request(start_date, repeat, workreq)
-        else:
-            self.llapi.create_work_request(workreq)
-            print(f'{LINE}\nWork request successfully created!\n{LINE}')
-
+        pass
 
     def create_work_request(self):
         print('Enter the following information: ')
@@ -245,7 +255,7 @@ class WorkRequestMenu:
 
 
     def create_work_req_list(self):
-        new_id = self.llapi.get_new_id()
+        new_id = self.llapi.get_new_request_id()
         workreq = [new_id]
         fieldnames = ["Title", "Property_ID"]
         for field in fieldnames:
@@ -269,7 +279,7 @@ class WorkRequestMenu:
         workreq.append(priority)
         description = input('Description: ')
         workreq.append(description)
-        report_id = 'None'
+        report_id = None
         workreq.append(report_id)
         return start_date, workreq
 

@@ -132,12 +132,12 @@ class WorkRequestLL:
                         request_list.append(request)
         return request_list
 
-    def get_new_id(self):
+    def get_new_request_id(self):
         """This function finds the last workrequest id and returns the next one 
         if a new one is made.
         Returns:
             the next work request id (str)"""
-        last_id = self.dlapi.find_last_id()
+        last_id = self.dlapi.find_last_request_id()
         new_id = int(last_id[1:])+1
         return f'w{new_id}'
 

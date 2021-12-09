@@ -40,8 +40,8 @@ class LLAPI:
         return self.employeeLL.edit_employee(employee)
 
     # Property LL
-    def create_property(self, propert):
-        return self.propertyLL.create_property(propert)
+    def create_property(self, property):
+        return self.propertyLL.create_property(property)
 
     def list_properties(self, destination):
         return self.propertyLL.list_properties(destination)
@@ -87,14 +87,14 @@ class LLAPI:
     def search_work_requests_cont(self, cont_id, destination):
         return self.work_requestLL.search_work_request_cont(cont_id, destination)
 
-    def edit_work_request(self,work_reqest):
-        return self.work_requestLL.edit_work_request(work_reqest)
+    def edit_work_request(self,work_request):
+        return self.work_requestLL.edit_work_request(work_request)
 
     def search_work_request_ssn(self, ssn, destination):
         return self.work_requestLL.search_work_request_ssn(ssn, destination)
     
-    def get_new_id(self):
-        return self.work_requestLL.get_new_id()
+    def get_new_request_id(self):
+        return self.work_requestLL.get_new_request_id()
 
     def get_list_of_workreq_on_period(self,request_list,start_date,end_date):
         return self.work_requestLL.get_list_of_workreq_on_period(request_list,start_date,end_date)
@@ -114,6 +114,9 @@ class LLAPI:
 
     def approve_report(self, workreport_id):
         return self.work_reportLL.approve_report(workreport_id)
+    
+    def get_new_report_id(self):
+        return self.work_reportLL.get_new_id()
 
     
         
