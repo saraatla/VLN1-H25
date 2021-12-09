@@ -67,7 +67,7 @@ class ContractorMenu:
     def list_contractors(self, destination):
         table = Texttable()
         table.set_deco(Texttable.HEADER)
-        table.set_max_width(118)
+        table.set_max_width(130)
         cont_list = self.llapi.list_contractors()
         for item in range(len(cont_list)):
             cont = cont_list[item]
