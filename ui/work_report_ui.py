@@ -108,7 +108,7 @@ class WorkReportUI:
     def __print_work_report_table(self, report, nr=None):
         work_report_table = Texttable()
         if nr is not None:
-            work_report_table.add_row(["Number.",nr])
+            work_report_table.add_row(["Number",nr])
         work_report_table.add_row(["Workreport_ID",report.workreport_id])
         work_report_table.add_row(["SSN",report.ssn])
         work_report_table.add_row(["Contractor_ID",report.contractor_id])
