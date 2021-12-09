@@ -7,6 +7,7 @@ from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
 
 class EmployeeUI:
+    """Employee UI layer class. Contains  """
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -14,30 +15,30 @@ class EmployeeUI:
         self.user_type = user_type
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
-    def employee_menu_start(self):
+    def _employee_menu_start(self):
         empAscii()
         while True:
             operations =  ['Search by SSN', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
-            operations_menu = Menu(f'Employees in {self.destination_collor}\nChoose options',operations)
+            operations_menu = Menu(f'Employees in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
             operation = operations[selected_operation]
 
             if operation  == 'Search by SSN':
-                search = input('Enter SSN: ')
+                search = input(colored('Enter SSN: ','green' ,attrs=['bold', 'underline']))
                 found_employee = self.llapi.search_employee(search, self.destination)
                 if found_employee is None: 
                     print(f'{LINE}\nEmployee not found\n{LINE}')
                 else:
-                    self.individual_employee_ui(found_employee)
+                    self.__individual_employee_ui(found_employee)
 
             elif operation == 'See list':
-                emp_list = self.list_employees()
+                emp_list = self.__list_employees()
                 while True:
-                    command = input("Enter number of employee to open or B to Back: ").upper()
+                    command = input(colored("Enter number of employee to open or B to Back: ",'green' ,attrs=['bold', 'underline'])).upper()
                     if command == "B":
                         return
                     if not command.isdigit():
@@ -50,11 +51,11 @@ class EmployeeUI:
                         break
 
             elif operation == 'Add new':
-                self.create_employee()
+                self.__create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
 
-    def create_employee(self):
+    def __create_employee(self):
         print('Enter the following information: ')
         print(LINE)
         fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Title']
@@ -62,14 +63,14 @@ class EmployeeUI:
         if self.destination == 'All destinations':
             fieldnames.insert(6, 'Destination')
         for field in fieldnames:
-            val = input(f'{field}: ')
+            val = input(colored(f'{field}: ','green' ,attrs=['bold', 'underline']))
             emp.append(val)
         if self.destination != 'All destinations':
             emp.insert(6, self.destination)
         return self.llapi.create_employee(emp) 
 
 
-    def list_employees(self):
+    def __list_employees(self):
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)
@@ -82,11 +83,11 @@ class EmployeeUI:
         return emp_list
 
     
-    def individual_employee_ui(self, employee, nr=None):
-        self.print_employee_table(employee, nr)
+    def __individual_employee_ui(self, employee, nr=None):
+        self.__print_employee_table(employee, nr)
         while True: 
             if self.user_type == 'Employee':
-                command = input("Press B for back: ").upper()
+                command = input(colored("Press B for back: ",'green' ,attrs=['bold', 'underline'])).upper()
                 print(LINE)
                 if command == "B":
                     return
@@ -96,11 +97,11 @@ class EmployeeUI:
             else:
                 print("1: Edit\nB: Back")
                 print(LINE)
-                command = input("Choose Options edit or back: ").upper()
+                command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
                 print(LINE)
                 if command == "1":
-                    self.edit_employee(employee)
-                    self.print_employee_table(employee)
+                    self.__edit_employee(employee)
+                    self.__print_employee_table(employee)
                 elif command == "B":
                     return
                 else:
@@ -108,7 +109,7 @@ class EmployeeUI:
                     print(LINE)
     
 
-    def print_employee_table(self, employee, nr=None):
+    def __print_employee_table(self, employee, nr=None):
         employee_table = Texttable()
         if nr is not None:
             employee_table.add_row(["Number",nr])
@@ -123,15 +124,15 @@ class EmployeeUI:
         print(employee_table.draw())
 
 
-    def edit_employee(self,emp):
+    def __edit_employee(self,emp):
         while True:
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Destination', 'Title']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What do you want to change? ')
+            col = input(colored('What do you want to change? ','green' ,attrs=['bold', 'underline']))
             try:
                 col = int(col)
-                newval = input(f'What is the new {fieldnames[col-1]}? ')
+                newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(emp, fieldnames[col-1].lower(), newval)
                 return self.llapi.edit_employee(emp)
             except:

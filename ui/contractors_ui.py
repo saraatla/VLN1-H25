@@ -13,7 +13,7 @@ class ContractorUI:
         self.user_type = user_type
         self.table = Texttable
 
-    def contractor_menu_start(self):
+    def _contractor_menu_start(self):
         contAscii()
         while True:
             operations =  ['Search by ID', 'See list']
@@ -26,7 +26,7 @@ class ContractorUI:
             operation = operations[selected_operation]
 
             if operation  == 'Search by ID':
-                search = input('Enter contractor ID: ')
+                search = input(colored('Enter contractor ID: ','green' ,attrs=['bold', 'underline']))
                 found_contractor = self.llapi.search_contractor(search)
                 if found_contractor is None:
                     print(f'{LINE}\nContractor not found\n{LINE}')
@@ -36,7 +36,7 @@ class ContractorUI:
             elif operation == 'See list':
                 cont_list = self.list_contractors(self.destination)
                 while True:
-                    command = input("Enter number of contractor to open or B to Back:").upper()
+                    command = input(colored("Enter number of contractor to open or B to Back: ",'green' ,attrs=['bold', 'underline'])).upper()
                     if command == "B":
                         return
                     if not command.isdigit():
