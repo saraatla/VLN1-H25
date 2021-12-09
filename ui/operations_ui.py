@@ -1,8 +1,8 @@
 from ui.menu import Menu
-from ui.employee_menu_ui import EmployeeMenu
-from ui.property_menu_ui import PropertyMenu
-from ui.contractors_menu_ui import ContractorMenu
-from ui.work_requests_menu_ui import WorkRequestMenu
+from ui.employee_ui import EmployeeMenu
+from ui.property_ui import PropertyMenu
+from ui.contractors_ui import ContractorMenu
+from ui.work_requests_ui import WorkRequestMenu
 from ui.destination_ui import DestinationUI
 from logic.LLAPI import LLAPI
 from Extra.TermcolorFile.termcolor import colored, cprint
@@ -35,7 +35,7 @@ class OperationsUI:
                 property_menu.property_menu_start()
             elif operation == 'Work requests':
                 work_request_menu  = WorkRequestMenu(self.destination,self.user_type)
-                work_request_menu.start()
+                work_request_menu.workrequest_menu_start()
             elif operation == 'Contractors':
                 contractor_menu  = ContractorMenu(self.destination,self.user_type)
                 contractor_menu.contractor_menu_start()
