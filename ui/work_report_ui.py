@@ -45,7 +45,7 @@ class WorkReportUI:
                     elif command == "B":
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, please try again")
                         print(LINE)
             else:
                 while True:
@@ -55,7 +55,7 @@ class WorkReportUI:
                     if command == 'B':
                         return
                     else:
-                        print("Invalid option, try again ")
+                        print("Invalid option, please try again")
                         print(LINE)
         if self.user_type == 'Manager':
             while True:
@@ -68,13 +68,13 @@ class WorkReportUI:
                 if command == 'B':
                     return
                 if not command.isdigit():
-                    print("Invalid option, try again ")
+                    print("Invalid option, please try again")
                     print(LINE)
                 if command == '1':
                     self._approve_report(report.workreport_id, request)
                     return
                 elif command == '2':
-                    report.manager_cmt = input('Enter comment:')
+                    report.manager_cmt = input('Enter comment: ')
                     self.llapi._edit_work_report(report)
                     self.__print_work_report_table(report)
 
@@ -95,14 +95,14 @@ class WorkReportUI:
             fieldnames = ['SSN','Contractor_ID','Contractor_review','Contractor_remuneration','Totel_cost','Description']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What do you want to change? ')
+            col = input('What do you want to change?')
             try:
                 col = int(col)
                 newval = input(f'What is the new {fieldnames[col-1]}? ')
                 setattr(report, fieldnames[col-1].lower(), newval)
                 return self.llapi._edit_work_report(report)
             except:
-                print('Invalid input, try again!')
+                print('Invalid input, please try again')
 
                 
     def __print_work_report_table(self, report, nr=None):
