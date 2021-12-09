@@ -1,7 +1,7 @@
 Name,SSN,Email,Address,Phone,GSM,Destination,Title
-einartomas,123456-0001,einar2250@gmail.com,Vei 230 12. Longyearbyen,+45 92 09 77 00,+354 777 1337,Svalbard - Longyearbyen,Manager
-Amos,123456-0002,jacob.yxa@nanair.is,Longyearbyen,+47 92 09 77 01,+354 777 1338,Svalbard - Longyearbyen,Employee
-kristin,123456-0003,nanna.daema@nanair.is,Ivan Starostin st. 109. Barantsburg,+47 92 09 77 02,+354 777 1339,Svalbard - Longyearbyen,Employee
+Jan Jacobsen,123456-0001,jan.jacobsen@nanair.is,Vei 230 12. Longyearbyen,+45 92 09 77 00,+354 777 1337,Svalbard - Longyearbyen,Manager
+Jacob Yxa,123456-0002,jacob.yxa@nanair.is,Longyearbyen,+47 92 09 77 01,+354 777 1338,Svalbard - Longyearbyen,Employee
+Nanna Daema,123456-0003,nanna.daema@nanair.is,Ivan Starostin st. 109. Barantsburg,+47 92 09 77 02,+354 777 1339,Svalbard - Longyearbyen,Employee
 Minik Wallace,123456-0004,minik.wallace@nanair.is,Isaajap Aqqutaa 1. 3900 Nuuk,+299 34 24 67,+354 777 1361,Greenland - Nuuk,Manager
 Aqqaluk Lynge,123456-0005,aqqaluk.lynge@nanair.is,Qattaaq 44. 3905 Nuuk,+299 35 24 66,+354 777 1362,Greenland - Nuuk,Employee
 Nauja Lynge,123456-0006,nauja.lynge@nanair.is,Qunguleq 3759. 3905 Nuuk,+299 31 21 64,+354 777 1363,Greenland - Nuuk,Employee

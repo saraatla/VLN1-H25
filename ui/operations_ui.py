@@ -1,11 +1,11 @@
 from ui.menu import Menu
-from ui.employee_menu_ui import EmployeeMenu
-from ui.property_menu_ui import PropertyMenu
-from ui.contractors_menu_ui import ContractorMenu
-from ui.work_requests_menu_ui import WorkRequestMenu
+from ui.employee_ui import EmployeeUI
+from ui.property_ui import PropertyUI
+from ui.contractors_ui import ContractorUI
+from ui.work_requests_ui import WorkRequestUI
 from ui.destination_ui import DestinationUI
 from logic.LLAPI import LLAPI
-from Extra.TermcolorFile.termcolor import colored, cprint
+from Extra.TermcolorFile.termcolor import colored
 
 
 class OperationsUI:
@@ -28,19 +28,19 @@ class OperationsUI:
                 return
             operation = operations[selected_operation]
             if operation  == 'Employees':
-                employee_menu  = EmployeeMenu(self.destination,self.user_type)
-                employee_menu.start()
+                employee_menu  = EmployeeUI(self.destination,self.user_type)
+                employee_menu._employee_menu_start()
             elif operation == 'Properties':
-                property_menu  = PropertyMenu(self.destination,self.user_type)
-                property_menu.start()
+                property_menu  = PropertyUI(self.destination,self.user_type)
+                property_menu._property_menu_start()
             elif operation == 'Work requests':
-                work_request_menu  = WorkRequestMenu(self.destination,self.user_type)
-                work_request_menu.start()
+                work_request_menu  = WorkRequestUI(self.destination,self.user_type)
+                work_request_menu._workrequest_menu_start()
             elif operation == 'Contractors':
-                contractor_menu  = ContractorMenu(self.destination,self.user_type)
-                contractor_menu.start()
+                contractor_menu  = ContractorUI(self.destination,self.user_type)
+                contractor_menu._contractor_menu_start()
             elif operation == 'Destination info':
                 destination = self.llapi.search_destination(self.destination)
                 destination_ui = DestinationUI(destination)
-                destination_ui.start()
+                destination_ui._destination_info_ui()
 

@@ -7,7 +7,7 @@ class ContractorDL:
     def __init__(self):
         self.filepath = "csv/Contractors.csv"
 
-    def list_contractors(self):
+    def _list_contractors(self):
         """This function reads the csv file and makes a list with 
         all the contractors along with their information.
         Returns:
@@ -22,7 +22,7 @@ class ContractorDL:
                 return_list.append(contractor)
         return return_list
 
-    def create_contractor(self, contractor):
+    def _create_contractor(self, contractor):
         """This function appends a new contractor to the csv file.
         Args:
             contractor (class instance): contractor model class """
@@ -32,7 +32,7 @@ class ContractorDL:
             writer.writerow({'Contractor_ID': contractor.id,'Name': contractor.name, 'Type': contractor.type, 'Contact': contractor.contact, 
             'Contacts_phone': contractor.contacts_phone, 'Address':contractor.address, 'Open_hours':contractor.open_hours, 'Review':contractor.review}) 
 
-    def edit_contractor(self, contractor):
+    def _edit_contractor(self, contractor):
         """This function edits a certain value in the csv file for a certain contractor (input by Managers).
         Args:
             contractor (class): model class attributes"""

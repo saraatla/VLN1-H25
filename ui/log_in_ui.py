@@ -13,7 +13,7 @@ class LogInUI:
         while True:
             acci()
             print("%s" % time.ctime())
-            intro = 'Welcome to NaN Air \nPlease Enter your status in the company.'
+            intro = 'Welcome to NaN Air \nPlease Enter your status in the company'
             options = ['Manager', 'Employee']
             menu = Menu(intro, options)
             selection = menu.draw_options()
@@ -21,7 +21,7 @@ class LogInUI:
                 return
             selection_str = options[selection]
             destination_menu = DestinationMenu(selection_str)
-            destination_menu.start()
+            destination_menu._destination_menu_start()
 
         
 
