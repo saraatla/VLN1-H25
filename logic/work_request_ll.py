@@ -16,7 +16,12 @@ class WorkRequestLL:
 
     def workrequests_by_status(self, status, destination): 
         """Prints a table of all request baised on their status. Requests that are ready to be closed
-        are open and have a report signed to them."""
+        are open and have a report signed to them
+        Args:
+        
+        Returns:
+        
+        """
         reader_report = self.dlapi.list_work_reports()
         reader_request = self.dlapi.list_work_requests()
         request_list = []
