@@ -188,6 +188,10 @@ class WorkRequestMenu:
                     else:
                         print("Invalid option, try again ")
                         print(LINE)
+            elif request.status == 'open' and request.workreport_id is not None:
+                while True:
+                    print("1: See report\n2: Edit\nB: Back")
+                    pass
             else:
                 while True:
                     print("1: Edit\nB: Back")
