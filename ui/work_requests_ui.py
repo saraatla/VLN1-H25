@@ -1,8 +1,8 @@
 import datetime
+from Extra.TermcolorFile.termcolor import colored, cprint
+from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from datetime import date, timedelta, datetime
 from dateutil.relativedelta import relativedelta
-from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
-from Extra.TermcolorFile.termcolor import colored, cprint
 from Extra.acci import workAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
@@ -14,13 +14,13 @@ LINE = '------------------------------------------'
 
 class WorkRequestUI:
     def __init__(self, destination, user_type):
-        self.destination = destination
-        self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
-        self.llapi = LLAPI(self.destination)
         self.user_type = user_type
-        self.report_ui = WorkReportUI(self.destination, self.user_type)
+        self.destination = destination
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
         self.Work_Requests_menu_color = colored("Work Requests Menu",'red' ,attrs=['bold', 'underline'])
+        self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
+        self.llapi = LLAPI(self.destination)
+        self.report_ui = WorkReportUI(self.destination, self.user_type)
 
 
     def _workrequest_menu_start(self):
@@ -97,7 +97,7 @@ class WorkRequestUI:
     def __open_request_from_list(self, request_list):
         while True:
             print(LINE)
-            command = input(self.color_format.format("Enter Number of request to open or B to Back:")).upper()
+            command = input(self.color_format.format("Enter Number of request to open or B to Back: ")).upper()
             if command == "B":
                 break
             if command == "P":
@@ -131,16 +131,15 @@ class WorkRequestUI:
         table.set_max_width(300)
         for item in range(len(request_list)):
             workreq = request_list[item]
-            table.add_rows([[get_color_string(bcolors.GREEN,"Number."),get_color_string(bcolors.GREEN,"Workrequest_ID"), get_color_string(bcolors.GREEN,"Title"), get_color_string(bcolors.GREEN,"Date"), get_color_string(bcolors.GREEN,"Status"), get_color_string(bcolors.GREEN,"Priority")], 
+            table.add_rows([[get_color_string(bcolors.GREEN,"Number"),get_color_string(bcolors.GREEN,"Workrequest_ID"), get_color_string(bcolors.GREEN,"Title"), get_color_string(bcolors.GREEN,"Date"), get_color_string(bcolors.GREEN,"Status"), get_color_string(bcolors.GREEN,"Priority")], 
                             [get_color_string(bcolors.GREEN,item+1), workreq.workrequest_id, workreq.title, workreq.date.strftime('%d/%m/%Y'), workreq.status, workreq.priority]])
         print(f'\n{table.draw()}\n')
 
 
     def __individual_work_request_ui(self, request, nr=None):
         if self.user_type == 'Employee':
-            if request.status == 'open' and request.workreport_id is None:
+            if request.status == 'open' and not request.workreport_id:
                 while True:
-                    print('Work request: ')
                     self.__print_work_request_table(request, nr)
                     print('1: Add report\nB: Back')
                     print(LINE)
@@ -157,7 +156,6 @@ class WorkRequestUI:
                         print(LINE)
             elif request.status == 'closed':
                 while True:
-                    print('Work request: ')
                     self.__print_work_request_table(request, nr)
                     command = input(self.color_format.format('Press B for back: ')).upper()
                     if command == 'B':
@@ -167,7 +165,6 @@ class WorkRequestUI:
                         print(LINE)
             else:
                 while True:
-                    print('Work request: ')
                     self.__print_work_request_table(request, nr)
                     print('1: See report\nB: Back ')
                     print(LINE)
@@ -183,7 +180,6 @@ class WorkRequestUI:
         elif self.user_type == 'Manager':
             if request.status == 'completed':
                 while True:
-                    print('Work request: ')
                     self.__print_work_request_table(request, nr)
                     print("1: Reopen request\nB: Back")
                     print(LINE)
@@ -201,9 +197,8 @@ class WorkRequestUI:
                         print(LINE)
             elif request.status == 'open' and request.workreport_id is not None:
                 while True:
-                    print('Work request: ')
                     self.__print_work_request_table(request, nr)
-                    print("1: See report\n2: Edit\nB: Back")
+                    print(f"{LINE}\n1: See report\n2: Edit\nB: Back")
                     command = input(self.color_format.format('Choose options: ')).upper()
                     if command == '1':
                         report = self.llapi._search_work_report(request.workreport_id)
@@ -236,8 +231,9 @@ class WorkRequestUI:
 
     def __print_work_request_table(self, request, nr=None):
         work_request_table = Texttable()
+        work_request_table.add_row([get_color_string(bcolors.BLUE,"Work request\n⬇⬇⬇⬇⬇"),get_color_string(bcolors.BLUE,"Work request\n⬇⬇⬇⬇⬇")])
         if nr is not None:
-            work_request_table.add_row([get_color_string(bcolors.GREEN,"Number."),nr])
+            work_request_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
         work_request_table.add_row([get_color_string(bcolors.GREEN,"Workrequest_ID"),request.workrequest_id])
         work_request_table.add_row([get_color_string(bcolors.GREEN,"Title"),request.title])
         work_request_table.add_row([get_color_string(bcolors.GREEN,"Property_ID"),request.property_id])
@@ -248,7 +244,7 @@ class WorkRequestUI:
         work_request_table.add_row([get_color_string(bcolors.GREEN,"Priority"),request.priority])
         work_request_table.add_row([get_color_string(bcolors.GREEN,"Description"),request.description])
         work_request_table.add_row([get_color_string(bcolors.GREEN,"Workreport ID"),request.workreport_id])
-        print(f'\n{work_request_table.draw()}\n')
+        print(f'{work_request_table.draw()}')
     
 
     def __edit_work_request(self, req):

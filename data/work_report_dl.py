@@ -51,5 +51,5 @@ class WorkReportDL:
                     writer.writerow(row)
         
     def _find_last_report_id(self):
-        rep_list = self.list_work_reports()
+        rep_list = self._list_work_reports()
         return rep_list[-1].workreport_id
