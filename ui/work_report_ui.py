@@ -41,7 +41,7 @@ class WorkReportUI:
                     command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                     print(LINE)
                     if command == "1":
-                        self._edit_work_report(report)
+                        self.__edit_work_report(report)
                     elif command == "B":
                         return
                     else:
@@ -69,7 +69,7 @@ class WorkReportUI:
                     print("Invalid option, please try again")
                     print(LINE)
                 if command == '1':
-                    self._approve_report(report.workreport_id, request)
+                    self.__approve_report(report.workreport_id, request)
                     return
                 elif command == '2':
                     report.manager_cmt = input(self.color_format.format('Enter comment: '))
@@ -77,7 +77,7 @@ class WorkReportUI:
                     self.__print_work_report_table(report)
 
 
-    def _approve_report(self, report_id, request):
+    def __approve_report(self, report_id, request):
         reader = self.llapi._list_work_reports()
         for report in reader:
             if report_id == report.workreport_id:
@@ -88,7 +88,7 @@ class WorkReportUI:
                 print('Report has been marked approved and request has been closed!') 
 
 
-    def _edit_work_report(self, report):
+    def __edit_work_report(self, report):
         while True:
             fieldnames = ['Employee SSN','Contractor_ID','Contractor_review','Contractor_remuneration','Totel_cost','Description']
             for index, field in enumerate(fieldnames):
