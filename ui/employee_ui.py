@@ -1,4 +1,3 @@
-
 from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.acci import empAscii
 from ui.menu import Menu
