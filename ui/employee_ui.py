@@ -22,19 +22,20 @@ class EmployeeUI:
         See list: prompts a list of all the employees along with their information,
         if the user logged in as a manager he also sees
         Add new: makes it possible to add a new employee to the system."""
+
         empAscii()
         while True:
-            operations =  ['Search by SSN', 'See list']
+            operations =  ['Search by employee SSN', 'See list']
             if self.user_type == 'Manager':
-                operations.append('Add new')
+                operations.append('Create new')
             operations_menu = Menu(f'{self.employee_menu_collor} in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
             operation = operations[selected_operation]
 
-            if operation  == 'Search by SSN':
-                search = input(colored('Enter SSN: ','green' ,attrs=['bold', 'underline']))
+            if operation  == 'Search by employee SSN':
+                search = input(colored('Enter employee SSN: ','green' ,attrs=['bold', 'underline']))
                 found_employee = self.llapi._search_employee(search, self.destination)
                 if found_employee is None: 
                     print(f'{LINE}\nEmployee not found\n{LINE}')
@@ -56,7 +57,7 @@ class EmployeeUI:
                                 self.__individual_employee_ui(employee,nr)
                         break
 
-            elif operation == 'Add new':
+            elif operation == 'Create new':
                 self.__create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
@@ -64,6 +65,7 @@ class EmployeeUI:
     def __create_employee(self):
         """This function runs when the user (manager) chooses 'Add new' . 
         The employee will be given a destination according to the user's choice in the destination menu."""
+
         print('Enter the following information: ')
         print(LINE)
         fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Title']
@@ -81,6 +83,7 @@ class EmployeeUI:
     def __list_employees(self):
         """This function runs when the user chooses 'See list'.
         It will show the list of employees in a printable template format."""
+
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)
@@ -95,9 +98,11 @@ class EmployeeUI:
     
     def __individual_employee_ui(self, employee, nr=None):
         """This function runs when the user chooses 'Search by SSN' and inputs a SSN that's in the system.
-        It will show information about an employee and also the oprion edit if the user is a Manager
+        It will show information about an employee and also the option to edit if the user is a Manager.
         Args:
-            employee (class instance): employee model class"""
+            employee (class instance): employee model class,
+            nr : either None or int. """
+
         self.__print_employee_table(employee, nr)
         while True: 
             if self.user_type == 'Employee':
@@ -124,7 +129,11 @@ class EmployeeUI:
     
 
     def __print_employee_table(self, employee, nr=None):
-        """This function prints employee info in a printable template format."""
+        """This function prints employee info in a printable template format.
+        Args:
+            employee (class instance): employee model class,
+            nr : either None or int. """
+
         employee_table = Texttable()
         if nr is not None:
             employee_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
@@ -139,9 +148,12 @@ class EmployeeUI:
         print(employee_table.draw())
 
 
-    def __edit_employee(self,emp):
-        """This function runs the the user is a Manager and chooses to Edit employee.
-        The user chooses what to edit according to the available options"""
+    def __edit_employee(self,employee):
+        """This function runs if the user is a Manager and chooses to Edit employee.
+        The user chooses what to edit according to the available options.
+        Args:
+            employee (class instance): employee model class."""
+
         while True:
             fieldnames = ['Name', 'Email', 'Address', 'Phone', 'GSM', 'Destination', 'Title']
             for index, field in enumerate(fieldnames):
@@ -150,8 +162,8 @@ class EmployeeUI:
             try:
                 col = int(col)
                 newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
-                setattr(emp, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_employee(emp)
+                setattr(employee, fieldnames[col-1].lower(), newval)
+                return self.llapi._edit_employee(employee)
             except:
                 print('Invalid input, please try again')
 

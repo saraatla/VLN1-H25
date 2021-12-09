@@ -36,7 +36,8 @@ class WorkRequestLL:
         else:
             for request in reader_request:
                 if request.status == status:
-                    request_list.append(request)
+                    if destination == 'All destinations' or destination == request.destination:
+                        request_list.append(request)
         return request_list
        
 
