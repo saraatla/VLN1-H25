@@ -5,14 +5,14 @@ from logic.LLAPI import LLAPI
 from Extra.TermcolorFile.termcolor import colored, cprint
 LINE = '------------------------------------------'
 
-class PropertyMenu:
+class PropertyUI:
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
 
-    def start(self):
+    def property_menu_start(self):
         propAscii()
         while True:
             operations =  ['Search by ID', 'See list']

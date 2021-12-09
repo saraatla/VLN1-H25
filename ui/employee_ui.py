@@ -6,7 +6,7 @@ from Extra.TermcolorFile.termcolor import colored, cprint
 
 LINE = '------------------------------------------'
 
-class EmployeeMenu:
+class EmployeeUI:
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -14,7 +14,7 @@ class EmployeeMenu:
         self.user_type = user_type
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
 
-    def start(self):
+    def employee_menu_start(self):
         empAscii()
         while True:
             operations =  ['Search by SSN', 'See list']
@@ -133,7 +133,7 @@ class EmployeeMenu:
                 col = int(col)
                 newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(emp, fieldnames[col-1].lower(), newval)
-                return self.llapi.save_employee(emp)
+                return self.llapi.edit_employee(emp)
             except:
                 print('Invalid input, try again!')
 

@@ -5,7 +5,7 @@ class DestinationUI:
         self.destination = destination
         self.options = """B: Back"""
 
-    def start(self):
+    def destination_info_ui(self):
         print(self.destination)
         print(LINE)
         while True:
