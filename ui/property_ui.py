@@ -2,7 +2,7 @@ from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.acci import propAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-from Extra.TermcolorFile.termcolor import colored, cprint
+from Extra.TermcolorFile.termcolor import colored
 LINE = '------------------------------------------'
 
 class PropertyUI:

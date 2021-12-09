@@ -2,7 +2,7 @@ from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.operations_ui import OperationsUI
 from Extra.acci import locAscii
-from Extra.TermcolorFile.termcolor import colored, cprint
+from Extra.TermcolorFile.termcolor import colored
 
 LINE = '------------------------------------------'
 

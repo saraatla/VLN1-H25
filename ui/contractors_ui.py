@@ -2,7 +2,7 @@ from Extra.texttableFile.texttable import Texttable
 from Extra.acci import contAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-from Extra.TermcolorFile.termcolor import colored, cprint
+from Extra.TermcolorFile.termcolor import colored
 LINE = '------------------------------------------'
 
 class ContractorUI:

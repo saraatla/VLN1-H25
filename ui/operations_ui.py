@@ -5,7 +5,7 @@ from ui.contractors_ui import ContractorUI
 from ui.work_requests_ui import WorkRequestUI
 from ui.destination_ui import DestinationUI
 from logic.LLAPI import LLAPI
-from Extra.TermcolorFile.termcolor import colored, cprint
+from Extra.TermcolorFile.termcolor import colored
 
 
 class OperationsUI:
