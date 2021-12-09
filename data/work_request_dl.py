@@ -65,7 +65,7 @@ class WorkRequestDL:
 
 
     def _find_last_request_id(self):
-        req_list = self.list_work_requests()
+        req_list = self._list_work_requests()
         return req_list[-1].workrequest_id
 
 
