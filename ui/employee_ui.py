@@ -27,8 +27,8 @@ class EmployeeUI:
         if the user logged in as a manager he also sees
         Add new: makes it possible to add a new employee to the system."""
 
-        empAscii()
         while True:
+            empAscii()
             operations =  ['Search by employee SSN', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')

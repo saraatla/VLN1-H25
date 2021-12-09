@@ -28,8 +28,8 @@ class PropertyUI:
         if the user logged in as a manager he also sees
         Add new: makes it possible to add a new property to the system."""
 
-        propAscii()
         while True:
+            propAscii()
             operations =  ['Search by property ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')

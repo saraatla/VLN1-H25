@@ -34,7 +34,7 @@ class OperationsUI:
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors',]
             else:
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors','Destination info']
-            operations_menu = Menu(f'Welcome to {self.destination_collor}\nMain menu for {self.colored_user_type}',operations)
+            operations_menu = Menu(f'\x1bcWelcome to {self.destination_collor}\nMain menu for {self.colored_user_type}',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return

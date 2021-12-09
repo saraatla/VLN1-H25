@@ -28,8 +28,8 @@ class ContractorUI:
         if the user logged in as a manager he also sees
         Add new: makes it possible to add a new contractor to the system."""
 
-        contAscii()
         while True:
+            contAscii()
             operations =  ['Search by contractor ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')

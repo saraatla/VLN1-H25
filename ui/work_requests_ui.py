@@ -32,8 +32,8 @@ class WorkRequestUI:
     def _workrequest_menu_start(self):
         """This function makes the work request menu function. It depends on the inputs by user"""
 
-        workAscii()
         while True:
+            workAscii()
             operations = ['Search by work request ID', 'Search by property ID', 'Search by employee SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
 
             # If the user logged in as a Manager he also sees
