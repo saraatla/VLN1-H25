@@ -7,6 +7,10 @@ from Extra.TermcolorFile.termcolor import colored
 LINE = '------------------------------------------'
 
 class ContractorUI:
+    """Contractor UI layer class. Contains 7 functions.
+    Args:
+        destination (str): destination chosen by user
+        user_type (str): user type chosen by user (manager/employee)"""
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -17,6 +21,11 @@ class ContractorUI:
         self.Contractors_menu_color = colored("Contractors Menu",'red' ,attrs=['bold', 'underline'])
 
     def _contractor_menu_start(self):
+        """This function makes the contractor menu function. It depends on the inputs by user: 
+        Search by ID: allows the user to search a contractor by their ID, 
+        See list: prompts a list of all the contractors along with their information,
+        if the user logged in as a manager he also sees
+        Add new: makes it possible to add a new contractor to the system."""
         contAscii()
         while True:
             operations =  ['Search by ID', 'See list']
@@ -57,6 +66,7 @@ class ContractorUI:
 
 
     def __create_contractor(self):
+        
         print('Enter the following information: ')
         print(LINE)
         new_id = self.llapi._get_new_cont_id()
