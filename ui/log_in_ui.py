@@ -9,7 +9,7 @@ class LogInUI:
     def __init__(self):
         pass
 
-    def log_in(self):
+    def _log_in(self):
         while True:
             acci()
             print("%s" % time.ctime())
