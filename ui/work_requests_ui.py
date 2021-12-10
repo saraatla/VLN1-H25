@@ -245,7 +245,6 @@ class WorkRequestUI:
                     if command == "2":
                         request.status = 'open'
                         self.llapi.edit_work_request(request)
-                        self.__print_work_request_table(request)
                         break
                     elif command == "B":
                         return
@@ -278,7 +277,6 @@ class WorkRequestUI:
                     print(LINE)
                     if command == "1":
                         self.__edit_work_request(request)
-                        self.__print_work_request_table(request)
                     elif command == "B":
                         return
                     else:
