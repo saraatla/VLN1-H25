@@ -28,7 +28,7 @@ class DestinationMenu:
 
         locAscii()
         while True:
-            options = self.llapi._list_of_destinations()
+            options = self.llapi.list_of_destinations()
             options.append('All destinations')
             if self.user_type == "Manager":
                 options.append('Add new destination')        
@@ -37,20 +37,21 @@ class DestinationMenu:
             if selection < 0:
                 return
             option = options[selection]
-            if self.user_type == "Manager":
-                if option == 'Add new destination':
+            if option == 'Add new destination':
+                if self.user_type == "Manager":
                     self.__create_destination()
                     print(f'{LINE}\nDestination successfully created!\n{LINE}')
                     while True:
                         command = input(self.color_format.format('Press B for back: ')).upper()
                         if command == 'B':
-                            return
+                            break
                         else:
                             print("Invalid option, please try again")
                             print(LINE)
-            selection_str = options[selection]
-            operations = OperationsUI(selection_str, self.user_type)
-            operations.start()
+            else:
+                selection_str = options[selection]
+                operations = OperationsUI(selection_str, self.user_type)
+                operations.start()
 
 
     def __create_destination(self):
