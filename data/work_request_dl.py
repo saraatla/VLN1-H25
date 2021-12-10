@@ -12,7 +12,7 @@ class WorkRequestDL:
         self.filepath = "csv/Workrequest.csv"
         self.destination = destination
     
-    def _list_work_requests(self):
+    def list_work_requests(self):
         """This function reads the csv file and makes a list with 
         all the work requests along with their information.
         Returns: 
@@ -28,7 +28,7 @@ class WorkRequestDL:
                 return_list.append(work_req)
         return return_list
 
-    def _create_work_request(self,work_req):
+    def create_work_request(self,work_req):
         """This function appends a new work request to the csv file.
         Args: 
             work_req (class instance) : work request model class"""
@@ -39,7 +39,7 @@ class WorkRequestDL:
             'Destination': work_req.destination, 'Contractor':work_req.contractor, 'Date':work_req.date, 
             'Status':work_req.status, 'Priority':work_req.priority, 'Description':work_req.description, 'Workreport_ID':work_req.workreport_id})
     
-    def _edit_work_request(self, workreq):  
+    def edit_work_request(self, workreq):  
         """This function edits a certain value for a certain work request (input by Manager).
         Args: 
             work_req (class instance) : work request model class"""
@@ -64,8 +64,8 @@ class WorkRequestDL:
                     writer.writerow(row)
 
 
-    def _find_last_request_id(self):
-        req_list = self._list_work_requests()
+    def find_last_request_id(self):
+        req_list = self.list_work_requests()
         return req_list[-1].workrequest_id
 
 

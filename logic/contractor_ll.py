@@ -10,14 +10,14 @@ class ContractorLL:
         self.dlapi = DLAPI(destination)
 
 
-    def _list_contractors(self):
+    def list_contractors(self):
         """This function makes a list of contractor info"""
-        return self.dlapi._list_contractors()
+        return self.dlapi.list_contractors()
 
 
-    def _create_contractor(self, contractor): 
+    def create_contractor(self, contractor): 
         """Creates new contractor"""
-        self.dlapi._create_contractor(Contractor(contractor))
+        self.dlapi.create_contractor(Contractor(contractor))
 
 
     def _search_contractor(self, cont_id):
@@ -26,16 +26,16 @@ class ContractorLL:
             cont_id (str): contractor id input by user
         Returns: 
             contractor (class instance): contractor model class"""
-        reader = self.dlapi._list_contractors()
+        reader = self.dlapi.list_contractors()
         for contractor in reader:
             if contractor.id == cont_id:
                 return contractor
         return None
     
 
-    def _edit_contractor(self, contractor):
+    def edit_contractor(self, contractor):
         """Edits contractor info"""
-        return self.dlapi._edit_contractor(contractor)
+        return self.dlapi.edit_contractor(contractor)
 
 
     def _get_new_cont_id(self):
@@ -43,4 +43,4 @@ class ContractorLL:
         adds one to get the new contractor id.
         Returns:
             the next contractor id (str)"""
-        return 'C' + str(int(self.dlapi._list_contractors()[-1].id[1:])+1)
+        return 'C' + str(int(self.dlapi.list_contractors()[-1].id[1:])+1)

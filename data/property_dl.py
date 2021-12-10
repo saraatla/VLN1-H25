@@ -8,7 +8,7 @@ class PropertyDL:
         self.filepath = "csv/Properties.csv"
         self.destination = destination
     
-    def _list_properties(self):
+    def list_properties(self):
         """This function reads the csv file and makes a list with 
         all the properties along with their information.
         Returns:
@@ -23,7 +23,7 @@ class PropertyDL:
                 return_list.append(property)
         return return_list
 
-    def _create_property(self, property):
+    def create_property(self, property):
         """This function appends a new property to the csv file.
         Args:
             property (class instance): property model class"""
@@ -33,7 +33,7 @@ class PropertyDL:
             writer.writerow({'Destination': property.destination, "Address": property.address, "Squarefoot": property.squarefoot, 
             "Rooms": property.rooms, "Type": property.type, "Property_ID": property.property_id, "Facilities": property.facilities})
 
-    def _edit_property(self, property):  
+    def edit_property(self, property):  
         """This function edits a certain value for a certain property (input by Manager).
         Args:
             property (class instance): property model class"""

@@ -23,54 +23,54 @@ class LLAPI:
     def _search_destination(self, destination):
         return self.destinationLL._search_destination(destination)
 
-    def _create_destination(self, destination):
-        return self.destinationLL._create_destination(destination)
+    def create_destination(self, destination):
+        return self.destinationLL.create_destination(destination)
 
     # Employee LL
-    def _create_employee(self, employee):
-        return self.employeeLL._create_employee(employee)
+    def create_employee(self, employee):
+        return self.employeeLL.create_employee(employee)
 
-    def _list_employees(self, destination):
-        return self.employeeLL._list_employees(destination)
+    def list_employees(self, destination):
+        return self.employeeLL.list_employees(destination)
 
     def _search_employee(self, ssn, destination):
         return self.employeeLL._search_employee(ssn, destination)
     
-    def _edit_employee(self,employee):
-        return self.employeeLL._edit_employee(employee)
+    def edit_employee(self,employee):
+        return self.employeeLL.edit_employee(employee)
 
     # Property LL
-    def _create_property(self, property):
-        return self.propertyLL._create_property(property)
+    def create_property(self, property):
+        return self.propertyLL.create_property(property)
 
-    def _list_properties(self, destination):
-        return self.propertyLL._list_properties(destination)
+    def list_properties(self, destination):
+        return self.propertyLL.list_properties(destination)
 
     def _search_property(self, id, destination):
         return self.propertyLL._search_property(id, destination)
 
-    def _edit_property(self,property):
-        return self.propertyLL._edit_property(property)
+    def edit_property(self,property):
+        return self.propertyLL.edit_property(property)
 
     # Contractor LL
-    def _create_contractor(self, contractor):
-        return self.contractorLL._create_contractor(contractor)
+    def create_contractor(self, contractor):
+        return self.contractorLL.create_contractor(contractor)
 
-    def _list_contractors(self):
-        return self.contractorLL._list_contractors()
+    def list_contractors(self):
+        return self.contractorLL.list_contractors()
 
     def _search_contractor(self,contractor):
         return self.contractorLL._search_contractor(contractor)
 
-    def _edit_contractor(self,cont_id):
-        return self.contractorLL._edit_contractor(cont_id)
+    def edit_contractor(self,cont_id):
+        return self.contractorLL.edit_contractor(cont_id)
 
     def _get_new_cont_id(self):
         return self.contractorLL._get_new_cont_id()
 
     # Work Request LL
-    def _create_work_request(self, work_req):
-        return self.work_requestLL._create_work_request(work_req)
+    def create_work_request(self, work_req):
+        return self.work_requestLL.create_work_request(work_req)
 
     def _list_all_work_requests(self, destination):
         return self.work_requestLL._list_all_work_requests(destination)
@@ -87,8 +87,8 @@ class LLAPI:
     def _search_work_requests_cont(self, cont_id, destination):
         return self.work_requestLL._search_work_request_cont(cont_id, destination)
 
-    def _edit_work_request(self,work_request):
-        return self.work_requestLL._edit_work_request(work_request)
+    def edit_work_request(self,work_request):
+        return self.work_requestLL.edit_work_request(work_request)
 
     def _search_work_request_ssn(self, ssn, destination):
         return self.work_requestLL._search_work_request_ssn(ssn, destination)
@@ -103,14 +103,14 @@ class LLAPI:
     def _create_report(self, work_rep):
         return self.work_reportLL._create_report(work_rep)
 
-    def _list_work_reports(self):
-        return self.work_reportLL._list_work_reports()
+    def list_work_reports(self):
+        return self.work_reportLL.list_work_reports()
 
     def _search_work_report(self,work_rep):
         return self.work_reportLL._search_work_report(work_rep)
 
-    def _edit_work_report(self,work_rep):
-        return self.work_reportLL._edit_work_report(work_rep)
+    def edit_work_report(self,work_rep):
+        return self.work_reportLL.edit_work_report(work_rep)
     
     def _get_new_report_id(self):
         return self.work_reportLL._get_new_id()

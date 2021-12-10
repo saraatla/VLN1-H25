@@ -8,7 +8,7 @@ class WorkRequestLL:
     chosen by user, lists work requests by status chosen by user, creates the id for a new work request.
     Args:
         destination (str): destination chosen by user"""
-        
+
     def __init__(self, destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
@@ -24,8 +24,8 @@ class WorkRequestLL:
             request_list (list): list 
         
         """
-        reader_report = self.dlapi._list_work_reports()
-        reader_request = self.dlapi._list_work_requests()
+        reader_report = self.dlapi.list_work_reports()
+        reader_request = self.dlapi.list_work_requests()
         request_list = []
         if status == 'ready for closing':
             for report in reader_report:
@@ -48,20 +48,20 @@ class WorkRequestLL:
         Returns:
             request_list (list): list of work requests in given destination"""
         request_list = []
-        for request in self.dlapi._list_work_requests():
+        for request in self.dlapi.list_work_requests():
             if destination == 'All destinations' or destination == request.destination:
                 request_list.append(request)
         return request_list
 
 
-    def _create_work_request(self,workrequest):
+    def create_work_request(self,workrequest):
         """Creates new work requests"""
-        self.dlapi._create_work_request(WorkRequest(workrequest))
+        self.dlapi.create_work_request(WorkRequest(workrequest))
 
 
-    def _edit_work_request(self, workrequest):
+    def edit_work_request(self, workrequest):
         """Edits work request info"""
-        return self.dlapi._edit_work_request(workrequest)
+        return self.dlapi.edit_work_request(workrequest)
 
 
     def _search_work_request_id(self, workreq_id, destination):
@@ -72,7 +72,7 @@ class WorkRequestLL:
         Returns: 
             request (class instance): work request model class, or
             None"""
-        reader = self.dlapi._list_work_requests()
+        reader = self.dlapi.list_work_requests()
         for request in reader:
             if request.workrequest_id == workreq_id:
                 if destination == 'All destinations' or destination == request.destination:
@@ -87,7 +87,7 @@ class WorkRequestLL:
             destination (str) : destination chosen by user
         Returns: 
             request_list (list): list of work requests according to property id"""
-        reader = self.dlapi._list_work_requests()
+        reader = self.dlapi.list_work_requests()
         request_list = []
         for request in reader:
             if request.property_id == prop_id:
@@ -103,8 +103,8 @@ class WorkRequestLL:
             destination (str) : destination chosen by user
         Returns: 
             request_list (list): list of work requests according to ssn"""
-        reader_report = self.dlapi._list_work_reports()
-        reader_request = self.dlapi._list_work_requests()
+        reader_report = self.dlapi.list_work_reports()
+        reader_request = self.dlapi.list_work_requests()
         report_list = []
         for report in reader_report:
             if report.ssn == ssn:
@@ -126,8 +126,8 @@ class WorkRequestLL:
             destination (str) : destination chosen by user
         Returns: 
             request_list (list): list of work requests according to contractor id"""
-        reader_report = self.dlapi._list_work_reports()
-        reader_request = self.dlapi._list_work_requests()
+        reader_report = self.dlapi.list_work_reports()
+        reader_request = self.dlapi.list_work_requests()
         report_list = []
         for report in reader_report:
             if report.contractor_id == cont_id:
@@ -145,7 +145,7 @@ class WorkRequestLL:
         if a new one is made.
         Returns:
             the next work request id (str)"""
-        last_id = self.dlapi._find_last_request_id()
+        last_id = self.dlapi.find_last_request_id()
         new_id = int(last_id[1:])+1
         return f'w{new_id}'
 

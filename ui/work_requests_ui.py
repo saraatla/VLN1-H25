@@ -98,19 +98,19 @@ class WorkRequestUI:
                     else:
                         break
                 if status != 'b':
-                    self.__list_work_requests_ui(request_list)
+                    self._list_work_requests_ui(request_list)
                     self.__open_request_from_list(request_list)
 
             # Create new: makes it possible to create new work request
             elif operation == 'Create new':
-                self.__create_work_request()
+                self._create_work_request()
 
 
     def __print_request_list(self, request_list):
         """This function calls 3 functions in this class"""
 
         request_list_by_date = self.__find_date_range(request_list)
-        self.__list_work_requests_ui(request_list_by_date)
+        self._list_work_requests_ui(request_list_by_date)
         self.__open_request_from_list(request_list_by_date)
 
 
@@ -154,7 +154,7 @@ class WorkRequestUI:
                 return request_list_by_date
                     
 
-    def __list_work_requests_ui(self, request_list):
+    def _list_work_requests_ui(self, request_list):
         """This function runs when the user chooses to see work requests.
         It will show the list of work requests in a printable template format."""
 
@@ -236,7 +236,7 @@ class WorkRequestUI:
                         self.report_ui._individual_work_report_ui(report, request)
                     if command == "2":
                         request.status = 'open'
-                        self.llapi._edit_work_request(request)
+                        self.llapi.edit_work_request(request)
                         self.__print_work_request_table(request)
                         break
                     elif command == "B":
@@ -270,7 +270,7 @@ class WorkRequestUI:
                     command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                     print(LINE)
                     if command == "1":
-                        self.__edit_work_request(request)
+                        self._edit_work_request(request)
                         self.__print_work_request_table(request)
                     elif command == "B":
                         return
@@ -302,7 +302,7 @@ class WorkRequestUI:
         print(f'{work_request_table.draw()}')
     
 
-    def __edit_work_request(self, request):
+    def _edit_work_request(self, request):
         """This function runs if the user is a Manager and chooses to Edit work request.
         The user chooses what to edit according to the available options.
         Args:
@@ -317,12 +317,12 @@ class WorkRequestUI:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
                 setattr(request, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_work_request(request)
+                return self.llapi.edit_work_request(request)
             except:
                 print('Invalid input, please try again')
 
 
-    def __create_work_request(self):
+    def _create_work_request(self):
         """This function runs when the user (manager) chooses 'Create new' . 
         The work request will be given a destination according to the user's choice in the destination menu."""
         
@@ -337,7 +337,7 @@ class WorkRequestUI:
         if repeat > 1:
             self.__repeat_work_request(start_date, repeat, workreq)
         else:
-            self.llapi._create_work_request(workreq)
+            self.llapi.create_work_request(workreq)
             print(f'{LINE}\nWork request successfully created!\n{LINE}')
 
 
@@ -424,7 +424,7 @@ class WorkRequestUI:
         date_work_req = date_var + new_date
         date_work_req = date_work_req.strftime('%d/%m/%Y')
         workreq[5] = date_work_req
-        self.llapi._create_work_request(workreq)
+        self.llapi.create_work_request(workreq)
         old_id = workreq[0]
         new_id = int(old_id[1:])+1
         workreq[0] = f'w{new_id}'

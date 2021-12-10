@@ -6,28 +6,28 @@ class PropertyLL:
     lists properties according to destination chosen by user, finds information about a property chosen by user in destination
     Args:
         destination (str): destination chosen by user"""
-        
+
     def __init__(self,destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
 
 
-    def _list_properties(self, destination):
+    def list_properties(self, destination):
         """This function lists poroperties according to destination.
         Args:
             destination (str) : destination chosen by user
         Returns:
             property_list (list): list of properties in given destination"""
         property_list = []
-        for property in self.dlapi._list_properties():
+        for property in self.dlapi.list_properties():
             if destination == 'All destinations' or destination == property.destination:
                 property_list.append(property)
         return property_list
 
 
-    def _create_property(self, property):
+    def create_property(self, property):
         """Creates new property"""
-        self.dlapi._create_property(Property(property))
+        self.dlapi.create_property(Property(property))
         
 
     def _search_property(self, prop_id, destination):
@@ -39,13 +39,13 @@ class PropertyLL:
         Returns: 
             property (class instance): property model class, or
             None"""
-        reader = self.dlapi._list_properties()
+        reader = self.dlapi.list_properties()
         for property in reader:
             if property.property_id == prop_id:
                 if destination == 'All destinations' or destination == property.destination:
                     return property
         return None
            
-    def _edit_property(self, property):
+    def edit_property(self, property):
         """Edits property info"""
-        return self.dlapi._edit_property(property)
+        return self.dlapi.edit_property(property)

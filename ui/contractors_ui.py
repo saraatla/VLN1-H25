@@ -48,7 +48,7 @@ class ContractorUI:
                     self.__individual_contractor_ui(found_contractor)
 
             elif operation == 'See list':
-                cont_list = self.__list_contractors()
+                cont_list = self._list_contractors()
                 while True:
                     command = input(self.color_format.format("Enter number of contractor to open or B to Back: ")).upper()
                     if command == "B":
@@ -63,11 +63,11 @@ class ContractorUI:
                         break
 
             elif operation == 'Add new':
-                self.__create_contractor()
+                self._create_contractor()
                 print(f'{LINE}\nContractor successfully created!\n{LINE}')
 
 
-    def __create_contractor(self):
+    def _create_contractor(self):
         """This function runs when the user (manager) chooses 'Add new' . 
         The contractor will be given a destination according to the user's choice in the destination menu."""
 
@@ -79,16 +79,16 @@ class ContractorUI:
         for field in fieldnames:
             val = input(f'{field}: ')
             cont.append(val)
-        return self.llapi._create_contractor(cont)
+        return self.llapi.create_contractor(cont)
 
-    def __list_contractors(self):
+    def _list_contractors(self):
         """This function runs when the user chooses 'See list'.
         It will show the list of contractors in a printable template format."""
 
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(160)
-        cont_list = self.llapi._list_contractors()
+        cont_list = self.llapi.list_contractors()
         for item in range(len(cont_list)):
             cont = cont_list[item]
             table.add_rows([[get_color_string(bcolors.GREEN,"Number"), get_color_string(bcolors.GREEN,"Contractor_ID"), get_color_string(bcolors.GREEN,"Name"), get_color_string(bcolors.GREEN,"Type"), get_color_string(bcolors.GREEN,"Address"), get_color_string(bcolors.GREEN,"Open_hours"), get_color_string(bcolors.GREEN,"Review")], 
@@ -119,7 +119,7 @@ class ContractorUI:
                 command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                 print(LINE)
                 if command == "1":
-                    self.__edit_contractor(contractor)
+                    self._edit_contractor(contractor)
                     self.__print_contractor_table(contractor)
                 elif command == "B":
                     return
@@ -146,7 +146,7 @@ class ContractorUI:
         contractor_table.add_row([get_color_string(bcolors.GREEN,"Review"),contractor.review])
         print(contractor_table.draw())
 
-    def __edit_contractor(self, contractor):
+    def _edit_contractor(self, contractor):
         """This function runs if the user is a Manager and chooses to Edit contractor.
         The user chooses what to edit according to the available options.
         Args: 
@@ -161,6 +161,6 @@ class ContractorUI:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
                 setattr(contractor, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_contractor(contractor)
+                return self.llapi.edit_contractor(contractor)
             except:
                 print('Invalid input, please try again')

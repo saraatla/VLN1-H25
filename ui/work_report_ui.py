@@ -36,7 +36,7 @@ class WorkReportUI:
         work_report = self.llapi._create_report(workrep)
         print(f'{LINE}\nWork report successfully created!\n{LINE}')
         request.workreport_id = new_id
-        self.llapi._edit_work_request(request)
+        self.llapi.edit_work_request(request)
         return work_report
 
     
@@ -57,7 +57,7 @@ class WorkReportUI:
                     command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                     print(LINE)
                     if command == "1":
-                        self.__edit_work_report(report)
+                        self._edit_work_report(report)
                     elif command == "B":
                         return
                     else:
@@ -89,7 +89,7 @@ class WorkReportUI:
                     return
                 elif command == '2':
                     report.manager_cmt = input(self.color_format.format('Enter comment: '))
-                    self.llapi._edit_work_report(report)
+                    self.llapi.edit_work_report(report)
 
 
     def __approve_report(self, report_id, request):
@@ -98,17 +98,17 @@ class WorkReportUI:
             report_id (str): work report id
             request (class instance): work request model class """
 
-        reader = self.llapi._list_work_reports()
+        reader = self.llapi.list_work_reports()
         for report in reader:
             if report_id == report.workreport_id:
                 request.status = 'completed'
                 report.approved = True
-                self.llapi._edit_work_report(report)
-                self.llapi._edit_work_request(request)
+                self.llapi.edit_work_report(report)
+                self.llapi.edit_work_request(request)
                 print('Report has been marked approved and request has been closed!') 
 
 
-    def __edit_work_report(self, report):
+    def _edit_work_report(self, report):
         """This function runs if the user is an Employee and chooses to Edit work report.
         The user chooses what to edit according to the available options.
         Args:
@@ -123,7 +123,7 @@ class WorkReportUI:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
                 setattr(report, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_work_report(report)
+                return self.llapi.edit_work_report(report)
             except:
                 print('Invalid input, please try again')
 

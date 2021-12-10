@@ -47,7 +47,7 @@ class EmployeeUI:
                     self.__individual_employee_ui(found_employee)
 
             elif operation == 'See list':
-                emp_list = self.__list_employees()
+                emp_list = self._list_employees()
                 while True:
                     command = input(colored("Enter number of employee to open or B to Back: ",'green' ,attrs=['bold', 'underline'])).upper()
                     if command == "B":
@@ -62,11 +62,11 @@ class EmployeeUI:
                         break
 
             elif operation == 'Add new':
-                self.__create_employee()
+                self._create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
 
-    def __create_employee(self):
+    def _create_employee(self):
         """This function runs when the user (manager) chooses 'Add new' . 
         The employee will be given a destination according to the user's choice in the destination menu."""
 
@@ -81,17 +81,17 @@ class EmployeeUI:
             emp.append(val)
         if self.destination != 'All destinations':
             emp.insert(6, self.destination)
-        return self.llapi._create_employee(emp) 
+        return self.llapi.create_employee(emp) 
 
 
-    def __list_employees(self):
+    def _list_employees(self):
         """This function runs when the user chooses 'See list'.
         It will show the list of employees in a printable template format."""
 
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)
-        emp_list = self.llapi._list_employees(self.destination)
+        emp_list = self.llapi.list_employees(self.destination)
         for item in range(len(emp_list)):
             emp = emp_list[item]
             table.add_rows([[get_color_string(bcolors.GREEN,"Number"),get_color_string(bcolors.GREEN,"Name"),get_color_string(bcolors.GREEN,"SSN"),get_color_string(bcolors.GREEN,"Destination"),get_color_string(bcolors.GREEN,"Title")], 
@@ -123,7 +123,7 @@ class EmployeeUI:
                 command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
                 print(LINE)
                 if command == "1":
-                    self.__edit_employee(employee)
+                    self._edit_employee(employee)
                     self.__print_employee_table(employee)
                 elif command == "B":
                     return
@@ -152,7 +152,7 @@ class EmployeeUI:
         print(employee_table.draw())
 
 
-    def __edit_employee(self,employee):
+    def _edit_employee(self,employee):
         """This function runs if the user is a Manager and chooses to Edit employee.
         The user chooses what to edit according to the available options.
         Args:
@@ -167,7 +167,7 @@ class EmployeeUI:
                 col = int(col)
                 newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(employee, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_employee(employee)
+                return self.llapi.edit_employee(employee)
             except:
                 print('Invalid input, please try again')
 

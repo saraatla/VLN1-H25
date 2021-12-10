@@ -48,7 +48,7 @@ class PropertyUI:
                     self.__individual_property_ui(found_property)
 
             elif operation == 'See list':
-                prop_list = self.__list_properties()
+                prop_list = self._list_properties()
                 while True:
                     command = input(self.color_format.format("Enter number of property to open or B to Back: ")).upper()
                     if command == "B":
@@ -63,11 +63,11 @@ class PropertyUI:
                         break
 
             elif operation == 'Add new':
-                self.__create_property()
+                self._create_property()
                 print(f'{LINE}\nProperty successfully created!\n{LINE}')
 
 
-    def __create_property(self):
+    def _create_property(self):
         """This function runs when the user (manager) chooses 'Add new' . 
         The property will be given a destination according to the user's choice in the destination menu."""
 
@@ -82,17 +82,17 @@ class PropertyUI:
         for field in fieldnames:
             val = input(self.color_format.format(f'{field}: '))
             prop.append(val)
-        return self.llapi._create_property(prop)
+        return self.llapi.create_property(prop)
 
 
-    def __list_properties(self):
+    def _list_properties(self):
         """This function runs when the user chooses 'See list'.
         It will show the list of properties in a printable template format."""
 
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(0)
-        prop_list = self.llapi._list_properties(self.destination)
+        prop_list = self.llapi.list_properties(self.destination)
         for item in range(len(prop_list)):
             prop = prop_list[item]                                                                                                             
             table.add_rows([[get_color_string(bcolors.GREEN, "Number"),get_color_string(bcolors.GREEN,"Property_ID"),get_color_string(bcolors.GREEN,"Type"),get_color_string(bcolors.GREEN,"Address"),get_color_string(bcolors.GREEN,"Destination")], 
@@ -118,7 +118,7 @@ class PropertyUI:
             command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
             print(LINE)
             if command == "1":
-                self.__edit_property(property)
+                self._edit_property(property)
                 self.__print_property_table(property)
             elif command == "B":
                 return
@@ -144,7 +144,7 @@ class PropertyUI:
         property_table.add_row([get_color_string(bcolors.GREEN,"Facilities"),property.facilities])
         print(property_table.draw())
 
-    def __edit_property(self, property):
+    def _edit_property(self, property):
         """This function runs if the user is a Manager and chooses to Edit property.
         The user chooses what to edit according to the available options.
         Args:
@@ -159,7 +159,7 @@ class PropertyUI:
                 col = int(col)
                 newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
                 setattr(property, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_property(property)
+                return self.llapi.edit_property(property)
             except:
                 print('Invalid input, please try again')
 

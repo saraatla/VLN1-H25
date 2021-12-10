@@ -8,7 +8,7 @@ class DestinationDL:
         self.filepath = "csv/Destinations.csv"
 
 
-    def _list_destinations(self):
+    def list_destinations(self):
         """This function reads the csv file and makes a list with 
         all the destinations along with their information.
         Returns:
@@ -23,7 +23,7 @@ class DestinationDL:
                 return_list.append(dest)
         return return_list
 
-    def _create_destination(self,destination):
+    def create_destination(self,destination):
         """This function appends a new employee to the csv file
         Args:
             employee (class instance): employee model class"""

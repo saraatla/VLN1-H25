@@ -8,7 +8,7 @@ class EmployeeDL:
         self.filepath = "csv/Employees.csv"
         self.destination = destination
     
-    def _list_employees(self):
+    def list_employees(self):
         """This function reads the csv file and makes a list with 
         all the employees along with their information
         Returns:
@@ -23,7 +23,7 @@ class EmployeeDL:
                 return_list.append(employee)
         return return_list
 
-    def _create_employee(self,employee):
+    def create_employee(self,employee):
         """This function appends a new employee to the csv file
         Args:
             employee (class instance): employee model class"""
@@ -34,7 +34,7 @@ class EmployeeDL:
             'Phone':employee.phone, 'GSM':employee.gsm, 'Destination':employee.destination, 'Title':employee.title})
     
 
-    def _edit_employee(self, employee): 
+    def edit_employee(self, employee): 
         """This function edits a certain value for a certain employee (input by supervisor)
         Args:
             employee (class): model class attributes"""

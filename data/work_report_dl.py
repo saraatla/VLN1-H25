@@ -9,7 +9,7 @@ class WorkReportDL:
         self.filepath = 'csv/Workreport.csv'
         self.destination = destination
 
-    def _list_work_reports(self):
+    def list_work_reports(self):
         return_list = []
         with open(self.filepath, newline="", encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile) # reader maps the information in each row to a dict whose keys 
@@ -29,7 +29,7 @@ class WorkReportDL:
             'Contractor_review': work_rep.contractor_review, 'Contractor_remuneration':work_rep.contractor_remuneration,
             'Total_cost':work_rep.total_cost, 'Description':work_rep.description, 'Approved':work_rep.approved, 'Manager_comment':work_rep.manager_comment})
 
-    def _edit_work_report(self, report):
+    def edit_work_report(self, report):
         """This function edits a certain value for a certain work report (input by employee)"""
         with open(self.filepath, 'r', newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile) # iterates over lines in the csvfile.
@@ -50,6 +50,6 @@ class WorkReportDL:
                 else:
                     writer.writerow(row)
         
-    def _find_last_report_id(self):
-        rep_list = self._list_work_reports()
+    def find_last_report_id(self):
+        rep_list = self.list_work_reports()
         return rep_list[-1].workreport_id

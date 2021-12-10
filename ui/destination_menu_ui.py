@@ -46,7 +46,7 @@ class DestinationMenu:
                     for field in fieldnames:
                         val = input(self.color_format.format(f'{field}: '))
                         dest.append(val)
-                    return self.llapi._create_destination(dest)
+                    return self.llapi.create_destination(dest)
             selection_str = options[selection]
             operations = OperationsUI(selection_str, self.user_type)
             operations.start()

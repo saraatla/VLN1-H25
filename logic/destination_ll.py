@@ -6,7 +6,7 @@ class DestinationLL:
     makes list of destination names and finds information about a destination chosen by user
     Args:
         destination (str): destination chosen by user"""
-        
+
     def __init__(self,destination):
         self.destination = destination
         self.dlapi = DLAPI(self.destination)
@@ -16,7 +16,7 @@ class DestinationLL:
         """This function makes a list of the destination names
         Returns:
         dest_name_list (list): [name1,name2,name3,etc]"""
-        dest_list = self.dlapi._list_destinations()
+        dest_list = self.dlapi.list_destinations()
         dest_name_list = []
         for value in dest_list: 
             dest_name_list.append(value.destination)
@@ -30,12 +30,12 @@ class DestinationLL:
         Returns: 
             dest (class instance): destination model class"""
         while True:
-            reader = self.dlapi._list_destinations()
+            reader = self.dlapi.list_destinations()
             for dest in reader:
                 if destination == dest.destination:
                     return dest
     
-    def _create_destination(self, dest):
-        self.dlapi._create_destination(Destination(dest))
+    def create_destination(self, dest):
+        self.dlapi.create_destination(Destination(dest))
 
 
