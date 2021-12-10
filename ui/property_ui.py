@@ -48,7 +48,7 @@ class PropertyUI:
                     sleep(2)
                 else:
                     self.__individual_property_ui(found_property)
-                    command = input(self.color_format.format('press B to go back: '))
+                    command = input(self.color_format.format('Press B to go back: '))
 
 
             elif operation == 'See list':
