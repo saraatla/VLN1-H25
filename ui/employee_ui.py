@@ -3,6 +3,7 @@ from Extra.acci import empAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from Extra.TermcolorFile.termcolor import colored
+from time import sleep
 
 LINE = '------------------------------------------'
 
@@ -44,6 +45,7 @@ class EmployeeUI:
                 found_employee = self.llapi.search_employee(search, self.destination)
                 if found_employee is None: 
                     print(f'{LINE}\nEmployee not found\n{LINE}')
+                    sleep(2)
                 else:
                     self.__individual_employee_ui(found_employee)
 
@@ -65,6 +67,7 @@ class EmployeeUI:
             elif operation == 'Create new':
                 self.__create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
+                sleep(2)
 
 
     def __create_employee(self):
