@@ -62,7 +62,6 @@ class PropertyUI:
                         for index, property in enumerate(prop_list):
                             if index+1 == nr:
                                 self.__individual_property_ui(property, nr)
-                        break
 
             elif operation == 'Create new':
                 self.__create_property()
@@ -84,12 +83,15 @@ class PropertyUI:
             for i, option in enumerate(destination_options):
                 print(f"{i+1}: {option}")
             holdon = True
-            index = input(self.color_format.format('Choose destination: '))
             while holdon == True:
+                index = input(self.color_format.format('Choose destination: '))
                 try:
                     int(index)
-                    destination = destination_options[index-1]
-                    holdon = False
+                    if index != 0:
+                        destination = destination_options[index-1]
+                        holdon = False
+                    else: 
+                        print('Invalid input, please try again')
                 except:
                     print('Invalid input, please try again')
             prop = [destination]   
