@@ -5,15 +5,15 @@ def acci():
         x = colored("███╗   ██╗ █████╗ ███╗   ██╗     █████╗ ██╗██████╗ ",'green',attrs=['bold'])
         print(f'\x1bc{x}')
         time.sleep(0.1)
-        print(colored("████╗  ██║██╔══██╗████╗  ██║    ██╔══██╗██║██╔══██╗",'blue' ,attrs=['bold']))
+        print(colored("████╗  ██║██╔══██╗████╗  ██║    ██╔══██╗██║██╔══██╗",'green' ,attrs=['bold']))
         time.sleep(0.12)
         print(colored("██╔██╗ ██║███████║██╔██╗ ██║    ███████║██║██████╔╝",'green' ,attrs=['bold']))
         time.sleep(0.13)
-        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", 'blue' ,attrs=['bold']))
+        print(colored("██║╚██╗██║██╔══██║██║╚██╗██║    ██╔══██║██║██╔══██╗", 'green' ,attrs=['bold']))
         time.sleep(0.14)
         print(colored("██║ ╚████║██║  ██║██║ ╚████║    ██║  ██║██║██║  ██║", 'green' ,attrs=['bold']))
         time.sleep(0.15)
-        print(colored("╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝", 'blue' ,attrs=['bold']))
+        print(colored("╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝", 'green' ,attrs=['bold']))
         time.sleep(0.16)
 
 def empAscii():
