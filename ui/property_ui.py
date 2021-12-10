@@ -77,9 +77,12 @@ class PropertyUI:
         if self.destination != 'All destinations':
             prop = [self.destination]
         else:
-            pass
-            #prop = []
-            #fieldnames.insert(0, 'Destination')        
+            destination_options = self.llapi.list_of_destinations()
+            for i, option in enumerate(destination_options):
+                print(f"{i+1}: {option}")
+            index = int(input(self.color_format.format('Choose destination: ')))
+            destination = destination_options[index-1]  
+            prop = [destination]   
         for field in fieldnames:
             val = input(self.color_format.format(f'{field}: '))
             prop.append(val)

@@ -2,7 +2,7 @@ from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.acci import empAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
-from Extra.TermcolorFile.termcolor import colored, cprint
+from Extra.TermcolorFile.termcolor import colored
 
 LINE = '------------------------------------------'
 
@@ -17,6 +17,7 @@ class EmployeeUI:
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
         self.llapi = LLAPI(self.destination)
         self.user_type = user_type
+        self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
         self.employee_menu_collor = colored("Employees Menu", 'red' ,attrs=['bold', 'underline'])
 
@@ -74,13 +75,18 @@ class EmployeeUI:
         print(LINE)
         fieldnames = ['Name', 'SSN', 'Email', "Address", 'Phone', 'GSM', 'Title']
         emp = []
-        if self.destination == 'All destinations':
-            fieldnames.insert(6, 'Destination')
         for field in fieldnames:
             val = input(colored(f'{field}: ','green' ,attrs=['bold', 'underline']))
             emp.append(val)
         if self.destination != 'All destinations':
             emp.insert(6, self.destination)
+        else:
+            destination_options = self.llapi.list_of_destinations()
+            for i, option in enumerate(destination_options):
+                print(f"{i+1}: {option}")
+            index = int(input(self.color_format.format('Choose destination: ')))
+            destination = destination_options[index-1]  
+            emp.insert(6, destination)
         return self.llapi.create_employee(emp) 
 
 
