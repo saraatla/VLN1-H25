@@ -352,6 +352,7 @@ class WorkRequestUI:
         for field in fieldnames:
             val = input(f'{field}: ')
             workreq.append(val)
+        
         workreq.append(self.destination)
         contractor = input(self.color_format.format('Is a contractor needed for this work request: '))
         workreq.append(contractor)

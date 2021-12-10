@@ -53,3 +53,12 @@ class PropertyDL:
                                      property.facilities])
                 else:
                     writer.writerow(row)
+    
+
+    def find_last_property_id(self, destination):
+        prop_list = self.list_properties()
+        prop_dest_list =  []
+        for property in prop_list:
+            if property.destination == destination:
+                prop_dest_list.append(property)
+        return prop_dest_list[-1].property_id

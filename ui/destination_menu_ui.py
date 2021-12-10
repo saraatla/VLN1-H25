@@ -57,22 +57,13 @@ class DestinationMenu:
     def __create_destination(self):
         print('Enter the following information: ')
         print(LINE)
-        fieldnames = ['Destination', 'Phone number', 'Opening hours']
+        fieldnames = ['Destination', 'Phone number', 'Opening hours', 'Manager SSN']
         dest = []
         for field in fieldnames:
             val = input(self.color_format.format(f'{field}: '))
             dest.append(val)
-        while True:
-            ssn_input = input(self.color_format.format('Manager SSN: '))
-            found_ssn = self.llapi.search_employee(ssn_input, 'All destinations')
-            if found_ssn is None:
-                print('Manager SSN not found')
-            elif found_ssn.title == 'Manager':
-                dest.append(ssn_input)
-                break
-            else:
-                print('Manager SSN not found')
         return self.llapi.create_destination(dest)
+
     
 
     

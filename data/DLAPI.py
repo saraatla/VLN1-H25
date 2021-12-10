@@ -42,6 +42,9 @@ class DLAPI:
 
     def edit_property(self,prop):
         return self.propertyDL.edit_property(prop)
+    
+    def find_last_property_id(self,  destination):
+        return self.propertyDL.find_last_property_id(destination)
 
     # Contractor DL
     def create_contractor(self, cont):

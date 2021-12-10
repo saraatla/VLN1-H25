@@ -27,9 +27,9 @@ class PropertyUI:
         See list: prompts a list of all the property along with their information,
         if the user logged in as a manager he also sees
         Add new: makes it possible to add a new property to the system."""
-
+        
+        propAscii()
         while True:
-            propAscii()
             operations =  ['Search by property ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
@@ -73,15 +73,18 @@ class PropertyUI:
 
         print('Enter the following information: ')
         print(LINE)
-        fieldnames = ['Address', 'Squarefoot', 'Rooms', 'Type', 'Property_ID', 'Facilities']
+        fieldnames = ['Address', 'Squarefoot', 'Rooms', 'Type', 'Facilities']
         if self.destination != 'All destinations':
             prop = [self.destination]
         else:
-            prop = []
-            fieldnames.insert(0, 'Destination')        
+            pass
+            #prop = []
+            #fieldnames.insert(0, 'Destination')        
         for field in fieldnames:
             val = input(self.color_format.format(f'{field}: '))
             prop.append(val)
+        new_id = self.llapi.get_new_property_id(prop[0])
+        prop.insert(5, new_id)  
         return self.llapi.create_property(prop)
 
 

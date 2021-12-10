@@ -46,6 +46,18 @@ class PropertyLL:
                     return property
         return None
            
+
     def edit_property(self, property):
         """Edits property info"""
         return self.dlapi.edit_property(property)
+    
+
+    def get_new_property_id(self, destination):
+        """This function finds the last workrequest id and returns the next one 
+        if a new one is made.
+        Returns:
+            the next work request id (str)"""
+        last_id = self.dlapi.find_last_property_id(destination)
+        letters = last_id[:2]
+        new_number = int(last_id[2:])+1
+        return f'{letters}{new_number}'

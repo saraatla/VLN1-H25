@@ -51,6 +51,9 @@ class LLAPI:
 
     def edit_property(self,property):
         return self.propertyLL.edit_property(property)
+    
+    def get_new_property_id(self, destination):
+        return self.propertyLL.get_new_property_id(destination)
 
     # Contractor LL
     def create_contractor(self, contractor):
