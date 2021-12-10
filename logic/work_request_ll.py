@@ -168,6 +168,7 @@ class WorkRequestLL:
                 if date_search_from.date() <= request.date <= date_search_to.date():
                     request_list_by_date.append(request)
             return request_list_by_date
+        
         return None
 
 

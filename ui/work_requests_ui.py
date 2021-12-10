@@ -157,7 +157,6 @@ class WorkRequestUI:
             request_list_by_date = self.llapi.get_list_of_workreq_on_period(request_list,start_date,end_date)
             if request_list_by_date is None:
                 print('The inputs are not valid, please try again')
-                break
             else:
                 return request_list_by_date
                     
