@@ -123,7 +123,7 @@ class EmployeeUI:
                 command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
                 print(LINE)
                 if command == "1":
-                    self._edit_employee(employee)
+                    self.__edit_employee(employee)
                     self.__print_employee_table(employee)
                 elif command == "B":
                     return
@@ -152,7 +152,7 @@ class EmployeeUI:
         print(employee_table.draw())
 
 
-    def _edit_employee(self,employee):
+    def __edit_employee(self,employee):
         """This function runs if the user is a Manager and chooses to Edit employee.
         The user chooses what to edit according to the available options.
         Args:
