@@ -7,7 +7,7 @@ from Extra.acci import workAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from ui.work_report_ui import WorkReportUI
-
+from time import sleep
 
 
 LINE = '------------------------------------------'
@@ -31,8 +31,8 @@ class WorkRequestUI:
 
     def workrequest_menu_start(self):
         """This function makes the work request menu function. It depends on the inputs by user"""
-        workAscii()
-        while True:  
+        while True: 
+            workAscii() 
             operations = ['Search by work request ID', 'Search by property ID', 'Search by employee SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
 
             # If the user logged in as a Manager he also sees
@@ -50,6 +50,7 @@ class WorkRequestUI:
                 found_request = self.llapi.search_work_requests_id(search, self.destination)
                 if found_request is None:
                     print(f'{LINE}\nWork request not found\n{LINE}')
+                    sleep(2)
                 else:
                     self.__individual_work_request_ui(found_request)
 
@@ -59,6 +60,7 @@ class WorkRequestUI:
                 found_requests = self.llapi.search_work_requests_prop(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
+                    sleep(2)
                 else:
                     self.__print_request_list(found_requests)
 
@@ -68,6 +70,7 @@ class WorkRequestUI:
                 found_requests = self.llapi.search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
+                    sleep(2)
                 else:
                     self.__print_request_list(found_requests)
 
@@ -77,6 +80,7 @@ class WorkRequestUI:
                 found_requests = self.llapi.search_work_requests_cont(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
+                    sleep(2)
                 else:
                     self.__print_request_list(found_requests)
 
@@ -94,6 +98,7 @@ class WorkRequestUI:
                     request_list = self.llapi.workrequests_by_status(status, self.destination)
                     if request_list == []:
                         print('No {} work request found.\nPlease enter "open", "closed", "ready for closing",\n"completed" or "B" to go back'.format(status))
+                        sleep(2)
                     else:
                         break
                 if status != 'b':
@@ -340,6 +345,7 @@ class WorkRequestUI:
             elif repeat == 1:
                 self.llapi.create_work_request(workreq)
                 print(f'{LINE}\nWork request successfully created!\n{LINE}')
+                sleep(2)
                 break
             else:
                 print('Invalid option, please try again')
@@ -425,6 +431,7 @@ class WorkRequestUI:
                     new_date = relativedelta(years =+1*i)
                     self.__create_repeated(workreq, date_var, new_date)
             print(f'{LINE}\nWork request successfully created!\n{LINE}')
+            sleep(2)
         else:
             print("Can not create work request in the past")
 

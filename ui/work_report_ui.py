@@ -1,6 +1,7 @@
 from Extra.texttableFile.texttable import Texttable, get_color_string, bcolors
 from Extra.TermcolorFile.termcolor import colored, cprint
 from logic.LLAPI import LLAPI
+from time import sleep
 LINE = '------------------------------------------'
 
 class WorkReportUI:
@@ -35,6 +36,7 @@ class WorkReportUI:
         workrep.append(manager_comment)
         work_report = self.llapi.create_work_report(workrep)
         print(f'{LINE}\nWork report successfully created!\n{LINE}')
+        sleep(2)
         request.workreport_id = new_id
         self.llapi.edit_work_request(request)
         return work_report

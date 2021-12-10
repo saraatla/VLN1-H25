@@ -26,8 +26,8 @@ class DestinationMenu:
         destination.
         Add new destination: makes it possible for the manager to add a new destination to the system."""
 
-        locAscii()
         while True:
+            locAscii()
             options = self.llapi.list_of_destinations()
             options.append('All destinations')
             if self.user_type == "Manager":
