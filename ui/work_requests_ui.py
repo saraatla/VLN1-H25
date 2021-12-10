@@ -271,7 +271,6 @@ class WorkRequestUI:
             # if the status is 'open' or 'closed' he can edit the request
             else:
                 while True:
-                    print('Work request: ')
                     self.__print_work_request_table(request, nr)
                     print("1: Edit\nB: Back")
                     print(LINE)
