@@ -4,6 +4,7 @@ from Extra.acci import contAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from Extra.TermcolorFile.termcolor import colored
+from time import sleep
 LINE = '------------------------------------------'
 
 class ContractorUI:
@@ -65,6 +66,7 @@ class ContractorUI:
             elif operation == 'Create new':
                 self.__create_contractor()
                 print(f'{LINE}\nContractor successfully created!\n{LINE}')
+                sleep(2)
 
 
     def __create_contractor(self):
