@@ -84,8 +84,8 @@ class PropertyUI:
             for i, option in enumerate(destination_options):
                 print(f"{i+1}: {option}")
             holdon = True
-            index = input(self.color_format.format('Choose destination: '))
             while holdon == True:
+                index = input(self.color_format.format('Choose destination: '))
                 try:
                     int(index)
                     destination = destination_options[index-1]
