@@ -363,10 +363,11 @@ class WorkRequestUI:
         workreq.append(contractor)
         while True:
             start_date = self.__check_date('start date')
-            if date.today() <= start_date:
-                break
-            else:
+            date_var = datetime.strptime(start_date,'%d/%m/%Y').date()
+            if date.today() > date_var:
                 print('Can not create work request in the past')
+            else:
+                break
         workreq.append(start_date)
         if start_date == date.today():
             status = 'open'
@@ -462,5 +463,7 @@ class WorkRequestUI:
                 return date_string
             except ValueError:
                 print("This is the incorrect date format. It should be dd/mm/yyyy")
+        
+            
 
 
