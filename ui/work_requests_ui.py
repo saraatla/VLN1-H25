@@ -332,12 +332,17 @@ class WorkRequestUI:
         options = ['Do no repeat', 'Daily', 'Weekly', 'Monthly', 'Yearly']
         for index, option in enumerate(options):
             print(f"{index+1}: {option}")
-        repeat = int(input(self.color_format.format('Choose option: ')))
-        if repeat > 1:
-            self.__repeat_work_request(start_date, repeat, workreq)
-        else:
-            self.llapi.create_work_request(workreq)
-            print(f'{LINE}\nWork request successfully created!\n{LINE}')
+        while True:
+            repeat = int(input(self.color_format.format('Choose option: ')))
+            if repeat > 1:
+                self.__repeat_work_request(start_date, repeat, workreq)
+                break
+            elif repeat == 1:
+                self.llapi.create_work_request(workreq)
+                print(f'{LINE}\nWork request successfully created!\n{LINE}')
+                break
+            else:
+                print('Invalid option, please try again')
 
 
     def __create_work_req_list(self):
@@ -350,13 +355,18 @@ class WorkRequestUI:
         workreq = [new_id]
         fieldnames = ["Title", "Property_ID"]
         for field in fieldnames:
-            val = input(f'{field}: ')
+            val = input(self.color_format.format(f'{field}: '))
             workreq.append(val)
         
         workreq.append(self.destination)
         contractor = input(self.color_format.format('Is a contractor needed for this work request: '))
         workreq.append(contractor)
-        start_date = self.__check_date('start date')
+        while True:
+            start_date = self.__check_date('start date')
+            if date.today() <= start_date:
+                break
+            else:
+                print('Can not create work request in the past')
         workreq.append(start_date)
         if start_date == date.today():
             status = 'open'
@@ -367,8 +377,13 @@ class WorkRequestUI:
         for i, option in enumerate(priority_options):
             print(f"{i+1}: {option}")
         # The manager can choose the urgency of the request 
-        index = int(input(self.color_format.format('Choose priority: ')))
-        priority = priority_options[index-1]
+        while True:
+            index = int(input(self.color_format.format('Choose priority: ')))
+            try:
+                priority = priority_options[index-1]
+                break
+            except:
+                print('Invalid option, please try again')
         workreq.append(priority)
         description = input(self.color_format.format('Description: '))
         workreq.append(description)
