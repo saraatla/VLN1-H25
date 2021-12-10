@@ -87,8 +87,15 @@ class EmployeeUI:
             destination_options = self.llapi.list_of_destinations()
             for i, option in enumerate(destination_options):
                 print(f"{i+1}: {option}")
-            index = int(input(self.color_format.format('Choose destination: ')))
-            destination = destination_options[index-1]  
+            holdon = True
+            while holdon == True:
+                index = input(self.color_format.format('Choose destination: '))
+                try:
+                    int(index)
+                    destination = destination_options[index-1]  
+                    holdon = False
+                except:
+                    print('Invalid option, please try again')
             emp.insert(6, destination)
         return self.llapi.create_employee(emp) 
 
