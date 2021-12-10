@@ -343,15 +343,19 @@ class WorkRequestUI:
             print(f"{index+1}: {option}")
         while True:
             repeat = int(input(self.color_format.format('Choose option: ')))
-            if repeat > 1:
-                self.__repeat_work_request(start_date, repeat, workreq)
-                break
-            elif repeat == 1:
-                self.llapi.create_work_request(workreq)
-                print(f'{LINE}\nWork request successfully created!\n{LINE}')
-                sleep(2)
-                break
-            else:
+            try:
+                repeat = int(repeat)
+                if repeat > 1:
+                    self.__repeat_work_request(start_date, repeat, workreq)
+                    break
+                elif repeat == 1:
+                    self.llapi.create_work_request(workreq)
+                    print(f'{LINE}\nWork request successfully created!\n{LINE}')
+                    sleep(2)
+                    break
+                else:
+                    print('Invalid option, please try again')
+            except:
                 print('Invalid option, please try again')
 
 
@@ -389,8 +393,9 @@ class WorkRequestUI:
             print(f"{i+1}: {option}")
         # The manager can choose the urgency of the request 
         while True:
-            index = int(input(self.color_format.format('Choose priority: ')))
+            index = input(self.color_format.format('Choose priority: '))
             try:
+                index = int(index)
                 priority = priority_options[index-1]
                 break
             except:
