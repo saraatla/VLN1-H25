@@ -48,7 +48,7 @@ class PropertyUI:
                     self.__individual_property_ui(found_property)
 
             elif operation == 'See list':
-                prop_list = self._list_properties()
+                prop_list = self.__list_properties()
                 while True:
                     command = input(self.color_format.format("Enter number of property to open or B to Back: ")).upper()
                     if command == "B":
@@ -63,11 +63,11 @@ class PropertyUI:
                         break
 
             elif operation == 'Add new':
-                self._create_property()
+                self.__create_property()
                 print(f'{LINE}\nProperty successfully created!\n{LINE}')
 
 
-    def _create_property(self):
+    def __create_property(self):
         """This function runs when the user (manager) chooses 'Add new' . 
         The property will be given a destination according to the user's choice in the destination menu."""
 
@@ -85,7 +85,7 @@ class PropertyUI:
         return self.llapi.create_property(prop)
 
 
-    def _list_properties(self):
+    def __list_properties(self):
         """This function runs when the user chooses 'See list'.
         It will show the list of properties in a printable template format."""
 
@@ -118,7 +118,7 @@ class PropertyUI:
             command = input(colored("Choose Options edit or back: ",'green' ,attrs=['bold', 'underline'])).upper()
             print(LINE)
             if command == "1":
-                self._edit_property(property)
+                self.__edit_property(property)
                 self.__print_property_table(property)
             elif command == "B":
                 return
@@ -144,7 +144,7 @@ class PropertyUI:
         property_table.add_row([get_color_string(bcolors.GREEN,"Facilities"),property.facilities])
         print(property_table.draw())
 
-    def _edit_property(self, property):
+    def __edit_property(self, property):
         """This function runs if the user is a Manager and chooses to Edit property.
         The user chooses what to edit according to the available options.
         Args:

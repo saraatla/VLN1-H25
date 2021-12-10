@@ -47,7 +47,7 @@ class EmployeeUI:
                     self.__individual_employee_ui(found_employee)
 
             elif operation == 'See list':
-                emp_list = self._list_employees()
+                emp_list = self.__list_employees()
                 while True:
                     command = input(colored("Enter number of employee to open or B to Back: ",'green' ,attrs=['bold', 'underline'])).upper()
                     if command == "B":
@@ -62,11 +62,11 @@ class EmployeeUI:
                         break
 
             elif operation == 'Add new':
-                self._create_employee()
+                self.__create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
 
-    def _create_employee(self):
+    def __create_employee(self):
         """This function runs when the user (manager) chooses 'Add new' . 
         The employee will be given a destination according to the user's choice in the destination menu."""
 
@@ -84,7 +84,7 @@ class EmployeeUI:
         return self.llapi.create_employee(emp) 
 
 
-    def _list_employees(self):
+    def __list_employees(self):
         """This function runs when the user chooses 'See list'.
         It will show the list of employees in a printable template format."""
 

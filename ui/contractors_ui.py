@@ -48,7 +48,7 @@ class ContractorUI:
                     self.__individual_contractor_ui(found_contractor)
 
             elif operation == 'See list':
-                cont_list = self._list_contractors()
+                cont_list = self.__list_contractors()
                 while True:
                     command = input(self.color_format.format("Enter number of contractor to open or B to Back: ")).upper()
                     if command == "B":
@@ -63,11 +63,11 @@ class ContractorUI:
                         break
 
             elif operation == 'Add new':
-                self._create_contractor()
+                self.__create_contractor()
                 print(f'{LINE}\nContractor successfully created!\n{LINE}')
 
 
-    def _create_contractor(self):
+    def __create_contractor(self):
         """This function runs when the user (manager) chooses 'Add new' . 
         The contractor will be given a destination according to the user's choice in the destination menu."""
 
@@ -81,7 +81,7 @@ class ContractorUI:
             cont.append(val)
         return self.llapi.create_contractor(cont)
 
-    def _list_contractors(self):
+    def __list_contractors(self):
         """This function runs when the user chooses 'See list'.
         It will show the list of contractors in a printable template format."""
 
@@ -119,7 +119,7 @@ class ContractorUI:
                 command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                 print(LINE)
                 if command == "1":
-                    self._edit_contractor(contractor)
+                    self.__edit_contractor(contractor)
                     self.__print_contractor_table(contractor)
                 elif command == "B":
                     return
@@ -146,7 +146,7 @@ class ContractorUI:
         contractor_table.add_row([get_color_string(bcolors.GREEN,"Review"),contractor.review])
         print(contractor_table.draw())
 
-    def _edit_contractor(self, contractor):
+    def __edit_contractor(self, contractor):
         """This function runs if the user is a Manager and chooses to Edit contractor.
         The user chooses what to edit according to the available options.
         Args: 
