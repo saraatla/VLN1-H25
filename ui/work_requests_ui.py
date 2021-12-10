@@ -13,6 +13,12 @@ from ui.work_report_ui import WorkReportUI
 LINE = '------------------------------------------'
 
 class WorkRequestUI:
+    """Work Request UI layer class. Contains 14 functions. 
+    The class contains an instance of the LLAPI and WorkReportUI class
+    Args: 
+        destination (str): destination chosen by user
+        user_type (str): user type chosen by user (manager/employee)"""
+
     def __init__(self, destination, user_type):
         self.user_type = user_type
         self.destination = destination
@@ -24,84 +30,101 @@ class WorkRequestUI:
 
 
     def _workrequest_menu_start(self):
-        workAscii()
+        """This function makes the work request menu function. It depends on the inputs by user"""
+
         while True:
-            operations = ['Search by work request ID', 'Search by property ID', 'Search by SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
+            workAscii()
+            operations = ['Search by work request ID', 'Search by property ID', 'Search by employee SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
+
+            # If the user logged in as a Manager he also sees
             if self.user_type == 'Manager':
-                operations.append('Add new')
+                operations.append('Create new')
             operations_menu = Menu(f'{LINE}\n{self.Work_Requests_menu_color} in {self.destination_collor}\nChoose options', operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
                 return
             operation = operations[selected_operation]
 
+            # Search by work request ID: allows the user to search a work request by it's ID
             if operation == 'Search by work request ID':
-                search = input(self.color_format.format('Enter work request ID: '))
+                search = input(self.color_format.format('Enter work request ID: ')).lower()
                 found_request = self.llapi._search_work_requests_id(search, self.destination)
                 if found_request is None:
                     print(f'{LINE}\nWork request not found\n{LINE}')
                 else:
                     self.__individual_work_request_ui(found_request)
 
+            # Search by property ID: allows the user to search a work request by property ID
             elif operation == 'Search by property ID':
-                search = input(self.color_format.format('Enter property ID: '))
+                search = input(self.color_format.format('Enter property ID: ')).upper()
                 found_requests = self.llapi._search_work_requests_prop(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
                     self.__print_request_list(found_requests)
 
-            elif operation == 'Search by SSN':
-                search = input(self.color_format.format('Enter SSN: '))
+            # Search by employee SSN: -||- employee SSN,
+            elif operation == 'Search by employee SSN':
+                search = input(self.color_format.format('Enter epmloyee SSN: '))
                 found_requests = self.llapi._search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
                     self.__print_request_list(found_requests)
 
+            # Search by contractor ID: -||- contractor ID,
             elif operation == 'Search by contractor ID':
-                search = input(self.color_format.format('Enter contractor ID: '))
+                search = input(self.color_format.format('Enter contractor ID: ')).upper()
                 found_requests = self.llapi._search_work_requests_cont(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')
                 else:
                     self.__print_request_list(found_requests)
 
+            # See list of all requests: prompts a list of work requests on a specific period chosen by user or all of them
             elif operation == 'See list of all requests':
                 request_list = self.llapi._list_all_work_requests(self.destination)
                 self.__print_request_list(request_list)
 
-
+            # See list of requests by status: prompts a list of requests by status
             elif operation == "See list of requests by status":
                 while True:
                     status = input(self.color_format.format('Enter status: ')).lower()
-                    request_list = self.llapi._workrequests_by_status(status, self.destination) 
+                    if status == 'b':
+                        break
+                    request_list = self.llapi._workrequests_by_status(status, self.destination)
                     if request_list == []:
-                        print('No {} work request found.\nPlease enter "open", "closed", "ready for closing" or "completed".'.format(status))
+                        print('No {} work request found.\nPlease enter "open", "closed", "ready for closing",\n"completed" or "B" to go back'.format(status))
                     else:
                         break
-                self.__list_work_requests_ui(request_list)
-                self.__open_request_from_list(request_list)
-                
+                if status != 'b':
+                    self.__list_work_requests_ui(request_list)
+                    self.__open_request_from_list(request_list)
 
-            elif operation == 'Add new':
+            # Create new: makes it possible to create new work request
+            elif operation == 'Create new':
                 self.__create_work_request()
 
 
     def __print_request_list(self, request_list):
+        """This function calls 3 functions in this class"""
+
         request_list_by_date = self.__find_date_range(request_list)
         self.__list_work_requests_ui(request_list_by_date)
         self.__open_request_from_list(request_list_by_date)
 
 
     def __open_request_from_list(self, request_list):
+        """This function allows the user to choose a work request to see more information about 
+        in a list of work requests
+        Args: 
+            request_list (list): list of work requests"""
+
         while True:
             print(LINE)
             command = input(self.color_format.format("Enter Number of request to open or B to Back: ")).upper()
             if command == "B":
                 break
-            if command == "P":
-                self.__print_request_list(request_list)
             if not command.isdigit():
                 print("Invalid input, please try again")
             else:
@@ -113,6 +136,12 @@ class WorkRequestUI:
 
 
     def __find_date_range(self, request_list):
+        """This function finds work requests on a specific period input by user
+        Args: 
+            request_list (list): list of all requests
+        Returns:
+            request_list_by_date (list): list of requests on a specific period"""
+
         while True:
             print(f'Enter date range for list of work requests or leave blank to see all\n{LINE}')
             start_date = self.__check_date('date to search from')
@@ -126,6 +155,9 @@ class WorkRequestUI:
                     
 
     def __list_work_requests_ui(self, request_list):
+        """This function runs when the user chooses to see work requests.
+        It will show the list of work requests in a printable template format."""
+
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(300)
@@ -137,6 +169,14 @@ class WorkRequestUI:
 
 
     def __individual_work_request_ui(self, request, nr=None):
+        """This function runs when the user chooses 'Search by X' and inputs an ID that's in the system.
+        It will show information of a work request along with options.
+        The options depend on the user (Manager/Employee) and also the work request status.
+        Args:
+            request (class instance): request model class,
+            nr : either None or int. """
+
+        # If the user is an Employee and the status of request is 'open' he can add a report
         if self.user_type == 'Employee':
             if request.status == 'open' and not request.workreport_id:
                 while True:
@@ -146,7 +186,7 @@ class WorkRequestUI:
                     command = input(self.color_format.format("Choose Options: ")).upper()
                     print(LINE)
                     if command == "1":
-                        work_report = self.report_ui._create_work_report(request)
+                        work_report = self.report_ui.create_work_report(request)
                         self.report_ui._individual_work_report_ui(work_report, request)
                         break
                     elif command == "B":
@@ -154,6 +194,8 @@ class WorkRequestUI:
                     else:
                         print("Invalid option, please try again")
                         print(LINE)
+
+            # if the status is 'closed' he can only view it
             elif request.status == 'closed':
                 while True:
                     self.__print_work_request_table(request, nr)
@@ -163,6 +205,8 @@ class WorkRequestUI:
                     else:
                         print("Invalid option, please try again")
                         print(LINE)
+
+            # if the status is 'completed' he can see report
             else:
                 while True:
                     self.__print_work_request_table(request, nr)
@@ -177,15 +221,20 @@ class WorkRequestUI:
                     else:
                         print("Invalid option, please try again")
                         print(LINE)
+
+        # If the user is a Manager and the status of request is 'completed' he can see report or reopen request
         elif self.user_type == 'Manager':
             if request.status == 'completed':
                 while True:
                     self.__print_work_request_table(request, nr)
-                    print("1: Reopen request\nB: Back")
+                    print("1: See report\n2:Reopen request\nB: Back")
                     print(LINE)
-                    command = input(self.color_format.format("Choose Options reopen or back: ")).upper()
+                    command = input(self.color_format.format("Choose Options see report,reopen or back: ")).upper()
                     print(LINE)
-                    if command == "1":
+                    if command == '1':
+                        report = self.llapi._search_work_report(request.workreport_id)
+                        self.report_ui._individual_work_report_ui(report, request)
+                    if command == "2":
                         request.status = 'open'
                         self.llapi._edit_work_request(request)
                         self.__print_work_request_table(request)
@@ -195,22 +244,23 @@ class WorkRequestUI:
                     else:
                         print("Invalid option, please try again")
                         print(LINE)
-            elif request.status == 'open' and request.workreport_id is not None:
+
+            # if the statust is 'open' and there is a report assigned to it he can see report and choose what to do with it
+            elif request.status == 'open' and request.workreport_id:
                 while True:
                     self.__print_work_request_table(request, nr)
-                    print(f"{LINE}\n1: See report\n2: Edit\nB: Back")
+                    print(f"{LINE}\n1: See report\nB: Back")
                     command = input(self.color_format.format('Choose options: ')).upper()
                     if command == '1':
                         report = self.llapi._search_work_report(request.workreport_id)
                         self.report_ui._individual_work_report_ui(report, request)
-                    elif command == '2':
-                        self.__edit_work_request(request)
-                        self.__print_work_request_table(request)
                     elif command == 'B':
                         return
                     else:
                         print("Invalid option, please try again")
                         print(LINE)
+
+            # if the status is 'open' or 'closed' he can edit the request
             else:
                 while True:
                     print('Work request: ')
@@ -227,9 +277,14 @@ class WorkRequestUI:
                     else:
                         print("Invalid option, please try again")
                         print(LINE)
-    
+
 
     def __print_work_request_table(self, request, nr=None):
+        """This function prints work request info in a printable template format.
+        Args:
+            request (class instance): work request model class,
+            nr : either None or int. """
+
         work_request_table = Texttable()
         work_request_table.add_row([get_color_string(bcolors.BLUE,"Work request\n⬇⬇⬇⬇⬇"),get_color_string(bcolors.BLUE,"Work request\n⬇⬇⬇⬇⬇")])
         if nr is not None:
@@ -247,7 +302,12 @@ class WorkRequestUI:
         print(f'{work_request_table.draw()}')
     
 
-    def __edit_work_request(self, req):
+    def __edit_work_request(self, request):
+        """This function runs if the user is a Manager and chooses to Edit work request.
+        The user chooses what to edit according to the available options.
+        Args:
+            request (class instance): work request model class."""
+
         while True:
             fieldnames = ['Title', 'Property_ID', 'Destination', 'Contractor', 'Date', 'Status', 'Priority', 'Description']
             for index, field in enumerate(fieldnames):
@@ -256,33 +316,34 @@ class WorkRequestUI:
             try:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
-                setattr(req, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_work_request(req)
+                setattr(request, fieldnames[col-1].lower(), newval)
+                return self.llapi._edit_work_request(request)
             except:
                 print('Invalid input, please try again')
 
 
-
-
-
     def __create_work_request(self):
+        """This function runs when the user (manager) chooses 'Create new' . 
+        The work request will be given a destination according to the user's choice in the destination menu."""
+        
         print('Enter the following information: ')
         print(LINE)
         start_date, workreq = self.__create_work_req_list()
         print('Do you want to repeat this work request?')
         options = ['Do no repeat', 'Daily', 'Weekly', 'Monthly', 'Yearly']
-        for i, option in enumerate(options):
-            print(f"{i+1}: {option}")
+        for index, option in enumerate(options):
+            print(f"{index+1}: {option}")
         repeat = int(input(self.color_format.format('Choose option: ')))
         if repeat > 1:
             self.__repeat_work_request(start_date, repeat, workreq)
         else:
             self.llapi._create_work_request(workreq)
             print(f'{LINE}\nWork request successfully created!\n{LINE}')
-    
 
 
     def __create_work_req_list(self):
+        """"""
+
         new_id = self.llapi._get_new_request_id()
         workreq = [new_id]
         fieldnames = ["Title", "Property_ID"]
@@ -313,7 +374,10 @@ class WorkRequestUI:
 
 
     def __repeat_work_request(self,start_date, repeat, workreq):
-        date_var = datetime.strptime(start_date,'%d/%m/%Y')
+        """"""
+
+        date_var = datetime.strptime(start_date,'%d/%m/%Y').date()
+        print(date_var)
         if date.today() <= date_var:
             i = 0
             if repeat == 2:
@@ -342,6 +406,8 @@ class WorkRequestUI:
 
 
     def __create_repeated(self, workreq, date_var, new_date):
+        """ """
+
         date_work_req = date_var + new_date
         date_work_req = date_work_req.strftime('%d/%m/%Y')
         workreq[5] = date_work_req
@@ -352,6 +418,8 @@ class WorkRequestUI:
 
 
     def __check_date(self, date_str):
+        """"""
+
         while True:
             date_string = input(self.color_format.format(f'Enter {date_str}, dd/mm/yyyy: '))
             if date_string == '' and date_str is not 'start date':

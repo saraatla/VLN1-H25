@@ -1,13 +1,13 @@
-from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
 from models.contractor_model import Contractor
 
 class ContractorLL:
     """Contractor logic layer class; Contains 6 functions: fetches the functions in the data layer API, 
-    search for a contractor by id and finds the last contractor id in csv file"""
+    search for a contractor by id and finds the last contractor id in csv file
+    Args:
+        destination (str): destination chosen by user"""
     def __init__(self,destination):
         self.dlapi = DLAPI(destination)
-        self.table = Texttable()
 
 
     def _list_contractors(self):

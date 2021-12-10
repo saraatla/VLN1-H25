@@ -7,6 +7,11 @@ from Extra.TermcolorFile.termcolor import colored
 LINE = '------------------------------------------'
 
 class ContractorUI:
+    """Contractor UI layer class: Contains 7 functions. The class contains an instance of the LLAPI class
+    Args:
+        destination (str): destination chosen by user
+        user_type (str): user type chosen by user (manager/employee)"""
+
     def __init__(self, destination, user_type):
         self.destination = destination
         self.destination_collor = colored(self.destination, 'blue' ,attrs=['bold', 'underline'])
@@ -17,9 +22,15 @@ class ContractorUI:
         self.Contractors_menu_color = colored("Contractors Menu",'red' ,attrs=['bold', 'underline'])
 
     def _contractor_menu_start(self):
-        contAscii()
+        """This function makes the contractor menu function. It depends on the inputs by user: 
+        Search by ID: allows the user to search a contractor by their ID, 
+        See list: prompts a list of all the contractors along with their information,
+        if the user logged in as a manager he also sees
+        Add new: makes it possible to add a new contractor to the system."""
+
         while True:
-            operations =  ['Search by ID', 'See list']
+            contAscii()
+            operations =  ['Search by contractor ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Add new')
             operations_menu = Menu(f'{self.Contractors_menu_color} in {self.destination_collor}\nChoose options',operations)
@@ -28,8 +39,8 @@ class ContractorUI:
                 return
             operation = operations[selected_operation]
 
-            if operation  == 'Search by ID':
-                search = input(self.color_format.format('Enter contractor ID: '))
+            if operation  == 'Search by contractor ID':
+                search = input(self.color_format.format('Enter contractor ID: ')).upper()
                 found_contractor = self.llapi._search_contractor(search)
                 if found_contractor is None:
                     print(f'{LINE}\nContractor not found\n{LINE}')
@@ -57,6 +68,9 @@ class ContractorUI:
 
 
     def __create_contractor(self):
+        """This function runs when the user (manager) chooses 'Add new' . 
+        The contractor will be given a destination according to the user's choice in the destination menu."""
+
         print('Enter the following information: ')
         print(LINE)
         new_id = self.llapi._get_new_cont_id()
@@ -68,6 +82,9 @@ class ContractorUI:
         return self.llapi._create_contractor(cont)
 
     def __list_contractors(self):
+        """This function runs when the user chooses 'See list'.
+        It will show the list of contractors in a printable template format."""
+
         table = Texttable()
         table.set_deco(Texttable.HEADER)
         table.set_max_width(160)
@@ -80,6 +97,12 @@ class ContractorUI:
         return cont_list
 
     def __individual_contractor_ui(self, contractor, nr=None):
+        """This function runs when the user chooses 'Search by contractor ID' and inputs an ID that's in the system.
+        It will show information about a contractor and also the option to edit if the user is a Manager.
+        Args:
+            contractor (class instance): contractor model class
+            nr : either None or int."""
+
         self.__print_contractor_table(contractor, nr)
         while True:
             if self.user_type == 'Employee':
@@ -105,6 +128,11 @@ class ContractorUI:
                     print(LINE)
 
     def __print_contractor_table(self, contractor, nr=None):
+        """This function prints contractor info in a printable template format.
+        Args:
+            contractor (class instance): contractor model class
+            nr : either None or int."""
+
         contractor_table = Texttable()
         if nr is not None:
             contractor_table.add_row([get_color_string(bcolors.GREEN,"Number"),nr])
@@ -118,7 +146,12 @@ class ContractorUI:
         contractor_table.add_row([get_color_string(bcolors.GREEN,"Review"),contractor.review])
         print(contractor_table.draw())
 
-    def __edit_contractor(self, cont):
+    def __edit_contractor(self, contractor):
+        """This function runs if the user is a Manager and chooses to Edit contractor.
+        The user chooses what to edit according to the available options.
+        Args: 
+            contractor (class instance): contractor model class"""
+        
         while True:
             fieldnames = ["Name", "Type", "Contact", "Contact's phone", "Address", "Open_hours", "Review"]
             for index, field in enumerate(fieldnames):
@@ -127,7 +160,7 @@ class ContractorUI:
             try:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
-                setattr(cont, fieldnames[col-1].lower(), newval)
-                return self.llapi._edit_contractor(cont)
+                setattr(contractor, fieldnames[col-1].lower(), newval)
+                return self.llapi._edit_contractor(contractor)
             except:
                 print('Invalid input, please try again')

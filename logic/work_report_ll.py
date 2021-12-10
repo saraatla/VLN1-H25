@@ -3,8 +3,9 @@ from models.work_report import WorkReport
  
 class WorkReportLL:
     """Work Report logic layer class; Contains 6 functions: fetches the functions in the data layer API,
-    """
-    
+    lists information of work report, creates the id for a new work report.
+    Args: 
+        destination (str): destination chosen by user"""
 
     def __init__(self,destination):
         self.destination = destination
@@ -21,14 +22,14 @@ class WorkReportLL:
 
     def _search_work_report(self, search):
         reader = self._list_work_reports()
-        for row in reader:
-            if search == row.workreport_id:
-                return row
+        for report in reader:
+            if search == report.workreport_id:
+                return report
         return False
 
 
     def _create_report(self, work_rep):
-        return self.dlapi._create_work_report(WorkReport(work_rep))
+        return self.dlapi.create_work_report(WorkReport(work_rep))
 
 
     def _get_new_id(self):
