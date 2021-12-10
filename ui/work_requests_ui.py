@@ -31,9 +31,8 @@ class WorkRequestUI:
 
     def workrequest_menu_start(self):
         """This function makes the work request menu function. It depends on the inputs by user"""
-
-        while True:
-            workAscii()
+        workAscii()
+        while True:  
             operations = ['Search by work request ID', 'Search by property ID', 'Search by employee SSN', 'Search by contractor ID', 'See list of all requests', 'See list of requests by status']
 
             # If the user logged in as a Manager he also sees
@@ -65,7 +64,7 @@ class WorkRequestUI:
 
             # Search by employee SSN: allows the user to search a work request by employee SSN,
             elif operation == 'Search by employee SSN':
-                search = input(self.color_format.format('Enter epmloyee SSN: '))
+                search = input(self.color_format.format('Enter employee SSN: '))
                 found_requests = self.llapi.search_work_request_ssn(search, self.destination)
                 if found_requests == []:
                     print(f'{LINE}\nNo work requests found\n{LINE}')

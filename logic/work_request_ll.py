@@ -107,7 +107,7 @@ class WorkRequestLL:
         reader_request = self.dlapi.list_work_requests()
         report_list = []
         for report in reader_report:
-            if report.ssn == ssn:
+            if report.employee_ssn == ssn:
                 report_list.append(report)
         request_list = []
         for report in report_list:
