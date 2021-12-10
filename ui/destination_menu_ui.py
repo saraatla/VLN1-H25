@@ -26,9 +26,9 @@ class DestinationMenu:
         destination.
         Add new destination: makes it possible for the manager to add a new destination to the system."""
 
+        locAscii()
         while True:
-            locAscii()
-            options = self.llapi.list_of_destinations()
+            options = self.llapi._list_of_destinations()
             options.append('All destinations')
             if self.user_type == "Manager":
                 options.append('Add new destination')        
@@ -39,17 +39,29 @@ class DestinationMenu:
             option = options[selection]
             if self.user_type == "Manager":
                 if option == 'Add new destination':
-                    print('Enter the following information: ')
-                    print(LINE)
-                    fieldnames = ['Destination', 'Phone number', 'Opening hours', "Manager SSN"]
-                    dest = []
-                    for field in fieldnames:
-                        val = input(self.color_format.format(f'{field}: '))
-                        dest.append(val)
-                    return self.llapi.create_destination(dest)
+                    self.__create_destination()
+                    print(f'{LINE}\nDestination successfully created!\n{LINE}')
+                    while True:
+                        command = input(self.color_format.format('Press B for back: ')).upper()
+                        if command == 'B':
+                            return
+                        else:
+                            print("Invalid option, please try again")
+                            print(LINE)
             selection_str = options[selection]
             operations = OperationsUI(selection_str, self.user_type)
             operations.start()
+
+
+    def __create_destination(self):
+        print('Enter the following information: ')
+        print(LINE)
+        fieldnames = ['Destination', 'Phone number', 'Opening hours', "Manager SSN"]
+        dest = []
+        for field in fieldnames:
+            val = input(self.color_format.format(f'{field}: '))
+            dest.append(val)
+        return self.llapi.create_destination(dest)
     
 
     
