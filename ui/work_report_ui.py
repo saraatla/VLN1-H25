@@ -23,7 +23,7 @@ class WorkReportUI:
 
         print('Enter the following information: ')
         print(LINE)
-        new_id = self.llapi._get_new_report_id()
+        new_id = self.llapi.get_new_report_id()
         workrep = [new_id]
         fieldnames = ['Eployee SSN', 'Contractor_ID', 'Contractor_review', 'Contractor_remuneration', 'Total_cost', 'Description']
         for field in fieldnames:
@@ -33,14 +33,14 @@ class WorkReportUI:
         workrep.append(approved)
         manager_comment = None
         workrep.append(manager_comment)
-        work_report = self.llapi._create_report(workrep)
+        work_report = self.llapi.create_work_report(workrep)
         print(f'{LINE}\nWork report successfully created!\n{LINE}')
         request.workreport_id = new_id
         self.llapi.edit_work_request(request)
         return work_report
 
     
-    def _individual_work_report_ui(self, report, request, nr=None):
+    def individual_work_report_ui(self, report, request, nr=None):
         """This function runs when the user chooses to see report for a work request.
         It will show information of the report and also the option to edit if the user is a employee.
         Args:
@@ -57,7 +57,7 @@ class WorkReportUI:
                     command = input(self.color_format.format("Choose Options edit or back: ")).upper()
                     print(LINE)
                     if command == "1":
-                        self._edit_work_report(report)
+                        self.__edit_work_report(report)
                     elif command == "B":
                         return
                     else:
@@ -108,7 +108,7 @@ class WorkReportUI:
                 print('Report has been marked approved and request has been closed!') 
 
 
-    def _edit_work_report(self, report):
+    def __edit_work_report(self, report):
         """This function runs if the user is an Employee and chooses to Edit work report.
         The user chooses what to edit according to the available options.
         Args:

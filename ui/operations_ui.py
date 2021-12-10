@@ -28,7 +28,7 @@ class OperationsUI:
         Work requests: -||- work request menu where the work reports can also be found
         Contractors: -||- contractor menu
         Destination info: -||- destination menu if the user chose a specific destination (not All destinations)"""
-        
+
         while True:
             if self.destination == 'All destinations':
                 operations =  ['Employees', 'Properties', 'Work requests', 'Contractors',]
@@ -41,18 +41,18 @@ class OperationsUI:
             operation = operations[selected_operation]
             if operation  == 'Employees':
                 employee_menu  = EmployeeUI(self.destination,self.user_type)
-                employee_menu._employee_menu_start()
+                employee_menu.employee_menu_start()
             elif operation == 'Properties':
                 property_menu  = PropertyUI(self.destination,self.user_type)
-                property_menu._property_menu_start()
+                property_menu.property_menu_start()
             elif operation == 'Work requests':
                 work_request_menu  = WorkRequestUI(self.destination,self.user_type)
-                work_request_menu._workrequest_menu_start()
+                work_request_menu.workrequest_menu_start()
             elif operation == 'Contractors':
                 contractor_menu  = ContractorUI(self.destination,self.user_type)
-                contractor_menu._contractor_menu_start()
+                contractor_menu.contractor_menu_start()
             elif operation == 'Destination info':
-                destination = self.llapi._search_destination(self.destination)
+                destination = self.llapi.search_destination(self.destination)
                 destination_ui = DestinationUI(destination)
-                destination_ui._destination_info_ui()
+                destination_ui.destination_info_ui()
 

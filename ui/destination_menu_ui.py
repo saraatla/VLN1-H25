@@ -19,7 +19,7 @@ class DestinationMenu:
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
         
-    def _destination_menu_start(self):
+    def destination_menu_start(self):
         """This function makes the destination menu function. The user chooses which destination
         he wants to see.  After choosing a destination all the information later on in the
         program will only show employees, work requests, contractors and properties in that
@@ -28,7 +28,7 @@ class DestinationMenu:
 
         while True:
             locAscii()
-            options = self.llapi._list_of_destinations()
+            options = self.llapi.list_of_destinations()
             options.append('All destinations')
             if self.user_type == "Manager":
                 options.append('Add new destination')        

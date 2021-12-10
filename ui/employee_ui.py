@@ -20,7 +20,7 @@ class EmployeeUI:
         self.colored_user_type = colored(self.user_type, 'green' ,attrs=['bold', 'underline'])
         self.employee_menu_collor = colored("Employees Menu", 'red' ,attrs=['bold', 'underline'])
 
-    def _employee_menu_start(self):
+    def employee_menu_start(self):
         """This function makes the employee menu function. It depends on the inputs by user: 
         Search by SSN: allows the user to search an employee by SSN, 
         See list: prompts a list of all the employees along with their information,
@@ -40,7 +40,7 @@ class EmployeeUI:
 
             if operation  == 'Search by employee SSN':
                 search = input(colored('Enter employee SSN: ','green' ,attrs=['bold', 'underline']))
-                found_employee = self.llapi._search_employee(search, self.destination)
+                found_employee = self.llapi.search_employee(search, self.destination)
                 if found_employee is None: 
                     print(f'{LINE}\nEmployee not found\n{LINE}')
                 else:

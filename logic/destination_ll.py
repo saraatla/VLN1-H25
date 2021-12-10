@@ -12,7 +12,7 @@ class DestinationLL:
         self.dlapi = DLAPI(self.destination)
 
 
-    def _list_of_destinations(self):
+    def list_of_destinations(self):
         """This function makes a list of the destination names
         Returns:
         dest_name_list (list): [name1,name2,name3,etc]"""
@@ -23,7 +23,7 @@ class DestinationLL:
         return dest_name_list
     
 
-    def _search_destination(self, destination):
+    def search_destination(self, destination):
         """This function searches for a employee by his ssn in list of all employees.
         Args:
             destination (str): destination name chosen by user

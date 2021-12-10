@@ -14,7 +14,7 @@ class WorkRequestLL:
         self.dlapi = DLAPI(self.destination)
    
 
-    def _workrequests_by_status(self, status, destination): 
+    def workrequests_by_status(self, status, destination): 
         """Prints a table of all request baised on their status. Requests that are ready to be closed
         are open and have a report signed to them
         Args:
@@ -41,7 +41,7 @@ class WorkRequestLL:
         return request_list
        
 
-    def _list_all_work_requests(self, destination):
+    def list_all_work_requests(self, destination):
         """This function lists work requests according to destination.
         Args:
             destination (str) : destination chosen by user
@@ -64,7 +64,7 @@ class WorkRequestLL:
         return self.dlapi.edit_work_request(workrequest)
 
 
-    def _search_work_request_id(self, workreq_id, destination):
+    def search_work_request_id(self, workreq_id, destination):
         """This function searches for a work request by it's id in list of all work requests.
         Args:
             workreq_id (str): work request id input by user
@@ -80,7 +80,7 @@ class WorkRequestLL:
         return None     
 
 
-    def _search_work_request_prop(self, prop_id, destination):
+    def search_work_request_prop(self, prop_id, destination):
         """This function returns workrequests based on the property they are assigned to
         Args:
             prop_id (str): property id input by user
@@ -96,7 +96,7 @@ class WorkRequestLL:
         return request_list
 
 
-    def _search_work_request_ssn(self, ssn, destination):
+    def search_work_request_ssn(self, ssn, destination):
         """This function returns work requests based on the ssn of the employee that worked on the associated report
         Args:
             ssn (str): ssn input by user
@@ -118,7 +118,7 @@ class WorkRequestLL:
         return request_list
 
 
-    def _search_work_request_cont(self, cont_id, destination):
+    def search_work_request_cont(self, cont_id, destination):
         """This function returns work requests based on the contractor that worked with the employee who wrote
         the workreport.
         Args:
@@ -140,7 +140,7 @@ class WorkRequestLL:
                         request_list.append(request)
         return request_list
 
-    def _get_new_request_id(self):
+    def get_new_request_id(self):
         """This function finds the last workrequest id and returns the next one 
         if a new one is made.
         Returns:
@@ -149,7 +149,7 @@ class WorkRequestLL:
         new_id = int(last_id[1:])+1
         return f'w{new_id}'
 
-    def _get_list_of_workreq_on_period(self,request_list,start_date,end_date):
+    def get_list_of_workreq_on_period(self,request_list,start_date,end_date):
         """This function fetches a list of work requests on a period input by user
         Args:
             request_list (list): 

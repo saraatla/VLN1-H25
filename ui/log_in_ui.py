@@ -23,7 +23,7 @@ class LogInUI:
                 return
             selection_str = options[selection]
             destination_menu = DestinationMenu(selection_str)
-            destination_menu._destination_menu_start()
+            destination_menu.destination_menu_start()
 
         
 

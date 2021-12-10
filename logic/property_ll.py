@@ -30,7 +30,7 @@ class PropertyLL:
         self.dlapi.create_property(Property(property))
         
 
-    def _search_property(self, prop_id, destination):
+    def search_property(self, prop_id, destination):
         """This function searches for a property in destination by it's id in list of all properties,
         returns it's information.
         Args:

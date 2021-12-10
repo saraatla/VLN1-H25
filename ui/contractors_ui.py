@@ -21,7 +21,7 @@ class ContractorUI:
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
         self.Contractors_menu_color = colored("Contractors Menu",'red' ,attrs=['bold', 'underline'])
 
-    def _contractor_menu_start(self):
+    def contractor_menu_start(self):
         """This function makes the contractor menu function. It depends on the inputs by user: 
         Search by ID: allows the user to search a contractor by their ID, 
         See list: prompts a list of all the contractors along with their information,
@@ -41,7 +41,7 @@ class ContractorUI:
 
             if operation  == 'Search by contractor ID':
                 search = input(self.color_format.format('Enter contractor ID: ')).upper()
-                found_contractor = self.llapi._search_contractor(search)
+                found_contractor = self.llapi.search_contractor(search)
                 if found_contractor is None:
                     print(f'{LINE}\nContractor not found\n{LINE}')
                 else:
@@ -73,7 +73,7 @@ class ContractorUI:
 
         print('Enter the following information: ')
         print(LINE)
-        new_id = self.llapi._get_new_cont_id()
+        new_id = self.llapi.get_new_cont_id()
         cont = [new_id]
         fieldnames = ["Name", "Type", "Contact", "Contact's phone", "Address", "Open_hours", "Review"]
         for field in fieldnames:

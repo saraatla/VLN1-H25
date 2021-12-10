@@ -20,7 +20,7 @@ class ContractorLL:
         self.dlapi.create_contractor(Contractor(contractor))
 
 
-    def _search_contractor(self, cont_id):
+    def search_contractor(self, cont_id):
         """This function searches for a contractor by his id in list of all contractors.
         Args:
             cont_id (str): contractor id input by user
@@ -38,7 +38,7 @@ class ContractorLL:
         return self.dlapi.edit_contractor(contractor)
 
 
-    def _get_new_cont_id(self):
+    def get_new_cont_id(self):
         """Gets the ID of the last contractor in the csv file and
         adds one to get the new contractor id.
         Returns:

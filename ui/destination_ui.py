@@ -13,7 +13,7 @@ class DestinationUI:
         self.color_format = colored("{}",'green' ,attrs=['bold', 'underline'])
 
 
-    def _destination_info_ui(self):
+    def destination_info_ui(self):
         """This function will show information about a destination."""
 
         self.__print_destination_info_table(self.destination)

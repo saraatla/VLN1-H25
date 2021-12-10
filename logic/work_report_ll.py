@@ -20,7 +20,7 @@ class WorkReportLL:
         return self.dlapi.edit_work_report(rep)
     
 
-    def _search_work_report(self, search):
+    def search_work_report(self, search):
         reader = self.list_work_reports()
         for report in reader:
             if search == report.workreport_id:
@@ -28,11 +28,11 @@ class WorkReportLL:
         return False
 
 
-    def _create_report(self, work_rep):
+    def create_work_report(self, work_rep):
         return self.dlapi.create_work_report(WorkReport(work_rep))
 
 
-    def _get_new_id(self):
+    def get_new_id(self):
         last_id = self.dlapi.find_last_report_id()
         new_id = int(last_id[4:])+1
         return f'wrep{new_id}'

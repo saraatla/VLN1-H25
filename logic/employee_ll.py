@@ -30,7 +30,7 @@ class EmployeeLL:
         self.dlapi.create_employee(Employee(employee)) 
 
 
-    def _search_employee(self, ssn, destination):
+    def search_employee(self, ssn, destination):
         """This function searches for a employee by his ssn in list of all employees.
         Args:
             ssn (str): employee ssn input by user

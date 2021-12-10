@@ -21,7 +21,7 @@ class PropertyUI:
         self.Properties_menu_color = colored("Properties Menu",'red' ,attrs=['bold', 'underline'])
         
 
-    def _property_menu_start(self):
+    def property_menu_start(self):
         """This function makes the property menu function. It depends on the inputs by user: 
         Search by property ID: allows the user to search a property by it's ID, 
         See list: prompts a list of all the property along with their information,
@@ -41,7 +41,7 @@ class PropertyUI:
 
             if operation  == 'Search by property ID':
                 search = input(self.color_format.format('Enter property ID: ')).upper()
-                found_property = self.llapi._search_property(search, self.destination)
+                found_property = self.llapi.search_property(search, self.destination)
                 if found_property is None:
                     print(f'{LINE}\nProperty not found\n{LINE}')
                 else:
