@@ -3,6 +3,7 @@ from Extra.acci import propAscii
 from ui.menu import Menu
 from logic.LLAPI import LLAPI
 from Extra.TermcolorFile.termcolor import colored
+from time import sleep
 LINE = '------------------------------------------'
 
 class PropertyUI:
@@ -28,8 +29,8 @@ class PropertyUI:
         if the user logged in as a manager he also sees
         Add new: makes it possible to add a new property to the system."""
         
-        propAscii()
         while True:
+            propAscii()
             operations =  ['Search by property ID', 'See list']
             if self.user_type == 'Manager':
                 operations.append('Create new')
@@ -44,6 +45,7 @@ class PropertyUI:
                 found_property = self.llapi.search_property(search, self.destination)
                 if found_property is None:
                     print(f'{LINE}\nProperty not found\n{LINE}')
+                    sleep(2)
                 else:
                     self.__individual_property_ui(found_property)
 
@@ -65,6 +67,7 @@ class PropertyUI:
             elif operation == 'Create new':
                 self.__create_property()
                 print(f'{LINE}\nProperty successfully created!\n{LINE}')
+                sleep(2)
 
 
     def __create_property(self):
@@ -80,8 +83,15 @@ class PropertyUI:
             destination_options = self.llapi.list_of_destinations()
             for i, option in enumerate(destination_options):
                 print(f"{i+1}: {option}")
-            index = int(input(self.color_format.format('Choose destination: ')))
-            destination = destination_options[index-1]  
+            holdon = True
+            index = input(self.color_format.format('Choose destination: '))
+            while holdon == True:
+                try:
+                    int(index)
+                    destination = destination_options[index-1]
+                    holdon = False
+                except:
+                    print('Invalid input, please try again')
             prop = [destination]   
         for field in fieldnames:
             val = input(self.color_format.format(f'{field}: '))
