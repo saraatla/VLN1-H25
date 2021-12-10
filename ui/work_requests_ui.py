@@ -317,13 +317,16 @@ class WorkRequestUI:
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input('What do you want to change? ')
-            try:
-                col = int(col)
-                newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
-                setattr(request, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_work_request(request)
-            except:
+            if col == '0':
                 print('Invalid input, please try again')
+            else:
+                try:
+                    col = int(col)
+                    newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
+                    setattr(request, fieldnames[col-1].lower(), newval)
+                    return self.llapi.edit_work_request(request)
+                except:
+                    print('Invalid input, please try again')
 
 
     def __create_work_request(self):

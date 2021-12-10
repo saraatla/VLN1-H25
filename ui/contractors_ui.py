@@ -160,10 +160,13 @@ class ContractorUI:
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input(self.color_format.format('What do you want to change?'))
-            try:
-                col = int(col)
-                newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
-                setattr(contractor, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_contractor(contractor)
-            except:
+            if col == '0':
                 print('Invalid input, please try again')
+            else:
+                try:
+                    col = int(col)
+                    newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
+                    setattr(contractor, fieldnames[col-1].lower(), newval)
+                    return self.llapi.edit_contractor(contractor)
+                except:
+                    print('Invalid input, please try again')

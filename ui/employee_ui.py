@@ -179,12 +179,15 @@ class EmployeeUI:
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input(colored('What do you want to change? ','green' ,attrs=['bold', 'underline']))
-            try:
-                col = int(col)
-                newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
-                setattr(employee, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_employee(employee)
-            except:
+            if col == '0':
                 print('Invalid input, please try again')
+            else:
+                try:
+                    col = int(col)
+                    newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
+                    setattr(employee, fieldnames[col-1].lower(), newval)
+                    return self.llapi.edit_employee(employee)
+                except:
+                    print('Invalid input, please try again')
 
 
