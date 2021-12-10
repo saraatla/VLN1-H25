@@ -45,6 +45,7 @@ class ContractorUI:
                 found_contractor = self.llapi.search_contractor(search)
                 if found_contractor is None:
                     print(f'{LINE}\nContractor not found\n{LINE}')
+                    sleep(2)
                 else:
                     self.__individual_contractor_ui(found_contractor)
 
