@@ -175,13 +175,16 @@ class PropertyUI:
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
             col = input(colored('What do you want to change? ','green' ,attrs=['bold', 'underline']))
-            try:
-                col = int(col)
-                newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
-                setattr(property, fieldnames[col-1].lower(), newval)
-                return self.llapi.edit_property(property)
-            except:
+            if col == '0':
                 print('Invalid input, please try again')
+            else:
+                try:
+                    col = int(col)
+                    newval = input(colored(f'What is the new {fieldnames[col-1]}? ','green' ,attrs=['bold', 'underline']))
+                    setattr(property, fieldnames[col-1].lower(), newval)
+                    return self.llapi.edit_property(property)
+                except:
+                    print('Invalid input, please try again')
 
 
 
