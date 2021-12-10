@@ -63,7 +63,7 @@ class WorkRequestUI:
                 else:
                     self.__print_request_list(found_requests)
 
-            # Search by employee SSN: -||- employee SSN,
+            # Search by employee SSN: allows the user to search a work request by employee SSN,
             elif operation == 'Search by employee SSN':
                 search = input(self.color_format.format('Enter epmloyee SSN: '))
                 found_requests = self.llapi._search_work_request_ssn(search, self.destination)
@@ -72,7 +72,7 @@ class WorkRequestUI:
                 else:
                     self.__print_request_list(found_requests)
 
-            # Search by contractor ID: -||- contractor ID,
+            # Search by contractor ID: allows the user to search a work request by contractor ID,
             elif operation == 'Search by contractor ID':
                 search = input(self.color_format.format('Enter contractor ID: ')).upper()
                 found_requests = self.llapi._search_work_requests_cont(search, self.destination)
@@ -342,7 +342,10 @@ class WorkRequestUI:
 
 
     def __create_work_req_list(self):
-        """"""
+        """This function lists the inputs and options needed to make a work request.
+        Returns: 
+            start_date (str): date when request opens
+            workreq (list(str)): info of new work request"""
 
         new_id = self.llapi._get_new_request_id()
         workreq = [new_id]
@@ -363,6 +366,7 @@ class WorkRequestUI:
         priority_options  = ['Emergengy', 'Now', 'ASAP']
         for i, option in enumerate(priority_options):
             print(f"{i+1}: {option}")
+        # The manager can choose the urgency of the request 
         index = int(input(self.color_format.format('Choose priority: ')))
         priority = priority_options[index-1]
         workreq.append(priority)
@@ -374,7 +378,12 @@ class WorkRequestUI:
 
 
     def __repeat_work_request(self,start_date, repeat, workreq):
-        """"""
+        """This function makes the number of work requests according do the start date, end date
+        and how it is repeated (daily/weekly/monthly/yearly)
+        Args:
+            start_date (str): 
+            repeat (int): option int for daily/weekly/monthly/yearly
+            workreq (list): info of new work request"""
 
         date_var = datetime.strptime(start_date,'%d/%m/%Y').date()
         print(date_var)
@@ -406,7 +415,11 @@ class WorkRequestUI:
 
 
     def __create_repeated(self, workreq, date_var, new_date):
-        """ """
+        """This function creates the new work requests
+        Args:
+            workreq (list): info of new work request
+            date_var (datetime.date): date variable for the start date of work request
+            new_date (datetime.timedelta): timedelta variable for number of days/weeks/months/years """
 
         date_work_req = date_var + new_date
         date_work_req = date_work_req.strftime('%d/%m/%Y')
@@ -418,7 +431,11 @@ class WorkRequestUI:
 
 
     def __check_date(self, date_str):
-        """"""
+        """This function checks if the format of a input date is right
+        Args:
+            date_str (str): type of date (start/end)
+        Returns:
+            date_string (str): input date"""
 
         while True:
             date_string = input(self.color_format.format(f'Enter {date_str}, dd/mm/yyyy: '))

@@ -85,8 +85,8 @@ if date_search_from <= date <= date_search_to:
 else:
     print("date out of range")
 """
-from datetime import datetime,date
-
+from datetime import datetime,date,timedelta
+"""
 from os import read
 from Extra.texttableFile.texttable import Texttable
 from data.DLAPI import DLAPI
@@ -127,13 +127,13 @@ def list_work_requests_ui(request_list):
                             [item+1, workreq.workrequest_id, workreq.title, workreq.date, workreq.status, workreq.priority]])
         print(table.draw())
 
-bla = check_if_date_is_between(request_list,start_date,end_date)
-list_work_requests_ui(check_if_date_is_between(request_list,start_date,end_date))
+# bla = check_if_date_is_between(request_list,start_date,end_date)
+# list_work_requests_ui(check_if_date_is_between(request_list,start_date,end_date))
 
 
-dlapi = DLAPI('Svalbard - Longyearbyen')
+# dlapi = DLAPI('Svalbard - Longyearbyen')
 string = 'hwllo'         
-reader = dlapi.list_contractors()
+# reader = dlapi.list_contractors()
 for contractor in reader:
     print(type(contractor))
     print(type(string))
@@ -160,9 +160,9 @@ for contractor in reader:
 
 # empDL = EmployeeDL()
 # emp = Employee('kristin', '123456-3456', 'kristinb20@ru.is','Stigahlíð 84', '564-2728', '824-3732', 'Reykjavik', "L1","keflavik", "yfirmaður")
-empDL = EmployeeDL('Svalbard')
-listi = ['Jan Jacobsen','123456-0001','jan.jacobsen@nanair.is','Vei 230 12. Longyearbyen','+47 92 09 77 00','+354 777 1337','Svalbard','Lonyearbyen','Manager']
-emp = Employee(listi)
+# empDL = EmployeeDL('Svalbard')
+# listi = ['Jan Jacobsen','123456-0001','jan.jacobsen@nanair.is','Vei 230 12. Longyearbyen','+47 92 09 77 00','+354 777 1337','Svalbard','Lonyearbyen','Manager']
+# emp = Employee(listi)
 # edit_employee = empDL.edit_employee('123456-0001',3,'hrauntunga23')
 
 # def create_work_request(self,work_req):
@@ -176,6 +176,18 @@ emp = Employee(listi)
 #             workreq.append(val)
 #         self.dlapi.create_contractor(WorkRequest(workreq))
 #         print(f'{LINE}\nWork request successfully created!\n{LINE}')
-
-
-
+"""
+start_date = '12/12/2021'
+repeat = 2
+date_var = datetime.strptime(start_date,'%d/%m/%Y').date()
+print(date_var)
+if date.today() <= date_var:
+    i = 0
+    if repeat == 2:
+        # how_many = int(input(self.color_format.format('for how many days: ')))
+        for i in range(4):
+            new_date = timedelta(days = 1*i)
+            # self.__create_repeated(workreq, date_var, new_date)
+print(type(date_var))
+print(new_date)
+print(type(new_date))
