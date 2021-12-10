@@ -57,7 +57,11 @@ class PropertyUI:
                     command = input(self.color_format.format("Enter number of property to open or B to Back: ")).upper()
                     if command == "B":
                         break
-                    if not command.isdigit():
+                    try:
+                        nr = int(command)
+                        if nr > len(prop_list) or nr == 0:
+                            raise ValueError
+                    except:
                         print("Invalid input, please try again")
                     else:
                         nr = int(command)

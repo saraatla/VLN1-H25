@@ -55,7 +55,11 @@ class ContractorUI:
                     command = input(self.color_format.format("Enter number of contractor to open or B to Back: ")).upper()
                     if command == "B":
                         break
-                    if not command.isdigit():
+                    try:
+                        nr = int(command)
+                        if nr > len(cont_list) or nr == 0:
+                            raise ValueError
+                    except:
                         print("Invalid input, please try again")
                     else:
                         nr = int(command)
