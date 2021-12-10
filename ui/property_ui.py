@@ -32,7 +32,7 @@ class PropertyUI:
         while True:
             operations =  ['Search by property ID', 'See list']
             if self.user_type == 'Manager':
-                operations.append('Add new')
+                operations.append('Create new')
             operations_menu = Menu(f'{self.Properties_menu_color} in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
@@ -62,7 +62,7 @@ class PropertyUI:
                                 self.__individual_property_ui(property, nr)
                         break
 
-            elif operation == 'Add new':
+            elif operation == 'Create new':
                 self.__create_property()
                 print(f'{LINE}\nProperty successfully created!\n{LINE}')
 

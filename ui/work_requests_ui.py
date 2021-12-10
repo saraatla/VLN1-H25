@@ -311,7 +311,7 @@ class WorkRequestUI:
             fieldnames = ['Title', 'Property_ID', 'Destination', 'Contractor', 'Date', 'Status', 'Priority', 'Description']
             for index, field in enumerate(fieldnames):
                 print(f"{index+1}: {field}")
-            col = input('What do you want to change?')
+            col = input('What do you want to change? ')
             try:
                 col = int(col)
                 newval = input(self.color_format.format(f'What is the new {fieldnames[col-1]}? '))
@@ -328,7 +328,7 @@ class WorkRequestUI:
         print('Enter the following information: ')
         print(LINE)
         start_date, workreq = self.__create_work_req_list()
-        print('Do you want to repeat this work request?')
+        print('Do you want to repeat this work request? ')
         options = ['Do no repeat', 'Daily', 'Weekly', 'Monthly', 'Yearly']
         for index, option in enumerate(options):
             print(f"{index+1}: {option}")

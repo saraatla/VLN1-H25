@@ -32,7 +32,7 @@ class EmployeeUI:
             empAscii()
             operations =  ['Search by employee SSN', 'See list']
             if self.user_type == 'Manager':
-                operations.append('Add new')
+                operations.append('Create new')
             operations_menu = Menu(f'{self.employee_menu_collor} in {self.destination_collor}\nSign in as {self.colored_user_type}\nChoose options',operations)
             selected_operation = operations_menu.draw_options()
             if selected_operation < 0:
@@ -62,7 +62,7 @@ class EmployeeUI:
                                 self.__individual_employee_ui(employee,nr)
                         break
 
-            elif operation == 'Add new':
+            elif operation == 'Create new':
                 self.__create_employee()
                 print(f'{LINE}\nEmployee successfully created!\n{LINE}')
 
