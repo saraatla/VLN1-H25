@@ -90,7 +90,7 @@ class WorkReportUI:
                     self.__approve_report(report.workreport_id, request)
                     return
                 elif command == '2':
-                    report.manager_cmt = input(self.color_format.format('Enter comment: '))
+                    report.manager_comment = input(self.color_format.format('Enter comment: '))
                     self.llapi.edit_work_report(report)
 
 
